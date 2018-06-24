@@ -101,8 +101,8 @@ function reLoad() {
 }
 function add() {
 	// iframe层
-    var index = parent.layer.getFrameIndex(window.name);
-    parent.layer.iframeAuto(index);
+    var index = layer.getFrameIndex(window.name);
+    layer.iframeAuto(index);
 	layer.open({
 		type : 2,
 		title : '增加用户',
