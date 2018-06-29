@@ -50,13 +50,33 @@ $(document).ready(function () {
         });
     });
 
-
+/**取消菜单切换
     // 菜单切换
     $('.navbar-minimalize').click(function () {
         $("body").toggleClass("mini-navbar");
         SmoothlyMenu();
     });
+**/
 
+$('#shworhidmenu').click(function () {
+    $('#wrapper').toggleClass('toggled');
+});
+
+    $(document).bind('click', function(e) {
+        var e = e || window.event; //浏览器兼容性
+        var elem = e.target || e.srcElement;
+        while (elem) { //循环判断至跟节点，防止点击的是div子元素
+            if ((elem.id && elem.id == 'navbar')||(elem.id&&elem.id == 'shworhidmenu')) {
+                return;
+            }
+            elem = elem.parentNode;
+        }
+
+        if($('#wrapper').hasClass('toggled')){
+            $('#wrapper').removeClass('toggled');
+
+        }
+    });
 
     // 侧边栏高度
     function fix_height() {
@@ -83,8 +103,8 @@ $(document).ready(function () {
     $('.full-height-scroll').slimScroll({
         height: '100%'
     });
-
-    $('#side-menu>li').click(function () {
+/**
+   $('#side-menu>li').click(function () {
         if ($('body').hasClass('mini-navbar')) {
             NavToggle();
         }
@@ -94,22 +114,25 @@ $(document).ready(function () {
             NavToggle();
         }
     });
-
-    $('.nav-close').click(NavToggle);
+**/
+   // $('.nav-close').click(NavToggle);
 
     //ios浏览器兼容性处理
     if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
         $('#content-main').css('overflow-y', 'auto');
     }
 
+
 });
 
+/* 取消迷你菜单
 $(window).bind("load resize", function () {
     if ($(this).width() < 769) {
         $('body').addClass('mini-navbar');
         $('.navbar-static-side').fadeIn();
     }
 });
+*/
 
 function NavToggle() {
     $('.navbar-minimalize').trigger('click');

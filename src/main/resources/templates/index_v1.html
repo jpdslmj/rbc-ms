@@ -21,7 +21,8 @@
       style="overflow: hidden">
 <div id="wrapper">
     <!--左侧导航开始-->
-    <nav class="navbar-default navbar-static-side" role="navigation">
+    <div id="navbar">
+    <nav class="navbar-default navbar-static-side" role="navigation" id="sidebar-wrapper">
         <div class="nav-close">
             <i class="fa fa-times-circle"></i>
         </div>
@@ -31,7 +32,7 @@
                     <div>
                         <span><img alt="image" class="img-circle" height="60" width="60" th:src="${picUrl}"/></span>
                         <h3 class="" style="color: #ffffff">
-                            </i>铁路制动室管理系统
+                            </i>铁路制动室管理
                         </h3>
                     </div>
                     <div class="dropdown profile-element hidden">
@@ -59,32 +60,29 @@
                         <div class="logo-element">rbc</div>
                     </div>
                 </li>
-                <li><a href="#"> <i class="fa fa-home"></i>
-                    <span class="nav-label">主页</span>
-                    <span class="fa arrow"></span>
+                <li><a href="#"> <i class="fa fa-home"></i> <span
+                        class="nav-label">主页</span> <span class="fa arrow"></span>
                 </a>
                     <ul class="nav nav-second-level">
                         <li><a id="index001" class="J_menuItem" href="index_v1.html"
                                data-index="0" th:href="@{/main}">了解铁路制动室管理系统</a></li>
                     </ul>
                 </li>
-
-                <li th:each="menu : ${menus}">
-                    <a href="#">
-                    <i class="fa fa fa-bar-chart-o" th:class="${menu.attributes.icon}"></i>
-                    <span class="nav-label" th:text="${menu.text}">基础信息</span>
-                    <span class="fa arrow"></span>
+                <li th:each="menu : ${menus}"><a href="#"> <i
+                        class="fa fa fa-bar-chart-o" th:class="${menu.attributes.icon}"></i>
+                    <span class="nav-label" th:text="${menu.text}">基础信息</span> <span
+                            class="fa arrow"></span>
                 </a>
                     <ul class="nav nav-second-level">
-                        <li th:each="cmenu : ${menu.children}">
-                            <a class="J_menuItem" href="graph_echarts.html" th:text="${cmenu.text}"
-                               th:href="${cmenu.attributes.url}">系统管理</a>
-                        </li>
+                        <li th:each="cmenu : ${menu.children}"><a class="J_menuItem" href="graph_echarts.html"
+                                                                  th:text="${cmenu.text}"
+                                                                  th:href="${cmenu.attributes.url}">系统管理</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
     </nav>
+    </div>
     <!--左侧导航结束-->
     <!--右侧部分开始-->
     <div id="page-wrapper" class="gray-bg dashbard-1">
@@ -92,7 +90,7 @@
             <nav class="navbar navbar-static-top" role="navigation"
                  style="margin-bottom: 0">
                 <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2 btn btn-default" href="#" title="收起菜单">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-default" href="#" title="收起菜单" id="shworhidmenu">
                         <i class="fa fa-bars"></i>
                     </a>
                     <form role="search" class="navbar-form-custom" method="post" action="">
@@ -169,9 +167,11 @@
                     class="fa fa fa-sign-out"></i> 退出</a>
         </div>
         <div class="row J_mainContent" id="content-main">
-            <iframe class="J_iframe" name="iframe0" width="100%" height="100%"
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" id="iframe1"
                     src="" th:src="@{/main}" frameborder="0" data-id="index_v1.html"
-                    seamless></iframe>
+                    seamless >
+
+            </iframe>
         </div>
         <div class="footer">
             <div class="pull-right">BootDo面向学习型的开源框架</div>
