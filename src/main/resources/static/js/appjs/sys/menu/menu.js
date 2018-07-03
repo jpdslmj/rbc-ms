@@ -112,8 +112,13 @@ function add(pId) {
         title: '增加菜单',
         maxmin: true,
         shadeClose: false, // 点击遮罩关闭层
-        area: ['800px', '520px'],
-        content: prefix + '/add/' + pId // iframe的url
+        content: prefix + '/add/' + pId, // iframe的url
+        fixed:false,
+        resize:true,
+        area : ['360px','640px'],
+        success:function(layero ,index){
+            layer.full(index);
+        }
     });
 }
 
@@ -145,8 +150,13 @@ function edit(id) {
         title: '菜单修改',
         maxmin: true,
         shadeClose: false, // 点击遮罩关闭层
-        area: ['800px', '520px'],
-        content: prefix + '/edit/' + id // iframe的url
+        content: prefix + '/edit/' + id, // iframe的url
+        fixed:false,
+        resize:true,
+        area : ['360px','640px'],
+        success:function(layero ,index){
+            layer.full(index);
+        }
     });
 }
 

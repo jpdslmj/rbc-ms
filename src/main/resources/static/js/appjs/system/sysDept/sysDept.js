@@ -86,8 +86,13 @@ function add(pId) {
 		title : '增加',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content : prefix + '/add/' + pId
+		content : prefix + '/add/' + pId,
+        fixed:false,
+        resize:true,
+        area : ['360px','640px'],
+        success:function(layero ,index){
+            layer.full(index);
+        }
 	});
 }
 function edit(id) {
@@ -96,8 +101,13 @@ function edit(id) {
 		title : '编辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + id // iframe的url
+		content : prefix + '/edit/' + id, // iframe的url
+        fixed:false,
+        resize:true,
+        area : ['360px','640px'],
+        success:function(layero ,index){
+            layer.full(index);
+        }
 	});
 }
 function removeone(id) {

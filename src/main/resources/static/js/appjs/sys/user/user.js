@@ -106,10 +106,15 @@ function add() {
 	layer.open({
 		type : 2,
 		title : '增加用户',
-		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content : prefix + '/add'
+		content : prefix + '/add',
+        maxmin : true,
+        fixed:false,
+        resize:true,
+        area : ['360px','640px'],
+        success:function(layero ,index){
+            layer.full(index);
+        }
 	});
 }
 function remove(id) {
@@ -137,20 +142,31 @@ function edit(id) {
 	layer.open({
 		type : 2,
 		title : '用户修改',
-		maxmin : true,
 		shadeClose : false,
-		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + id // iframe的url
+        content : prefix + '/edit/' + id ,// iframe的url
+        maxmin : true,
+        fixed:false,
+        resize:true,
+        area : ['360px','640px'],
+		success:function(layero ,index){
+			layer.full(index);
+    }
 	});
 }
+
 function resetPwd(id) {
 	layer.open({
 		type : 2,
 		title : '重置密码',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '400px', '260px' ],
-		content : prefix + '/resetPwd/' + id // iframe的url
+		content : prefix + '/resetPwd/' + id, // iframe的url
+        fixed:false,
+        resize:true,
+        area : ['360px','640px'],
+        success:function(layero ,index){
+            layer.full(index);
+        }
 	});
 }
 function batchRemove() {
