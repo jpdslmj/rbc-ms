@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${testTool.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">风表误差±10范围：</label>
+								<div class="col-sm-8">
+									<input id="windErrorValue" name="windErrorValue" th:value="${testTool.windErrorValue}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">风表是否超期：</label>
+								<div class="col-sm-8">
+									<input id="isWindExced" name="isWindExced" th:value="${testTool.isWindExced}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">温度：</label>
+								<div class="col-sm-8">
+									<input id="temperature" name="temperature" th:value="${testTool.temperature}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">湿度：</label>
+								<div class="col-sm-8">
+									<input id="humidity" name="humidity" th:value="${testTool.humidity}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">705试验台1机能：</label>
+								<div class="col-sm-8">
+									<input id="fu705test1" name="fu705test1" th:value="${testTool.fu705test1}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">705试验台2机能：</label>
+								<div class="col-sm-8">
+									<input id="fu705test2" name="fu705test2" th:value="${testTool.fu705test2}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">705试验台3机能：</label>
+								<div class="col-sm-8">
+									<input id="fu705test3" name="fu705test3" th:value="${testTool.fu705test3}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">F8试验台1机能：</label>
+								<div class="col-sm-8">
+									<input id="fuf8test1" name="fuf8test1" th:value="${testTool.fuf8test1}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">F8试验台2机能：</label>
+								<div class="col-sm-8">
+									<input id="fuf8test2" name="fuf8test2" th:value="${testTool.fuf8test2}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">705试验台1故障：</label>
+								<div class="col-sm-8">
+									<input id="fa705test1" name="fa705test1" th:value="${testTool.fa705test1}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">705试验台2故障：</label>
+								<div class="col-sm-8">
+									<input id="fa705test2" name="fa705test2" th:value="${testTool.fa705test2}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">705试验台3故障：</label>
+								<div class="col-sm-8">
+									<input id="fa705test3" name="fa705test3" th:value="${testTool.fa705test3}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">F8试验台1故障：</label>
+								<div class="col-sm-8">
+									<input id="faf8test1" name="faf8test1" th:value="${testTool.faf8test1}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">F8试验台2故障：</label>
+								<div class="col-sm-8">
+									<input id="faf8test2" name="faf8test2" th:value="${testTool.faf8test2}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">705试验台1备注：</label>
+								<div class="col-sm-8">
+									<input id="mk705test1" name="mk705test1" th:value="${testTool.mk705test1}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">705试验台2备注：</label>
+								<div class="col-sm-8">
+									<input id="mk705test2" name="mk705test2" th:value="${testTool.mk705test2}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">705试验台3备注：</label>
+								<div class="col-sm-8">
+									<input id="mk705test3" name="mk705test3" th:value="${testTool.mk705test3}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">试验者工号：</label>
+								<div class="col-sm-8">
+									<input id="testerNo" name="testerNo" th:value="${testTool.testerNo}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">试验者名称：</label>
+								<div class="col-sm-8">
+									<input id="testerName" name="testerName" th:value="${testTool.testerName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">工长工号：</label>
+								<div class="col-sm-8">
+									<input id="gangmasterNo" name="gangmasterNo" th:value="${testTool.gangmasterNo}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">工长名称：</label>
+								<div class="col-sm-8">
+									<input id="gangmasterName" name="gangmasterName" th:value="${testTool.gangmasterName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">工长审核意见：0不同意 1同意：</label>
+								<div class="col-sm-8">
+									<input id="gangmasterAudit" name="gangmasterAudit" th:value="${testTool.gangmasterAudit}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">质检员工号：</label>
+								<div class="col-sm-8">
+									<input id="inspectorNo" name="inspectorNo" th:value="${testTool.inspectorNo}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">质检员名称：</label>
+								<div class="col-sm-8">
+									<input id="inspectorName" name="inspectorName" th:value="${testTool.inspectorName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">质检员审核意见：</label>
+								<div class="col-sm-8">
+									<input id="inspectorAudit" name="inspectorAudit" th:value="${testTool.inspectorAudit}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">开工意见：</label>
+								<div class="col-sm-8">
+									<input id="permissionsOpinion" name="permissionsOpinion" th:value="${testTool.permissionsOpinion}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">返回意见：</label>
+								<div class="col-sm-8">
+									<input id="returnOpinion" name="returnOpinion" th:value="${testTool.returnOpinion}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">创建日期：</label>
+								<div class="col-sm-8">
+									<input id="createTime" name="createTime" th:value="${testTool.createTime}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">更新日期：</label>
+								<div class="col-sm-8">
+									<input id="updateTime" name="updateTime" th:value="${testTool.updateTime}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/biz/testTool/edit.js">
+	</script>
+</body>
+</html>

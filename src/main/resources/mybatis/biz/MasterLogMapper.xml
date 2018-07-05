@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rbc.biz.dao.MasterLogDao">
+
+	<select id="get" resultType="com.rbc.biz.domain.MasterLogDO">
+		select `id`,`weather`,`cls_envision`,`cls_one`,`task_details`,`cls_mark`,`gangmaster_no`,`gangmaster_name`,`create_time`,`update_time` from web_master_log where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.rbc.biz.domain.MasterLogDO">
+		select `id`,`weather`,`cls_envision`,`cls_one`,`task_details`,`cls_mark`,`gangmaster_no`,`gangmaster_name`,`create_time`,`update_time` from web_master_log
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="weather != null and weather != ''"> and weather = #{weather} </if>
+		  		  <if test="clsEnvision != null and clsEnvision != ''"> and cls_envision = #{clsEnvision} </if>
+		  		  <if test="clsOne != null and clsOne != ''"> and cls_one = #{clsOne} </if>
+		  		  <if test="taskDetails != null and taskDetails != ''"> and task_details = #{taskDetails} </if>
+		  		  <if test="clsMark != null and clsMark != ''"> and cls_mark = #{clsMark} </if>
+		  		  <if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
+		  		  <if test="gangmasterName != null and gangmasterName != ''"> and gangmaster_name = #{gangmasterName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from web_master_log
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="weather != null and weather != ''"> and weather = #{weather} </if>
+		  		  <if test="clsEnvision != null and clsEnvision != ''"> and cls_envision = #{clsEnvision} </if>
+		  		  <if test="clsOne != null and clsOne != ''"> and cls_one = #{clsOne} </if>
+		  		  <if test="taskDetails != null and taskDetails != ''"> and task_details = #{taskDetails} </if>
+		  		  <if test="clsMark != null and clsMark != ''"> and cls_mark = #{clsMark} </if>
+		  		  <if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
+		  		  <if test="gangmasterName != null and gangmasterName != ''"> and gangmaster_name = #{gangmasterName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.rbc.biz.domain.MasterLogDO" useGeneratedKeys="true" keyProperty="id">
+		insert into web_master_log
+		(
+			`weather`, 
+			`cls_envision`, 
+			`cls_one`, 
+			`task_details`, 
+			`cls_mark`, 
+			`gangmaster_no`, 
+			`gangmaster_name`, 
+			`create_time`, 
+			`update_time`
+		)
+		values
+		(
+			#{weather}, 
+			#{clsEnvision}, 
+			#{clsOne}, 
+			#{taskDetails}, 
+			#{clsMark}, 
+			#{gangmasterNo}, 
+			#{gangmasterName}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.rbc.biz.domain.MasterLogDO">
+		update web_master_log 
+		<set>
+			<if test="weather != null">`weather` = #{weather}, </if>
+			<if test="clsEnvision != null">`cls_envision` = #{clsEnvision}, </if>
+			<if test="clsOne != null">`cls_one` = #{clsOne}, </if>
+			<if test="taskDetails != null">`task_details` = #{taskDetails}, </if>
+			<if test="clsMark != null">`cls_mark` = #{clsMark}, </if>
+			<if test="gangmasterNo != null">`gangmaster_no` = #{gangmasterNo}, </if>
+			<if test="gangmasterName != null">`gangmaster_name` = #{gangmasterName}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from web_master_log where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from web_master_log where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

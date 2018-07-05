@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rbc.biz.dao.ToolOtherDao">
+
+	<select id="get" resultType="com.rbc.biz.domain.ToolOtherDO">
+		select `id`,`tool_id`,`tool_name`,`deal_sit`,`remark`,`create_time`,`update_time` from web_tool_other where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.rbc.biz.domain.ToolOtherDO">
+		select `id`,`tool_id`,`tool_name`,`deal_sit`,`remark`,`create_time`,`update_time` from web_tool_other
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="toolId != null and toolId != ''"> and tool_id = #{toolId} </if>
+		  		  <if test="toolName != null and toolName != ''"> and tool_name = #{toolName} </if>
+		  		  <if test="dealSit != null and dealSit != ''"> and deal_sit = #{dealSit} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from web_tool_other
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="toolId != null and toolId != ''"> and tool_id = #{toolId} </if>
+		  		  <if test="toolName != null and toolName != ''"> and tool_name = #{toolName} </if>
+		  		  <if test="dealSit != null and dealSit != ''"> and deal_sit = #{dealSit} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.rbc.biz.domain.ToolOtherDO" useGeneratedKeys="true" keyProperty="id">
+		insert into web_tool_other
+		(
+			`tool_id`, 
+			`tool_name`, 
+			`deal_sit`, 
+			`remark`, 
+			`create_time`, 
+			`update_time`
+		)
+		values
+		(
+			#{toolId}, 
+			#{toolName}, 
+			#{dealSit}, 
+			#{remark}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.rbc.biz.domain.ToolOtherDO">
+		update web_tool_other 
+		<set>
+			<if test="toolId != null">`tool_id` = #{toolId}, </if>
+			<if test="toolName != null">`tool_name` = #{toolName}, </if>
+			<if test="dealSit != null">`deal_sit` = #{dealSit}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from web_tool_other where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from web_tool_other where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${popValve104.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">104紧急阀编号：</label>
+								<div class="col-sm-8">
+									<input id="popValue" name="popValue" th:value="${popValve104.popValue}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">分解者工号：</label>
+								<div class="col-sm-8">
+									<input id="disassembleNo" name="disassembleNo" th:value="${popValve104.disassembleNo}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">分解者名称：</label>
+								<div class="col-sm-8">
+									<input id="disassembleName" name="disassembleName" th:value="${popValve104.disassembleName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">清洗者工号：</label>
+								<div class="col-sm-8">
+									<input id="cleanerNo" name="cleanerNo" th:value="${popValve104.cleanerNo}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">清洗者名称：</label>
+								<div class="col-sm-8">
+									<input id="cleanerName" name="cleanerName" th:value="${popValve104.cleanerName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">检修者1工号：</label>
+								<div class="col-sm-8">
+									<input id="fixer1No" name="fixer1No" th:value="${popValve104.fixer1No}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">检修者1名称：</label>
+								<div class="col-sm-8">
+									<input id="fixer1Name" name="fixer1Name" th:value="${popValve104.fixer1Name}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">检修者1备注：</label>
+								<div class="col-sm-8">
+									<input id="fixer1Remark" name="fixer1Remark" th:value="${popValve104.fixer1Remark}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">检修者2工号：</label>
+								<div class="col-sm-8">
+									<input id="fixer2No" name="fixer2No" th:value="${popValve104.fixer2No}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">检修者2名称：</label>
+								<div class="col-sm-8">
+									<input id="fixer2Name" name="fixer2Name" th:value="${popValve104.fixer2Name}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">检修者2备注：</label>
+								<div class="col-sm-8">
+									<input id="fixer2Remark" name="fixer2Remark" th:value="${popValve104.fixer2Remark}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">检修者3工号：</label>
+								<div class="col-sm-8">
+									<input id="fixer3No" name="fixer3No" th:value="${popValve104.fixer3No}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">检修者3名称：</label>
+								<div class="col-sm-8">
+									<input id="fixer3Name" name="fixer3Name" th:value="${popValve104.fixer3Name}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">检修者3备注：</label>
+								<div class="col-sm-8">
+									<input id="fixer3Remark" name="fixer3Remark" th:value="${popValve104.fixer3Remark}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">检修者4工号：</label>
+								<div class="col-sm-8">
+									<input id="fixer4No" name="fixer4No" th:value="${popValve104.fixer4No}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">检修者4名称：</label>
+								<div class="col-sm-8">
+									<input id="fixer4Name" name="fixer4Name" th:value="${popValve104.fixer4Name}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">检修者4备注：</label>
+								<div class="col-sm-8">
+									<input id="fixer4Remark" name="fixer4Remark" th:value="${popValve104.fixer4Remark}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">组装者工号：</label>
+								<div class="col-sm-8">
+									<input id="assemblerNo" name="assemblerNo" th:value="${popValve104.assemblerNo}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">组装者名称：</label>
+								<div class="col-sm-8">
+									<input id="assemblerName" name="assemblerName" th:value="${popValve104.assemblerName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">组装者备注：</label>
+								<div class="col-sm-8">
+									<input id="assemblerRemark" name="assemblerRemark" th:value="${popValve104.assemblerRemark}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">组装人字标志：</label>
+								<div class="col-sm-8">
+									<input id="assembleMark" name="assembleMark" th:value="${popValve104.assembleMark}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">工长工号：</label>
+								<div class="col-sm-8">
+									<input id="gangmasterNo" name="gangmasterNo" th:value="${popValve104.gangmasterNo}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">工长名称：</label>
+								<div class="col-sm-8">
+									<input id="gangmasterName" name="gangmasterName" th:value="${popValve104.gangmasterName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">工长审核意见：1同意 0不同意：</label>
+								<div class="col-sm-8">
+									<input id="gangmasterAudit" name="gangmasterAudit" th:value="${popValve104.gangmasterAudit}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">工长审核备注：</label>
+								<div class="col-sm-8">
+									<input id="gangmasterRemark" name="gangmasterRemark" th:value="${popValve104.gangmasterRemark}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">工长一字标志：</label>
+								<div class="col-sm-8">
+									<input id="gangmasterMark" name="gangmasterMark" th:value="${popValve104.gangmasterMark}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">质检员工号：</label>
+								<div class="col-sm-8">
+									<input id="inspectorNo" name="inspectorNo" th:value="${popValve104.inspectorNo}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">质检员名称：</label>
+								<div class="col-sm-8">
+									<input id="inspectorName" name="inspectorName" th:value="${popValve104.inspectorName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">质检员合字标志：</label>
+								<div class="col-sm-8">
+									<input id="inspectorMark" name="inspectorMark" th:value="${popValve104.inspectorMark}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">质检员审核意见：1同意 0不同意：</label>
+								<div class="col-sm-8">
+									<input id="inspectorAudit" name="inspectorAudit" th:value="${popValve104.inspectorAudit}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">质检员审核备注：</label>
+								<div class="col-sm-8">
+									<input id="inspectorRemark" name="inspectorRemark" th:value="${popValve104.inspectorRemark}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">退回意见：1同意 0不同意：</label>
+								<div class="col-sm-8">
+									<input id="returnOpinion" name="returnOpinion" th:value="${popValve104.returnOpinion}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">退回备注：</label>
+								<div class="col-sm-8">
+									<input id="returnRemark" name="returnRemark" th:value="${popValve104.returnRemark}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">创建日期：</label>
+								<div class="col-sm-8">
+									<input id="createTime" name="createTime" th:value="${popValve104.createTime}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">更新日期：</label>
+								<div class="col-sm-8">
+									<input id="updateTime" name="updateTime" th:value="${popValve104.updateTime}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/biz/popValve104/edit.js">
+	</script>
+</body>
+</html>

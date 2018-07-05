@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rbc.biz.dao.TaskDistributionDao">
+
+	<select id="get" resultType="com.rbc.biz.domain.TaskDistributionDO">
+		select `id`,`sequence_no`,`fix_project`,`plan_num`,`real_Num`,`fix_worker_no`,`fix_worker_name`,`gangmaster_no`,`gangmaster_name`,`remark`,`create_time`,`update_time` from web_task_distribution where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.rbc.biz.domain.TaskDistributionDO">
+		select `id`,`sequence_no`,`fix_project`,`plan_num`,`real_Num`,`fix_worker_no`,`fix_worker_name`,`gangmaster_no`,`gangmaster_name`,`remark`,`create_time`,`update_time` from web_task_distribution
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="sequenceNo != null and sequenceNo != ''"> and sequence_no = #{sequenceNo} </if>
+		  		  <if test="fixProject != null and fixProject != ''"> and fix_project = #{fixProject} </if>
+		  		  <if test="planNum != null and planNum != ''"> and plan_num = #{planNum} </if>
+		  		  <if test="realNum != null and realNum != ''"> and real_Num = #{realNum} </if>
+		  		  <if test="fixWorkerNo != null and fixWorkerNo != ''"> and fix_worker_no = #{fixWorkerNo} </if>
+		  		  <if test="fixWorkerName != null and fixWorkerName != ''"> and fix_worker_name = #{fixWorkerName} </if>
+		  		  <if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
+		  		  <if test="gangmasterName != null and gangmasterName != ''"> and gangmaster_name = #{gangmasterName} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from web_task_distribution
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="sequenceNo != null and sequenceNo != ''"> and sequence_no = #{sequenceNo} </if>
+		  		  <if test="fixProject != null and fixProject != ''"> and fix_project = #{fixProject} </if>
+		  		  <if test="planNum != null and planNum != ''"> and plan_num = #{planNum} </if>
+		  		  <if test="realNum != null and realNum != ''"> and real_Num = #{realNum} </if>
+		  		  <if test="fixWorkerNo != null and fixWorkerNo != ''"> and fix_worker_no = #{fixWorkerNo} </if>
+		  		  <if test="fixWorkerName != null and fixWorkerName != ''"> and fix_worker_name = #{fixWorkerName} </if>
+		  		  <if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
+		  		  <if test="gangmasterName != null and gangmasterName != ''"> and gangmaster_name = #{gangmasterName} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.rbc.biz.domain.TaskDistributionDO" useGeneratedKeys="true" keyProperty="id">
+		insert into web_task_distribution
+		(
+			`sequence_no`, 
+			`fix_project`, 
+			`plan_num`, 
+			`real_Num`, 
+			`fix_worker_no`, 
+			`fix_worker_name`, 
+			`gangmaster_no`, 
+			`gangmaster_name`, 
+			`remark`, 
+			`create_time`, 
+			`update_time`
+		)
+		values
+		(
+			#{sequenceNo}, 
+			#{fixProject}, 
+			#{planNum}, 
+			#{realNum}, 
+			#{fixWorkerNo}, 
+			#{fixWorkerName}, 
+			#{gangmasterNo}, 
+			#{gangmasterName}, 
+			#{remark}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.rbc.biz.domain.TaskDistributionDO">
+		update web_task_distribution 
+		<set>
+			<if test="sequenceNo != null">`sequence_no` = #{sequenceNo}, </if>
+			<if test="fixProject != null">`fix_project` = #{fixProject}, </if>
+			<if test="planNum != null">`plan_num` = #{planNum}, </if>
+			<if test="realNum != null">`real_Num` = #{realNum}, </if>
+			<if test="fixWorkerNo != null">`fix_worker_no` = #{fixWorkerNo}, </if>
+			<if test="fixWorkerName != null">`fix_worker_name` = #{fixWorkerName}, </if>
+			<if test="gangmasterNo != null">`gangmaster_no` = #{gangmasterNo}, </if>
+			<if test="gangmasterName != null">`gangmaster_name` = #{gangmasterName}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from web_task_distribution where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from web_task_distribution where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

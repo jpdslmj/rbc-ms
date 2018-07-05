@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rbc.biz.dao.WenchDao">
+
+	<select id="get" resultType="com.rbc.biz.domain.WenchDO">
+		select `id`,`tool_id`,`wench_no`,`deal_sit`,`remark`,`create_time`,`update_time` from web_wench where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.rbc.biz.domain.WenchDO">
+		select `id`,`tool_id`,`wench_no`,`deal_sit`,`remark`,`create_time`,`update_time` from web_wench
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="toolId != null and toolId != ''"> and tool_id = #{toolId} </if>
+		  		  <if test="wenchNo != null and wenchNo != ''"> and wench_no = #{wenchNo} </if>
+		  		  <if test="dealSit != null and dealSit != ''"> and deal_sit = #{dealSit} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from web_wench
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="toolId != null and toolId != ''"> and tool_id = #{toolId} </if>
+		  		  <if test="wenchNo != null and wenchNo != ''"> and wench_no = #{wenchNo} </if>
+		  		  <if test="dealSit != null and dealSit != ''"> and deal_sit = #{dealSit} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.rbc.biz.domain.WenchDO" useGeneratedKeys="true" keyProperty="id">
+		insert into web_wench
+		(
+			`tool_id`, 
+			`wench_no`, 
+			`deal_sit`, 
+			`remark`, 
+			`create_time`, 
+			`update_time`
+		)
+		values
+		(
+			#{toolId}, 
+			#{wenchNo}, 
+			#{dealSit}, 
+			#{remark}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.rbc.biz.domain.WenchDO">
+		update web_wench 
+		<set>
+			<if test="toolId != null">`tool_id` = #{toolId}, </if>
+			<if test="wenchNo != null">`wench_no` = #{wenchNo}, </if>
+			<if test="dealSit != null">`deal_sit` = #{dealSit}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from web_wench where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from web_wench where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

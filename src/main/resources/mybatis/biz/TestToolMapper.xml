@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rbc.biz.dao.TestToolDao">
+
+	<select id="get" resultType="com.rbc.biz.domain.TestToolDO">
+		select `id`,`wind_error_value`,`is_wind_exced`,`temperature`,`humidity`,`fu705test1`,`fu705test2`,`fu705test3`,`fuF8test1`,`fuF8test2`,`fa705test1`,`fa705test2`,`fa705test3`,`faF8test1`,`faF8test2`,`mk705test1`,`mk705test2`,`mk705test3`,`tester_no`,`tester_name`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`inspector_no`,`inspector_name`,`inspector_audit`,`permissions_opinion`,`return_opinion`,`create_time`,`update_time` from web_test_tool where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.rbc.biz.domain.TestToolDO">
+		select `id`,`wind_error_value`,`is_wind_exced`,`temperature`,`humidity`,`fu705test1`,`fu705test2`,`fu705test3`,`fuF8test1`,`fuF8test2`,`fa705test1`,`fa705test2`,`fa705test3`,`faF8test1`,`faF8test2`,`mk705test1`,`mk705test2`,`mk705test3`,`tester_no`,`tester_name`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`inspector_no`,`inspector_name`,`inspector_audit`,`permissions_opinion`,`return_opinion`,`create_time`,`update_time` from web_test_tool
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="windErrorValue != null and windErrorValue != ''"> and wind_error_value = #{windErrorValue} </if>
+		  		  <if test="isWindExced != null and isWindExced != ''"> and is_wind_exced = #{isWindExced} </if>
+		  		  <if test="temperature != null and temperature != ''"> and temperature = #{temperature} </if>
+		  		  <if test="humidity != null and humidity != ''"> and humidity = #{humidity} </if>
+		  		  <if test="fu705test1 != null and fu705test1 != ''"> and fu705test1 = #{fu705test1} </if>
+		  		  <if test="fu705test2 != null and fu705test2 != ''"> and fu705test2 = #{fu705test2} </if>
+		  		  <if test="fu705test3 != null and fu705test3 != ''"> and fu705test3 = #{fu705test3} </if>
+		  		  <if test="fuf8test1 != null and fuf8test1 != ''"> and fuF8test1 = #{fuf8test1} </if>
+		  		  <if test="fuf8test2 != null and fuf8test2 != ''"> and fuF8test2 = #{fuf8test2} </if>
+		  		  <if test="fa705test1 != null and fa705test1 != ''"> and fa705test1 = #{fa705test1} </if>
+		  		  <if test="fa705test2 != null and fa705test2 != ''"> and fa705test2 = #{fa705test2} </if>
+		  		  <if test="fa705test3 != null and fa705test3 != ''"> and fa705test3 = #{fa705test3} </if>
+		  		  <if test="faf8test1 != null and faf8test1 != ''"> and faF8test1 = #{faf8test1} </if>
+		  		  <if test="faf8test2 != null and faf8test2 != ''"> and faF8test2 = #{faf8test2} </if>
+		  		  <if test="mk705test1 != null and mk705test1 != ''"> and mk705test1 = #{mk705test1} </if>
+		  		  <if test="mk705test2 != null and mk705test2 != ''"> and mk705test2 = #{mk705test2} </if>
+		  		  <if test="mk705test3 != null and mk705test3 != ''"> and mk705test3 = #{mk705test3} </if>
+		  		  <if test="testerNo != null and testerNo != ''"> and tester_no = #{testerNo} </if>
+		  		  <if test="testerName != null and testerName != ''"> and tester_name = #{testerName} </if>
+		  		  <if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
+		  		  <if test="gangmasterName != null and gangmasterName != ''"> and gangmaster_name = #{gangmasterName} </if>
+		  		  <if test="gangmasterAudit != null and gangmasterAudit != ''"> and gangmaster_audit = #{gangmasterAudit} </if>
+		  		  <if test="inspectorNo != null and inspectorNo != ''"> and inspector_no = #{inspectorNo} </if>
+		  		  <if test="inspectorName != null and inspectorName != ''"> and inspector_name = #{inspectorName} </if>
+		  		  <if test="inspectorAudit != null and inspectorAudit != ''"> and inspector_audit = #{inspectorAudit} </if>
+		  		  <if test="permissionsOpinion != null and permissionsOpinion != ''"> and permissions_opinion = #{permissionsOpinion} </if>
+		  		  <if test="returnOpinion != null and returnOpinion != ''"> and return_opinion = #{returnOpinion} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from web_test_tool
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="windErrorValue != null and windErrorValue != ''"> and wind_error_value = #{windErrorValue} </if>
+		  		  <if test="isWindExced != null and isWindExced != ''"> and is_wind_exced = #{isWindExced} </if>
+		  		  <if test="temperature != null and temperature != ''"> and temperature = #{temperature} </if>
+		  		  <if test="humidity != null and humidity != ''"> and humidity = #{humidity} </if>
+		  		  <if test="fu705test1 != null and fu705test1 != ''"> and fu705test1 = #{fu705test1} </if>
+		  		  <if test="fu705test2 != null and fu705test2 != ''"> and fu705test2 = #{fu705test2} </if>
+		  		  <if test="fu705test3 != null and fu705test3 != ''"> and fu705test3 = #{fu705test3} </if>
+		  		  <if test="fuf8test1 != null and fuf8test1 != ''"> and fuF8test1 = #{fuf8test1} </if>
+		  		  <if test="fuf8test2 != null and fuf8test2 != ''"> and fuF8test2 = #{fuf8test2} </if>
+		  		  <if test="fa705test1 != null and fa705test1 != ''"> and fa705test1 = #{fa705test1} </if>
+		  		  <if test="fa705test2 != null and fa705test2 != ''"> and fa705test2 = #{fa705test2} </if>
+		  		  <if test="fa705test3 != null and fa705test3 != ''"> and fa705test3 = #{fa705test3} </if>
+		  		  <if test="faf8test1 != null and faf8test1 != ''"> and faF8test1 = #{faf8test1} </if>
+		  		  <if test="faf8test2 != null and faf8test2 != ''"> and faF8test2 = #{faf8test2} </if>
+		  		  <if test="mk705test1 != null and mk705test1 != ''"> and mk705test1 = #{mk705test1} </if>
+		  		  <if test="mk705test2 != null and mk705test2 != ''"> and mk705test2 = #{mk705test2} </if>
+		  		  <if test="mk705test3 != null and mk705test3 != ''"> and mk705test3 = #{mk705test3} </if>
+		  		  <if test="testerNo != null and testerNo != ''"> and tester_no = #{testerNo} </if>
+		  		  <if test="testerName != null and testerName != ''"> and tester_name = #{testerName} </if>
+		  		  <if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
+		  		  <if test="gangmasterName != null and gangmasterName != ''"> and gangmaster_name = #{gangmasterName} </if>
+		  		  <if test="gangmasterAudit != null and gangmasterAudit != ''"> and gangmaster_audit = #{gangmasterAudit} </if>
+		  		  <if test="inspectorNo != null and inspectorNo != ''"> and inspector_no = #{inspectorNo} </if>
+		  		  <if test="inspectorName != null and inspectorName != ''"> and inspector_name = #{inspectorName} </if>
+		  		  <if test="inspectorAudit != null and inspectorAudit != ''"> and inspector_audit = #{inspectorAudit} </if>
+		  		  <if test="permissionsOpinion != null and permissionsOpinion != ''"> and permissions_opinion = #{permissionsOpinion} </if>
+		  		  <if test="returnOpinion != null and returnOpinion != ''"> and return_opinion = #{returnOpinion} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.rbc.biz.domain.TestToolDO" useGeneratedKeys="true" keyProperty="id">
+		insert into web_test_tool
+		(
+			`wind_error_value`, 
+			`is_wind_exced`, 
+			`temperature`, 
+			`humidity`, 
+			`fu705test1`, 
+			`fu705test2`, 
+			`fu705test3`, 
+			`fuF8test1`, 
+			`fuF8test2`, 
+			`fa705test1`, 
+			`fa705test2`, 
+			`fa705test3`, 
+			`faF8test1`, 
+			`faF8test2`, 
+			`mk705test1`, 
+			`mk705test2`, 
+			`mk705test3`, 
+			`tester_no`, 
+			`tester_name`, 
+			`gangmaster_no`, 
+			`gangmaster_name`, 
+			`gangmaster_audit`, 
+			`inspector_no`, 
+			`inspector_name`, 
+			`inspector_audit`, 
+			`permissions_opinion`, 
+			`return_opinion`, 
+			`create_time`, 
+			`update_time`
+		)
+		values
+		(
+			#{windErrorValue}, 
+			#{isWindExced}, 
+			#{temperature}, 
+			#{humidity}, 
+			#{fu705test1}, 
+			#{fu705test2}, 
+			#{fu705test3}, 
+			#{fuf8test1}, 
+			#{fuf8test2}, 
+			#{fa705test1}, 
+			#{fa705test2}, 
+			#{fa705test3}, 
+			#{faf8test1}, 
+			#{faf8test2}, 
+			#{mk705test1}, 
+			#{mk705test2}, 
+			#{mk705test3}, 
+			#{testerNo}, 
+			#{testerName}, 
+			#{gangmasterNo}, 
+			#{gangmasterName}, 
+			#{gangmasterAudit}, 
+			#{inspectorNo}, 
+			#{inspectorName}, 
+			#{inspectorAudit}, 
+			#{permissionsOpinion}, 
+			#{returnOpinion}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.rbc.biz.domain.TestToolDO">
+		update web_test_tool 
+		<set>
+			<if test="windErrorValue != null">`wind_error_value` = #{windErrorValue}, </if>
+			<if test="isWindExced != null">`is_wind_exced` = #{isWindExced}, </if>
+			<if test="temperature != null">`temperature` = #{temperature}, </if>
+			<if test="humidity != null">`humidity` = #{humidity}, </if>
+			<if test="fu705test1 != null">`fu705test1` = #{fu705test1}, </if>
+			<if test="fu705test2 != null">`fu705test2` = #{fu705test2}, </if>
+			<if test="fu705test3 != null">`fu705test3` = #{fu705test3}, </if>
+			<if test="fuf8test1 != null">`fuF8test1` = #{fuf8test1}, </if>
+			<if test="fuf8test2 != null">`fuF8test2` = #{fuf8test2}, </if>
+			<if test="fa705test1 != null">`fa705test1` = #{fa705test1}, </if>
+			<if test="fa705test2 != null">`fa705test2` = #{fa705test2}, </if>
+			<if test="fa705test3 != null">`fa705test3` = #{fa705test3}, </if>
+			<if test="faf8test1 != null">`faF8test1` = #{faf8test1}, </if>
+			<if test="faf8test2 != null">`faF8test2` = #{faf8test2}, </if>
+			<if test="mk705test1 != null">`mk705test1` = #{mk705test1}, </if>
+			<if test="mk705test2 != null">`mk705test2` = #{mk705test2}, </if>
+			<if test="mk705test3 != null">`mk705test3` = #{mk705test3}, </if>
+			<if test="testerNo != null">`tester_no` = #{testerNo}, </if>
+			<if test="testerName != null">`tester_name` = #{testerName}, </if>
+			<if test="gangmasterNo != null">`gangmaster_no` = #{gangmasterNo}, </if>
+			<if test="gangmasterName != null">`gangmaster_name` = #{gangmasterName}, </if>
+			<if test="gangmasterAudit != null">`gangmaster_audit` = #{gangmasterAudit}, </if>
+			<if test="inspectorNo != null">`inspector_no` = #{inspectorNo}, </if>
+			<if test="inspectorName != null">`inspector_name` = #{inspectorName}, </if>
+			<if test="inspectorAudit != null">`inspector_audit` = #{inspectorAudit}, </if>
+			<if test="permissionsOpinion != null">`permissions_opinion` = #{permissionsOpinion}, </if>
+			<if test="returnOpinion != null">`return_opinion` = #{returnOpinion}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from web_test_tool where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from web_test_tool where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
