@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<table class="table table-bordered">
+								<tr>
+									<td>检修时间：</td>
+									<td><input type="date" class="form-control" id="checkTime" /></td>
+									<td>编号：</td>
+									<td><input type="text" class="form-control" id="code" placeholder="请输入编号"/></td>
+								</tr>
+							</table>
+							<table class="table table-bordered">
+								<thead>
+								<tr>
+									<th>检修工序</th>
+									<th>检修内容</th>
+									<th>工作者</th>
+									<th>备注</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>分解</td>
+									<td>检查除锈及配件状态</td>
+									<td>王语嫣</td>
+									<td><textarea class="form-control" rows="1"></textarea></td>
+								</tr>
+								<tr>
+									<td>清洗</td>
+									<td>阀体、阀盖和阀内各配件清晰</td>
+									<td>王语嫣</td>
+									<td><textarea class="form-control" rows="1"></textarea></td>
+								</tr>
+								<tr>
+									<td>检修</td>
+									<td>阀体、阀盖和阀内各配件清晰</td>
+									<td>王语嫣</td>
+									<td><textarea class="form-control" rows="1"></textarea></td>
+								</tr>
+								<tr>
+									<td>检修</td>
+									<td>通针疏通限制孔：1.8mm 0.5mm 1.15mm零部件检查</td>
+									<td>王语嫣</td>
+									<td><textarea class="form-control" rows="1"></textarea></td>
+								</tr>
+								<tr>
+									<td>检修</td>
+									<td>各橡胶制品齐全不超期，香蕉模板及密封圈更换</td>
+									<td>王语嫣</td>
+									<td><textarea class="form-control" rows="1"></textarea></td>
+								</tr>
+								<tr>
+									<td>组装</td>
+									<td>各部件组装状态良好，结合部清洁，压板螺母紧固，丝扣紧固</td>
+									<td>王语嫣</td>
+									<td><textarea class="form-control" rows="1"></textarea></td>
+								</tr>
+								<tr>
+									<td colspan="4"></td>
+								</tr>
+								</tbody>
+							</table>
+							<table class="table">
+								<tr>
+									<td><button type="submit" class="btn btn-default">影像上传</button></td>
+									<td></td>
+									<td><button type="submit" class="btn btn-default">保存</button></td>
+									<td><button type="submit" class="btn btn-default">签字提交</button></td>
+								</tr>
+							</table>
+
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/part/m104chk/edit.js">
+	</script>
+</body>
+</html>
