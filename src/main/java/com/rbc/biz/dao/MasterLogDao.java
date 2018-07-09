@@ -18,9 +18,9 @@ public interface MasterLogDao {
 
 	MasterLogDO get(Long id);
 	
-	List<MasterLogDO> list(Map<String,Object> map);
+	List<MasterLogDO> list(Map<String, Object> map);
 	
-	int count(Map<String,Object> map);
+	int count(Map<String, Object> map);
 	
 	int save(MasterLogDO masterLog);
 	

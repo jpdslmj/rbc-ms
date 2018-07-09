@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<form role="form" class="form-horizontal"  id="editTaskForm">
+		<div class="wrapper wrapper-content animated fadeInRight" style="wmargin: auto">
+
+			<table class="table table-bordered">
+				<tr>
+					<td>
+						<div class="form-group">
+							<label for="updateTime" class="col-sm-2 control-label">检修时间：</label>
+							<div class="col-sm-8">
+								<input type="date"
+									   class="form-control"
+									   id="updateTime"
+									   name="updateTime"
+									   th:value="${mainValve104.updateTime}"
+								>
+							</div>
+						</div>
+					</td>
+					<td>
+						<div class="form-group">
+							<label for="mainValue" class="col-sm-2 control-label">编号：</label>
+							<div class="col-sm-8">
+								<input id="mainValue"
+									   name="mainValue"
+									   th:value="${mainValve104.mainValue}"
+									   class="form-control"
+									   type="text" disabled>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+			<table class="table table-bordered" style="text-align: center">
+				<thead>
+				<tr>
+					<th style="text-align: center">检修工序</th>
+					<th colspan="2" style="text-align: center">检修内容</th>
+					<th style="text-align: center">工作者</th>
+					<th>备注</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>分解</td>
+					<td colspan="2">检查除锈及配件状态</td>
+					<td>
+						<input id="disassembleName"
+							   name="disassembleName"
+							   th:value="${mainValve104.disassembleName}"
+							   class="form-control"
+							   type="text" disabled>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>清洗</td>
+					<td colspan="2">阀体、阀盖和阀内各配件清晰</td>
+					<td>
+						<input id="cleanerName"
+							   name="cleanerName"
+							   th:value="${mainValve104.cleanerName}"
+							   class="form-control"
+							   type="text">
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td rowspan="3">检修</td>
+					<td colspan="2">阀体、阀盖和阀内各配件清晰</td>
+					<td>
+						<input id="fixer1Name"
+							   name="fixer1Name"
+							   th:value="${mainValve104.fixer1Name}"
+							   class="form-control"
+							   type="text">
+					</td>
+					<td><textarea class="form-control" rows="2"></textarea></td>
+				</tr>
+				<tr>
+
+					<td colspan="2">通针疏通限制孔：1.8mm 0.5mm 1.15mm零部件检查</td>
+					<td>
+						<input id="fixer2Name"
+							   name="fixer3Name"
+							   th:value="${mainValve104.fixer3Name}"
+							   class="form-control"
+							   type="text">
+					</td>
+					<td><textarea class="form-control" rows="2"></textarea></td>
+				</tr>
+				<tr>
+
+					<td colspan="2">各橡胶制品齐全不超期，香蕉模板及密封圈更换</td>
+					<td>
+						<input id="fixer3Name"
+							   name="fixer3Name"
+							   th:value="${mainValve104.fixer3Name}"
+							   class="form-control"
+							   type="text">
+					</td>
+					<td><textarea class="form-control" rows="2"></textarea></td>
+				</tr>
+				<tr>
+					<td>组装</td>
+					<td>各部件组装状态良好，结合部清洁，压板螺母紧固，丝扣紧固</td>
+					<td>
+						<label for="checkbox" class="control-label" >人
+							<input type="checkbox" id="checkbox" >
+						</label>
+					</td>
+					<td>
+						<input id="assemblerName"
+							   name="assemblerName"
+							   th:value="${mainValve104.assemblerName}"
+							   class="form-control"
+							   type="text"></td>
+					<td></td>
+				</tr>
+
+				<tr>
+					<td>审核</td>
+					<td colspan="3">
+						<table class="table-bordered" style="width: 100%;text-align: center">
+							<tr>
+								<td style="text-align: right">
+									工长：
+								</td>
+								<td>
+									张三
+								</td>
+								<td>
+									<label for="checkbox" class="control-label" >一
+										<input type="checkbox" id="checkbox" >
+									</label></td>
+								</td>
+								<td style="text-align: right">
+									质检员：
+								</td>
+								<td>
+									李四
+								</td>
+								<td>
+									<label for="checkbox" class="control-label" >口
+										<input type="checkbox" id="checkbox" >
+									</label></td>
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td> </td>
+				</tr>
+
+				<tr>
+					<td>备注：</td>
+					<td colspan="4"><textarea class="form-control" rows="4"></textarea></td>
+				</tr>
+				<tr>
+					<td colspan="5">
+						<table style="text-align: center;width: 100%">
+							<tr>
+								<td>
+									<button type="submit" class="btn btn-success">影像查看</button>
+								</td>
+								<td>
+									<button type="submit" class="btn btn-success">保存</button>
+								</td>
+								<td>
+									<button type="submit" class="btn btn-success">提交</button>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</form>
+
+
+<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/part/fix104m/editTask.js">
+	</script>
+</body>
+</html>

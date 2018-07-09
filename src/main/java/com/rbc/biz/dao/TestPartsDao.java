@@ -18,9 +18,9 @@ public interface TestPartsDao {
 
 	TestPartsDO get(Long id);
 	
-	List<TestPartsDO> list(Map<String,Object> map);
+	List<TestPartsDO> list(Map<String, Object> map);
 	
-	int count(Map<String,Object> map);
+	int count(Map<String, Object> map);
 	
 	int save(TestPartsDO testParts);
 	

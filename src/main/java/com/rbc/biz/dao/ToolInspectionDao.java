@@ -18,9 +18,9 @@ public interface ToolInspectionDao {
 
 	ToolInspectionDO get(Long id);
 	
-	List<ToolInspectionDO> list(Map<String,Object> map);
+	List<ToolInspectionDO> list(Map<String, Object> map);
 	
-	int count(Map<String,Object> map);
+	int count(Map<String, Object> map);
 	
 	int save(ToolInspectionDO toolInspection);
 	

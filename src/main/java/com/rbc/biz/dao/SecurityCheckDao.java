@@ -18,9 +18,9 @@ public interface SecurityCheckDao {
 
 	SecurityCheckDO get(Long id);
 	
-	List<SecurityCheckDO> list(Map<String,Object> map);
+	List<SecurityCheckDO> list(Map<String, Object> map);
 	
-	int count(Map<String,Object> map);
+	int count(Map<String, Object> map);
 	
 	int save(SecurityCheckDO securityCheck);
 	
