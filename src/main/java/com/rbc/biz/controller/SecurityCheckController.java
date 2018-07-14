@@ -1,5 +1,4 @@
 package com.rbc.biz.controller;
-
 import com.rbc.biz.domain.SecurityCheckDO;
 import com.rbc.biz.service.SecurityCheckService;
 import com.rbc.common.utils.PageUtils;
@@ -34,7 +33,7 @@ public class SecurityCheckController {
 	    return "biz/securityCheck/securityCheck";
 	}
 	
-	@ResponseBody
+	/**@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("biz:securityCheck:securityCheck")
 	public PageUtils list(@RequestParam Map<String, Object> params){
@@ -44,7 +43,7 @@ public class SecurityCheckController {
 		int total = securityCheckService.count(query);
 		PageUtils pageUtils = new PageUtils(securityCheckList, total);
 		return pageUtils;
-	}
+	}*/
 	
 	@GetMapping("/add")
 	@RequiresPermissions("biz:securityCheck:add")

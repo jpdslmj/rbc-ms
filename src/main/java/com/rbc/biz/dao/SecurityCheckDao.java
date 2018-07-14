@@ -29,4 +29,7 @@ public interface SecurityCheckDao {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
+	int  batchSave(List<SecurityCheckDO> list);
+	int  batchUpdate(List<SecurityCheckDO> list);
 }

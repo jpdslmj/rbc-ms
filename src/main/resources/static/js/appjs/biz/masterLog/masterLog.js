@@ -52,26 +52,6 @@ function load() {
 									title : '' 
 								},
 																{
-									field : 'weather', 
-									title : '天气' 
-								},
-																{
-									field : 'clsEnvision', 
-									title : '班前预想' 
-								},
-																{
-									field : 'clsOne', 
-									title : '班前一题' 
-								},
-																{
-									field : 'taskDetails', 
-									title : '任务完成情况和改进措施' 
-								},
-																{
-									field : 'clsMark', 
-									title : '班组记事' 
-								},
-																{
 									field : 'gangmasterNo', 
 									title : '工长工号' 
 								},
@@ -82,10 +62,6 @@ function load() {
 																{
 									field : 'createTime', 
 									title : '创建日期' 
-								},
-																{
-									field : 'updateTime', 
-									title : '更新日期' 
 								},
 																{
 									title : '操作',
@@ -112,21 +88,34 @@ function reLoad() {
 function add() {
 	layer.open({
 		type : 2,
-		title : '增加',
-		maxmin : true,
+		title : '新增日志',
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content : prefix + '/add' // iframe的url
+		content : prefix + '/add' ,// iframe的url
+
+        maxmin : true,
+        fixed:false,
+        resize:true,
+        area : ['360px','640px'],
+        success:function(layero ,index){
+            layer.full(index);
+        }
+
 	});
 }
 function edit(id) {
 	layer.open({
 		type : 2,
 		title : '编辑',
-		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + id // iframe的url
+		content : prefix + '/edit/' + id, // iframe的url
+
+        maxmin : true,
+        fixed:false,
+        resize:true,
+        area : ['360px','640px'],
+        success:function(layero ,index){
+            layer.full(index);
+        }
 	});
 }
 function remove(id) {

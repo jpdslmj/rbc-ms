@@ -1,21 +1,22 @@
 
-var prefix = "/biz/securityCheck"
+var prefix = "/biz/masterLog"
 $(function() {
-	load();
+	loadSafeChkTable();
 });
-
-function load() {
-	$('#exampleTable')
-			.bootstrapTable(
+function loadSafeChkTable() {
+    $('#safeChkTable').bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/list", // 服务器数据的加载地址
+						url : prefix + "/listSecurity/", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
+                        editable:true,
+                        clickToSelect: true,
 						iconSize : 'outline',
-						toolbar : '#exampleToolbar',
-						striped : true, // 设置为true会有隔行变色效果
+						html:true,
+						//toolbar : '#safeChkTable',
+						//striped : true, // 设置为true会有隔行变色效果
 						dataType : "json", // 服务器返回的数据类型
 						pagination : true, // 设置为true会在底部显示分页条
 						// queryParamsType : "limit",
@@ -32,9 +33,10 @@ function load() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset
+								offset:params.offset,
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
+                                 logId:$('#id').val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -48,68 +50,123 @@ function load() {
 									checkbox : true
 								},
 																{
-									field : 'id', 
-									title : '' 
+									field : 'logId',
+									title : '日志表主键',
+									visible:false
 								},
+                            {
+                                field : 'id',
+                                title : '主键',
+                                visible:false
+                            },
+                               {
+                                   field : 'num',
+                                   title : '序号'
+                               },
 																{
 									field : 'securityProject', 
-									title : '质检项目名' 
+									title : '抽查项目名' ,
+									editable: {
+										type: 'text',
+										mode: "inline",
+                                        placeholder: '抽查项目',
+                                        validate: function (value) {
+											if ($.trim(value) == '') return '质检项目不能为空';
+											}
+											}
 								},
 																{
 									field : 'description', 
-									title : '安全质量状况描述' 
+									title : '安全质量状况' ,
+                                    editable: {
+                                        type: 'text',
+                                        mode: "inline",
+                                        placeholder: '安全质量状况',
+                                        validate: function (value) {
+                                        if ($.trim(value) == '') return '安全质量状况不能为空';
+                                        }
+                                        }
 								},
-																{
-									field : 'status', 
-									title : '质检状态' 
-								},
+                               {
+                                   field : 'remark',
+                                   title : '备注',
+								   editable: {
+                                       type: 'text',
+                                       mode: "inline",
+                                       placeholder: '备注',
+                                   }
+                               },
 																{
 									field : 'gangmasterNo', 
-									title : '工长工号' 
+									title : '工长工号' ,
+                                     visible:false
 								},
 																{
 									field : 'gangmasterName', 
-									title : '工长名称' 
+									title : '工长名称' ,
+                                    visible:false
 								},
-																{
-									field : 'checkTime', 
-									title : '质检日期' 
-								},
-																{
-									field : 'remark', 
-									title : '备注' 
-								},
+
+
 																{
 									field : 'createTime', 
-									title : '创建日期' 
+									title : '创建日期',
+									visible:false
 								},
 																{
 									field : 'updateTime', 
-									title : '更新日期' 
+									title : '更新日期',
+                                    visible:false
 								},
 																{
 									title : '操作',
-									field : 'id',
+									field : 'num',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.id
+										var e = '<a class="btn btn-primary btn-sm '+'" href="#" mce_href="#" title="编辑" onclick="editSafeChkTable(\''
+												+ row.num
 												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.id
+										var d = '<a class="btn btn-warning btn-sm '+'" href="#" title="删除"  mce_href="#" onclick="removeSafeChkTable(\''
+												+ row.num
 												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.id
-												+ '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
 								} ]
 					});
 }
-function reLoad() {
-	$('#exampleTable').bootstrapTable('refresh');
+$('#addData').click(function(){
+	var Allrows=$('#safeChkTable').bootstrapTable('getData');
+    var len= Allrows.length;
+
+
+    var data = {id:"",num:++len,securityProject:"",description:"",remark:"",gangmasterNo:"",createTime:"",updateTime:"",};
+    $('#safeChkTable').bootstrapTable('insertRow', {index:$('#safeChkTable').bootstrapTable('getData').length, row:data});
+});
+
+$('#delData').click(function(){
+    var ids = $.map($('#safeChkTable').bootstrapTable('getSelections'), function (row) {
+        return row.num;
+    });
+    $('#safeChkTable').bootstrapTable('remove', {
+        field: 'num',
+        values: ids
+    });
+    $.each($('#safeChkTable').bootstrapTable('getData'),function(i,row){
+    	var t=i;
+    	var r=row;
+       $('#safeChkTable').bootstrapTable('updateCell',{
+       	index:i,
+	    field:'num',
+	    value:++i
+       });
+	})
+});
+
+
+function reLoadSafeChkTable() {
+	$('#safeChkTable').bootstrapTable('refresh');
 }
-function add() {
+function addSafeChkTable() {
 	layer.open({
 		type : 2,
 		title : '增加',
@@ -119,7 +176,7 @@ function add() {
 		content : prefix + '/add' // iframe的url
 	});
 }
-function edit(id) {
+function editSafeChkTable(id) {
 	layer.open({
 		type : 2,
 		title : '编辑',
@@ -129,7 +186,7 @@ function edit(id) {
 		content : prefix + '/edit/' + id // iframe的url
 	});
 }
-function remove(id) {
+function removeSafeChkTable(id) {
 	layer.confirm('确定要删除选中的记录？', {
 		btn : [ '确定', '取消' ]
 	}, function() {
@@ -151,10 +208,10 @@ function remove(id) {
 	})
 }
 
-function resetPwd(id) {
+function resetPwdSafeChkTable(id) {
 }
-function batchRemove() {
-	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+function batchRemoveSafeChkTable() {
+	var rows = $('##safeChkTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
 		layer.msg("请选择要删除的数据");
 		return;

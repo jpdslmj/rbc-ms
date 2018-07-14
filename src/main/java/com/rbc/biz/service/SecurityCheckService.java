@@ -27,4 +27,6 @@ public interface SecurityCheckService {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
+	//int batchSaveOrUpdate(List<SecurityCheckDO> list);
 }

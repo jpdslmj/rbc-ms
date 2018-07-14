@@ -2,9 +2,12 @@ package com.rbc.biz.controller;
 
 import com.rbc.biz.domain.PopValve104DO;
 import com.rbc.biz.service.PopValve104Service;
+import com.rbc.common.controller.BaseController;
 import com.rbc.common.utils.PageUtils;
 import com.rbc.common.utils.Query;
 import com.rbc.common.utils.R;
+import com.rbc.system.domain.UserDO;
+import com.rbc.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +27,11 @@ import java.util.Map;
  
 @Controller
 @RequestMapping("/biz/popValve104")
-public class PopValve104Controller {
+public class PopValve104Controller extends BaseController {
 	@Autowired
 	private PopValve104Service popValve104Service;
+    @Autowired
+    private UserService userService;
 	
 	@GetMapping()
 	@RequiresPermissions("biz:popValve104:popValve104")
@@ -48,9 +53,11 @@ public class PopValve104Controller {
 	
 	@GetMapping("/add")
 	@RequiresPermissions("biz:popValve104:add")
-	String add(){
-	    return "biz/popValve104/add";
-	}
+    String add(Model model){
+        UserDO userDO  = userService.get(getUserId());
+        model.addAttribute("user",userDO);
+        return "biz/popValve104/add";
+    }
 
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("biz:popValve104:edit")

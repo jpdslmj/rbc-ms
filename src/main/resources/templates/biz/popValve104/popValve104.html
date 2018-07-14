@@ -9,7 +9,7 @@
 				<div class="ibox-body">
 					<div class="fixed-table-toolbar">
 						<div class="columns pull-left">
-							<button shiro:hasPermission="biz:popValve104:add" type="button" class="btn  btn-primary" onclick="add()">
+							<button shiro:hasPermission="biz:popValve104:add"  type="button" class="btn  btn-primary" onclick="add()">
 								<i class="fa fa-plus" aria-hidden="true"></i>添加
 							</button>
 							<button shiro:hasPermission="biz:popValve104:batchRemove" type="button" class="btn  btn-danger"
@@ -36,12 +36,13 @@
 			<script type="text/javascript">
 				var s_edit_h = 'hidden';
 				var s_remove_h = 'hidden';
-				var s_resetPwd_h = 'hidden';
 			</script>
 		</div>
 		<div shiro:hasPermission="biz:popValve104:edit">
 			<script type="text/javascript">
+				alert("edit");
 				s_edit_h = '';
+
 			</script>
 		</div>
 		<div shiro:hasPermission="biz:popValve104:remove">
@@ -49,11 +50,7 @@
 				var s_remove_h = '';
 			</script>
 		</div>
-		<div shiro:hasPermission="biz:popValve104:resetPwd">
-			<script type="text/javascript">
-				var s_resetPwd_h = '';
-			</script>
-		</div>
+
 	</div>
 	<div th:include="include :: footer"></div>
 	<script type="text/javascript" src="/js/appjs/biz/popValve104/popValve104.js"></script>

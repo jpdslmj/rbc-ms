@@ -46,10 +46,10 @@ public class SecurityCheckServiceImpl implements SecurityCheckService {
 	public int remove(Long id){
 		return securityCheckDao.remove(id);
 	}
-	
+
 	@Override
 	public int batchRemove(Long[] ids){
 		return securityCheckDao.batchRemove(ids);
 	}
-	
+
 }

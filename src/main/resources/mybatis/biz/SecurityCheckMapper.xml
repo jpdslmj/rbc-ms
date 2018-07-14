@@ -4,12 +4,13 @@
 <mapper namespace="com.rbc.biz.dao.SecurityCheckDao">
 
 	<select id="get" resultType="com.rbc.biz.domain.SecurityCheckDO">
-		select `id`,`security_project`,`description`,`status`,`gangmaster_no`,`gangmaster_name`,`check_time`,`remark`,`create_time`,`update_time` from web_security_check where id = #{value}
+		select `id`,`security_project`,`description`,`status`,`gangmaster_no`,`gangmaster_name`,`check_time`,`remark`,`create_time`,`update_time`,`log_id` from web_security_check where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.rbc.biz.domain.SecurityCheckDO">
-		select `id`,`security_project`,`description`,`status`,`gangmaster_no`,`gangmaster_name`,`check_time`,`remark`,`create_time`,`update_time` from web_security_check
-        <where>  
+		select `id`,`security_project`,`description`,`status`,`gangmaster_no`,`gangmaster_name`,`check_time`,`remark`,`create_time`,`update_time`,`log_id` from web_security_check
+        <where>
+			      log_id = #{logId}
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="securityProject != null and securityProject != ''"> and security_project = #{securityProject} </if>
 		  		  <if test="description != null and description != ''"> and description = #{description} </if>
@@ -20,6 +21,7 @@
 		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -47,6 +49,7 @@
 		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="logId != null and logId != ''"> and log_id = #{logId} </if>
 		  		</where>
 	</select>
 	 
@@ -61,7 +64,8 @@
 			`check_time`, 
 			`remark`, 
 			`create_time`, 
-			`update_time`
+			`update_time`, 
+			`log_id`
 		)
 		values
 		(
@@ -73,10 +77,43 @@
 			#{checkTime}, 
 			#{remark}, 
 			#{createTime}, 
-			#{updateTime}
+			#{updateTime}, 
+			#{logId}
 		)
 	</insert>
-	 
+	<insert id="batchSave" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+		insert into web_security_check
+		(
+			`security_project`,
+			`description`,
+			`status`,
+			`gangmaster_no`,
+			`gangmaster_name`,
+			`check_time`,
+			`remark`,
+			`create_time`,
+			`update_time`,
+			`log_id`
+		)
+		values
+		<foreach collection ="list" item="securityCheckDO" index= "index" separator =",">
+		(
+			#{securityCheckDO.securityProject},
+			#{securityCheckDO.description},
+			#{securityCheckDO.status},
+			#{securityCheckDO.gangmasterNo},
+			#{securityCheckDO.gangmasterName},
+			#{securityCheckDO.checkTime},
+			#{securityCheckDO.remark},
+			#{securityCheckDO.createTime},
+			#{securityCheckDO.updateTime},
+			#{securityCheckDO.logId}
+		)
+		</foreach>
+	</insert>
+
+
+
 	<update id="update" parameterType="com.rbc.biz.domain.SecurityCheckDO">
 		update web_security_check 
 		<set>
@@ -88,11 +125,93 @@
 			<if test="checkTime != null">`check_time` = #{checkTime}, </if>
 			<if test="remark != null">`remark` = #{remark}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
-			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="logId != null">`log_id` = #{logId}</if>
 		</set>
 		where id = #{id}
 	</update>
-	
+
+
+	<update id="batchUpdate" parameterType="java.util.List">
+		update web_security_check
+		<trim prefix="set" suffixOverrides=",">
+			<trim prefix="security_project =case" suffix="end,">
+				<foreach collection="list" item="securityCheckDO" index="index">
+					<if test="securityProject != null"> when #{securityCheckDO.id} then
+						#{securityCheckDO.securityProject}</if>
+				</foreach>
+			</trim>
+			<trim prefix="description =case" suffix="end,">
+				<foreach collection="list" item="securityCheckDO" index="index">
+					<if test="description != null"> when #{securityCheckDO.id} then
+						#{securityCheckDO.description}</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="status =case" suffix="end,">
+				<foreach collection="list" item="securityCheckDO" index="index">
+					<if test="status != null"> when #{securityCheckDO.id} then
+						#{securityCheckDO.status}</if>
+				</foreach>
+			</trim>
+			<trim prefix="gangmasterNo =case" suffix="end,">
+				<foreach collection="list" item="securityCheckDO" index="index">
+					<if test="gangmasterNo != null"> when #{securityCheckDO.id} then
+						#{securityCheckDO.gangmasterNo}</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="gangmasterName =case" suffix="end,">
+				<foreach collection="list" item="securityCheckDO" index="index">
+					<if test="gangmasterName != null"> when #{securityCheckDO.id} then
+						#{securityCheckDO.gangmasterName}</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="checkTime =case" suffix="end,">
+				<foreach collection="list" item="securityCheckDO" index="index">
+					<if test="checkTime != null"> when #{securityCheckDO.id} then
+						#{securityCheckDO.checkTime}</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="remark =case" suffix="end,">
+				<foreach collection="list" item="securityCheckDO" index="index">
+					<if test="remark != null"> when #{securityCheckDO.id} then
+						#{securityCheckDO.remark}</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="createTime =case" suffix="end,">
+				<foreach collection="list" item="securityCheckDO" index="index">
+					<if test="createTime != null"> when #{securityCheckDO.id} then
+						#{securityCheckDO.createTime}</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="updateTime =case" suffix="end,">
+				<foreach collection="list" item="securityCheckDO" index="index">
+					<if test="updateTime != null"> when #{securityCheckDO.id} then
+						#{securityCheckDO.updateTime}</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="logId =case" suffix="end,">
+				<foreach collection="list" item="securityCheckDO" index="index">
+					<if test="logId != null"> when #{securityCheckDO.id} then
+						#{securityCheckDO.logId}</if>
+				</foreach>
+			</trim>
+
+	</trim>
+		where
+		<foreach collection="list" separator="," item="securityCheckDO" index="index" >
+			id=#{securityCheckDO.id}
+		</foreach>
+	</update>
+
+
+
 	<delete id="remove">
 		delete from web_security_check where id = #{value}
 	</delete>

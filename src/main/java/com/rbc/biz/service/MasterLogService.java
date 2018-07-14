@@ -1,6 +1,7 @@
 package com.rbc.biz.service;
 
 import com.rbc.biz.domain.MasterLogDO;
+import com.rbc.biz.domain.SecurityCheckDO;
 
 import java.util.List;
 import java.util.Map;
@@ -27,4 +28,6 @@ public interface MasterLogService {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
+	int batchSaveOrUpdate(MasterLogDO masterLogDo,List<SecurityCheckDO>securityCheckList);
 }

@@ -1,5 +1,5 @@
 
-var prefix = "/biz/popValve104"
+var prefix = "/biz/popValve104";
 $(function() {
 	load();
 });
@@ -49,7 +49,8 @@ function load() {
 								},
 																{
 									field : 'id', 
-									title : '' 
+									title : '',
+									visible:false
 								},
 																{
 									field : 'popValue', 
@@ -57,7 +58,8 @@ function load() {
 								},
 																{
 									field : 'disassembleNo', 
-									title : '分解者工号' 
+									title : '分解者工号',
+									visible:false
 								},
 																{
 									field : 'disassembleName', 
@@ -65,7 +67,8 @@ function load() {
 								},
 																{
 									field : 'cleanerNo', 
-									title : '清洗者工号' 
+									title : '清洗者工号',
+                                    visible:false
 								},
 																{
 									field : 'cleanerName', 
@@ -73,7 +76,8 @@ function load() {
 								},
 																{
 									field : 'fixer1No', 
-									title : '检修者1工号' 
+									title : '检修者1工号' ,
+                                    visible:false
 								},
 																{
 									field : 'fixer1Name', 
@@ -81,47 +85,58 @@ function load() {
 								},
 																{
 									field : 'fixer1Remark', 
-									title : '检修者1备注' 
+									title : '检修者1备注',
+                                    visible:false
 								},
 																{
 									field : 'fixer2No', 
-									title : '检修者2工号' 
+									title : '检修者2工号',
+                                    visible:false
 								},
 																{
 									field : 'fixer2Name', 
-									title : '检修者2名称' 
+									title : '检修者2名称',
+                                    visible:false
 								},
 																{
 									field : 'fixer2Remark', 
-									title : '检修者2备注' 
+									title : '检修者2备注',
+                                    visible:false
 								},
 																{
 									field : 'fixer3No', 
-									title : '检修者3工号' 
+									title : '检修者3工号',
+                                    visible:false
 								},
 																{
 									field : 'fixer3Name', 
-									title : '检修者3名称' 
+									title : '检修者3名称',
+                                    visible:false
 								},
 																{
 									field : 'fixer3Remark', 
-									title : '检修者3备注' 
+									title : '检修者3备注',
+                                    visible:false
 								},
 																{
 									field : 'fixer4No', 
-									title : '检修者4工号' 
+									title : '检修者4工号',
+                                    visible:false
 								},
 																{
 									field : 'fixer4Name', 
-									title : '检修者4名称' 
+									title : '检修者4名称',
+                                    visible:false
 								},
 																{
 									field : 'fixer4Remark', 
-									title : '检修者4备注' 
+									title : '检修者4备注',
+                                    visible:false
 								},
 																{
 									field : 'assemblerNo', 
-									title : '组装者工号' 
+									title : '组装者工号',
+                                    visible:false
 								},
 																{
 									field : 'assemblerName', 
@@ -129,67 +144,78 @@ function load() {
 								},
 																{
 									field : 'assemblerRemark', 
-									title : '组装者备注' 
+									title : '组装者备注' ,
+                                    visible:false
 								},
 																{
 									field : 'assembleMark', 
-									title : '组装人字标志' 
+									title : '组装人字标志' ,
+                                    visible:false
 								},
 																{
 									field : 'gangmasterNo', 
-									title : '工长工号' 
+									title : '工长工号' ,
+                                    visible:false
 								},
 																{
 									field : 'gangmasterName', 
-									title : '工长名称' 
+									title : '工长名称',
+                                    visible:false
 								},
 																{
 									field : 'gangmasterAudit', 
-									title : '工长审核意见：1同意 0不同意' 
+									title : '工长审核意见：1同意 0不同意',
+                                    visible:false
 								},
 																{
 									field : 'gangmasterRemark', 
-									title : '工长审核备注' 
+									title : '工长审核备注',
+                                    visible:false
 								},
 																{
 									field : 'gangmasterMark', 
-									title : '工长一字标志' 
+									title : '工长一字标志',
+                                    visible:false
 								},
 																{
 									field : 'inspectorNo', 
-									title : '质检员工号' 
+									title : '质检员工号',
+                                    visible:false
 								},
 																{
 									field : 'inspectorName', 
-									title : '质检员名称' 
+									title : '质检员名称',
+                                                                    visible:false
 								},
 																{
 									field : 'inspectorMark', 
-									title : '质检员合字标志' 
+									title : '质检员合字标志',
+																	visible:false
 								},
 																{
 									field : 'inspectorAudit', 
-									title : '质检员审核意见：1同意 0不同意' 
+									title : '质检员审核意见：1同意 0不同意',visible:false
 								},
 																{
 									field : 'inspectorRemark', 
-									title : '质检员审核备注' 
+									title : '质检员审核备注' ,visible:false
 								},
 																{
 									field : 'returnOpinion', 
-									title : '退回意见：1同意 0不同意' 
+									title : '退回意见：1同意 0不同意' ,visible:false
 								},
 																{
 									field : 'returnRemark', 
-									title : '退回备注' 
+									title : '退回备注',visible:false
 								},
 																{
 									field : 'createTime', 
-									title : '创建日期' 
+									title : '创建日期'
 								},
 																{
 									field : 'updateTime', 
-									title : '更新日期' 
+									title : '更新日期',
+																	visible:false
 								},
 																{
 									title : '操作',
@@ -202,9 +228,6 @@ function load() {
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.id
 												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.id
-												+ '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
 								} ]
@@ -217,20 +240,30 @@ function add() {
 	layer.open({
 		type : 2,
 		title : '增加',
-		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content : prefix + '/add' // iframe的url
+		content : prefix + '/add', // iframe的url
+        maxMin : true,
+        fixed:false,
+        resize:true,
+        area : ['360px','640px'],
+        success:function(layero ,index){
+            layer.full(index);
+        }
 	});
 }
 function edit(id) {
 	layer.open({
 		type : 2,
 		title : '编辑',
-		maxmin : true,
+		maxMin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + id // iframe的url
+		content : prefix + '/edit/' + id ,// iframe的url
+        fixed:false,
+        resize:true,
+        area : ['360px','640px'],
+        success:function(layero ,index){
+            layer.full(index);
+        }
 	});
 }
 function remove(id) {

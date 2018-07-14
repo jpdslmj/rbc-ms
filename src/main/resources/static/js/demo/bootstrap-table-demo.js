@@ -175,7 +175,7 @@ function buildTable($el, cells, rows) {
   // ------------------------------
   (function() {
     $('#exampleTableEvents').bootstrapTable({
-      url: "js/demo/bootstrap_table_test.json",
+      url: "js/demo/pop104.json",
       search: true,
       pagination: true,
       showRefresh: true,
