@@ -7,40 +7,26 @@
 		<div class="col-sm-12">
 			<div class="ibox">
 				<div class="ibox-body">
-					<ul class="nav nav-tabs">
-						<li class="active"><a data-toggle="tab" href="#tab-1"><i class="fa fa-file-text"></i>待办任务</a>
-						</li>
-						<li class=""><a data-toggle="tab" href="#tab-2"><i class="fa fa-briefcase"></i>历史任务</a>
-						</li>
-					</ul>
-					<div class="tab-content">
-						<div id="tab-1" class="tab-pane active">
-							<div class="fixed-table-toolbar">
-								<div class="columns pull-left">
-									<button shiro:hasPermission="biz:popValve104:add"  type="button" class="btn  btn-primary" onclick="add()">
-										<i class="fa fa-plus" aria-hidden="true"></i>添加
-									</button>
-									<button shiro:hasPermission="biz:popValve104:batchRemove" type="button" class="btn  btn-danger"
-										onclick="batchRemove()">
-										<i class="fa fa-trash" aria-hidden="true"></i>删除
-									</button>
-								</div>
-								<div class="columns pull-right">
-									<button class="btn btn-success" onclick="reLoad()">查询</button>
-								</div>
-								<div class="columns pull-right col-md-2 nopadding">
-									<input id="searchName" type="text" class="form-control"
-										placeholder="">
-								</div>
-							</div>
-
-							<table id="exampleTable" data-mobile-responsive="true">
-							</table>
+					<div class="fixed-table-toolbar">
+						<div class="columns pull-left">
+							<button shiro:hasPermission="biz:popValve104:add"  type="button" class="btn  btn-primary" onclick="add()">
+								<i class="fa fa-plus" aria-hidden="true"></i>添加
+							</button>
+							<button shiro:hasPermission="biz:popValve104:batchRemove" type="button" class="btn  btn-danger"
+								onclick="batchRemove()">
+								<i class="fa fa-trash" aria-hidden="true"></i>删除
+							</button>
 						</div>
-						<div id="tab-2" class="tab-pane ">
-							<table id="historyTable" data-mobile-responsive="true"></table>
+						<div class="columns pull-right">
+							<button class="btn btn-success" onclick="reLoad()">查询</button>
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<input id="searchName" type="text" class="form-control"
+								placeholder="">
 						</div>
 					</div>
+					<table id="exampleTable" data-mobile-responsive="true">
+					</table>
 				</div>
 			</div>
 		</div>
@@ -66,6 +52,5 @@
 	</div>
 	<div th:include="include :: footer"></div>
 	<script type="text/javascript" src="/js/appjs/biz/popValve104/popValve104.js"></script>
-	<script type="text/javascript" src="/js/appjs/biz/popValve104/history.js"></script>
 </body>
 </html>

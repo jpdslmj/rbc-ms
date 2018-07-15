@@ -8,7 +8,7 @@
 		<div class="ibox-content">
 			<div class="row m-b-sm">
 				<form class="form-horizontal m-t" id="pop104Form">
-					<input id="id" name="id" class="form-control" type="hidden" >
+					<input id="id" name="id" class="form-control" type="hidden" th:value="${popValve104.id}">
 					<div class="col-sm-12 form-inline">
 						<div class="form-group col-sm-6" >
 							<label class="control-label">时间:</label>
@@ -25,50 +25,67 @@
 			<table class="table table-bordered table-striped table-hover" id="pop104Table"   data-mobile-responsive="true" data-url="js/demo/pop104.json" ></table>
 			<div class="row m-t-md">
 				<div class="form-group col-sm-12 " >
-					<textarea id="returnRemark" name="returnRemark" class="form-control" rows="1" placeholder="备注"></textarea>
+					<textarea id="returnRemark" name="returnRemark" class="form-control" rows="1" placeholder="备注" th:text="${popValve104.returnRemark}"></textarea>
 				</div>
 				<form class="m-t" id="pop104Form1">
+					<input id="disassembleNo" name="disassembleNo" class="form-control" type="hidden" th:value="${popValve104.disassembleNo}">
+					<input id="disassembleName" name="disassembleName" class="form-control" type="hidden" th:value="${popValve104.disassembleName}">
+
+					<input id="cleanerNo" name="cleanerNo" class="form-control" type="hidden" th:value="${popValve104.cleanerNo}">
+					<input id="cleanerName" name="cleanerName" class="form-control" type="hidden" th:value="${popValve104.cleanerName}">
+
+					<input id="fixer1No" name="fixer1No" class="form-control" type="hidden" th:value="${popValve104.fixer1No}">
+					<input id="fixer1Name" name="fixer1Name" class="form-control" type="hidden" th:value="${popValve104.fixer1Name}">
+
+					<input id="fixer2No" name="fixer2No" class="form-control" type="hidden" th:value="${popValve104.fixer2No}">
+					<input id="fixer2Name" name="fixer2Name" class="form-control" type="hidden" th:value="${popValve104.fixer2Name}">
+
+					<input id="fixer3No" name="fixer3No" class="form-control" type="hidden" th:value="${popValve104.fixer3No}">
+					<input id="fixer3Name" name="fixer3Name" class="form-control" type="hidden" th:value="${popValve104.fixer3Name}">
+
+					<input id="fixer4No" name="fixer4No" class="form-control" type="hidden" th:value="${popValve104.fixer4No}">
+					<input id="fixer4Name" name="fixer4Name" class="form-control" type="hidden" th:value="${popValve104.fixer4Name}">
 
 					<div class="col-sm-12 form-inline">
 						<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster">
 							<label class="control-label">工长检修意见：</label>
 							<select id="gangmasterAudit" name="gangmasterAudit" class="form-control">
-								<option value="0">不合格</option>
-								<option value="1"  selected = "selected">合格</option>
+								<option value="0" th:selected="${popValve104.gangmasterAudit == 0}">不合格</option>
+								<option value="1" th:selected="${popValve104.gangmasterAudit == 1}">合格</option>
 							</select>
 						</div>
-						<input id="gangmasterNo" name="gangmasterNo" class="form-control" type="hidden" >
+						<input id="gangmasterNo" name="gangmasterNo" class="form-control" type="hidden" th:value="${popValve104.gangmasterNo}?:${user.username}">
 						<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster">
-							<input id="gangmasterName" name="gangmasterName" class="form-control" type="text" placeholder="工长名称">
+							<input id="gangmasterName" name="gangmasterName" class="form-control" type="text" placeholder="工长名称" th:value="${popValve104.gangmasterName}?:${user.name}">
 						</div>
 						<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
 							<label class="control-label">质检员检修意见:</label>
-							<select id="inspectorAudit" name="inspectorAudit" class="form-control ">
-								<option value="0">不合格</option>
-								<option value="1"  selected = "selected">合格</option>
+							<select id="inspectorAudit" name="inspectorAudit" class="form-control " th:value="${popValve104.inspectorAudit}">
+								<option value="0" th:selected="${popValve104.inspectorAudit ==0}">不合格</option>
+								<option value="1" th:selected="${popValve104.inspectorAudit ==1}">合格</option>
 							</select>
 						</div>
-						<input id="inspectorNo" name="inspectorNo" class="form-control" type="hidden" >
+						<input id="inspectorNo" name="inspectorNo" class="form-control" type="hidden" th:value="${popValve104.inspectorNo}?:${user.username}" >
 						<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
-							<input id="inspectorName" name="inspectorName" class="form-control" type="text" placeholder="质检员名称">
+							<input id="inspectorName" name="inspectorName" class="form-control" type="text" placeholder="质检员名称" th:value="${popValve104.inspectorName}?:${user.name}">
 						</div>
 					</div>
 					<div class="col-sm-12 form-inline">
 						<div class="form-group col-sm-4" shiro:hasPermission="biz:popValve104:assemble">
 							<label class="control-label">组装合字：</label>
-							<input id="assemblerRemark" name="assemblerRemark" class="form-control" type="checkbox" >
+							<input id="assemblerRemark" name="assemblerRemark" class="form-control" type="checkbox" th:checked="${popValve104.assemblerRemark}?true:false">
 							<label class="control-label"><img src="/img/ren.png" style="width: 14px;height: 14px "></label>
 						</div>
 						<input id="assemblerNo" name="assemblerNo" class="form-control" type="hidden" >
 						<div class="form-group col-sm-4" shiro:hasAnyRoles="role:admin,role:gangmaster">
 							<label class="control-label">工长合字:</label>
-							<input id="gangmasterRemark" name="gangmasterRemark" class="form-control " type="checkbox" >
+							<input id="gangmasterRemark" name="gangmasterRemark" class="form-control " type="checkbox"  th:checked="${popValve104.gangmasterRemark}?true:false">
 							<label class="control-label"><img src="/img/renyi.png" style="width: 14px;height: 14px "></label>
 						</div>
 
 						<div class="form-group col-sm-4" shiro:hasAnyRoles="role:admin,role:inspector">
 							<label class="control-label">质检员合字:</label>
-							<input id="inspectorRemark" name="inspectorRemark" class="form-control " type="checkbox">
+							<input id="inspectorRemark" name="inspectorRemark" class="form-control " type="checkbox" th:checked="${popValve104.inspectorRemark}?true:false">
 							<label class="control-label"><img src="/img/he.png" style="width: 14px;height: 14px ;" ></label>
 						</div>
 					</div>
@@ -97,6 +114,8 @@
         var cleaner = false;
         var fixer = false;
         var assembler=false;
+        var gangmaster=false;
+        var inspector=false;
 	</script>
 </div>
 <div shiro:hasPermission="biz:popValve104:disassemble">
@@ -123,12 +142,42 @@
         assembler = true;
 	</script>
 </div>
+<div shiro:hasAnyRoles="role:admin,role:gangmaster">
+	<script type="text/javascript">
+        //alert("gangmaster");
+        gangmaster = true;
+	</script>
+</div>
+<div shiro:hasAnyRoles="role:admin,role:inspector">
+	<script type="text/javascript">
+        //alert("gangmaster");
+        inspector = true;
+	</script>
+</div>
 <div th:include="include::footer"></div>
 <script type="text/javascript" src="/js/appjs/biz/popValve104/edit.js">
 </script>
 <script th:inline="javascript">
     var currentUserName=[[${user.name}]];
     var currentUserNameNo=[[${user.username}]];
+
+    var disassembleName=[[${popValve104.disassembleName}]];
+    var disassembleNo=[[${popValve104.disassembleNo}]];
+    var cleanerName=[[${popValve104.cleanerName}]];
+    var cleanerNo=[[${popValve104.cleanerNo}]];
+
+    var fixer1Name=[[${popValve104.fixer1Name}]];
+    var fixer2Name=[[${popValve104.fixer2Name}]];
+    var fixer3Name=[[${popValve104.fixer3Name}]];
+    var fixer4Name=[[${popValve104.fixer4Name}]];
+
+    var fixer1No=[[${popValve104.fixer1No}]];
+    var fixer2No=[[${popValve104.fixer2No}]];
+    var fixer3No=[[${popValve104.fixer3No}]];
+    var fixer4No=[[${popValve104.fixer4No}]];
+
+    var assemblerName=[[${popValve104.assemblerName}]];
+    var assemblerNo=[[${popValve104.assemblerNo}]];
 </script>
 </body>
 </html>

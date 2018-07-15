@@ -38,8 +38,8 @@
 							</select>
 						</div>
 						<input id="gangmasterNo" name="gangmasterNo" class="form-control" type="hidden" >
-						<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster">
-							<input id="gangmasterName" name="gangmasterName" class="form-control" type="text" placeholder="工长名称">
+						<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster" th:value="${user.username}">
+							<input id="gangmasterName" name="gangmasterName" class="form-control" type="text" placeholder="工长名称" th:value="${user.name}">
 						</div>
 						<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
 							<label class="control-label">质检员检修意见:</label>
@@ -48,9 +48,9 @@
 								<option value="1"  selected = "selected">合格</option>
 							</select>
 						</div>
-						<input id="inspectorNo" name="inspectorNo" class="form-control" type="hidden" >
+						<input id="inspectorNo" name="inspectorNo" class="form-control" type="hidden" th:value="${user.username}">
 						<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
-							<input id="inspectorName" name="inspectorName" class="form-control" type="text" placeholder="质检员名称">
+							<input id="inspectorName" name="inspectorName" class="form-control" type="text" placeholder="质检员名称" th:value="${user.name}">
 						</div>
 					</div>
 					<div class="col-sm-12 form-inline">

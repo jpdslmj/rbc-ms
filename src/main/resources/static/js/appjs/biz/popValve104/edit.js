@@ -2,8 +2,35 @@
 $().ready(function() {
     loadPop104Table();
     var today=new Date().Format("yyyy-MM-dd");
-    $("#createTime").val(today);
 
+
+    $.each($('#pop104Table').bootstrapTable('getData'),function(i,row){
+        var workerName="";
+        if(row.uId==0){
+            if(disassembleName!=null) {workerName=disassembleName;}
+    }
+        if(row.uId==1){
+            if(cleanerName!=null){workerName=cleanerName;}
+        }
+        if(row.uId==2){
+            if(fixer1Name!=null){workerName=fixer1Name;}
+        }
+        if(row.uId==3){
+            if(fixer2Name!=null){workerName=fixer2Name;}
+
+        }
+        if(row.uId==4){
+            if(fixer3Name!=null){workerName=fixer3Name;}
+        }
+        if(row.uId==5){
+           if(assemblerName!=null){workerName=assemblerName;}
+        }
+        $('#pop104Table').bootstrapTable('updateCell',{
+            index:row.uId,
+            field:'worker',
+            value:workerName
+        });
+    });
     validateRule();
 });
 
@@ -237,7 +264,7 @@ function update() {
     var data1=$('#pop104Form').serialize();
     var data2=$('#pop104Form1').serialize();
     var data3=$('#returnRemark').text();
-    var data4 = $.map($('#pop104Table').bootstrapTable('getSelections'), function (row) {
+ /**   var data4 = $.map($('#pop104Table').bootstrapTable('getSelections'), function (row) {
         var dataTemp="";
         if(row.uId=="0"){
             dataTemp =dataTemp+"&disassembleName="+currentUserName;
@@ -264,8 +291,8 @@ function update() {
             dataTemp =dataTemp+"&gangmasterNo="+currentUserNameNo;
         }
         return dataTemp;
-    });
-    var data = data1+"&"+data2+"&returnRemark="+data3+data4;
+    });**/
+    var data = data1+"&"+data2+"&returnRemark="+data3;
     $.ajax({
         cache : true,
         type : "POST",
