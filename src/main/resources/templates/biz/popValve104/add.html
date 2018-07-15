@@ -30,7 +30,7 @@
 				<form class="m-t" id="pop104Form1">
 
 					<div class="col-sm-12 form-inline">
-						<div class="form-group col-sm-3" shiro:hasPermission="biz:popValve104:check">
+						<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster">
 							<label class="control-label">工长检修意见：</label>
 							<select id="gangmasterAudit" name="gangmasterAudit" class="form-control">
 								<option value="0">不合格</option>
@@ -38,10 +38,10 @@
 							</select>
 						</div>
 						<input id="gangmasterNo" name="gangmasterNo" class="form-control" type="hidden" >
-						<div class="form-group col-sm-3" shiro:hasPermission="biz:popValve104:check">
+						<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster">
 							<input id="gangmasterName" name="gangmasterName" class="form-control" type="text" placeholder="工长名称">
 						</div>
-						<div class="form-group col-sm-3" shiro:hasPermission="biz:popValve104:check">
+						<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
 							<label class="control-label">质检员检修意见:</label>
 							<select id="inspectorAudit" name="inspectorAudit" class="form-control ">
 								<option value="0">不合格</option>
@@ -49,27 +49,26 @@
 							</select>
 						</div>
 						<input id="inspectorNo" name="inspectorNo" class="form-control" type="hidden" >
-						<div class="form-group col-sm-3" shiro:hasPermission="biz:popValve104:check">
+						<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
 							<input id="inspectorName" name="inspectorName" class="form-control" type="text" placeholder="质检员名称">
 						</div>
 					</div>
 					<div class="col-sm-12 form-inline">
 						<div class="form-group col-sm-4" shiro:hasPermission="biz:popValve104:assemble">
 							<label class="control-label">组装合字：</label>
-							<input id="assembleMark" name="assembleMark" class="form-control" type="checkbox" >
+							<input id="assemblerRemark" name="assemblerRemark" class="form-control" type="checkbox" >
 							<label class="control-label"><img src="/img/ren.png" style="width: 14px;height: 14px "></label>
 						</div>
 						<input id="assemblerNo" name="assemblerNo" class="form-control" type="hidden" >
-						<div class="form-group col-sm-4" shiro:hasPermission="biz:popValve104:check">
+						<div class="form-group col-sm-4" shiro:hasAnyRoles="role:admin,role:gangmaster">
 							<label class="control-label">工长合字:</label>
-							<input id="gangmasterMark" name="gangmasterMark" class="form-control " type="checkbox" >
+							<input id="gangmasterRemark" name="gangmasterRemark" class="form-control " type="checkbox" >
 							<label class="control-label"><img src="/img/renyi.png" style="width: 14px;height: 14px "></label>
 						</div>
 
-
-						<div class="form-group col-sm-4" shiro:hasPermission="biz:popValve104:check">
+						<div class="form-group col-sm-4" shiro:hasAnyRoles="role:admin,role:inspector">
 							<label class="control-label">质检员合字:</label>
-							<input id="inspectorMark" name="inspectorMark" class="form-control " type="checkbox">
+							<input id="inspectorRemark" name="inspectorRemark" class="form-control " type="checkbox">
 							<label class="control-label"><img src="/img/he.png" style="width: 14px;height: 14px ;" ></label>
 						</div>
 					</div>

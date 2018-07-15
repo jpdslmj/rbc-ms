@@ -64,6 +64,8 @@ public class PopValve104Controller extends BaseController {
 	String edit(@PathVariable("id") Long id,Model model){
 		PopValve104DO popValve104 = popValve104Service.get(id);
 		model.addAttribute("popValve104", popValve104);
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
 	    return "biz/popValve104/edit";
 	}
 	

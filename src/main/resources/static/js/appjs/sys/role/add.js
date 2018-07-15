@@ -78,12 +78,18 @@ function validateRule() {
 		rules : {
 			roleName : {
 				required : true
-			}
+			},
+            roleSign:{
+                required : true
+	}
 		},
 		messages : {
 			roleName : {
 				required : icon + "请输入角色名"
-			}
+			},
+            roleSign : {
+                required : icon + "请输入角色标识！"
+            }
 		}
 	});
 }

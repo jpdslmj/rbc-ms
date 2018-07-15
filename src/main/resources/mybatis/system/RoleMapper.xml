@@ -94,5 +94,11 @@
 			#{roleId}
 		</foreach>
 	</delete>
-
+	<select id="listUserRoles" resultType="string">
+		select distinct r.role_sign
+		from sys_role r
+		left join sys_user_role ur
+		on ur.role_id = r.role_id where ur.user_id
+		= #{id}
+	</select>
 </mapper>

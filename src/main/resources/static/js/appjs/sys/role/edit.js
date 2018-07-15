@@ -69,17 +69,23 @@ function update() {
 	});
 }
 function validateRule() {
-	var icon = "<i class='fa fa-times-circle'></i> ";
-	$("#signupForm").validate({
-		rules : {
-			roleName : {
-				required : true
-			}
-		},
-		messages : {
-			roleName : {
-				required : icon + "请输入角色名"
-			}
-		}
-	});
+    var icon = "<i class='fa fa-times-circle'></i> ";
+    $("#signupForm").validate({
+        rules : {
+            roleName : {
+                required : true
+            },
+            roleSign:{
+                required : true
+            }
+        },
+        messages : {
+            roleName : {
+                required : icon + "请输入角色名"
+            },
+            roleSign : {
+                required : icon + "请输入角色标识！"
+            }
+        }
+    });
 }

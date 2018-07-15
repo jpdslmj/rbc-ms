@@ -6,6 +6,7 @@ import com.rbc.common.utils.ShiroUtils;
 import com.rbc.system.dao.UserDao;
 import com.rbc.system.domain.UserDO;
 import com.rbc.system.service.MenuService;
+import com.rbc.system.service.RoleService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -22,9 +23,12 @@ public class UserRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection arg0) {
 		Long userId = ShiroUtils.getUserId();
 		MenuService menuService = ApplicationContextRegister.getBean(MenuService.class);
+		RoleService roleService = ApplicationContextRegister.getBean(RoleService.class);
 		Set<String> perms = menuService.listPerms(userId);
+		Set<String> roles = roleService.listRoles(userId);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		info.setStringPermissions(perms);
+		info.setRoles(roles);
 		return info;
 	}
 

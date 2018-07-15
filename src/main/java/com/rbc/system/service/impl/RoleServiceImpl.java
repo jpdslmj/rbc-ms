@@ -1,9 +1,6 @@
 package com.rbc.system.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import com.rbc.system.dao.RoleDao;
 import com.rbc.system.dao.RoleMenuDao;
@@ -12,6 +9,7 @@ import com.rbc.system.dao.UserRoleDao;
 import com.rbc.system.domain.RoleDO;
 import com.rbc.system.domain.RoleMenuDO;
 import com.rbc.system.service.RoleService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -116,5 +114,15 @@ public class RoleServiceImpl implements RoleService {
         int r = roleMapper.batchRemove(ids);
         return r;
     }
-
+    @Override
+    public Set<String> listRoles(Long userId) {
+        List<String> roles = roleMapper.listUserRoles(userId);
+        Set<String> rolesSet = new HashSet<>();
+        for (String role : roles) {
+            if (StringUtils.isNotBlank(role)) {
+                rolesSet.addAll(Arrays.asList(role.trim().split(",")));
+            }
+        }
+        return rolesSet;
+    }
 }

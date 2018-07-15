@@ -4,6 +4,7 @@ import com.rbc.system.domain.RoleDO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -22,4 +23,6 @@ public interface RoleService {
 	List<RoleDO> list(Long userId);
 
 	int batchremove(Long[] ids);
+
+	Set<String> listRoles(Long userId);
 }
