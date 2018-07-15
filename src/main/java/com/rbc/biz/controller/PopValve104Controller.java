@@ -38,6 +38,12 @@ public class PopValve104Controller extends BaseController {
 	String PopValve104(){
 	    return "biz/popValve104/popValve104";
 	}
+
+	@GetMapping("/history")
+	//@RequiresPermissions("biz:popValve104:popValve104")
+	String historyIndex(){
+		return "biz/popValve104/history_index";
+	}
 	
 	@ResponseBody
 	@GetMapping("/list")
@@ -45,6 +51,18 @@ public class PopValve104Controller extends BaseController {
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
+		List<PopValve104DO> popValve104List = popValve104Service.list(query);
+		int total = popValve104Service.count(query);
+		PageUtils pageUtils = new PageUtils(popValve104List, total);
+		return pageUtils;
+	}
+
+	@ResponseBody
+	@GetMapping("/history/list")
+	@RequiresPermissions("biz:popValve104:popValve104")
+	public PageUtils historyList(@RequestParam Map<String, Object> params){
+		//查询列表数据
+		Query query = new Query(params);
 		List<PopValve104DO> popValve104List = popValve104Service.list(query);
 		int total = popValve104Service.count(query);
 		PageUtils pageUtils = new PageUtils(popValve104List, total);
@@ -67,6 +85,14 @@ public class PopValve104Controller extends BaseController {
 		UserDO userDO  = userService.get(getUserId());
 		model.addAttribute("user",userDO);
 	    return "biz/popValve104/edit";
+	}
+
+	@GetMapping("/history/{id}")
+	//@RequiresPermissions("biz:popValve104:edit")
+	String historydetail(@PathVariable("id") Long id,Model model){
+		PopValve104DO popValve104 = popValve104Service.get(id);
+		model.addAttribute("popValve104", popValve104);
+		return "biz/popValve104/history_detail";
 	}
 	
 	/**
