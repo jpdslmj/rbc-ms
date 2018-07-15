@@ -18,9 +18,9 @@ public interface TaskDistributionDao {
 
 	TaskDistributionDO get(Long id);
 	
-	List<TaskDistributionDO> list(Map<String,Object> map);
+	List<TaskDistributionDO> list(Map<String, Object> map);
 	
-	int count(Map<String,Object> map);
+	int count(Map<String, Object> map);
 	
 	int save(TaskDistributionDO taskDistribution);
 	

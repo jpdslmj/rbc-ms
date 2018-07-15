@@ -105,7 +105,7 @@
 	<insert id="save" parameterType="com.rbc.biz.domain.MainValve104DO" useGeneratedKeys="true" keyProperty="id">
 		insert into web_main_valve_104
 		(
-			`pop_value`, 
+			`pop_value`,
 			`disassemble_no`, 
 			`disassemble_name`, 
 			`cleaner_no`, 
@@ -121,7 +121,7 @@
 			`fixer3_remark`, 
 			`fixer4_no`, 
 			`fixer4_name`, 
-			`fixer4_remark`, 
+			`fixer4_remark`,
 			`assembler_no`, 
 			`assembler_name`, 
 			`assembler_remark`, 
@@ -143,7 +143,7 @@
 		)
 		values
 		(
-			#{popValue}, 
+			#{mainValue}, 
 			#{disassembleNo}, 
 			#{disassembleName}, 
 			#{cleanerNo}, 
@@ -160,6 +160,8 @@
 			#{fixer4No}, 
 			#{fixer4Name}, 
 			#{fixer4Remark}, 
+			#{fixerProcess}, 
+			#{fixerProcessDetail}, 
 			#{assemblerNo}, 
 			#{assemblerName}, 
 			#{assemblerRemark}, 
@@ -180,11 +182,11 @@
 			#{updateTime}
 		)
 	</insert>
-
+	 
 	<update id="update" parameterType="com.rbc.biz.domain.MainValve104DO">
-		update web_main_valve_104
+		update web_main_valve_104 
 		<set>
-			<if test="popValue != null">`pop_value` = #{popValue}, </if>
+			<if test="mainValue != null">`main_value` = #{mainValue}, </if>
 			<if test="disassembleNo != null">`disassemble_no` = #{disassembleNo}, </if>
 			<if test="disassembleName != null">`disassemble_name` = #{disassembleName}, </if>
 			<if test="cleanerNo != null">`cleaner_no` = #{cleanerNo}, </if>
@@ -201,6 +203,8 @@
 			<if test="fixer4No != null">`fixer4_no` = #{fixer4No}, </if>
 			<if test="fixer4Name != null">`fixer4_name` = #{fixer4Name}, </if>
 			<if test="fixer4Remark != null">`fixer4_remark` = #{fixer4Remark}, </if>
+			<if test="fixerProcess != null">`fixer_process` = #{fixerProcess}, </if>
+			<if test="fixerProcessDetail != null">`fixer_process_detail` = #{fixerProcessDetail}, </if>
 			<if test="assemblerNo != null">`assembler_no` = #{assemblerNo}, </if>
 			<if test="assemblerName != null">`assembler_name` = #{assemblerName}, </if>
 			<if test="assemblerRemark != null">`assembler_remark` = #{assemblerRemark}, </if>
@@ -222,13 +226,13 @@
 		</set>
 		where id = #{id}
 	</update>
-
+	
 	<delete id="remove">
 		delete from web_main_valve_104 where id = #{value}
 	</delete>
-
+	
 	<delete id="batchRemove">
-		delete from web_main_valve_104 where id in
+		delete from web_main_valve_104 where id in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

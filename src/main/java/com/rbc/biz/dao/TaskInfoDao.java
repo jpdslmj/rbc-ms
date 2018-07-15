@@ -18,9 +18,9 @@ public interface TaskInfoDao {
 
 	TaskInfoDO get(Long id);
 	
-	List<TaskInfoDO> list(Map<String,Object> map);
+	List<TaskInfoDO> list(Map<String, Object> map);
 	
-	int count(Map<String,Object> map);
+	int count(Map<String, Object> map);
 	
 	int save(TaskInfoDO taskInfo);
 	

@@ -18,9 +18,9 @@ public interface TestToolDao {
 
 	TestToolDO get(Long id);
 	
-	List<TestToolDO> list(Map<String,Object> map);
+	List<TestToolDO> list(Map<String, Object> map);
 	
-	int count(Map<String,Object> map);
+	int count(Map<String, Object> map);
 	
 	int save(TestToolDO testTool);
 	

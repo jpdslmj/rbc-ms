@@ -18,9 +18,9 @@ public interface ToolOtherDao {
 
 	ToolOtherDO get(Long id);
 	
-	List<ToolOtherDO> list(Map<String,Object> map);
+	List<ToolOtherDO> list(Map<String, Object> map);
 	
-	int count(Map<String,Object> map);
+	int count(Map<String, Object> map);
 	
 	int save(ToolOtherDO toolOther);
 	

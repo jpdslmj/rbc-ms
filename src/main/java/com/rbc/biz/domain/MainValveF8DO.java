@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  * @author lmj
  * @email 359819418@qq.com
- * @date 2018-07-05 18:07:04
+ * @date 2018-07-07 10:22:40
  */
 public class MainValveF8DO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,7 +18,7 @@ public class MainValveF8DO implements Serializable {
 	//
 	private Long id;
 	//F8主阀编号
-	private String popValue;
+	private String mainValue;
 	//分解者工号
 	private String disassembleNo;
 	//分解者名称
@@ -51,6 +51,10 @@ public class MainValveF8DO implements Serializable {
 	private String fixer4Name;
 	//检修者4备注
 	private String fixer4Remark;
+	//检修工序
+	private String fixerProcess;
+	//检修工序详情
+	private String fixerProcessDetail;
 	//组装者工号
 	private String assemblerNo;
 	//组装者名称
@@ -103,14 +107,14 @@ public class MainValveF8DO implements Serializable {
 	/**
 	 * 设置：F8主阀编号
 	 */
-	public void setPopValue(String popValue) {
-		this.popValue = popValue;
+	public void setMainValue(String mainValue) {
+		this.mainValue = mainValue;
 	}
 	/**
 	 * 获取：F8主阀编号
 	 */
-	public String getPopValue() {
-		return popValue;
+	public String getMainValue() {
+		return mainValue;
 	}
 	/**
 	 * 设置：分解者工号
@@ -303,6 +307,30 @@ public class MainValveF8DO implements Serializable {
 	 */
 	public String getFixer4Remark() {
 		return fixer4Remark;
+	}
+	/**
+	 * 设置：检修工序
+	 */
+	public void setFixerProcess(String fixerProcess) {
+		this.fixerProcess = fixerProcess;
+	}
+	/**
+	 * 获取：检修工序
+	 */
+	public String getFixerProcess() {
+		return fixerProcess;
+	}
+	/**
+	 * 设置：检修工序详情
+	 */
+	public void setFixerProcessDetail(String fixerProcessDetail) {
+		this.fixerProcessDetail = fixerProcessDetail;
+	}
+	/**
+	 * 获取：检修工序详情
+	 */
+	public String getFixerProcessDetail() {
+		return fixerProcessDetail;
 	}
 	/**
 	 * 设置：组装者工号

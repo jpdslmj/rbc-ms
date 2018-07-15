@@ -18,9 +18,9 @@ public interface WenchDao {
 
 	WenchDO get(Long id);
 	
-	List<WenchDO> list(Map<String,Object> map);
+	List<WenchDO> list(Map<String, Object> map);
 	
-	int count(Map<String,Object> map);
+	int count(Map<String, Object> map);
 	
 	int save(WenchDO wench);
 	

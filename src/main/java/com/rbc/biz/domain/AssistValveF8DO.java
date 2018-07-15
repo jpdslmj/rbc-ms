@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  * @author lmj
  * @email 359819418@qq.com
- * @date 2018-07-05 18:07:04
+ * @date 2018-07-07 10:22:40
  */
 public class AssistValveF8DO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -51,6 +51,10 @@ public class AssistValveF8DO implements Serializable {
 	private String fixer4Name;
 	//检修者4备注
 	private String fixer4Remark;
+	//检修工序
+	private Integer fixerProcess;
+	//检修工序详情
+	private String fixerProcessDetail;
 	//组装者工号
 	private String assemblerNo;
 	//组装者名称
@@ -303,6 +307,30 @@ public class AssistValveF8DO implements Serializable {
 	 */
 	public String getFixer4Remark() {
 		return fixer4Remark;
+	}
+	/**
+	 * 设置：检修工序
+	 */
+	public void setFixerProcess(Integer fixerProcess) {
+		this.fixerProcess = fixerProcess;
+	}
+	/**
+	 * 获取：检修工序
+	 */
+	public Integer getFixerProcess() {
+		return fixerProcess;
+	}
+	/**
+	 * 设置：检修工序详情
+	 */
+	public void setFixerProcessDetail(String fixerProcessDetail) {
+		this.fixerProcessDetail = fixerProcessDetail;
+	}
+	/**
+	 * 获取：检修工序详情
+	 */
+	public String getFixerProcessDetail() {
+		return fixerProcessDetail;
 	}
 	/**
 	 * 设置：组装者工号
