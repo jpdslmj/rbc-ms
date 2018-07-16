@@ -17,8 +17,12 @@ public interface PopValve104Service {
 	PopValve104DO get(Long id);
 	
 	List<PopValve104DO> list(Map<String, Object> map);
-	
+
 	int count(Map<String, Object> map);
+
+	List<PopValve104DO> taskList(Map<String, Object> map);
+	
+	int taskCount(Map<String, Object> map);
 	
 	int save(PopValve104DO popValve104);
 	

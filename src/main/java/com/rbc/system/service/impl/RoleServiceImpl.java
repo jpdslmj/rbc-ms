@@ -125,4 +125,14 @@ public class RoleServiceImpl implements RoleService {
         }
         return rolesSet;
     }
+
+    @Override
+    public List<String> getGroupIds(Long userId) {
+        List<String> groupIds = new ArrayList<String>();
+        List<Long> rolesIds = userRoleMapper.listRoleId(userId);
+        for (Long roleId : rolesIds) {
+            groupIds.add(roleId.toString());
+        }
+        return groupIds;
+    }
 }

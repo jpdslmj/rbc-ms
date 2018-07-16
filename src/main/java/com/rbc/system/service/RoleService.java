@@ -25,4 +25,6 @@ public interface RoleService {
 	int batchremove(Long[] ids);
 
 	Set<String> listRoles(Long userId);
+
+	List<String> getGroupIds(Long userId);
 }
