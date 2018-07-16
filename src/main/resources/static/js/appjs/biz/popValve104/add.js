@@ -240,7 +240,7 @@ function getCount(data,prop,fieldArr,index,sortMap){
 function save() {
     var data1=$('#pop104Form').serialize();
     var data2=$('#pop104Form1').serialize();
-    var data3=$('#returnRemark').text();
+    var data3=$('#returnRemark').val();
     var data4 = $.map($('#pop104Table').bootstrapTable('getSelections'), function (row) {
         var dataTemp="";
         if(row.uId=="0"){
@@ -265,7 +265,7 @@ function save() {
         }
         if(row.uId=="5"){
             dataTemp =dataTemp+"&assemblerName="+currentUserName;
-            dataTemp =dataTemp+"&gangmasterNo="+currentUserNameNo;
+            dataTemp =dataTemp+"&assemblerNo="+currentUserNameNo;
         }
         return dataTemp;
     });
