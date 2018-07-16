@@ -95,6 +95,33 @@ function loadPop104Table() {
             showColumns : false, // 是否显示内容下拉框（选择显示的列）
             onCheck:function(row, $element){
                 row.worker=currentUserName;
+                var workerName="";
+                if(row.uId==0){
+                    $('#disassembleNo').val(currentUserNameNo);
+                    $('#disassembleName').val(currentUserName);
+                }
+                if(row.uId==1){
+                    $('#cleanerNo').val(currentUserNameNo);
+                    $('#cleanerName').val(currentUserName);
+                }
+                if(row.uId==2){
+
+                    $('#fixer1No').val(currentUserNameNo);
+                    $('#fixer1Name').val(currentUserName);
+                }
+                if(row.uId==3){
+                    $('#fixer2No').val(currentUserNameNo);
+                    $('#fixer2Name').val(currentUserName);
+
+                }
+                if(row.uId==4){
+                    $('#fixer3No').val(currentUserNameNo);
+                    $('#fixer3Name').val(currentUserName);
+                }
+                if(row.uId==5){
+                    $('#assemblerNo').val(currentUserNameNo);
+                    $('#assemblerName').val(currentUserName);
+                }
                 $('#pop104Table').bootstrapTable('updateRow',{
                     index: $element.data('index'),
                     row:row
