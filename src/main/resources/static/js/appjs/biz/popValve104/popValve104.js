@@ -247,10 +247,10 @@ function add() {
 		title : '增加',
 		shadeClose : false, // 点击遮罩关闭层
 		content : prefix + '/add', // iframe的url
-        maxMin : true,
+        maxmin : true,
         fixed:false,
         resize:true,
-        area : ['360px','640px'],
+        area : ['600px','400px'],
         success:function(layero ,index){
             layer.full(index);
         }
@@ -260,12 +260,12 @@ function edit(id) {
 	layer.open({
 		type : 2,
 		title : '编辑',
-		maxMin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		content : prefix + '/edit/' + id ,// iframe的url
+        maxmin : true,
         fixed:false,
         resize:true,
-        area : ['360px','640px'],
+        area : ['600px','400px'],
         success:function(layero ,index){
             layer.full(index);
         }

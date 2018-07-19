@@ -26,6 +26,8 @@ function loadSafeChkTable() {
 						// //发送到服务器的数据编码类型
 						pageSize : 10, // 如果设置了分页，每页数据条数
 						pageNumber : 1, // 如果设置了分布，首页页码
+                        sortable:true,
+                        sortOrder:"asc",
 						//search : true, // 是否显示搜索框
 						showColumns : false, // 是否显示内容下拉框（选择显示的列）
 						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
@@ -36,7 +38,9 @@ function loadSafeChkTable() {
 								offset:params.offset,
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
-                                 logId:$('#id').val()
+                                 logId:$('#id').val(),
+                                 sort:"num",
+                                 order:"asc"
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -117,21 +121,8 @@ function loadSafeChkTable() {
 									field : 'updateTime', 
 									title : '更新日期',
                                     visible:false
-								},
-																{
-									title : '操作',
-									field : 'num',
-									align : 'center',
-									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '+'" href="#" mce_href="#" title="编辑" onclick="editSafeChkTable(\''
-												+ row.num
-												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm '+'" href="#" title="删除"  mce_href="#" onclick="removeSafeChkTable(\''
-												+ row.num
-												+ '\')"><i class="fa fa-remove"></i></a> ';
-										return e + d ;
-									}
-								} ]
+								}
+								]
 					});
 }
 $('#addData').click(function(){
@@ -139,7 +130,7 @@ $('#addData').click(function(){
     var len= Allrows.length;
 
 
-    var data = {id:"",num:++len,securityProject:"",description:"",remark:"",gangmasterNo:"",createTime:"",updateTime:"",};
+    var data = {num:++len,securityProject:"",description:"",remark:""};
     $('#safeChkTable').bootstrapTable('insertRow', {index:$('#safeChkTable').bootstrapTable('getData').length, row:data});
 });
 
@@ -211,7 +202,7 @@ function removeSafeChkTable(id) {
 function resetPwdSafeChkTable(id) {
 }
 function batchRemoveSafeChkTable() {
-	var rows = $('##safeChkTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+	var rows = $('#safeChkTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
 		layer.msg("请选择要删除的数据");
 		return;

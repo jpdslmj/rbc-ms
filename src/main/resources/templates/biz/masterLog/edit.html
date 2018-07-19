@@ -4,36 +4,23 @@
 <head th:include="include :: header"></head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
-
 	<div class="ibox float-e-margins">
 		<div class="ibox-content">
-			<div class="row">
-				<form class="form-horizontal m-t m-l-sm" id="signupForm">
+				<form class="form-horizontal" id="masterLOgForm">
 					<div class="col-sm-12 form-inline">
-
-						<input id="id" name="id" class="form-control" type="hidden" th:value="${masterLog.id}">
-
 						<div class="form-group col-sm-4" >
-
 							<label class="control-label">时间：</label>
-
-							<input id="createTime" name="createTime" class="form-control" type="date" style="width: 250px" th:value="${masterLog.createTime}">
-
+							<input id="createTime" name="createTime" class="form-control" type="date" style="width: 250px" th:value="${#dates.format(masterLog.createTime,'yyyy-MM-dd')}">
 						</div>
 						<div class="form-group col-sm-4" >
-
 							<label class="control-label">天气：</label>
-
 							<input id="weather" name="weather" class="form-control" style="width: 250px" type="text" th:value="${masterLog.weather}">
 						</div>
 						<div class="form-group col-sm-4" >
 							<label class="control-label">工长：</label>
-
 							<input id="gangmasterName" name="gangmasterName" class="form-control" type="text" style="width: 250px" th:value="${masterLog.gangmasterName}">
-
 						</div>
 					</div>
-
 					<div class="form-group col-sm-12">
 						<label class="control-label">班前预想：</label>
 						<textarea id="clsEnvision" name="clsEnvision" class="form-control" rows="3" th:text="${masterLog.clsEnvision}"></textarea>
@@ -42,6 +29,20 @@
 						<label class="control-label">班前一题：</label>
 						<textarea id="clsOne" name="clsOne" class="form-control" rows="3" th:text="${masterLog.clsEnvision}"></textarea>
 					</div>
+					<div class="col-sm-12">
+						<div style="float:left;margin:10px 0px 10px 5px">
+							<h4>当日安全质量抽查记录</h4>
+						</div>
+						<div style="float:right;margin:10px 0px 10px 10px">
+							<button type="button" class="btn btn-default" id="addData"  style="color:#008000;background-color:#efefef;font-weight:bold;">
+								<span class="glyphicon glyphicon-plus"></span>
+							</button>
+							<button type="button" class="btn btn-default" id="delData"  style="color:#800109;background-color:#efefef;font-weight:bold;">
+								<span class="glyphicon glyphicon-minus"></span>
+							</button>
+						</div>
+					</div>
+					<table class="table table-bordered table-striped table-hover" id="safeChkTable"   data-mobile-responsive="true" ></table>
 					<div class="form-group col-sm-12">
 						<label class="control-label">任务完成情况和改进措施：</label>
 						<textarea id="taskDetails" name="taskDetails" class="form-control" rows="3" th:text="${masterLog.taskDetails}"></textarea>
@@ -50,43 +51,22 @@
 						<label class="control-label">班组记事：</label>
 						<textarea id="clsMark" name="clsMark" class="form-control" rows="3" th:text="${masterLog.clsMark}"></textarea>
 					</div>
-					<div class="form-group hidden">
-						<label class="control-label">工长工号：</label>
-						<input id="gangmasterNo" name="gangmasterNo" class="form-control" type="text" th:value="${masterLog.gangmasterNo}">
-					</div>
-
-					<div class="form-group hidden">
-						<label class="control-label">更新日期：</label>
-						<input id="updateTime" name="updateTime" class="form-control" type="text">
+					<input id="id" name="id" class="form-control" type="hidden" th:value="${masterLog.id}">
+					<input id="gangmasterNo" name="gangmasterNo"  type="hidden" th:value="${masterLog.gangmasterNo}">
+					<input id="updateTime" name="updateTime"  type="hidden">
+					<div class="form-group">
+						<div class="col-sm-6">
+							<button type="submit" class="btn btn-primary pull-right" id="save">提交</button>
+						</div>
 					</div>
 				</form>
-				<div class="col-sm-12">
-					<div style="float:left;margin:10px 0px 10px 5px">
-						<h4>当日安全质量抽查记录</h4>
-					</div>
-					<div style="float:right;margin:10px 0px 10px 10px">
-						<button type="button" class="btn btn-default" id="addData"  style="color:#008000;background-color:#efefef;font-weight:bold;">
-							<span class="glyphicon glyphicon-plus"></span>
-						</button>
-						<button type="button" class="btn btn-default" id="delData"  style="color:#800109;background-color:#efefef;font-weight:bold;">
-							<span class="glyphicon glyphicon-minus"></span>
-						</button>
-					</div>
-				</div>
-				<table class="table table-bordered table-striped table-hover" id="safeChkTable"   data-mobile-responsive="true" ></table>
-
-				<div class="col-sm-6 col-sm-offset-6 m-t-md">
-					<button type="submit" class="btn btn-primary" id="save">提交</button>
-				</div>
-			</div>
 		</div>
 	</div>
-
 </div>
 <div th:include="include::footer"></div>
 <script type="text/javascript" src="/js/appjs/biz/masterLog/edit.js">
 </script>
-<script type="text/javascript" src="/js/appjs/biz/securityCheck/securityCheck.js">
+<script type="text/javascript" src="/js/appjs/biz/masterLog/securityCheck.js">
 </script>
 </body>
 </html>

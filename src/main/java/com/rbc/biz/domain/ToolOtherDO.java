@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  * @author lmj
  * @email 359819418@qq.com
- * @date 2018-07-05 18:07:05
+ * @date 2018-07-18 00:11:59
  */
 public class ToolOtherDO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -29,6 +29,8 @@ public class ToolOtherDO implements Serializable {
 	private Date createTime;
 	//更新日期
 	private Date updateTime;
+	//
+	private Long num;
 
 	/**
 	 * 设置：
@@ -113,5 +115,17 @@ public class ToolOtherDO implements Serializable {
 	 */
 	public Date getUpdateTime() {
 		return updateTime;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setNum(Long num) {
+		this.num = num;
+	}
+	/**
+	 * 获取：
+	 */
+	public Long getNum() {
+		return num;
 	}
 }

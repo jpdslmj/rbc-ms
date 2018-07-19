@@ -3,10 +3,8 @@ $().ready(function() {
     $("#createTime").val(today);
     $("#updateTime").val(today);
 	validateRule();
-	$("#save").click(function(){
-        save();
-	});
 });
+//将form转成Jason对象
 $.fn.serializeObject = function()
 {
     var o = {};
@@ -29,44 +27,14 @@ $.validator.setDefaults({
 	}
 });
 function save() {
-
-    var allrows=$('#safeChkTable').bootstrapTable('getData');
-
-    var logId="";
+    var rows=$('#safeChkTable').bootstrapTable('getData');
 	//$.each(allrows,function(i,row){
            //if(row.securityProject==""||securityProject==null) {
            	//layer.msg("安全检查项目不能为空！");
 			   //return;
 		   //}
 	//})
-   var masterLog= $("#signupForm").serializeObject();
-  /**  $.ajax({
-		cache : true,
-		type : "POST",
-		url : "/biz/masterLog/save",
-		data : $('#signupForm').serialize(),// 你的formid
-		async : false,
-		error : function(request) {
-			parent.layer.alert("保存日志数据Connection error");
-		},
-		success : function(data) {
-			if (data.code == 0) {
-                logId=data.id;
-				//parent.layer.msg("操作成功");
-				///parent.reLoad();
-				//var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-				//parent.layer.close(index);
-
-			} else {
-				parent.layer.alert(data.msg)
-			}
-
-		}
-	});**/
-    var rows=$.map(allrows,function(row){
-    	row.logId=logId;
-    	return row;
-	});
+   var masterLog= $("#masterLOgForm").serializeObject();
     var Data={
     	"masterLogDo":masterLog,
         "securityCheckDos":rows
@@ -77,7 +45,7 @@ function save() {
         type : "POST",
         url : "/biz/masterLog/saveSecurityCheck",
 		contentType: "application/json; charset=utf-8",
-        data : jasonData,//
+        data : jasonData,
         async : false,
         error : function(request) {
             parent.layer.alert("保存安全检查数据Connection error");
@@ -99,7 +67,7 @@ function save() {
 }
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
-	$("#signupForm").validate({
+	$("#masterLOgForm").validate({
 		rules : {
             createTime : {
 				required : true

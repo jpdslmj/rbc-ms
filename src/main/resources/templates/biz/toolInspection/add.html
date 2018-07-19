@@ -4,132 +4,148 @@
 <head th:include="include :: header"></head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content ">
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="ibox float-e-margins">
-					<div class="ibox-content">
-						<form class="form-horizontal m-t" id="signupForm">
-							<div class="form-group">	
-								<label class="col-sm-3 control-label">白光照度测量：</label>
-								<div class="col-sm-8">
-									<input id="luminanceMeasure" name="luminanceMeasure" class="form-control" type="text">
+		<div class="ibox float-e-margins">
+			<div class="ibox-content">
+				<div class="row">
+					<form class="form-horizontal m-t" id="toolInspectionForm">
+						<div class="col-md-12 form-inline">
+							<div class="form-group col-md-4">
+								<div class="input-group">
+									<div class="input-group-addon">白光照度：</div>
+										<input type="text" class="form-control" id="luminanceMeasure" name="luminanceMeasure">
+									<div class="input-group-addon">LX</div>
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">温度：</label>
-								<div class="col-sm-8">
-									<input id="temperature" name="temperature" class="form-control" type="text">
+							<div class="form-group  col-md-4">
+								<div class="input-group">
+									<div class="input-group-addon">温度：</div>
+										<input id="temperature" name="temperature" class="form-control" type="text" >
+									<div class="input-group-addon">°C</div>
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">湿度：</label>
-								<div class="col-sm-8">
-									<input id="humidity" name="humidity" class="form-control" type="text">
+							<div class="form-group col-md-4">
+								<div class="input-group">
+								    <div class="input-group-addon">湿度：</div>
+										<input id="humidity" name="humidity" class="form-control" type="text">
+									<div class="input-group-addon">%</div>
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">力矩扳手：1全部合格，2部分合格，3全部不合格：</label>
-								<div class="col-sm-8">
-									<input id="wench" name="wench" class="form-control" type="text">
-								</div>
+						</div>
+							<div class="radio col-md-6">
+								<label class="radio-inline">
+									<span style="margin-right: 20px">样板：</span>
+									<input id="templet1" name="templet"  type="radio" value="1">合格
+								</label>
+								<label class="radio-inline">
+									<input id="templet2" name="templet"  type="radio" value="0">不合格
+								</label>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">样板：</label>
-								<div class="col-sm-8">
-									<input id="templet" name="templet" class="form-control" type="text">
-								</div>
+
+						<div class="radio col-md-6">
+								<label class="radio-inline">
+									<span style="margin-right: 20px">通针：</span>
+									<input id="nozzleCleaner1" name="nozzleCleaner"  type="radio" value="1">合格
+								</label>
+								<label class="radio-inline">
+									<input id="nozzleCleaner2" name="nozzleCleaner"  type="radio" value="0">不合格
+								</label>
+						</div>
+						<div class="radio col-md-6">
+							<label class="radio-inline">
+								<span style="margin-right: 20px">硅油：</span>
+								<input id="siliconeOil1" name="siliconeOil"  type="radio" value="1">合格
+							</label>
+							<label class="radio-inline">
+								<input id="siliconeOil2" name="siliconeOil"  type="radio" value="1">不合格
+							</label>
+						</div>
+						<div class="radio col-md-6">
+							<label class="radio-inline">
+								<span style="margin-right: 20px">硅脂：</span>
+								<input id="siliconeGrease1" name="siliconeGrease"  type="radio" value="1">合格
+							</label>
+							<label class="radio-inline">
+								<input id="siliconeGrease2" name="siliconeGrease"  type="radio" value="0">不合格
+							</label>
+						</div>
+						<div class="form-group" style="margin:15px 0px 0px 5px" >
+							<h4 class="col-sm-2 text-left">力矩扳手:</h4>
+							<label class="col-sm-2 control-label">检视情况</label>
+							<div class="col-sm-3">
+								<select id="wench" name="wench" class="form-control" >
+									<option value="1">全部合格</option>
+									<option value="2">部分合格</option>
+									<option value="3">全不合格</option>
+								</select>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">通针：</label>
-								<div class="col-sm-8">
-									<input id="nozzleCleaner" name="nozzleCleaner" class="form-control" type="text">
-								</div>
+						</div>
+						<div class="col-sm-12" id="wenchAdd">
+							<div style="float:left;margin:0px 0px 0px 5px">
+								<button type="button" class="btn btn-sm" id="addWench"  style="color:#008000;background-color:#efefef;font-weight:bold;">
+									<span class="glyphicon glyphicon-plus"></span>
+								</button>
+								<button type="button" class="btn btn-sm" id="delWench"  style="color:#800109;background-color:#efefef;font-weight:bold;">
+									<span class="glyphicon glyphicon-minus"></span>
+								</button>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">硅油：</label>
-								<div class="col-sm-8">
-									<input id="siliconeOil" name="siliconeOil" class="form-control" type="text">
-								</div>
+						</div>
+						<table class="table table-bordered table-striped table-hover" id="wenchTable"   data-mobile-responsive="true" ></table>
+
+						<div class="form-group" style="margin:10px 0px 0px 5px ">
+							<h4 class="col-sm-2 text-left">其他工具:</h4>
+							<label class="col-sm-2 control-label">检视情况</label>
+							<div class="col-sm-3">
+								<select id="otherTool" name="otherTool" class="form-control" >
+									<option value="1">全部合格</option>
+									<option value="2">部分合格</option>
+									<option value="3">全不合格</option>
+								</select>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">硅脂：</label>
-								<div class="col-sm-8">
-									<input id="siliconeGrease" name="siliconeGrease" class="form-control" type="text">
-								</div>
+						</div>
+						<div class="col-sm-12" id="toolAdd">
+							<div style="float:left;margin: 0px 0px 0px 5px">
+								<button type="button" class="btn btn-sm" id="addTool"  style="color:#008000;background-color:#efefef;font-weight:bold;">
+									<span class="glyphicon glyphicon-plus"></span>
+								</button>
+								<button type="button" class="btn btn-sm" id="delTool"  style="color:#800109;background-color:#efefef;font-weight:bold;">
+									<span class="glyphicon glyphicon-minus"></span>
+								</button>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">其他工具：</label>
-								<div class="col-sm-8">
-									<input id="otherTool" name="otherTool" class="form-control" type="text">
-								</div>
+						</div>
+						<table class="table table-bordered table-striped table-hover" id="otherToolTable"   data-mobile-responsive="true" ></table>
+
+								<input id="fixWorkerNo" name="fixWorkerNo" class="form-control" type="hidden">
+								<input id="fixWorkerName" name="fixWorkerName" class="form-control" type="hidden">
+								<input id="gangmasterNo" name="gangmasterNo" class="form-control"type="hidden">
+								<input id="gangmasterName" name="gangmasterName" class="form-control" type="hidden">
+								<input id="gangmasterAudit" name="gangmasterAudit" class="form-control" type="hidden">
+								<input id="permissionsOpinion" name="permissionsOpinion" class="form-control" type="hidden">
+								<input id="returnOpinion" name="returnOpinion" class="form-control" type="hidden">
+								<input id="createTime" name="createTime" class="form-control" type="hidden">
+								<input id="updateTime" name="updateTime" class="form-control" type="hidden">
+						<div class="form-group m-t-md">
+							<div class="col-sm-6">
+								<button type="submit" class="btn btn-primary pull-right" id="submit1">签字提交</button>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">工作者工号：</label>
-								<div class="col-sm-8">
-									<input id="fixWorkerNo" name="fixWorkerNo" class="form-control" type="text">
-								</div>
+							<div class="col-sm-6">
+								<button type="submit" class="btn btn-primary" id="submit2">保存</button>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">工作者名称：</label>
-								<div class="col-sm-8">
-									<input id="fixWorkerName" name="fixWorkerName" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">工长工号：</label>
-								<div class="col-sm-8">
-									<input id="gangmasterNo" name="gangmasterNo" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">工长名称：</label>
-								<div class="col-sm-8">
-									<input id="gangmasterName" name="gangmasterName" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">工长审核意见：1同意 0不同意：</label>
-								<div class="col-sm-8">
-									<input id="gangmasterAudit" name="gangmasterAudit" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">开工结论：</label>
-								<div class="col-sm-8">
-									<input id="permissionsOpinion" name="permissionsOpinion" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">退回意见：</label>
-								<div class="col-sm-8">
-									<input id="returnOpinion" name="returnOpinion" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">创建日期：</label>
-								<div class="col-sm-8">
-									<input id="createTime" name="createTime" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">更新日期：</label>
-								<div class="col-sm-8">
-									<input id="updateTime" name="updateTime" class="form-control" type="text">
-								</div>
-							</div>
-																					<div class="form-group">
-								<div class="col-sm-8 col-sm-offset-3">
-									<button type="submit" class="btn btn-primary">提交</button>
-								</div>
-							</div>
-						</form>
-					</div>
+						</div>
+					</form>
 				</div>
 			</div>
-	</div>
+		</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/biz/toolInspection/add.js">
+	<script type="text/javascript" src="/js/appjs/biz/toolInspection/add.js" >
 	</script>
+	<script type="text/javascript" src="/js/appjs/biz/toolInspection/wenchTable.js">
+	</script>
+	<script type="text/javascript" src="/js/appjs/biz/toolInspection/otherToolTable.js">
+	</script>
+<script th:inline="javascript">
+	var currentUserName=[[${user.name}]];
+	var currentUserNameNo=[[${user.username}]];
+</script>
 </body>
 </html>

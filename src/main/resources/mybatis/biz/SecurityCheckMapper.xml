@@ -4,11 +4,11 @@
 <mapper namespace="com.rbc.biz.dao.SecurityCheckDao">
 
 	<select id="get" resultType="com.rbc.biz.domain.SecurityCheckDO">
-		select `id`,`security_project`,`description`,`status`,`gangmaster_no`,`gangmaster_name`,`check_time`,`remark`,`create_time`,`update_time`,`log_id` from web_security_check where id = #{value}
+		select `id`,`security_project`,`description`,`status`,`gangmaster_no`,`gangmaster_name`,`check_time`,`remark`,`create_time`,`update_time`,`log_id`,`num` from web_security_check where log_id = #{value}
 	</select>
 
 	<select id="list" resultType="com.rbc.biz.domain.SecurityCheckDO">
-		select `id`,`security_project`,`description`,`status`,`gangmaster_no`,`gangmaster_name`,`check_time`,`remark`,`create_time`,`update_time`,`log_id` from web_security_check
+		select `id`,`security_project`,`description`,`status`,`gangmaster_no`,`gangmaster_name`,`check_time`,`remark`,`create_time`,`update_time`,`log_id`,`num` from web_security_check
         <where>
 			      log_id = #{logId}
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
@@ -21,7 +21,7 @@
 		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
-
+		  		  <if test="num != null and num != ''"> and num = #{num} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -50,12 +50,14 @@
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		  		  <if test="logId != null and logId != ''"> and log_id = #{logId} </if>
+		  		  <if test="num != null and num != ''"> and num = #{num} </if>
 		  		</where>
 	</select>
 	 
 	<insert id="save" parameterType="com.rbc.biz.domain.SecurityCheckDO" useGeneratedKeys="true" keyProperty="id">
 		insert into web_security_check
 		(
+			`id`, 
 			`security_project`, 
 			`description`, 
 			`status`, 
@@ -65,10 +67,12 @@
 			`remark`, 
 			`create_time`, 
 			`update_time`, 
-			`log_id`
+			`log_id`, 
+			`num`
 		)
 		values
 		(
+			#{id}, 
 			#{securityProject}, 
 			#{description}, 
 			#{status}, 
@@ -78,26 +82,28 @@
 			#{remark}, 
 			#{createTime}, 
 			#{updateTime}, 
-			#{logId}
+			#{logId}, 
+			#{num}
 		)
 	</insert>
 	<insert id="batchSave" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
 		insert into web_security_check
 		(
-			`security_project`,
-			`description`,
-			`status`,
-			`gangmaster_no`,
-			`gangmaster_name`,
-			`check_time`,
-			`remark`,
-			`create_time`,
-			`update_time`,
-			`log_id`
+		`security_project`,
+		`description`,
+		`status`,
+		`gangmaster_no`,
+		`gangmaster_name`,
+		`check_time`,
+		`remark`,
+		`create_time`,
+		`update_time`,
+		`log_id`,
+		`num`
 		)
 		values
 		<foreach collection ="list" item="securityCheckDO" index= "index" separator =",">
-		(
+			(
 			#{securityCheckDO.securityProject},
 			#{securityCheckDO.description},
 			#{securityCheckDO.status},
@@ -107,13 +113,11 @@
 			#{securityCheckDO.remark},
 			#{securityCheckDO.createTime},
 			#{securityCheckDO.updateTime},
-			#{securityCheckDO.logId}
-		)
+			#{securityCheckDO.logId},
+			#{securityCheckDO.num}
+			)
 		</foreach>
 	</insert>
-
-
-
 	<update id="update" parameterType="com.rbc.biz.domain.SecurityCheckDO">
 		update web_security_check 
 		<set>
@@ -126,12 +130,11 @@
 			<if test="remark != null">`remark` = #{remark}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
-			<if test="logId != null">`log_id` = #{logId}</if>
+			<if test="logId != null">`log_id` = #{logId}, </if>
+			<if test="num != null">`num` = #{num}</if>
 		</set>
 		where id = #{id}
 	</update>
-
-
 	<update id="batchUpdate" parameterType="java.util.List">
 		update web_security_check
 		<trim prefix="set" suffixOverrides=",">
@@ -203,17 +206,20 @@
 				</foreach>
 			</trim>
 
-	</trim>
+			<trim prefix="num =case" suffix="end,">
+				<foreach collection="list" item="securityCheckDO" index="index">
+					<if test="num != null"> when #{securityCheckDO.id} then
+						#{securityCheckDO.num}</if>
+				</foreach>
+			</trim>
+		</trim>
 		where
 		<foreach collection="list" separator="," item="securityCheckDO" index="index" >
 			id=#{securityCheckDO.id}
 		</foreach>
 	</update>
-
-
-
 	<delete id="remove">
-		delete from web_security_check where id = #{value}
+		delete from web_security_check where log_id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">

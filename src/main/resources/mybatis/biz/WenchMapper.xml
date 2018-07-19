@@ -4,19 +4,20 @@
 <mapper namespace="com.rbc.biz.dao.WenchDao">
 
 	<select id="get" resultType="com.rbc.biz.domain.WenchDO">
-		select `id`,`tool_id`,`wench_no`,`deal_sit`,`remark`,`create_time`,`update_time` from web_wench where id = #{value}
+		select `id`,`tool_id`,`wench_no`,`deal_sit`,`remark`,`create_time`,`update_time`,`num` from web_wench where tool_id = #{value}
 	</select>
 
 	<select id="list" resultType="com.rbc.biz.domain.WenchDO">
-		select `id`,`tool_id`,`wench_no`,`deal_sit`,`remark`,`create_time`,`update_time` from web_wench
-        <where>  
+		select `id`,`tool_id`,`wench_no`,`deal_sit`,`remark`,`create_time`,`update_time`,`num` from web_wench
+        <where>
+			      tool_id = #{toolId}
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="toolId != null and toolId != ''"> and tool_id = #{toolId} </if>
 		  		  <if test="wenchNo != null and wenchNo != ''"> and wench_no = #{wenchNo} </if>
 		  		  <if test="dealSit != null and dealSit != ''"> and deal_sit = #{dealSit} </if>
 		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="num != null and num != ''"> and num = #{num} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -41,6 +42,7 @@
 		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="num != null and num != ''"> and num = #{num} </if>
 		  		</where>
 	</select>
 	 
@@ -52,7 +54,8 @@
 			`deal_sit`, 
 			`remark`, 
 			`create_time`, 
-			`update_time`
+			`update_time`, 
+			`num`
 		)
 		values
 		(
@@ -61,10 +64,34 @@
 			#{dealSit}, 
 			#{remark}, 
 			#{createTime}, 
-			#{updateTime}
+			#{updateTime}, 
+			#{num}
 		)
 	</insert>
-	 
+	<insert id="batchSave" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+		insert into web_wench
+		(
+		`tool_id`,
+		`wench_no`,
+		`deal_sit`,
+		`remark`,
+		`create_time`,
+		`update_time`,
+		`num`
+		)
+		values
+		<foreach collection ="list" item="WenchDO" index= "index" separator =",">
+			(
+			#{WenchDO.toolId},
+			#{WenchDO.wenchNo},
+			#{WenchDO.dealSit},
+			#{WenchDO.remark},
+			#{WenchDO.createTime},
+			#{WenchDO.updateTime},
+			#{WenchDO.num}
+			)
+		</foreach>
+	</insert>
 	<update id="update" parameterType="com.rbc.biz.domain.WenchDO">
 		update web_wench 
 		<set>
@@ -73,13 +100,68 @@
 			<if test="dealSit != null">`deal_sit` = #{dealSit}, </if>
 			<if test="remark != null">`remark` = #{remark}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
-			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="num != null">`num` = #{num}</if>
 		</set>
 		where id = #{id}
 	</update>
-	
+	<update id="batchUpdate" parameterType="java.util.List">
+		update web_wench
+		<trim prefix="set" suffixOverrides=",">
+			<trim prefix="tool_id =case" suffix="end,">
+				<foreach collection="list" item="WenchDO" index="index">
+					<if test="toolId != null"> when #{WenchDO.id} then
+						#{WenchDO.toolId}</if>
+				</foreach>
+			</trim>
+			<trim prefix="wench_no =case" suffix="end,">
+				<foreach collection="list" item="WenchDO" index="index">
+					<if test="wenchNo != null"> when #{WenchDO.id} then
+						#{WenchDO.wenchNo}</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="deal_sit =case" suffix="end,">
+				<foreach collection="list" item="WenchDO" index="index">
+					<if test="dealSit != null"> when #{WenchDO.id} then
+						#{WenchDO.dealSit}</if>
+				</foreach>
+			</trim>
+			<trim prefix="remark =case" suffix="end,">
+				<foreach collection="list" item="WenchDO" index="index">
+					<if test="remark != null"> when #{WenchDO.id} then
+						#{WenchDO.remark}</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="createTime =case" suffix="end,">
+				<foreach collection="list" item="WenchDO" index="index">
+					<if test="createTime != null"> when #{WenchDO.id} then
+						#{WenchDO.createTime}</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="updateTime =case" suffix="end,">
+				<foreach collection="list" item="WenchDO" index="index">
+					<if test="updateTime != null"> when #{WenchDO.id} then
+						#{WenchDO.updateTime}</if>
+				</foreach>
+			</trim>
+			<trim prefix="num =case" suffix="end,">
+				<foreach collection="list" item="WenchDO" index="index">
+					<if test="num != null"> when #{WenchDO.id} then
+						#{WenchDO.num}</if>
+				</foreach>
+			</trim>
+
+		</trim>
+		where
+		<foreach collection="list" separator="," item="WenchDO" index="index" >
+			id=#{WenchDO.id}
+		</foreach>
+	</update>
 	<delete id="remove">
-		delete from web_wench where id = #{value}
+		delete from web_wench where tool_id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">

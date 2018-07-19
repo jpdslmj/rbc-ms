@@ -6,86 +6,98 @@
 <div class="wrapper wrapper-content">
 	<div class="ibox float-e-margins">
 		<div class="ibox-content">
-			<div class="row m-b-sm">
-				<form class="form-horizontal m-t" id="pop104Form">
-					<input id="id" name="id" class="form-control" type="hidden" >
-					<div class="col-sm-12 form-inline">
-						<div class="form-group col-sm-6" >
-							<label class="control-label">时间:</label>
-							<input id="createTime" name="createTime" class="form-control " disabled="true" type="date" style="width: 250px">
-						</div>
-						<div class="form-group col-sm-6" >
-							<label class="control-label">104紧急阀编号:</label>
-							<input id="popValue" name="popValue" class="form-control" disabled="true" type="text" style="width: 250px">
-
-						</div>
+			<form class="form-horizontal" id="pop104Form">
+				<div class="col-sm-12 form-inline m-b-sm">
+					<div class="form-group col-sm-6" >
+						<label class="control-label">时间:</label>
+						<input id="createTime" name="createTime" class="form-control " disabled="true" type="date" style="width: 250px">
 					</div>
-				</form>
-			</div>
-			<table class="table table-bordered table-striped table-hover" id="pop104Table"   data-mobile-responsive="true" data-url="js/demo/pop104.json" ></table>
-			<div class="row m-t-md">
-				<div class="form-group col-sm-12 " >
-					<textarea id="returnRemark" name="returnRemark" class="form-control" rows="1" placeholder="备注"></textarea>
+					<div class="form-group col-sm-6" >
+						<label class="control-label">104紧急阀编号:</label>
+						<input id="popValue" name="popValue" class="form-control" disabled="true" type="text" style="width: 250px">
+					</div>
 				</div>
-				<form class="m-t" id="pop104Form1">
 
-					<div class="col-sm-12 form-inline">
-						<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster">
-							<label class="control-label">工长检修意见：</label>
-							<select id="gangmasterAudit" name="gangmasterAudit" class="form-control">
-								<option value="0">不合格</option>
-								<option value="1"  selected = "selected">合格</option>
-							</select>
-						</div>
-						<input id="gangmasterNo" name="gangmasterNo" class="form-control" type="hidden" >
-						<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster" th:value="${user.username}">
-							<input id="gangmasterName" name="gangmasterName" class="form-control" type="text" placeholder="工长名称" th:value="${user.name}">
-						</div>
-						<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
-							<label class="control-label">质检员检修意见:</label>
-							<select id="inspectorAudit" name="inspectorAudit" class="form-control ">
-								<option value="0">不合格</option>
-								<option value="1"  selected = "selected">合格</option>
-							</select>
-						</div>
-						<input id="inspectorNo" name="inspectorNo" class="form-control" type="hidden" th:value="${user.username}">
-						<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
-							<input id="inspectorName" name="inspectorName" class="form-control" type="text" placeholder="质检员名称" th:value="${user.name}">
-						</div>
+			<table class="table table-bordered table-striped table-hover" id="pop104Table"   data-mobile-responsive="true" data-url="js/demo/pop104.json" ></table>
+
+				<div class="col-sm-12 form-inline m-t-sm">
+					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster">
+						<label class="control-label">工长检修意见：</label>
+						<select id="gangmasterAudit" name="gangmasterAudit" class="form-control">
+							<option value="0">不合格</option>
+							<option value="1"  selected = "selected">合格</option>
+						</select>
 					</div>
-					<div class="col-sm-12 form-inline">
+					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster" th:value="${user.username}">
+						<input id="gangmasterNo" name="gangmasterNo" class="form-control" type="hidden" th:value="${user.username}">
+						<input id="gangmasterName" name="gangmasterName" class="form-control" type="text" placeholder="工长名称" th:value="${user.name}">
+					</div>
+					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
+						<label class="control-label">质检员检修意见:</label>
+						<select id="inspectorAudit" name="inspectorAudit" class="form-control ">
+							<option value="0">不合格</option>
+							<option value="1"  selected = "selected">合格</option>
+						</select>
+					</div>
+					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
+						<input id="inspectorNo" name="inspectorNo" class="form-control" type="hidden" th:value="${user.username}">
+						<input id="inspectorName" name="inspectorName" class="form-control" type="text" placeholder="质检员名称" th:value="${user.name}">
+					</div>
+				</div>
+				<div class="col-sm-12 form-inline">
 						<div class="form-group col-sm-4" shiro:hasPermission="biz:popValve104:assemble">
 							<label class="control-label">组装合字：</label>
 							<input id="assemblerRemark" name="assemblerRemark" class="form-control" type="checkbox" >
 							<label class="control-label"><img src="/img/ren.png" style="width: 14px;height: 14px "></label>
 						</div>
-						<input id="assemblerNo" name="assemblerNo" class="form-control" type="hidden" >
 						<div class="form-group col-sm-4" shiro:hasAnyRoles="role:admin,role:gangmaster">
 							<label class="control-label">工长合字:</label>
 							<input id="gangmasterRemark" name="gangmasterRemark" class="form-control " type="checkbox" >
 							<label class="control-label"><img src="/img/renyi.png" style="width: 14px;height: 14px "></label>
 						</div>
-
 						<div class="form-group col-sm-4" shiro:hasAnyRoles="role:admin,role:inspector">
 							<label class="control-label">质检员合字:</label>
 							<input id="inspectorRemark" name="inspectorRemark" class="form-control " type="checkbox">
 							<label class="control-label"><img src="/img/he.png" style="width: 14px;height: 14px ;" ></label>
 						</div>
 					</div>
-				</form>
+				<div class="form-group col-sm-12 " >
+					<textarea id="returnRemark" name="returnRemark" class="form-control" rows="1" placeholder="备注"></textarea>
+				</div>
+				<input id="id" name="id" class="form-control" type="hidden" >
 
-			</div>
-			<div class="row ">
-				<div class="col-sm-4 ">
-					<button id="uploadImg" type="submit" class="btn btn-primary">影像上传</button>
+				<input id="disassembleNo" name="disassembleNo" class="form-control" type="hidden" >
+				<input id="disassembleName" name="disassembleName" class="form-control" type="hidden" >
+
+				<input id="cleanerNo" name="cleanerNo" class="form-control" type="hidden">
+				<input id="cleanerName" name="cleanerName" class="form-control" type="hidden">
+
+				<input id="fixer1No" name="fixer1No" class="form-control" type="hidden" >
+				<input id="fixer1Name" name="fixer1Name" class="form-control" type="hidden" >
+
+				<input id="fixer2No" name="fixer2No" class="form-control" type="hidden" >
+				<input id="fixer2Name" name="fixer2Name" class="form-control" type="hidden" >
+
+				<input id="fixer3No" name="fixer3No" class="form-control" type="hidden" >
+				<input id="fixer3Name" name="fixer3Name" class="form-control" type="hidden">
+
+				<input id="fixer4No" name="fixer4No" class="form-control" type="hidden" >
+				<input id="fixer4Name" name="fixer4Name" class="form-control" type="hidden">
+
+				<input id="assemblerNo" name="assemblerNo" class="form-control" type="hidden" >
+				<input id="assemblerName" name="assemblerName" class="form-control" type="hidden">
+				<div class="row ">
+					<div class="col-sm-4 ">
+						<button id="uploadImg" type="submit" class="btn btn-primary">影像上传</button>
+					</div>
+					<div class="col-sm-4 ">
+						<button id="save" type="submit" class="btn btn-primary" onclick="save()">签字提交</button>
+					</div>
+					<div class="col-sm-4 ">
+						<button id="sign" type="submit" class="btn btn-primary">保存</button>
+					</div>
 				</div>
-				<div class="col-sm-4 ">
-					<button id="save" type="submit" class="btn btn-primary" onclick="save()">保存</button>
-				</div>
-				<div class="col-sm-4 ">
-					<button id="sign" type="submit" class="btn btn-primary">签字提交</button>
-				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 </div>
@@ -101,25 +113,21 @@
 </div>
 <div shiro:hasPermission="biz:popValve104:disassemble">
 	<script type="text/javascript">
-        //alert("disassembler");
         disassembler = true;
 	</script>
 </div>
 <div shiro:hasPermission="biz:popValve104:clean">
 	<script type="text/javascript">
-        //alert("cleaner");
         cleaner =true;
 	</script>
 </div>
 <div shiro:hasPermission="biz:popValve104:fix">
 	<script type="text/javascript">
-       // alert("fixer");
         fixer = true;
 	</script>
 </div>
 <div shiro:hasPermission="biz:popValve104:assemble">
 	<script type="text/javascript">
-        //alert("assembler");
         assembler = true;
 	</script>
 </div>

@@ -29,4 +29,6 @@ public interface WenchDao {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+	int  batchSave(List<WenchDO> list);
+	int  batchUpdate(List<WenchDO> list);
 }

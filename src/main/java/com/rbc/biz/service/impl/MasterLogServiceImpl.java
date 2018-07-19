@@ -62,11 +62,22 @@ public class MasterLogServiceImpl implements MasterLogService {
     public int  batchSaveOrUpdate(MasterLogDO masterLogDo,List<SecurityCheckDO>securityCheckList){
 
 		List<SecurityCheckDO> saveList=new ArrayList();
-		List<SecurityCheckDO> updateList=new ArrayList();
         long logId=0;
-        if(save(masterLogDo)>0){
-            logId=masterLogDo.getId();
-        }
+        int l =0;
+		int j =0;
+        if("".equals(masterLogDo.getId())||masterLogDo.getId()==null){
+			masterLogDo.setCreateTime(new Date());
+			masterLogDo.setUpdateTime(new Date());
+			l=save(masterLogDo);
+			if(l>0){
+				logId=masterLogDo.getId();
+			}
+		}else{
+			logId=masterLogDo.getId();
+			securityCheckDao.remove(logId);
+			masterLogDo.setUpdateTime(new Date());
+			j=update(masterLogDo);
+		}
 
 		for(int i=0;i<securityCheckList.size();i++){
 			if("".equals(securityCheckList.get(i).getId())||securityCheckList.get(i).getId()==null){
@@ -78,15 +89,16 @@ public class MasterLogServiceImpl implements MasterLogService {
                 securityCheck.setGangmasterName(masterLogDo.getGangmasterName());
                 saveList.add(securityCheck);
 			}else{
-				updateList.add(securityCheckList.get(i));
+				SecurityCheckDO securityUpCheck =securityCheckList.get(i);
+				securityUpCheck.setUpdateTime(new Date());
+				securityUpCheck.setId(null);
+				saveList.add(securityUpCheck);
 			}
 
 		}
 		int k=0;
-		int j=0;
 		if(saveList!=null&&saveList.size()>0){j=securityCheckDao.batchSave(saveList);}
-		if(updateList!=null&&updateList.size()>0){j=securityCheckDao.batchUpdate(updateList);}
-		return j+k;
+		return l+j+k;
 	};
 	
 }

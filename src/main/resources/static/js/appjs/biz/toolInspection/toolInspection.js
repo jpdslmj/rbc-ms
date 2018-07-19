@@ -5,7 +5,7 @@ $(function() {
 });
 
 function load() {
-	$('#exampleTable')
+	$('#toolInspectionTable')
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
@@ -49,63 +49,16 @@ function load() {
 								},
 																{
 									field : 'id', 
-									title : '' 
-								},
-																{
-									field : 'luminanceMeasure', 
-									title : '白光照度测量' 
-								},
-																{
-									field : 'temperature', 
-									title : '温度' 
-								},
-																{
-									field : 'humidity', 
-									title : '湿度' 
-								},
-																{
-									field : 'wench', 
-									title : '力矩扳手：1全部合格，2部分合格，3全部不合格' 
-								},
-																{
-									field : 'templet', 
-									title : '样板' 
-								},
-																{
-									field : 'nozzleCleaner', 
-									title : '通针' 
-								},
-																{
-									field : 'siliconeOil', 
-									title : '硅油' 
-								},
-																{
-									field : 'siliconeGrease', 
-									title : '硅脂' 
-								},
-																{
-									field : 'otherTool', 
-									title : '其他工具' 
-								},
-																{
-									field : 'fixWorkerNo', 
-									title : '工作者工号' 
+									title : '',
+									visible:false
 								},
 																{
 									field : 'fixWorkerName', 
 									title : '工作者名称' 
 								},
 																{
-									field : 'gangmasterNo', 
-									title : '工长工号' 
-								},
-																{
 									field : 'gangmasterName', 
 									title : '工长名称' 
-								},
-																{
-									field : 'gangmasterAudit', 
-									title : '工长审核意见：1同意 0不同意' 
 								},
 																{
 									field : 'permissionsOpinion', 
@@ -119,13 +72,10 @@ function load() {
 									field : 'createTime', 
 									title : '创建日期' 
 								},
-																{
-									field : 'updateTime', 
-									title : '更新日期' 
-								},
+
 																{
 									title : '操作',
-									field : 'id',
+									field : 'fixWorkerName',
 									align : 'center',
 									formatter : function(value, row, index) {
 										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
@@ -134,16 +84,13 @@ function load() {
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.id
 												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.id
-												+ '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
 								} ]
 					});
 }
 function reLoad() {
-	$('#exampleTable').bootstrapTable('refresh');
+	$('#toolInspectionTable').bootstrapTable('refresh');
 }
 function add() {
 	layer.open({
@@ -151,18 +98,28 @@ function add() {
 		title : '增加',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content : prefix + '/add' // iframe的url
+		content : prefix + '/add', // iframe的url
+        fixed:false,
+        resize:true,
+        area : ['600x','400px'],
+        success:function(layero ,index){
+            layer.full(index);
+        }
 	});
 }
 function edit(id) {
 	layer.open({
 		type : 2,
 		title : '编辑',
-		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + id // iframe的url
+		content : prefix + '/edit/' + id, // iframe的url
+        maxmin : true,
+        fixed:false,
+        resize:true,
+        area : ['600x','400px'],
+        success:function(layero ,index){
+            layer.full(index);
+        }
 	});
 }
 function remove(id) {
@@ -190,7 +147,7 @@ function remove(id) {
 function resetPwd(id) {
 }
 function batchRemove() {
-	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+	var rows = $('#toolInspectionTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
 		layer.msg("请选择要删除的数据");
 		return;

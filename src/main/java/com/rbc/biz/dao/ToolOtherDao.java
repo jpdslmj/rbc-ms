@@ -29,4 +29,7 @@ public interface ToolOtherDao {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
+	int  batchSave(List<ToolOtherDO> list);
+	int  batchUpdate(List<ToolOtherDO> list);
 }

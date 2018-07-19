@@ -1,6 +1,8 @@
 package com.rbc.biz.service;
 
 import com.rbc.biz.domain.ToolInspectionDO;
+import com.rbc.biz.domain.ToolOtherDO;
+import com.rbc.biz.domain.WenchDO;
 
 import java.util.List;
 import java.util.Map;
@@ -27,4 +29,6 @@ public interface ToolInspectionService {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
+	int batchSaveOrUpdate(ToolInspectionDO toolInspectionDo,List<WenchDO> wenchDoList,List<ToolOtherDO> toolOtherDoList);
 }

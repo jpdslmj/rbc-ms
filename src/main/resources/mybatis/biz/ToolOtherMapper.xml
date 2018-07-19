@@ -4,19 +4,20 @@
 <mapper namespace="com.rbc.biz.dao.ToolOtherDao">
 
 	<select id="get" resultType="com.rbc.biz.domain.ToolOtherDO">
-		select `id`,`tool_id`,`tool_name`,`deal_sit`,`remark`,`create_time`,`update_time` from web_tool_other where id = #{value}
+		select `id`,`tool_id`,`tool_name`,`deal_sit`,`remark`,`create_time`,`update_time`,`num` from web_tool_other where tool_id = #{value}
 	</select>
 
 	<select id="list" resultType="com.rbc.biz.domain.ToolOtherDO">
-		select `id`,`tool_id`,`tool_name`,`deal_sit`,`remark`,`create_time`,`update_time` from web_tool_other
-        <where>  
+		select `id`,`tool_id`,`tool_name`,`deal_sit`,`remark`,`create_time`,`update_time`,`num` from web_tool_other
+        <where>
+				  tool_id = #{toolId}
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="toolId != null and toolId != ''"> and tool_id = #{toolId} </if>
 		  		  <if test="toolName != null and toolName != ''"> and tool_name = #{toolName} </if>
 		  		  <if test="dealSit != null and dealSit != ''"> and deal_sit = #{dealSit} </if>
 		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="num != null and num != ''"> and num = #{num} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -41,6 +42,7 @@
 		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="num != null and num != ''"> and num = #{num} </if>
 		  		</where>
 	</select>
 	 
@@ -52,7 +54,8 @@
 			`deal_sit`, 
 			`remark`, 
 			`create_time`, 
-			`update_time`
+			`update_time`, 
+			`num`
 		)
 		values
 		(
@@ -61,10 +64,34 @@
 			#{dealSit}, 
 			#{remark}, 
 			#{createTime}, 
-			#{updateTime}
+			#{updateTime}, 
+			#{num}
 		)
 	</insert>
-	 
+	<insert id="batchSave" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+		insert into web_tool_other
+		(
+		`tool_id`,
+		`tool_name`,
+		`deal_sit`,
+		`remark`,
+		`create_time`,
+		`update_time`,
+		`num`
+		)
+		values
+		<foreach collection ="list" item="ToolOtherDO" index= "index" separator =",">
+			(
+			#{ToolOtherDO.toolId},
+			#{ToolOtherDO.toolName},
+			#{ToolOtherDO.dealSit},
+			#{ToolOtherDO.remark},
+			#{ToolOtherDO.createTime},
+			#{ToolOtherDO.updateTime},
+			#{ToolOtherDO.num}
+			)
+		</foreach>
+	</insert>
 	<update id="update" parameterType="com.rbc.biz.domain.ToolOtherDO">
 		update web_tool_other 
 		<set>
@@ -73,13 +100,68 @@
 			<if test="dealSit != null">`deal_sit` = #{dealSit}, </if>
 			<if test="remark != null">`remark` = #{remark}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
-			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="num != null">`num` = #{num}</if>
 		</set>
 		where id = #{id}
 	</update>
-	
+	<update id="batchUpdate" parameterType="java.util.List">
+		update web_tool_other
+		<trim prefix="set" suffixOverrides=",">
+			<trim prefix="tool_id =case" suffix="end,">
+				<foreach collection="list" item="ToolOtherDO" index="index">
+					<if test="toolId != null"> when #{ToolOtherDO.id} then
+						#{ToolOtherDO.toolId}</if>
+				</foreach>
+			</trim>
+			<trim prefix="tool_name =case" suffix="end,">
+				<foreach collection="list" item="ToolOtherDO" index="index">
+					<if test="toolName != null"> when #{ToolOtherDO.id} then
+						#{ToolOtherDO.toolName}</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="deal_sit =case" suffix="end,">
+				<foreach collection="list" item="ToolOtherDO" index="index">
+					<if test="dealSit != null"> when #{ToolOtherDO.id} then
+						#{ToolOtherDO.dealSit}</if>
+				</foreach>
+			</trim>
+			<trim prefix="remark =case" suffix="end,">
+				<foreach collection="list" item="ToolOtherDO" index="index">
+					<if test="remark != null"> when #{ToolOtherDO.id} then
+						#{ToolOtherDO.remark}</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="createTime =case" suffix="end,">
+				<foreach collection="list" item="ToolOtherDO" index="index">
+					<if test="createTime != null"> when #{ToolOtherDO.id} then
+						#{ToolOtherDO.createTime}</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="updateTime =case" suffix="end,">
+				<foreach collection="list" item="ToolOtherDO" index="index">
+					<if test="updateTime != null"> when #{ToolOtherDO.id} then
+						#{ToolOtherDO.updateTime}</if>
+				</foreach>
+			</trim>
+			<trim prefix="num =case" suffix="end,">
+				<foreach collection="list" item="ToolOtherDO" index="index">
+					<if test="num != null"> when #{ToolOtherDO.id} then
+						#{ToolOtherDO.num}</if>
+				</foreach>
+			</trim>
+
+		</trim>
+		where
+		<foreach collection="list" separator="," item="ToolOtherDO" index="index" >
+			id=#{ToolOtherDO.id}
+		</foreach>
+	</update>
 	<delete id="remove">
-		delete from web_tool_other where id = #{value}
+		delete from web_tool_other where tool_id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">

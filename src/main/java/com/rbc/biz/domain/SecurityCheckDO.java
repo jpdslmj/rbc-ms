@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  * @author lmj
  * @email 359819418@qq.com
- * @date 2018-07-10 16:57:17
+ * @date 2018-07-19 23:15:53
  */
 public class SecurityCheckDO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -37,6 +37,8 @@ public class SecurityCheckDO implements Serializable {
 	private Date updateTime;
 	//日志表主键
 	private Long logId;
+	//
+	private Long num;
 
 	/**
 	 * 设置：
@@ -169,5 +171,17 @@ public class SecurityCheckDO implements Serializable {
 	 */
 	public Long getLogId() {
 		return logId;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setNum(Long num) {
+		this.num = num;
+	}
+	/**
+	 * 获取：
+	 */
+	public Long getNum() {
+		return num;
 	}
 }

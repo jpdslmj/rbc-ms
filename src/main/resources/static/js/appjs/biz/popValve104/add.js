@@ -7,7 +7,6 @@ $().ready(function() {
     }
     var today=new Date().Format("yyyy-MM-dd");
     $("#createTime").val(today);
-
 	validateRule();
 });
 
@@ -20,7 +19,6 @@ $.validator.setDefaults({
 function loadPop104Table() {
     $('#pop104Table').bootstrapTable(
         {
-
 			data:[
                 {
                     uId:"0",
@@ -75,23 +73,66 @@ function loadPop104Table() {
                 $('#pop104Table').bootstrapTable('updateRow',{
                     index: $element.data('index'),
                     row:row
-                    //value:currentUserName
                 });
+                if(row.uId==0){
+                    $('#disassembleNo').val(currentUserNameNo);
+                    $('#disassembleName').val(currentUserName);
+                }
+                if(row.uId==1){
+                    $('#cleanerNo').val(currentUserNameNo);
+                    $('#cleanerName').val(currentUserName);
+                }
+                if(row.uId==2){
+
+                    $('#fixer1No').val(currentUserNameNo);
+                    $('#fixer1Name').val(currentUserName);
+                }
+                if(row.uId==3){
+                    $('#fixer2No').val(currentUserNameNo);
+                    $('#fixer2Name').val(currentUserName);
+
+                }
+                if(row.uId==4){
+                    $('#fixer3No').val(currentUserNameNo);
+                    $('#fixer3Name').val(currentUserName);
+                }
+                if(row.uId==5){
+                    $('#assemblerNo').val(currentUserNameNo);
+                    $('#assemblerName').val(currentUserName);
+                }
             },
             onUncheck:function(row, $element){
                 row.worker="";
                 $('#pop104Table').bootstrapTable('updateRow',{
                     index: $element.data('index'),
                     row:row
-                    //value:currentUserName
                 });
-            },
+                if(row.uId==0){
+                    $('#disassembleNo').val("");
+                    $('#disassembleName').val("");
+                }
+                if(row.uId==1){
+                    $('#cleanerNo').val("");
+                    $('#cleanerName').val("");
+                }
+                if(row.uId==2){
 
-            onLoadSuccess : function(data) {
-                var data = $('#pop104Table').bootstrapTable('getData', true);
-                // 合并单元格
-                var fieldList=["fixPro"];
-                mergeCells(data, "fixPro", 1, $('#pop104Table'),fieldList);
+                    $('#fixer1No').val("");
+                    $('#fixer1Name').val("");
+                }
+                if(row.uId==3){
+                    $('#fixer2No').val("");
+                    $('#fixer2Name').val("");
+
+                }
+                if(row.uId==4){
+                    $('#fixer3No').val("");
+                    $('#fixer3Name').val("");
+                }
+                if(row.uId==5){
+                    $('#assemblerNo').val("");
+                    $('#assemblerName').val("");
+                }
             },
             columns : [
                 {
@@ -151,11 +192,6 @@ function loadPop104Table() {
                     }
                 },
                 {
-			        field : 'uId',
-                    title : '主键',
-                    visible:false
-                },
-                {
                     field : 'fixPro',
                     title : '检修工序'
                 },
@@ -166,115 +202,23 @@ function loadPop104Table() {
                 {
                     field : 'worker',
                     title : '工作者',
-                   /** editable: {
-                        type: 'text',
-                        mode: "inline",
-                        placeholder: '工作者',
-                        validate: function (value) {
-                            if ($.trim(value) == '') return '工作者不能为空';
-                        }
-                    }**/
-                }
+                },
+                {
+                    field : 'uId',
+                    title : '主键',
+                    visible:false
+                },
                 ],
-
         });
 }
 
- /**合并单元格
-
- @param data
-            原始数据（在服务端完成排序）
-@param fieldName
-            合并参照的属性名称
- @param colspan
-           合并开始列
-@param target
-           目标表格对象
- @param fieldList
-           要合并的字段集合
-**/
-function mergeCells(data,fieldName,colspan,target,fieldList){
-// 声明一个map计算相同属性值在data对象出现的次数和
-    var sortMap = {};
-    for(var i = 0 ; i < data.length ; i++){
-        for(var prop in data[i]){
-            //例如people.unit.name
-            var fieldArr=fieldName.split(".");
-            getCount(data[i],prop,fieldArr,0,sortMap);
-        }
-    }
-    var index = 0;
-    for(var prop in sortMap){
-        var count = sortMap[prop];
-        for(var i = 0 ; i < fieldList.length ; i++){
-            $(target).bootstrapTable('mergeCells',{index:index, field:fieldList[i], colspan: colspan, rowspan: count});
-        }
-        index += count;
-    }
-}
-/**
- * 递归到最后一层 统计数据重复次数
- * 比如例如people.unit.name 就一直取到name
- * 类似于data["people"]["unit"]["name"]
- */
-function getCount(data,prop,fieldArr,index,sortMap){
-    if(index == fieldArr.length-1){
-        if(prop == fieldArr[index]){
-            var key = data[prop];
-            if(sortMap.hasOwnProperty(key)){
-                sortMap[key] = sortMap[key]+ 1;
-            } else {
-                sortMap[key] = 1;
-            }
-        }
-        return;
-    }
-    if(prop == fieldArr[index]){
-        var sdata = data[prop];
-        index=index+1;
-        getCount(sdata,fieldArr[index],fieldArr,index,sortMap);
-    }
-
-}
-
 function save() {
-    var data1=$('#pop104Form').serialize();
-    var data2=$('#pop104Form1').serialize();
-    var data3=$('#returnRemark').val();
-    var data4 = $.map($('#pop104Table').bootstrapTable('getSelections'), function (row) {
-        var dataTemp="";
-        if(row.uId=="0"){
-            dataTemp =dataTemp+"&disassembleName="+currentUserName;
-            dataTemp =dataTemp+"&disassembleNo="+currentUserNameNo;
-        }
-        if(row.uId=="1"){
-            dataTemp =dataTemp+"&cleanerName="+currentUserName;
-            dataTemp =dataTemp+"&cleanerNo="+currentUserNameNo;
-        }
-        if(row.uId=="2"){
-            dataTemp =dataTemp+"&fixer1Name="+currentUserName;
-            dataTemp =dataTemp+"&fixer1No="+currentUserNameNo;
-        }
-        if(row.uId=="3"){
-            dataTemp =dataTemp+"&fixer2Name="+currentUserName;
-            dataTemp =dataTemp+"&fixer2No="+currentUserNameNo;
-        }
-        if(row.uId=="4"){
-            dataTemp =dataTemp+"&fixer3Name="+currentUserName;
-            dataTemp =dataTemp+"&fixer3No="+currentUserNameNo;
-        }
-        if(row.uId=="5"){
-            dataTemp =dataTemp+"&assemblerName="+currentUserName;
-            dataTemp =dataTemp+"&assemblerNo="+currentUserNameNo;
-        }
-        return dataTemp;
-    });
-    var data = data1+"&"+data2+"&returnRemark="+data3+data4;
+    var data=$('#pop104Form').serialize();
 	$.ajax({
 		cache : true,
 		type : "POST",
 		url : "/biz/popValve104/save",
-		data : data,// 你的formid
+		data : data,
 		async : false,
 		error : function(request) {
 			parent.layer.alert("Connection error");
@@ -292,20 +236,19 @@ function save() {
 
 		}
 	});
-
 }
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
-	$("#signupForm").validate({
+    $("#pop104Form").validate({
 		rules : {
-			name : {
+            popValue : {
 				required : true
 			}
 		},
 		messages : {
-			name : {
-				required : icon + "请输入姓名"
+            popValue : {
+				required : icon + "编号不能为空"
 			}
 		}
-	})
+	});
 }
