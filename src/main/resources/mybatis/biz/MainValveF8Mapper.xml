@@ -4,14 +4,14 @@
 <mapper namespace="com.rbc.biz.dao.MainValveF8Dao">
 
 	<select id="get" resultType="com.rbc.biz.domain.MainValveF8DO">
-		select `id`,`main_value`,`disassemble_no`,`disassemble_name`,`cleaner_no`,`cleaner_name`,`fixer1_no`,`fixer1_name`,`fixer1_remark`,`fixer2_no`,`fixer2_name`,`fixer2_remark`,`fixer3_no`,`fixer3_name`,`fixer3_remark`,`fixer4_no`,`fixer4_name`,`fixer4_remark`,`fixer_process`,`fixer_process_detail`,`assembler_no`,`assembler_name`,`assembler_remark`,`assemble_mark`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`gangmaster_remark`,`gangmaster_mark`,`inspector_no`,`inspector_name`,`inspector_mark`,`inspector_audit`,`inspector_remark`,`return_opinion`,`return_remark`,`create_time`,`update_time` from web_main_valve_f8 where id = #{value}
+		select `id`,`pop_value`,`disassemble_no`,`disassemble_name`,`cleaner_no`,`cleaner_name`,`fixer1_no`,`fixer1_name`,`fixer1_remark`,`fixer2_no`,`fixer2_name`,`fixer2_remark`,`fixer3_no`,`fixer3_name`,`fixer3_remark`,`fixer4_no`,`fixer4_name`,`fixer4_remark`,`assembler_no`,`assembler_name`,`assembler_remark`,`assemble_mark`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`gangmaster_remark`,`gangmaster_mark`,`inspector_no`,`inspector_name`,`inspector_mark`,`inspector_audit`,`inspector_remark`,`return_opinion`,`return_remark`,`create_time`,`update_time` from web_main_valve_f8 where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.rbc.biz.domain.MainValveF8DO">
-		select `id`,`main_value`,`disassemble_no`,`disassemble_name`,`cleaner_no`,`cleaner_name`,`fixer1_no`,`fixer1_name`,`fixer1_remark`,`fixer2_no`,`fixer2_name`,`fixer2_remark`,`fixer3_no`,`fixer3_name`,`fixer3_remark`,`fixer4_no`,`fixer4_name`,`fixer4_remark`,`fixer_process`,`fixer_process_detail`,`assembler_no`,`assembler_name`,`assembler_remark`,`assemble_mark`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`gangmaster_remark`,`gangmaster_mark`,`inspector_no`,`inspector_name`,`inspector_mark`,`inspector_audit`,`inspector_remark`,`return_opinion`,`return_remark`,`create_time`,`update_time` from web_main_valve_f8
+		select `id`,`pop_value`,`disassemble_no`,`disassemble_name`,`cleaner_no`,`cleaner_name`,`fixer1_no`,`fixer1_name`,`fixer1_remark`,`fixer2_no`,`fixer2_name`,`fixer2_remark`,`fixer3_no`,`fixer3_name`,`fixer3_remark`,`fixer4_no`,`fixer4_name`,`fixer4_remark`,`assembler_no`,`assembler_name`,`assembler_remark`,`assemble_mark`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`gangmaster_remark`,`gangmaster_mark`,`inspector_no`,`inspector_name`,`inspector_mark`,`inspector_audit`,`inspector_remark`,`return_opinion`,`return_remark`,`create_time`,`update_time` from web_main_valve_f8
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="mainValue != null and mainValue != ''"> and main_value = #{mainValue} </if>
+		  		  <if test="popValue != null and popValue != ''"> and pop_value = #{popValue} </if>
 		  		  <if test="disassembleNo != null and disassembleNo != ''"> and disassemble_no = #{disassembleNo} </if>
 		  		  <if test="disassembleName != null and disassembleName != ''"> and disassemble_name = #{disassembleName} </if>
 		  		  <if test="cleanerNo != null and cleanerNo != ''"> and cleaner_no = #{cleanerNo} </if>
@@ -28,8 +28,6 @@
 		  		  <if test="fixer4No != null and fixer4No != ''"> and fixer4_no = #{fixer4No} </if>
 		  		  <if test="fixer4Name != null and fixer4Name != ''"> and fixer4_name = #{fixer4Name} </if>
 		  		  <if test="fixer4Remark != null and fixer4Remark != ''"> and fixer4_remark = #{fixer4Remark} </if>
-		  		  <if test="fixerProcess != null and fixerProcess != ''"> and fixer_process = #{fixerProcess} </if>
-		  		  <if test="fixerProcessDetail != null and fixerProcessDetail != ''"> and fixer_process_detail = #{fixerProcessDetail} </if>
 		  		  <if test="assemblerNo != null and assemblerNo != ''"> and assembler_no = #{assemblerNo} </if>
 		  		  <if test="assemblerName != null and assemblerName != ''"> and assembler_name = #{assemblerName} </if>
 		  		  <if test="assemblerRemark != null and assemblerRemark != ''"> and assembler_remark = #{assemblerRemark} </if>
@@ -66,7 +64,7 @@
 		select count(*) from web_main_valve_f8
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="mainValue != null and mainValue != ''"> and main_value = #{mainValue} </if>
+		  		  <if test="popValue != null and popValue != ''"> and pop_value = #{popValue} </if>
 		  		  <if test="disassembleNo != null and disassembleNo != ''"> and disassemble_no = #{disassembleNo} </if>
 		  		  <if test="disassembleName != null and disassembleName != ''"> and disassemble_name = #{disassembleName} </if>
 		  		  <if test="cleanerNo != null and cleanerNo != ''"> and cleaner_no = #{cleanerNo} </if>
@@ -83,8 +81,6 @@
 		  		  <if test="fixer4No != null and fixer4No != ''"> and fixer4_no = #{fixer4No} </if>
 		  		  <if test="fixer4Name != null and fixer4Name != ''"> and fixer4_name = #{fixer4Name} </if>
 		  		  <if test="fixer4Remark != null and fixer4Remark != ''"> and fixer4_remark = #{fixer4Remark} </if>
-		  		  <if test="fixerProcess != null and fixerProcess != ''"> and fixer_process = #{fixerProcess} </if>
-		  		  <if test="fixerProcessDetail != null and fixerProcessDetail != ''"> and fixer_process_detail = #{fixerProcessDetail} </if>
 		  		  <if test="assemblerNo != null and assemblerNo != ''"> and assembler_no = #{assemblerNo} </if>
 		  		  <if test="assemblerName != null and assemblerName != ''"> and assembler_name = #{assemblerName} </if>
 		  		  <if test="assemblerRemark != null and assemblerRemark != ''"> and assembler_remark = #{assemblerRemark} </if>
@@ -109,7 +105,7 @@
 	<insert id="save" parameterType="com.rbc.biz.domain.MainValveF8DO" useGeneratedKeys="true" keyProperty="id">
 		insert into web_main_valve_f8
 		(
-			`main_value`, 
+			`pop_value`, 
 			`disassemble_no`, 
 			`disassemble_name`, 
 			`cleaner_no`, 
@@ -126,8 +122,6 @@
 			`fixer4_no`, 
 			`fixer4_name`, 
 			`fixer4_remark`, 
-			`fixer_process`, 
-			`fixer_process_detail`, 
 			`assembler_no`, 
 			`assembler_name`, 
 			`assembler_remark`, 
@@ -149,7 +143,7 @@
 		)
 		values
 		(
-			#{mainValue}, 
+			#{popValue}, 
 			#{disassembleNo}, 
 			#{disassembleName}, 
 			#{cleanerNo}, 
@@ -166,8 +160,6 @@
 			#{fixer4No}, 
 			#{fixer4Name}, 
 			#{fixer4Remark}, 
-			#{fixerProcess}, 
-			#{fixerProcessDetail}, 
 			#{assemblerNo}, 
 			#{assemblerName}, 
 			#{assemblerRemark}, 
@@ -192,7 +184,7 @@
 	<update id="update" parameterType="com.rbc.biz.domain.MainValveF8DO">
 		update web_main_valve_f8 
 		<set>
-			<if test="mainValue != null">`main_value` = #{mainValue}, </if>
+			<if test="popValue != null">`pop_value` = #{popValue}, </if>
 			<if test="disassembleNo != null">`disassemble_no` = #{disassembleNo}, </if>
 			<if test="disassembleName != null">`disassemble_name` = #{disassembleName}, </if>
 			<if test="cleanerNo != null">`cleaner_no` = #{cleanerNo}, </if>
@@ -209,8 +201,6 @@
 			<if test="fixer4No != null">`fixer4_no` = #{fixer4No}, </if>
 			<if test="fixer4Name != null">`fixer4_name` = #{fixer4Name}, </if>
 			<if test="fixer4Remark != null">`fixer4_remark` = #{fixer4Remark}, </if>
-			<if test="fixerProcess != null">`fixer_process` = #{fixerProcess}, </if>
-			<if test="fixerProcessDetail != null">`fixer_process_detail` = #{fixerProcessDetail}, </if>
 			<if test="assemblerNo != null">`assembler_no` = #{assemblerNo}, </if>
 			<if test="assemblerName != null">`assembler_name` = #{assemblerName}, </if>
 			<if test="assemblerRemark != null">`assembler_remark` = #{assemblerRemark}, </if>

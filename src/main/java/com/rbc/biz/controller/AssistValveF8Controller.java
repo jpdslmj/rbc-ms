@@ -1,33 +1,44 @@
 package com.rbc.biz.controller;
 
+import java.util.List;
+import java.util.Map;
+
+import com.rbc.common.controller.BaseController;
+import com.rbc.system.domain.UserDO;
+import com.rbc.system.service.UserService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.rbc.biz.domain.AssistValveF8DO;
 import com.rbc.biz.service.AssistValveF8Service;
 import com.rbc.common.utils.PageUtils;
 import com.rbc.common.utils.Query;
 import com.rbc.common.utils.R;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * F8辅助阀信息表
  * 
  * @author lmj
  * @email 359819418@qq.com
- * @date 2018-07-05 18:07:04
+ * @date 2018-07-23 00:13:25
  */
  
 @Controller
 @RequestMapping("/biz/assistValveF8")
-public class AssistValveF8Controller {
+public class AssistValveF8Controller extends BaseController {
 	@Autowired
 	private AssistValveF8Service assistValveF8Service;
-	
+	@Autowired
+	private UserService userService;
 	@GetMapping()
 	@RequiresPermissions("biz:assistValveF8:assistValveF8")
 	String AssistValveF8(){
@@ -48,7 +59,9 @@ public class AssistValveF8Controller {
 	
 	@GetMapping("/add")
 	@RequiresPermissions("biz:assistValveF8:add")
-	String add(){
+	String add(Model model){
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
 	    return "biz/assistValveF8/add";
 	}
 
@@ -57,6 +70,8 @@ public class AssistValveF8Controller {
 	String edit(@PathVariable("id") Long id,Model model){
 		AssistValveF8DO assistValveF8 = assistValveF8Service.get(id);
 		model.addAttribute("assistValveF8", assistValveF8);
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
 	    return "biz/assistValveF8/edit";
 	}
 	

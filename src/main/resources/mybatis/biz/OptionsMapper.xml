@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rbc.biz.dao.OptionsDao">
+
+	<select id="get" resultType="com.rbc.biz.domain.OptionsDO">
+		select `id`,`option_name`,`option_value`,`option_type`,`isvaliable`,`create_time`,`update_time` from web_options where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.rbc.biz.domain.OptionsDO">
+		select `id`,`option_name`,`option_value`,`option_type`,`isvaliable`,`create_time`,`update_time` from web_options
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="optionName != null and optionName != ''"> and option_name = #{optionName} </if>
+		  		  <if test="optionValue != null and optionValue != ''"> and option_value = #{optionValue} </if>
+		  		  <if test="optionType != null and optionType != ''"> and option_type = #{optionType} </if>
+		  		  <if test="isvaliable != null and isvaliable != ''"> and isvaliable = #{isvaliable} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from web_options
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="optionName != null and optionName != ''"> and option_name = #{optionName} </if>
+		  		  <if test="optionValue != null and optionValue != ''"> and option_value = #{optionValue} </if>
+		  		  <if test="optionType != null and optionType != ''"> and option_type = #{optionType} </if>
+		  		  <if test="isvaliable != null and isvaliable != ''"> and isvaliable = #{isvaliable} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.rbc.biz.domain.OptionsDO" useGeneratedKeys="true" keyProperty="id">
+		insert into web_options
+		(
+			`option_name`, 
+			`option_value`, 
+			`option_type`, 
+			`isvaliable`, 
+			`create_time`, 
+			`update_time`
+		)
+		values
+		(
+			#{optionName}, 
+			#{optionValue}, 
+			#{optionType}, 
+			#{isvaliable}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.rbc.biz.domain.OptionsDO">
+		update web_options 
+		<set>
+			<if test="optionName != null">`option_name` = #{optionName}, </if>
+			<if test="optionValue != null">`option_value` = #{optionValue}, </if>
+			<if test="optionType != null">`option_type` = #{optionType}, </if>
+			<if test="isvaliable != null">`isvaliable` = #{isvaliable}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from web_options where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from web_options where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

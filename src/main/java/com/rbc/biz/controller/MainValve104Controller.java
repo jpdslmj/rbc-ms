@@ -1,159 +1,127 @@
 package com.rbc.biz.controller;
 
-import com.rbc.biz.domain.MainValve104DO;
-import com.rbc.biz.service.MainValve104Service;
-import com.rbc.common.controller.BaseController;
-import com.rbc.common.utils.PageUtils;
-import com.rbc.common.utils.Query;
-import com.rbc.common.utils.R;
-import com.rbc.system.domain.UserDO;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Map;
 
+import com.rbc.common.controller.BaseController;
+import com.rbc.system.domain.UserDO;
+import com.rbc.system.service.RoleService;
+import com.rbc.system.service.UserService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.rbc.biz.domain.MainValve104DO;
+import com.rbc.biz.service.MainValve104Service;
+import com.rbc.common.utils.PageUtils;
+import com.rbc.common.utils.Query;
+import com.rbc.common.utils.R;
+
+/**
+ * 104主阀信息表
+ * 
+ * @author lmj
+ * @email 359819418@qq.com
+ * @date 2018-07-23 00:13:25
+ */
  
 @Controller
-@RequestMapping("")
+@RequestMapping("/biz/mainValve104")
 public class MainValve104Controller extends BaseController {
 	@Autowired
 	private MainValve104Service mainValve104Service;
-
-	/**
-	 * 104主阀部件检修列表页
-	 */
-	@GetMapping("/part/fix104m")
-	@RequiresPermissions("part:fix104m:fix104m")
-	String fix104m(){
-		return "part/fix104m/fix104m";
+	@Autowired
+	private UserService userService;
+	
+	@GetMapping()
+	@RequiresPermissions("biz:mainValve104:mainValve104")
+	String MainValve104(){
+	    return "biz/mainValve104/mainValve104";
 	}
-	/**
-	 * 104主阀部件检修审核列表页
-	 */
-	@GetMapping("/part/m104chk")
-	@RequiresPermissions("part:m104chk:m104chk")
-	String m104chk(){
-		return "part/m104chk/m104chk";
-	}
-
-
-	/**
-	 * 104主阀部件检修审核列表
-	 */
+	
 	@ResponseBody
-	@GetMapping("/part/m104chk/list")
-	@RequiresPermissions("part:m104chk:m104chk")
-	public PageUtils listM104chk(@RequestParam Map<String, Object> params){
+	@GetMapping("/list")
+	@RequiresPermissions("biz:mainValve104:mainValve104")
+	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
-		Query query = new Query(params);
-		List<MainValve104DO> mainValve104DOList = mainValve104Service.list(query);
+        Query query = new Query(params);
+		List<MainValve104DO> mainValve104List = mainValve104Service.list(query);
 		int total = mainValve104Service.count(query);
-		PageUtils pageUtils = new PageUtils(mainValve104DOList, total);
+		PageUtils pageUtils = new PageUtils(mainValve104List, total);
 		return pageUtils;
 	}
-
-	@GetMapping("/part/m104chk/add")
-	@RequiresPermissions("part:m104chk:add")
-	String addM104chk(){
-		return "part/m104chk/add";
+	
+	@GetMapping("/add")
+	@RequiresPermissions("biz:mainValve104:add")
+	String add(Model model){
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
+	    return "biz/mainValve104/add";
 	}
 
-	/**
-	 * 104主阀部件检修审核跳转
-	 */
-	@GetMapping("/part/m104chk/edit/{id}")
-	@RequiresPermissions("part:m104chk:edit")
-	String editM104chk(@PathVariable("id") Long id,Model model){
-		MainValve104DO mainValve104DO = mainValve104Service.get(id);
-		model.addAttribute("mainValve104", mainValve104DO);
-		return "part/m104chk/editTask";
+	@GetMapping("/edit/{id}")
+	@RequiresPermissions("biz:mainValve104:edit")
+	String edit(@PathVariable("id") Long id,Model model){
+		MainValve104DO mainValve104 = mainValve104Service.get(id);
+		model.addAttribute("mainValve104", mainValve104);
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
+	    return "biz/mainValve104/edit";
 	}
-
-
+	
 	/**
-	 * 104主阀部件检修审核保存
+	 * 保存
 	 */
 	@ResponseBody
-	@PostMapping("/part/m104chk/save")
-	@RequiresPermissions("part:m104chk:add")
-	public R saveM104chk(MainValve104DO mainValve104DO){
-		if(mainValve104Service.save(mainValve104DO)>0){
+	@PostMapping("/save")
+	@RequiresPermissions("biz:mainValve104:add")
+	public R save( MainValve104DO mainValve104){
+		if(mainValve104Service.save(mainValve104)>0){
 			return R.ok();
 		}
 		return R.error();
 	}
 	/**
-	 * 104主阀部件检修审核更新
+	 * 修改
 	 */
 	@ResponseBody
-	@RequestMapping("/part/m104chk/update")
-	@RequiresPermissions("part:m104chk:edit")
-	public R updateM104chk(MainValve104DO mainvalve){
-		mainValve104Service.update(mainvalve);
+	@RequestMapping("/update")
+	@RequiresPermissions("biz:mainValve104:edit")
+	public R update( MainValve104DO mainValve104){
+		mainValve104Service.update(mainValve104);
 		return R.ok();
 	}
-
-
-
+	
 	/**
-	 * 104主阀部件检修列表
+	 * 删除
 	 */
+	@PostMapping( "/remove")
 	@ResponseBody
-	@GetMapping("/part/fix104m/list")
-	@RequiresPermissions("part:fix104m:fix104m")
-	public PageUtils listFix104m(@RequestParam Map<String, Object> params){
-		//查询列表数据
-		Query query = new Query(params);
-		List<MainValve104DO> mainValve104DOList = mainValve104Service.list(query);
-		int total = mainValve104Service.count(query);
-		PageUtils pageUtils = new PageUtils(mainValve104DOList, total);
-		return pageUtils;
-	}
-	@GetMapping("/part/fix104m/add")
-	@RequiresPermissions("part:fix104m:add")
-	String addFix104mTask(Model model){
-		UserDO userDO = getUser();
-		model.addAttribute("userDO",userDO);
-		return "part/fix104m/addTask";
-	}
-	/**
-	 * 104主阀部件检修任务添加
-	 */
-	@ResponseBody
-	@PostMapping("/part/fix104m/saveFixTask")
-	@RequiresPermissions("part:fix104m:add")
-	public R saveFix104m(MainValve104DO mainValve104DO){
-		if(mainValve104Service.save(mainValve104DO)>0){
-			return R.ok();
+	@RequiresPermissions("biz:mainValve104:remove")
+	public R remove( Long id){
+		if(mainValve104Service.remove(id)>0){
+		return R.ok();
 		}
 		return R.error();
 	}
+	
 	/**
-	 * 104主阀部件检修更新跳转
+	 * 删除
 	 */
-	@GetMapping("/part/fix104m/edit/{id}")
-	@RequiresPermissions("part:fix104m:edit")
-	String editFix104m(@PathVariable("id") Long id,Model model){
-		MainValve104DO mainValve104DO = mainValve104Service.get(id);
-		model.addAttribute("mainValve104", mainValve104DO);
-		return "part/fix104m/editTask";
-	}
-
-	/**
-	 * 104主阀部件检修更新
-	 */
+	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequestMapping("/part/fix104m/update")
-	@RequiresPermissions("part:fix104m:edit")
-	public R updateFix104m(MainValve104DO mainvalve){
-		mainValve104Service.update(mainvalve);
+	@RequiresPermissions("biz:mainValve104:batchRemove")
+	public R remove(@RequestParam("ids[]") Long[] ids){
+		mainValve104Service.batchRemove(ids);
 		return R.ok();
 	}
-
-
-
+	
 }

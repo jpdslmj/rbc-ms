@@ -2,15 +2,19 @@ package com.rbc.biz.controller;
 
 import com.rbc.biz.domain.TestToolDO;
 import com.rbc.biz.service.TestToolService;
+import com.rbc.common.controller.BaseController;
 import com.rbc.common.utils.PageUtils;
 import com.rbc.common.utils.Query;
 import com.rbc.common.utils.R;
+import com.rbc.system.domain.UserDO;
+import com.rbc.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,10 +28,11 @@ import java.util.Map;
  
 @Controller
 @RequestMapping("/biz/testTool")
-public class TestToolController {
+public class TestToolController extends BaseController {
 	@Autowired
 	private TestToolService testToolService;
-	
+	@Autowired
+	UserService userService;
 	@GetMapping()
 	@RequiresPermissions("biz:testTool:testTool")
 	String TestTool(){
@@ -48,7 +53,9 @@ public class TestToolController {
 	
 	@GetMapping("/add")
 	@RequiresPermissions("biz:testTool:add")
-	String add(){
+	String add(Model model){
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
 	    return "biz/testTool/add";
 	}
 
@@ -67,6 +74,8 @@ public class TestToolController {
 	@PostMapping("/save")
 	@RequiresPermissions("biz:testTool:add")
 	public R save( TestToolDO testTool){
+		testTool.setCreateTime(new Date());
+		testTool.setUpdateTime(new Date());
 		if(testToolService.save(testTool)>0){
 			return R.ok();
 		}
@@ -79,6 +88,7 @@ public class TestToolController {
 	@RequestMapping("/update")
 	@RequiresPermissions("biz:testTool:edit")
 	public R update( TestToolDO testTool){
+		testTool.setUpdateTime(new Date());
 		testToolService.update(testTool);
 		return R.ok();
 	}

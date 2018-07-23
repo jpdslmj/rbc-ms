@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * F8主阀信息表
  * @author lmj
  * @email 359819418@qq.com
- * @date 2018-07-07 10:22:40
+ * @date 2018-07-23 00:13:25
  */
 @Mapper
 public interface MainValveF8Dao {

@@ -1,238 +1,184 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
-	<div class="wrapper wrapper-content ">
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="ibox float-e-margins">
-					<div class="ibox-content">
-						<form class="form-horizontal m-t" id="signupForm">
-						<input id="id" name="id" th:value="${mainValve104.id}"  type="hidden">
-							<div class="form-group">	
-								<label class="col-sm-3 control-label">104主阀编号：</label>
-								<div class="col-sm-8">
-									<input id="popValue" name="popValue" th:value="${mainValve104.popValue}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">分解者工号：</label>
-								<div class="col-sm-8">
-									<input id="disassembleNo" name="disassembleNo" th:value="${mainValve104.disassembleNo}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">分解者名称：</label>
-								<div class="col-sm-8">
-									<input id="disassembleName" name="disassembleName" th:value="${mainValve104.disassembleName}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">清洗者工号：</label>
-								<div class="col-sm-8">
-									<input id="cleanerNo" name="cleanerNo" th:value="${mainValve104.cleanerNo}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">清洗者名称：</label>
-								<div class="col-sm-8">
-									<input id="cleanerName" name="cleanerName" th:value="${mainValve104.cleanerName}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者1工号：</label>
-								<div class="col-sm-8">
-									<input id="fixer1No" name="fixer1No" th:value="${mainValve104.fixer1No}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者1名称：</label>
-								<div class="col-sm-8">
-									<input id="fixer1Name" name="fixer1Name" th:value="${mainValve104.fixer1Name}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者1备注：</label>
-								<div class="col-sm-8">
-									<input id="fixer1Remark" name="fixer1Remark" th:value="${mainValve104.fixer1Remark}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者2工号：</label>
-								<div class="col-sm-8">
-									<input id="fixer2No" name="fixer2No" th:value="${mainValve104.fixer2No}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者2名称：</label>
-								<div class="col-sm-8">
-									<input id="fixer2Name" name="fixer2Name" th:value="${mainValve104.fixer2Name}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者2备注：</label>
-								<div class="col-sm-8">
-									<input id="fixer2Remark" name="fixer2Remark" th:value="${mainValve104.fixer2Remark}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者3工号：</label>
-								<div class="col-sm-8">
-									<input id="fixer3No" name="fixer3No" th:value="${mainValve104.fixer3No}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者3名称：</label>
-								<div class="col-sm-8">
-									<input id="fixer3Name" name="fixer3Name" th:value="${mainValve104.fixer3Name}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者3备注：</label>
-								<div class="col-sm-8">
-									<input id="fixer3Remark" name="fixer3Remark" th:value="${mainValve104.fixer3Remark}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者4工号：</label>
-								<div class="col-sm-8">
-									<input id="fixer4No" name="fixer4No" th:value="${mainValve104.fixer4No}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者4名称：</label>
-								<div class="col-sm-8">
-									<input id="fixer4Name" name="fixer4Name" th:value="${mainValve104.fixer4Name}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者4备注：</label>
-								<div class="col-sm-8">
-									<input id="fixer4Remark" name="fixer4Remark" th:value="${mainValve104.fixer4Remark}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">组装者工号：</label>
-								<div class="col-sm-8">
-									<input id="assemblerNo" name="assemblerNo" th:value="${mainValve104.assemblerNo}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">组装者名称：</label>
-								<div class="col-sm-8">
-									<input id="assemblerName" name="assemblerName" th:value="${mainValve104.assemblerName}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">组装者备注：</label>
-								<div class="col-sm-8">
-									<input id="assemblerRemark" name="assemblerRemark" th:value="${mainValve104.assemblerRemark}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">组装人字标志：</label>
-								<div class="col-sm-8">
-									<input id="assembleMark" name="assembleMark" th:value="${mainValve104.assembleMark}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">工长工号：</label>
-								<div class="col-sm-8">
-									<input id="gangmasterNo" name="gangmasterNo" th:value="${mainValve104.gangmasterNo}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">工长名称：</label>
-								<div class="col-sm-8">
-									<input id="gangmasterName" name="gangmasterName" th:value="${mainValve104.gangmasterName}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">工长审核意见：1同意 0不同意：</label>
-								<div class="col-sm-8">
-									<input id="gangmasterAudit" name="gangmasterAudit" th:value="${mainValve104.gangmasterAudit}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">工长审核备注：</label>
-								<div class="col-sm-8">
-									<input id="gangmasterRemark" name="gangmasterRemark" th:value="${mainValve104.gangmasterRemark}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">工长一字标志：</label>
-								<div class="col-sm-8">
-									<input id="gangmasterMark" name="gangmasterMark" th:value="${mainValve104.gangmasterMark}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">质检员工号：</label>
-								<div class="col-sm-8">
-									<input id="inspectorNo" name="inspectorNo" th:value="${mainValve104.inspectorNo}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">质检员名称：</label>
-								<div class="col-sm-8">
-									<input id="inspectorName" name="inspectorName" th:value="${mainValve104.inspectorName}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">质检员合字标志：</label>
-								<div class="col-sm-8">
-									<input id="inspectorMark" name="inspectorMark" th:value="${mainValve104.inspectorMark}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">质检员审核意见：1同意 0不同意：</label>
-								<div class="col-sm-8">
-									<input id="inspectorAudit" name="inspectorAudit" th:value="${mainValve104.inspectorAudit}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">质检员审核备注：</label>
-								<div class="col-sm-8">
-									<input id="inspectorRemark" name="inspectorRemark" th:value="${mainValve104.inspectorRemark}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">退回意见：1同意 0不同意：</label>
-								<div class="col-sm-8">
-									<input id="returnOpinion" name="returnOpinion" th:value="${mainValve104.returnOpinion}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">退回备注：</label>
-								<div class="col-sm-8">
-									<input id="returnRemark" name="returnRemark" th:value="${mainValve104.returnRemark}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">创建日期：</label>
-								<div class="col-sm-8">
-									<input id="createTime" name="createTime" th:value="${mainValve104.createTime}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">更新日期：</label>
-								<div class="col-sm-8">
-									<input id="updateTime" name="updateTime" th:value="${mainValve104.updateTime}" class="form-control" type="text">
-								</div>
-							</div>
-																					<div class="form-group">
-								<div class="col-sm-8 col-sm-offset-3">
-									<button type="submit" class="btn btn-primary">提交</button>
-								</div>
-							</div>
-						</form>
+<div class="wrapper wrapper-content">
+	<div class="ibox float-e-margins">
+		<div class="ibox-content">
+			<form class="form-horizontal" id="main104Form">
+				<div class="col-sm-12 form-inline m-b-sm">
+					<div class="form-group col-sm-6" >
+						<label class="control-label">时间:</label>
+						<input id="createTime" name="createTime" class="form-control " th:value="${mainValve104.createTime}" disabled="true" type="date" style="width: 250px">
+					</div>
+					<div class="form-group col-sm-6" >
+						<label class="control-label">104紧急阀编号:</label>
+						<input id="popValue" name="popValue" class="form-control" disabled="true" type="text" th:value="${mainValve104.popValue}" style="width: 250px">
+
 					</div>
 				</div>
-			</div>
+
+				<table class="table table-bordered table-striped table-hover" id="main104Table"   data-mobile-responsive="true" data-url="js/demo/pop104.json" ></table>
+
+				<div class="col-sm-12 form-inline m-t-sm">
+					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster">
+						<label class="control-label">工长检修意见：</label>
+						<select id="gangmasterAudit" name="gangmasterAudit" class="form-control">
+							<option value="0" th:selected="${mainValve104.gangmasterAudit == 0}">不合格</option>
+							<option value="1" th:selected="${mainValve104.gangmasterAudit == 1}">合格</option>
+						</select>
+					</div>
+					<input id="gangmasterNo" name="gangmasterNo" class="form-control" type="hidden" th:value="${mainValve104.gangmasterNo}?:${user.username}">
+					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster">
+						<input id="gangmasterName" name="gangmasterName" class="form-control" type="text" placeholder="工长名称" th:value="${mainValve104.gangmasterName}?:${user.name}">
+					</div>
+					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
+						<label class="control-label">质检员检修意见:</label>
+						<select id="inspectorAudit" name="inspectorAudit" class="form-control " th:value="${mainValve104.inspectorAudit}">
+							<option value="0" th:selected="${mainValve104.inspectorAudit ==0}">不合格</option>
+							<option value="1" th:selected="${mainValve104.inspectorAudit ==1}">合格</option>
+						</select>
+					</div>
+					<input id="inspectorNo" name="inspectorNo" class="form-control" type="hidden" th:value="${mainValve104.inspectorNo}?:${user.username}" >
+					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
+						<input id="inspectorName" name="inspectorName" class="form-control" type="text" placeholder="质检员名称" th:value="${mainValve104.inspectorName}?:${user.name}">
+					</div>
+				</div>
+				<div class="col-sm-12 form-inline">
+					<div class="form-group col-sm-4" shiro:hasPermission="biz:mainValve104:assemble">
+						<label class="control-label">组装合字：</label>
+						<input id="assemblerRemark" name="assemblerRemark" class="form-control" type="checkbox" th:checked="${mainValve104.assemblerRemark}?true:false">
+						<label class="control-label"><img src="/img/ren.png" style="width: 14px;height: 14px "></label>
+					</div>
+					<div class="form-group col-sm-4" shiro:hasAnyRoles="role:admin,role:gangmaster">
+						<label class="control-label">工长合字:</label>
+						<input id="gangmasterRemark" name="gangmasterRemark" class="form-control " type="checkbox"  th:checked="${mainValve104.gangmasterRemark}?true:false">
+						<label class="control-label"><img src="/img/renyi.png" style="width: 14px;height: 14px "></label>
+					</div>
+					<div class="form-group col-sm-4" shiro:hasAnyRoles="role:admin,role:inspector">
+						<label class="control-label">质检员合字:</label>
+						<input id="inspectorRemark" name="inspectorRemark" class="form-control " type="checkbox" th:checked="${mainValve104.inspectorRemark}?true:false">
+						<label class="control-label"><img src="/img/he.png" style="width: 14px;height: 14px ;" ></label>
+					</div>
+				</div>
+				<div class="form-group col-sm-12 " >
+					<textarea id="returnRemark" name="returnRemark" class="form-control" rows="1" placeholder="备注" th:text="${mainValve104.returnRemark}"></textarea>
+				</div>
+
+
+				<input id="id" name="id" class="form-control" type="hidden" th:value="${mainValve104.id}">
+
+				<input id="disassembleNo" name="disassembleNo" class="form-control" type="hidden" th:value="${mainValve104.disassembleNo}">
+				<input id="disassembleName" name="disassembleName" class="form-control" type="hidden" th:value="${mainValve104.disassembleName}">
+
+				<input id="cleanerNo" name="cleanerNo" class="form-control" type="hidden" th:value="${mainValve104.cleanerNo}">
+				<input id="cleanerName" name="cleanerName" class="form-control" type="hidden" th:value="${mainValve104.cleanerName}">
+
+				<input id="fixer1No" name="fixer1No" class="form-control" type="hidden" th:value="${mainValve104.fixer1No}">
+				<input id="fixer1Name" name="fixer1Name" class="form-control" type="hidden" th:value="${mainValve104.fixer1Name}">
+
+				<input id="fixer2No" name="fixer2No" class="form-control" type="hidden" th:value="${mainValve104.fixer2No}">
+				<input id="fixer2Name" name="fixer2Name" class="form-control" type="hidden" th:value="${mainValve104.fixer2Name}">
+
+				<input id="fixer3No" name="fixer3No" class="form-control" type="hidden" th:value="${mainValve104.fixer3No}">
+				<input id="fixer3Name" name="fixer3Name" class="form-control" type="hidden" th:value="${mainValve104.fixer3Name}">
+
+				<input id="fixer4No" name="fixer4No" class="form-control" type="hidden" th:value="${mainValve104.fixer4No}">
+				<input id="fixer4Name" name="fixer4Name" class="form-control" type="hidden" th:value="${mainValve104.fixer4Name}">
+
+				<input id="assemblerNo" name="assemblerNo" class="form-control" type="hidden" th:value="${mainValve104.assemblerNo}">
+				<input id="assemblerName" name="assemblerName" class="form-control" type="hidden" th:value="${mainValve104.assemblerName}">
+				<div class="row ">
+					<div class="col-sm-4 ">
+						<button id="uploadImg" type="submit" class="btn btn-primary">影像上传</button>
+					</div>
+					<div class="col-sm-4 ">
+						<button id="save" type="submit" class="btn btn-primary" onclick="update()">签字提交</button>
+					</div>
+					<div class="col-sm-4 ">
+						<button id="sign" type="submit" class="btn btn-primary" >保存</button>
+					</div>
+				</div>
+			</form>
+
+		</div>
 	</div>
-	</div>
-	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/biz/mainValve104/edit.js">
+</div>
+
+<!--shiro控制各个角色下可操作的表单 -->
+<div>
+	<script type="text/javascript">
+        var disassembler = false;
+        var cleaner = false;
+        var fixer = false;
+        var assembler=false;
+        var gangmaster=false;
+        var inspector=false;
 	</script>
+</div>
+<div shiro:hasPermission="biz:mainValve104:disassemble">
+	<script type="text/javascript">
+        //alert("disassembler");
+        disassembler = true;
+	</script>
+</div>
+<div shiro:hasPermission="biz:mainValve104:clean">
+	<script type="text/javascript">
+        //alert("cleaner");
+        cleaner =true;
+	</script>
+</div>
+<div shiro:hasPermission="biz:mainValve104:fix">
+	<script type="text/javascript">
+        // alert("fixer");
+        fixer = true;
+	</script>
+</div>
+<div shiro:hasPermission="biz:mainValve104:assemble">
+	<script type="text/javascript">
+        //alert("assembler");
+        assembler = true;
+	</script>
+</div>
+<div shiro:hasAnyRoles="role:admin,role:gangmaster">
+	<script type="text/javascript">
+        //alert("gangmaster");
+        gangmaster = true;
+	</script>
+</div>
+<div shiro:hasAnyRoles="role:admin,role:inspector">
+	<script type="text/javascript">
+        //alert("gangmaster");
+        inspector = true;
+	</script>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/biz/mainValve104/edit.js">
+</script>
+<script th:inline="javascript">
+    var currentUserName=[[${user.name}]];
+    var currentUserNameNo=[[${user.username}]];
+
+    var disassembleName=[[${mainValve104.disassembleName}]];
+    var disassembleNo=[[${mainValve104.disassembleNo}]];
+    var cleanerName=[[${mainValve104.cleanerName}]];
+    var cleanerNo=[[${mainValve104.cleanerNo}]];
+
+    var fixer1Name=[[${mainValve104.fixer1Name}]];
+    var fixer2Name=[[${mainValve104.fixer2Name}]];
+    var fixer3Name=[[${mainValve104.fixer3Name}]];
+    var fixer4Name=[[${mainValve104.fixer4Name}]];
+
+    var fixer1No=[[${mainValve104.fixer1No}]];
+    var fixer2No=[[${mainValve104.fixer2No}]];
+    var fixer3No=[[${mainValve104.fixer3No}]];
+    var fixer4No=[[${mainValve104.fixer4No}]];
+
+    var assemblerName=[[${mainValve104.assemblerName}]];
+    var assemblerNo=[[${mainValve104.assemblerNo}]];
+
+    var createTime=[[${mainValve104.createTime}]];
+</script>
 </body>
 </html>

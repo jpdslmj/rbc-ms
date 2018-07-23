@@ -1,18 +1,19 @@
 package com.rbc.biz.service.impl;
 
-import com.rbc.biz.dao.MainValve104Dao;
-import com.rbc.biz.domain.MainValve104DO;
-import com.rbc.biz.service.MainValve104Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
+import com.rbc.biz.dao.MainValve104Dao;
+import com.rbc.biz.domain.MainValve104DO;
+import com.rbc.biz.service.MainValve104Service;
+
+
 
 @Service
 public class MainValve104ServiceImpl implements MainValve104Service {
-
 	@Autowired
 	private MainValve104Dao mainValve104Dao;
 	
@@ -32,13 +33,13 @@ public class MainValve104ServiceImpl implements MainValve104Service {
 	}
 	
 	@Override
-	public int save(MainValve104DO mainValve){
-		return mainValve104Dao.save(mainValve);
+	public int save(MainValve104DO mainValve104){
+		return mainValve104Dao.save(mainValve104);
 	}
 	
 	@Override
-	public int update(MainValve104DO mainValve){
-		return mainValve104Dao.update(mainValve);
+	public int update(MainValve104DO mainValve104){
+		return mainValve104Dao.update(mainValve104);
 	}
 	
 	@Override

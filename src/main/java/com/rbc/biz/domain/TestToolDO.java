@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  * @author lmj
  * @email 359819418@qq.com
- * @date 2018-07-05 18:07:04
+ * @date 2018-07-20 14:52:00
  */
 public class TestToolDO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,33 +18,33 @@ public class TestToolDO implements Serializable {
 	//
 	private Long id;
 	//风表误差±10范围
-	private Integer windErrorValue;
+	private String windErrorValue;
 	//风表是否超期
-	private Integer isWindExced;
+	private Long isWindExced;
 	//温度
-	private Integer temperature;
+	private Double temperature;
 	//湿度
-	private Integer humidity;
-	//705试验台1机能
-	private String fu705test1;
-	//705试验台2机能
-	private String fu705test2;
+	private Double humidity;
 	//705试验台3机能
-	private String fu705test3;
+	private Long fu705test3;
+	//705试验台1机能
+	private Long fu705test1;
+	//705试验台2机能
+	private Long fu705test2;
 	//F8试验台1机能
-	private String fuf8test1;
+	private Long fuf8test1;
 	//F8试验台2机能
-	private String fuf8test2;
+	private Long fuf8test2;
 	//705试验台1故障
-	private String fa705test1;
+	private Long fa705test1;
 	//705试验台2故障
-	private String fa705test2;
+	private Long fa705test2;
 	//705试验台3故障
-	private String fa705test3;
+	private Long fa705test3;
 	//F8试验台1故障
-	private String faf8test1;
+	private Long faf8test1;
 	//F8试验台2故障
-	private String faf8test2;
+	private Long faf8test2;
 	//705试验台1备注
 	private String mk705test1;
 	//705试验台2备注
@@ -75,6 +75,10 @@ public class TestToolDO implements Serializable {
 	private Date createTime;
 	//更新日期
 	private Date updateTime;
+	//f8试验台1备注
+	private String mkf8test1;
+	//f8试验台2备注
+	private String mkf8test2;
 
 	/**
 	 * 设置：
@@ -91,169 +95,169 @@ public class TestToolDO implements Serializable {
 	/**
 	 * 设置：风表误差±10范围
 	 */
-	public void setWindErrorValue(Integer windErrorValue) {
+	public void setWindErrorValue(String windErrorValue) {
 		this.windErrorValue = windErrorValue;
 	}
 	/**
 	 * 获取：风表误差±10范围
 	 */
-	public Integer getWindErrorValue() {
+	public String getWindErrorValue() {
 		return windErrorValue;
 	}
 	/**
 	 * 设置：风表是否超期
 	 */
-	public void setIsWindExced(Integer isWindExced) {
+	public void setIsWindExced(Long isWindExced) {
 		this.isWindExced = isWindExced;
 	}
 	/**
 	 * 获取：风表是否超期
 	 */
-	public Integer getIsWindExced() {
+	public Long getIsWindExced() {
 		return isWindExced;
 	}
 	/**
 	 * 设置：温度
 	 */
-	public void setTemperature(Integer temperature) {
+	public void setTemperature(Double temperature) {
 		this.temperature = temperature;
 	}
 	/**
 	 * 获取：温度
 	 */
-	public Integer getTemperature() {
+	public Double getTemperature() {
 		return temperature;
 	}
 	/**
 	 * 设置：湿度
 	 */
-	public void setHumidity(Integer humidity) {
+	public void setHumidity(Double humidity) {
 		this.humidity = humidity;
 	}
 	/**
 	 * 获取：湿度
 	 */
-	public Integer getHumidity() {
+	public Double getHumidity() {
 		return humidity;
-	}
-	/**
-	 * 设置：705试验台1机能
-	 */
-	public void setFu705test1(String fu705test1) {
-		this.fu705test1 = fu705test1;
-	}
-	/**
-	 * 获取：705试验台1机能
-	 */
-	public String getFu705test1() {
-		return fu705test1;
-	}
-	/**
-	 * 设置：705试验台2机能
-	 */
-	public void setFu705test2(String fu705test2) {
-		this.fu705test2 = fu705test2;
-	}
-	/**
-	 * 获取：705试验台2机能
-	 */
-	public String getFu705test2() {
-		return fu705test2;
 	}
 	/**
 	 * 设置：705试验台3机能
 	 */
-	public void setFu705test3(String fu705test3) {
+	public void setFu705test3(Long fu705test3) {
 		this.fu705test3 = fu705test3;
 	}
 	/**
 	 * 获取：705试验台3机能
 	 */
-	public String getFu705test3() {
+	public Long getFu705test3() {
 		return fu705test3;
+	}
+	/**
+	 * 设置：705试验台1机能
+	 */
+	public void setFu705test1(Long fu705test1) {
+		this.fu705test1 = fu705test1;
+	}
+	/**
+	 * 获取：705试验台1机能
+	 */
+	public Long getFu705test1() {
+		return fu705test1;
+	}
+	/**
+	 * 设置：705试验台2机能
+	 */
+	public void setFu705test2(Long fu705test2) {
+		this.fu705test2 = fu705test2;
+	}
+	/**
+	 * 获取：705试验台2机能
+	 */
+	public Long getFu705test2() {
+		return fu705test2;
 	}
 	/**
 	 * 设置：F8试验台1机能
 	 */
-	public void setFuf8test1(String fuf8test1) {
+	public void setFuf8test1(Long fuf8test1) {
 		this.fuf8test1 = fuf8test1;
 	}
 	/**
 	 * 获取：F8试验台1机能
 	 */
-	public String getFuf8test1() {
+	public Long getFuf8test1() {
 		return fuf8test1;
 	}
 	/**
 	 * 设置：F8试验台2机能
 	 */
-	public void setFuf8test2(String fuf8test2) {
+	public void setFuf8test2(Long fuf8test2) {
 		this.fuf8test2 = fuf8test2;
 	}
 	/**
 	 * 获取：F8试验台2机能
 	 */
-	public String getFuf8test2() {
+	public Long getFuf8test2() {
 		return fuf8test2;
 	}
 	/**
 	 * 设置：705试验台1故障
 	 */
-	public void setFa705test1(String fa705test1) {
+	public void setFa705test1(Long fa705test1) {
 		this.fa705test1 = fa705test1;
 	}
 	/**
 	 * 获取：705试验台1故障
 	 */
-	public String getFa705test1() {
+	public Long getFa705test1() {
 		return fa705test1;
 	}
 	/**
 	 * 设置：705试验台2故障
 	 */
-	public void setFa705test2(String fa705test2) {
+	public void setFa705test2(Long fa705test2) {
 		this.fa705test2 = fa705test2;
 	}
 	/**
 	 * 获取：705试验台2故障
 	 */
-	public String getFa705test2() {
+	public Long getFa705test2() {
 		return fa705test2;
 	}
 	/**
 	 * 设置：705试验台3故障
 	 */
-	public void setFa705test3(String fa705test3) {
+	public void setFa705test3(Long fa705test3) {
 		this.fa705test3 = fa705test3;
 	}
 	/**
 	 * 获取：705试验台3故障
 	 */
-	public String getFa705test3() {
+	public Long getFa705test3() {
 		return fa705test3;
 	}
 	/**
 	 * 设置：F8试验台1故障
 	 */
-	public void setFaf8test1(String faf8test1) {
+	public void setFaf8test1(Long faf8test1) {
 		this.faf8test1 = faf8test1;
 	}
 	/**
 	 * 获取：F8试验台1故障
 	 */
-	public String getFaf8test1() {
+	public Long getFaf8test1() {
 		return faf8test1;
 	}
 	/**
 	 * 设置：F8试验台2故障
 	 */
-	public void setFaf8test2(String faf8test2) {
+	public void setFaf8test2(Long faf8test2) {
 		this.faf8test2 = faf8test2;
 	}
 	/**
 	 * 获取：F8试验台2故障
 	 */
-	public String getFaf8test2() {
+	public Long getFaf8test2() {
 		return faf8test2;
 	}
 	/**
@@ -435,5 +439,29 @@ public class TestToolDO implements Serializable {
 	 */
 	public Date getUpdateTime() {
 		return updateTime;
+	}
+	/**
+	 * 设置：f8试验台1备注
+	 */
+	public void setMkf8test1(String mkf8test1) {
+		this.mkf8test1 = mkf8test1;
+	}
+	/**
+	 * 获取：f8试验台1备注
+	 */
+	public String getMkf8test1() {
+		return mkf8test1;
+	}
+	/**
+	 * 设置：f8试验台2备注
+	 */
+	public void setMkf8test2(String mkf8test2) {
+		this.mkf8test2 = mkf8test2;
+	}
+	/**
+	 * 获取：f8试验台2备注
+	 */
+	public String getMkf8test2() {
+		return mkf8test2;
 	}
 }

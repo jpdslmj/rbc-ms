@@ -1,11 +1,11 @@
 
-var prefix = "/biz/testTool"
+var prefix = "/biz/options"
 $(function() {
 	load();
 });
 
 function load() {
-	$('#testToolTable')
+	$('#exampleTable')
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
@@ -49,64 +49,35 @@ function load() {
 								},
 																{
 									field : 'id', 
-									title : '' 
+									title : '主键' 
 								},
 																{
-									field : 'testerNo', 
-									title : '试验者工号' ,
-									visible:false
+									field : 'optionName', 
+									title : '下拉选项名称' 
 								},
 																{
-									field : 'testerName', 
-									title : '试验者名称' 
+									field : 'optionValue', 
+									title : '选项值' 
 								},
 																{
-									field : 'gangmasterNo', 
-									title : '工长工号',
-                                    visible:false
+									field : 'optionType', 
+									title : '下拉选项类型' 
 								},
 																{
-									field : 'gangmasterName', 
-									title : '工长名称' 
-								},
-																{
-									field : 'gangmasterAudit', 
-									title : '工长审核意见：'
-								},
-																{
-									field : 'inspectorNo', 
-									title : '质检员工号' ,
-                                    visible:false
-								},
-																{
-									field : 'inspectorName', 
-									title : '质检员名称' 
-								},
-																{
-									field : 'inspectorAudit', 
-									title : '质检员审核意见' 
-								},
-																{
-									field : 'permissionsOpinion', 
-									title : '开工意见' 
-								},
-																{
-									field : 'returnOpinion', 
-									title : '返回意见' 
+									field : 'isvaliable', 
+									title : '是否有效' 
 								},
 																{
 									field : 'createTime', 
-									title : '创建日期',
-                                    visible:false
+									title : '创建时间' 
 								},
 																{
 									field : 'updateTime', 
-									title : '更新日期',
-									visible:false
+									title : '更新时间' 
 								},
 																{
 									title : '操作',
-									field : 'testerName',
+									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
 										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
@@ -115,13 +86,16 @@ function load() {
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.id
 												+ '\')"><i class="fa fa-remove"></i></a> ';
+										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+												+ row.id
+												+ '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
 								} ]
 					});
 }
 function reLoad() {
-	$('#testToolTable').bootstrapTable('refresh');
+	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
 	layer.open({
@@ -129,13 +103,8 @@ function add() {
 		title : '增加',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		content : prefix + '/add', // iframe的url
-        fixed:false,
-        resize:true,
-        area : ['600x','400px'],
-        success:function(layero ,index){
-            layer.full(index);
-        }
+		area : [ '800px', '520px' ],
+		content : prefix + '/add' // iframe的url
 	});
 }
 function edit(id) {
@@ -144,13 +113,8 @@ function edit(id) {
 		title : '编辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		content : prefix + '/edit/' + id, // iframe的url
-        fixed:false,
-        resize:true,
-        area : ['600x','400px'],
-        success:function(layero ,index){
-            layer.full(index);
-        }
+		area : [ '800px', '520px' ],
+		content : prefix + '/edit/' + id // iframe的url
 	});
 }
 function remove(id) {
@@ -178,7 +142,7 @@ function remove(id) {
 function resetPwd(id) {
 }
 function batchRemove() {
-	var rows = $('#testToolTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
 		layer.msg("请选择要删除的数据");
 		return;

@@ -4,15 +4,15 @@ $().ready(function() {
 
 $.validator.setDefaults({
 	submitHandler : function() {
-		update();
+		save();
 	}
 });
-function update() {
+function save() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/biz/testTool/update",
-		data : $('#testToolForm').serialize(),// 你的formid
+		url : "/biz/options/save",
+		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
 			parent.layer.alert("Connection error");
@@ -34,7 +34,7 @@ function update() {
 }
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
-	$("#testToolForm").validate({
+	$("#signupForm").validate({
 		rules : {
 			name : {
 				required : true
@@ -42,7 +42,7 @@ function validateRule() {
 		},
 		messages : {
 			name : {
-				required : icon + "请输入名字"
+				required : icon + "请输入姓名"
 			}
 		}
 	})

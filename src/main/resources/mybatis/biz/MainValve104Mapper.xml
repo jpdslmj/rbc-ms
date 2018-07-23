@@ -9,103 +9,103 @@
 
 	<select id="list" resultType="com.rbc.biz.domain.MainValve104DO">
 		select `id`,`pop_value`,`disassemble_no`,`disassemble_name`,`cleaner_no`,`cleaner_name`,`fixer1_no`,`fixer1_name`,`fixer1_remark`,`fixer2_no`,`fixer2_name`,`fixer2_remark`,`fixer3_no`,`fixer3_name`,`fixer3_remark`,`fixer4_no`,`fixer4_name`,`fixer4_remark`,`assembler_no`,`assembler_name`,`assembler_remark`,`assemble_mark`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`gangmaster_remark`,`gangmaster_mark`,`inspector_no`,`inspector_name`,`inspector_mark`,`inspector_audit`,`inspector_remark`,`return_opinion`,`return_remark`,`create_time`,`update_time` from web_main_valve_104
-		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="popValue != null and popValue != ''"> and pop_value = #{popValue} </if>
-			<if test="disassembleNo != null and disassembleNo != ''"> and disassemble_no = #{disassembleNo} </if>
-			<if test="disassembleName != null and disassembleName != ''"> and disassemble_name = #{disassembleName} </if>
-			<if test="cleanerNo != null and cleanerNo != ''"> and cleaner_no = #{cleanerNo} </if>
-			<if test="cleanerName != null and cleanerName != ''"> and cleaner_name = #{cleanerName} </if>
-			<if test="fixer1No != null and fixer1No != ''"> and fixer1_no = #{fixer1No} </if>
-			<if test="fixer1Name != null and fixer1Name != ''"> and fixer1_name = #{fixer1Name} </if>
-			<if test="fixer1Remark != null and fixer1Remark != ''"> and fixer1_remark = #{fixer1Remark} </if>
-			<if test="fixer2No != null and fixer2No != ''"> and fixer2_no = #{fixer2No} </if>
-			<if test="fixer2Name != null and fixer2Name != ''"> and fixer2_name = #{fixer2Name} </if>
-			<if test="fixer2Remark != null and fixer2Remark != ''"> and fixer2_remark = #{fixer2Remark} </if>
-			<if test="fixer3No != null and fixer3No != ''"> and fixer3_no = #{fixer3No} </if>
-			<if test="fixer3Name != null and fixer3Name != ''"> and fixer3_name = #{fixer3Name} </if>
-			<if test="fixer3Remark != null and fixer3Remark != ''"> and fixer3_remark = #{fixer3Remark} </if>
-			<if test="fixer4No != null and fixer4No != ''"> and fixer4_no = #{fixer4No} </if>
-			<if test="fixer4Name != null and fixer4Name != ''"> and fixer4_name = #{fixer4Name} </if>
-			<if test="fixer4Remark != null and fixer4Remark != ''"> and fixer4_remark = #{fixer4Remark} </if>
-			<if test="assemblerNo != null and assemblerNo != ''"> and assembler_no = #{assemblerNo} </if>
-			<if test="assemblerName != null and assemblerName != ''"> and assembler_name = #{assemblerName} </if>
-			<if test="assemblerRemark != null and assemblerRemark != ''"> and assembler_remark = #{assemblerRemark} </if>
-			<if test="assembleMark != null and assembleMark != ''"> and assemble_mark = #{assembleMark} </if>
-			<if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
-			<if test="gangmasterName != null and gangmasterName != ''"> and gangmaster_name = #{gangmasterName} </if>
-			<if test="gangmasterAudit != null and gangmasterAudit != ''"> and gangmaster_audit = #{gangmasterAudit} </if>
-			<if test="gangmasterRemark != null and gangmasterRemark != ''"> and gangmaster_remark = #{gangmasterRemark} </if>
-			<if test="gangmasterMark != null and gangmasterMark != ''"> and gangmaster_mark = #{gangmasterMark} </if>
-			<if test="inspectorNo != null and inspectorNo != ''"> and inspector_no = #{inspectorNo} </if>
-			<if test="inspectorName != null and inspectorName != ''"> and inspector_name = #{inspectorName} </if>
-			<if test="inspectorMark != null and inspectorMark != ''"> and inspector_mark = #{inspectorMark} </if>
-			<if test="inspectorAudit != null and inspectorAudit != ''"> and inspector_audit = #{inspectorAudit} </if>
-			<if test="inspectorRemark != null and inspectorRemark != ''"> and inspector_remark = #{inspectorRemark} </if>
-			<if test="returnOpinion != null and returnOpinion != ''"> and return_opinion = #{returnOpinion} </if>
-			<if test="returnRemark != null and returnRemark != ''"> and return_remark = #{returnRemark} </if>
-			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
-			<if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
-		</where>
-		<choose>
-			<when test="sort != null and sort.trim() != ''">
-				order by ${sort} ${order}
-			</when>
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="popValue != null and popValue != ''"> and pop_value = #{popValue} </if>
+		  		  <if test="disassembleNo != null and disassembleNo != ''"> and disassemble_no = #{disassembleNo} </if>
+		  		  <if test="disassembleName != null and disassembleName != ''"> and disassemble_name = #{disassembleName} </if>
+		  		  <if test="cleanerNo != null and cleanerNo != ''"> and cleaner_no = #{cleanerNo} </if>
+		  		  <if test="cleanerName != null and cleanerName != ''"> and cleaner_name = #{cleanerName} </if>
+		  		  <if test="fixer1No != null and fixer1No != ''"> and fixer1_no = #{fixer1No} </if>
+		  		  <if test="fixer1Name != null and fixer1Name != ''"> and fixer1_name = #{fixer1Name} </if>
+		  		  <if test="fixer1Remark != null and fixer1Remark != ''"> and fixer1_remark = #{fixer1Remark} </if>
+		  		  <if test="fixer2No != null and fixer2No != ''"> and fixer2_no = #{fixer2No} </if>
+		  		  <if test="fixer2Name != null and fixer2Name != ''"> and fixer2_name = #{fixer2Name} </if>
+		  		  <if test="fixer2Remark != null and fixer2Remark != ''"> and fixer2_remark = #{fixer2Remark} </if>
+		  		  <if test="fixer3No != null and fixer3No != ''"> and fixer3_no = #{fixer3No} </if>
+		  		  <if test="fixer3Name != null and fixer3Name != ''"> and fixer3_name = #{fixer3Name} </if>
+		  		  <if test="fixer3Remark != null and fixer3Remark != ''"> and fixer3_remark = #{fixer3Remark} </if>
+		  		  <if test="fixer4No != null and fixer4No != ''"> and fixer4_no = #{fixer4No} </if>
+		  		  <if test="fixer4Name != null and fixer4Name != ''"> and fixer4_name = #{fixer4Name} </if>
+		  		  <if test="fixer4Remark != null and fixer4Remark != ''"> and fixer4_remark = #{fixer4Remark} </if>
+		  		  <if test="assemblerNo != null and assemblerNo != ''"> and assembler_no = #{assemblerNo} </if>
+		  		  <if test="assemblerName != null and assemblerName != ''"> and assembler_name = #{assemblerName} </if>
+		  		  <if test="assemblerRemark != null and assemblerRemark != ''"> and assembler_remark = #{assemblerRemark} </if>
+		  		  <if test="assembleMark != null and assembleMark != ''"> and assemble_mark = #{assembleMark} </if>
+		  		  <if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
+		  		  <if test="gangmasterName != null and gangmasterName != ''"> and gangmaster_name = #{gangmasterName} </if>
+		  		  <if test="gangmasterAudit != null and gangmasterAudit != ''"> and gangmaster_audit = #{gangmasterAudit} </if>
+		  		  <if test="gangmasterRemark != null and gangmasterRemark != ''"> and gangmaster_remark = #{gangmasterRemark} </if>
+		  		  <if test="gangmasterMark != null and gangmasterMark != ''"> and gangmaster_mark = #{gangmasterMark} </if>
+		  		  <if test="inspectorNo != null and inspectorNo != ''"> and inspector_no = #{inspectorNo} </if>
+		  		  <if test="inspectorName != null and inspectorName != ''"> and inspector_name = #{inspectorName} </if>
+		  		  <if test="inspectorMark != null and inspectorMark != ''"> and inspector_mark = #{inspectorMark} </if>
+		  		  <if test="inspectorAudit != null and inspectorAudit != ''"> and inspector_audit = #{inspectorAudit} </if>
+		  		  <if test="inspectorRemark != null and inspectorRemark != ''"> and inspector_remark = #{inspectorRemark} </if>
+		  		  <if test="returnOpinion != null and returnOpinion != ''"> and return_opinion = #{returnOpinion} </if>
+		  		  <if test="returnRemark != null and returnRemark != ''"> and return_remark = #{returnRemark} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
 			<otherwise>
-				order by id desc
+                order by id desc
 			</otherwise>
-		</choose>
+        </choose>
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>
 	</select>
-
-	<select id="count" resultType="int">
+	
+ 	<select id="count" resultType="int">
 		select count(*) from web_main_valve_104
-		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="popValue != null and popValue != ''"> and pop_value = #{popValue} </if>
-			<if test="disassembleNo != null and disassembleNo != ''"> and disassemble_no = #{disassembleNo} </if>
-			<if test="disassembleName != null and disassembleName != ''"> and disassemble_name = #{disassembleName} </if>
-			<if test="cleanerNo != null and cleanerNo != ''"> and cleaner_no = #{cleanerNo} </if>
-			<if test="cleanerName != null and cleanerName != ''"> and cleaner_name = #{cleanerName} </if>
-			<if test="fixer1No != null and fixer1No != ''"> and fixer1_no = #{fixer1No} </if>
-			<if test="fixer1Name != null and fixer1Name != ''"> and fixer1_name = #{fixer1Name} </if>
-			<if test="fixer1Remark != null and fixer1Remark != ''"> and fixer1_remark = #{fixer1Remark} </if>
-			<if test="fixer2No != null and fixer2No != ''"> and fixer2_no = #{fixer2No} </if>
-			<if test="fixer2Name != null and fixer2Name != ''"> and fixer2_name = #{fixer2Name} </if>
-			<if test="fixer2Remark != null and fixer2Remark != ''"> and fixer2_remark = #{fixer2Remark} </if>
-			<if test="fixer3No != null and fixer3No != ''"> and fixer3_no = #{fixer3No} </if>
-			<if test="fixer3Name != null and fixer3Name != ''"> and fixer3_name = #{fixer3Name} </if>
-			<if test="fixer3Remark != null and fixer3Remark != ''"> and fixer3_remark = #{fixer3Remark} </if>
-			<if test="fixer4No != null and fixer4No != ''"> and fixer4_no = #{fixer4No} </if>
-			<if test="fixer4Name != null and fixer4Name != ''"> and fixer4_name = #{fixer4Name} </if>
-			<if test="fixer4Remark != null and fixer4Remark != ''"> and fixer4_remark = #{fixer4Remark} </if>
-			<if test="assemblerNo != null and assemblerNo != ''"> and assembler_no = #{assemblerNo} </if>
-			<if test="assemblerName != null and assemblerName != ''"> and assembler_name = #{assemblerName} </if>
-			<if test="assemblerRemark != null and assemblerRemark != ''"> and assembler_remark = #{assemblerRemark} </if>
-			<if test="assembleMark != null and assembleMark != ''"> and assemble_mark = #{assembleMark} </if>
-			<if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
-			<if test="gangmasterName != null and gangmasterName != ''"> and gangmaster_name = #{gangmasterName} </if>
-			<if test="gangmasterAudit != null and gangmasterAudit != ''"> and gangmaster_audit = #{gangmasterAudit} </if>
-			<if test="gangmasterRemark != null and gangmasterRemark != ''"> and gangmaster_remark = #{gangmasterRemark} </if>
-			<if test="gangmasterMark != null and gangmasterMark != ''"> and gangmaster_mark = #{gangmasterMark} </if>
-			<if test="inspectorNo != null and inspectorNo != ''"> and inspector_no = #{inspectorNo} </if>
-			<if test="inspectorName != null and inspectorName != ''"> and inspector_name = #{inspectorName} </if>
-			<if test="inspectorMark != null and inspectorMark != ''"> and inspector_mark = #{inspectorMark} </if>
-			<if test="inspectorAudit != null and inspectorAudit != ''"> and inspector_audit = #{inspectorAudit} </if>
-			<if test="inspectorRemark != null and inspectorRemark != ''"> and inspector_remark = #{inspectorRemark} </if>
-			<if test="returnOpinion != null and returnOpinion != ''"> and return_opinion = #{returnOpinion} </if>
-			<if test="returnRemark != null and returnRemark != ''"> and return_remark = #{returnRemark} </if>
-			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
-			<if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
-		</where>
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="popValue != null and popValue != ''"> and pop_value = #{popValue} </if>
+		  		  <if test="disassembleNo != null and disassembleNo != ''"> and disassemble_no = #{disassembleNo} </if>
+		  		  <if test="disassembleName != null and disassembleName != ''"> and disassemble_name = #{disassembleName} </if>
+		  		  <if test="cleanerNo != null and cleanerNo != ''"> and cleaner_no = #{cleanerNo} </if>
+		  		  <if test="cleanerName != null and cleanerName != ''"> and cleaner_name = #{cleanerName} </if>
+		  		  <if test="fixer1No != null and fixer1No != ''"> and fixer1_no = #{fixer1No} </if>
+		  		  <if test="fixer1Name != null and fixer1Name != ''"> and fixer1_name = #{fixer1Name} </if>
+		  		  <if test="fixer1Remark != null and fixer1Remark != ''"> and fixer1_remark = #{fixer1Remark} </if>
+		  		  <if test="fixer2No != null and fixer2No != ''"> and fixer2_no = #{fixer2No} </if>
+		  		  <if test="fixer2Name != null and fixer2Name != ''"> and fixer2_name = #{fixer2Name} </if>
+		  		  <if test="fixer2Remark != null and fixer2Remark != ''"> and fixer2_remark = #{fixer2Remark} </if>
+		  		  <if test="fixer3No != null and fixer3No != ''"> and fixer3_no = #{fixer3No} </if>
+		  		  <if test="fixer3Name != null and fixer3Name != ''"> and fixer3_name = #{fixer3Name} </if>
+		  		  <if test="fixer3Remark != null and fixer3Remark != ''"> and fixer3_remark = #{fixer3Remark} </if>
+		  		  <if test="fixer4No != null and fixer4No != ''"> and fixer4_no = #{fixer4No} </if>
+		  		  <if test="fixer4Name != null and fixer4Name != ''"> and fixer4_name = #{fixer4Name} </if>
+		  		  <if test="fixer4Remark != null and fixer4Remark != ''"> and fixer4_remark = #{fixer4Remark} </if>
+		  		  <if test="assemblerNo != null and assemblerNo != ''"> and assembler_no = #{assemblerNo} </if>
+		  		  <if test="assemblerName != null and assemblerName != ''"> and assembler_name = #{assemblerName} </if>
+		  		  <if test="assemblerRemark != null and assemblerRemark != ''"> and assembler_remark = #{assemblerRemark} </if>
+		  		  <if test="assembleMark != null and assembleMark != ''"> and assemble_mark = #{assembleMark} </if>
+		  		  <if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
+		  		  <if test="gangmasterName != null and gangmasterName != ''"> and gangmaster_name = #{gangmasterName} </if>
+		  		  <if test="gangmasterAudit != null and gangmasterAudit != ''"> and gangmaster_audit = #{gangmasterAudit} </if>
+		  		  <if test="gangmasterRemark != null and gangmasterRemark != ''"> and gangmaster_remark = #{gangmasterRemark} </if>
+		  		  <if test="gangmasterMark != null and gangmasterMark != ''"> and gangmaster_mark = #{gangmasterMark} </if>
+		  		  <if test="inspectorNo != null and inspectorNo != ''"> and inspector_no = #{inspectorNo} </if>
+		  		  <if test="inspectorName != null and inspectorName != ''"> and inspector_name = #{inspectorName} </if>
+		  		  <if test="inspectorMark != null and inspectorMark != ''"> and inspector_mark = #{inspectorMark} </if>
+		  		  <if test="inspectorAudit != null and inspectorAudit != ''"> and inspector_audit = #{inspectorAudit} </if>
+		  		  <if test="inspectorRemark != null and inspectorRemark != ''"> and inspector_remark = #{inspectorRemark} </if>
+		  		  <if test="returnOpinion != null and returnOpinion != ''"> and return_opinion = #{returnOpinion} </if>
+		  		  <if test="returnRemark != null and returnRemark != ''"> and return_remark = #{returnRemark} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
 	</select>
-
+	 
 	<insert id="save" parameterType="com.rbc.biz.domain.MainValve104DO" useGeneratedKeys="true" keyProperty="id">
 		insert into web_main_valve_104
 		(
-			`pop_value`,
+			`pop_value`, 
 			`disassemble_no`, 
 			`disassemble_name`, 
 			`cleaner_no`, 
@@ -121,7 +121,7 @@
 			`fixer3_remark`, 
 			`fixer4_no`, 
 			`fixer4_name`, 
-			`fixer4_remark`,
+			`fixer4_remark`, 
 			`assembler_no`, 
 			`assembler_name`, 
 			`assembler_remark`, 
@@ -143,7 +143,7 @@
 		)
 		values
 		(
-			#{mainValue}, 
+			#{popValue}, 
 			#{disassembleNo}, 
 			#{disassembleName}, 
 			#{cleanerNo}, 
@@ -160,8 +160,6 @@
 			#{fixer4No}, 
 			#{fixer4Name}, 
 			#{fixer4Remark}, 
-			#{fixerProcess}, 
-			#{fixerProcessDetail}, 
 			#{assemblerNo}, 
 			#{assemblerName}, 
 			#{assemblerRemark}, 
@@ -186,7 +184,7 @@
 	<update id="update" parameterType="com.rbc.biz.domain.MainValve104DO">
 		update web_main_valve_104 
 		<set>
-			<if test="mainValue != null">`main_value` = #{mainValue}, </if>
+			<if test="popValue != null">`pop_value` = #{popValue}, </if>
 			<if test="disassembleNo != null">`disassemble_no` = #{disassembleNo}, </if>
 			<if test="disassembleName != null">`disassemble_name` = #{disassembleName}, </if>
 			<if test="cleanerNo != null">`cleaner_no` = #{cleanerNo}, </if>
@@ -203,8 +201,6 @@
 			<if test="fixer4No != null">`fixer4_no` = #{fixer4No}, </if>
 			<if test="fixer4Name != null">`fixer4_name` = #{fixer4Name}, </if>
 			<if test="fixer4Remark != null">`fixer4_remark` = #{fixer4Remark}, </if>
-			<if test="fixerProcess != null">`fixer_process` = #{fixerProcess}, </if>
-			<if test="fixerProcessDetail != null">`fixer_process_detail` = #{fixerProcessDetail}, </if>
 			<if test="assemblerNo != null">`assembler_no` = #{assemblerNo}, </if>
 			<if test="assemblerName != null">`assembler_name` = #{assemblerName}, </if>
 			<if test="assemblerRemark != null">`assembler_remark` = #{assemblerRemark}, </if>

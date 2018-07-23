@@ -1,237 +1,142 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
-	<div class="wrapper wrapper-content ">
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="ibox float-e-margins">
-					<div class="ibox-content">
-						<form class="form-horizontal m-t" id="signupForm">
-							<div class="form-group">	
-								<label class="col-sm-3 control-label">F8主阀编号：</label>
-								<div class="col-sm-8">
-									<input id="popValue" name="popValue" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">分解者工号：</label>
-								<div class="col-sm-8">
-									<input id="disassembleNo" name="disassembleNo" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">分解者名称：</label>
-								<div class="col-sm-8">
-									<input id="disassembleName" name="disassembleName" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">清洗者工号：</label>
-								<div class="col-sm-8">
-									<input id="cleanerNo" name="cleanerNo" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">清洗者名称：</label>
-								<div class="col-sm-8">
-									<input id="cleanerName" name="cleanerName" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者1工号：</label>
-								<div class="col-sm-8">
-									<input id="fixer1No" name="fixer1No" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者1名称：</label>
-								<div class="col-sm-8">
-									<input id="fixer1Name" name="fixer1Name" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者1备注：</label>
-								<div class="col-sm-8">
-									<input id="fixer1Remark" name="fixer1Remark" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者2工号：</label>
-								<div class="col-sm-8">
-									<input id="fixer2No" name="fixer2No" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者2名称：</label>
-								<div class="col-sm-8">
-									<input id="fixer2Name" name="fixer2Name" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者2备注：</label>
-								<div class="col-sm-8">
-									<input id="fixer2Remark" name="fixer2Remark" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者3工号：</label>
-								<div class="col-sm-8">
-									<input id="fixer3No" name="fixer3No" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者3名称：</label>
-								<div class="col-sm-8">
-									<input id="fixer3Name" name="fixer3Name" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者3备注：</label>
-								<div class="col-sm-8">
-									<input id="fixer3Remark" name="fixer3Remark" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者4工号：</label>
-								<div class="col-sm-8">
-									<input id="fixer4No" name="fixer4No" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者4名称：</label>
-								<div class="col-sm-8">
-									<input id="fixer4Name" name="fixer4Name" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">检修者4备注：</label>
-								<div class="col-sm-8">
-									<input id="fixer4Remark" name="fixer4Remark" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">组装者工号：</label>
-								<div class="col-sm-8">
-									<input id="assemblerNo" name="assemblerNo" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">组装者名称：</label>
-								<div class="col-sm-8">
-									<input id="assemblerName" name="assemblerName" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">组装者备注：</label>
-								<div class="col-sm-8">
-									<input id="assemblerRemark" name="assemblerRemark" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">组装人字标志：</label>
-								<div class="col-sm-8">
-									<input id="assembleMark" name="assembleMark" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">工长工号：</label>
-								<div class="col-sm-8">
-									<input id="gangmasterNo" name="gangmasterNo" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">工长名称：</label>
-								<div class="col-sm-8">
-									<input id="gangmasterName" name="gangmasterName" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">工长审核意见：1同意 0不同意：</label>
-								<div class="col-sm-8">
-									<input id="gangmasterAudit" name="gangmasterAudit" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">工长审核备注：</label>
-								<div class="col-sm-8">
-									<input id="gangmasterRemark" name="gangmasterRemark" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">工长一字标志：</label>
-								<div class="col-sm-8">
-									<input id="gangmasterMark" name="gangmasterMark" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">质检员工号：</label>
-								<div class="col-sm-8">
-									<input id="inspectorNo" name="inspectorNo" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">质检员名称：</label>
-								<div class="col-sm-8">
-									<input id="inspectorName" name="inspectorName" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">质检员合字标志：</label>
-								<div class="col-sm-8">
-									<input id="inspectorMark" name="inspectorMark" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">质检员审核意见：1同意 0不同意：</label>
-								<div class="col-sm-8">
-									<input id="inspectorAudit" name="inspectorAudit" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">质检员审核备注：</label>
-								<div class="col-sm-8">
-									<input id="inspectorRemark" name="inspectorRemark" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">退回意见：1同意 0不同意：</label>
-								<div class="col-sm-8">
-									<input id="returnOpinion" name="returnOpinion" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">退回备注：</label>
-								<div class="col-sm-8">
-									<input id="returnRemark" name="returnRemark" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">创建日期：</label>
-								<div class="col-sm-8">
-									<input id="createTime" name="createTime" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">更新日期：</label>
-								<div class="col-sm-8">
-									<input id="updateTime" name="updateTime" class="form-control" type="text">
-								</div>
-							</div>
-																					<div class="form-group">
-								<div class="col-sm-8 col-sm-offset-3">
-									<button type="submit" class="btn btn-primary">提交</button>
-								</div>
-							</div>
-						</form>
+<div class="wrapper wrapper-content">
+	<div class="ibox float-e-margins">
+		<div class="ibox-content">
+			<form class="form-horizontal" id="mainF8Form">
+				<div class="col-sm-12 form-inline m-b-sm">
+					<div class="form-group col-sm-6" >
+						<label class="control-label">时间:</label>
+						<input id="createTime" name="createTime" class="form-control " disabled="true" type="date" style="width: 250px">
+					</div>
+					<div class="form-group col-sm-6" >
+						<label class="control-label">F8主阀编号:</label>
+						<input id="popValue" name="popValue" class="form-control" disabled="true" type="text" style="width: 250px">
 					</div>
 				</div>
-			</div>
+
+				<table class="table table-bordered table-striped table-hover" id="mainF8Table"   data-mobile-responsive="true"  ></table>
+
+				<div class="col-sm-12 form-inline m-t-sm">
+					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster">
+						<label class="control-label">工长检修意见：</label>
+						<select id="gangmasterAudit" name="gangmasterAudit" class="form-control">
+							<option value="0">不合格</option>
+							<option value="1"  selected = "selected">合格</option>
+						</select>
+					</div>
+					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster" th:value="${user.username}">
+						<input id="gangmasterNo" name="gangmasterNo" class="form-control" type="hidden" th:value="${user.username}">
+						<input id="gangmasterName" name="gangmasterName" class="form-control" type="text" placeholder="工长名称" th:value="${user.name}">
+					</div>
+					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
+						<label class="control-label">质检员检修意见:</label>
+						<select id="inspectorAudit" name="inspectorAudit" class="form-control ">
+							<option value="0">不合格</option>
+							<option value="1"  selected = "selected">合格</option>
+						</select>
+					</div>
+					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
+						<input id="inspectorNo" name="inspectorNo" class="form-control" type="hidden" th:value="${user.username}">
+						<input id="inspectorName" name="inspectorName" class="form-control" type="text" placeholder="质检员名称" th:value="${user.name}">
+					</div>
+				</div>
+				<div class="col-sm-12 form-inline">
+					<div class="form-group col-sm-4" shiro:hasPermission="biz:mainValveF8:assemble">
+						<label class="control-label">组装合字：</label>
+						<input id="assemblerRemark" name="assemblerRemark" class="form-control" type="checkbox" >
+						<label class="control-label"><img src="/img/ren.png" style="width: 14px;height: 14px "></label>
+					</div>
+					<div class="form-group col-sm-4" shiro:hasAnyRoles="role:admin,role:gangmaster">
+						<label class="control-label">工长合字:</label>
+						<input id="gangmasterRemark" name="gangmasterRemark" class="form-control " type="checkbox" >
+						<label class="control-label"><img src="/img/renyi.png" style="width: 14px;height: 14px "></label>
+					</div>
+					<div class="form-group col-sm-4" shiro:hasAnyRoles="role:admin,role:inspector">
+						<label class="control-label">质检员合字:</label>
+						<input id="inspectorRemark" name="inspectorRemark" class="form-control " type="checkbox">
+						<label class="control-label"><img src="/img/he.png" style="width: 14px;height: 14px ;" ></label>
+					</div>
+				</div>
+				<div class="form-group col-sm-12 " >
+					<textarea id="returnRemark" name="returnRemark" class="form-control" rows="1" placeholder="备注"></textarea>
+				</div>
+				<input id="id" name="id" class="form-control" type="hidden" >
+
+				<input id="disassembleNo" name="disassembleNo" class="form-control" type="hidden" >
+				<input id="disassembleName" name="disassembleName" class="form-control" type="hidden" >
+
+				<input id="cleanerNo" name="cleanerNo" class="form-control" type="hidden">
+				<input id="cleanerName" name="cleanerName" class="form-control" type="hidden">
+
+				<input id="fixer1No" name="fixer1No" class="form-control" type="hidden" >
+				<input id="fixer1Name" name="fixer1Name" class="form-control" type="hidden" >
+
+				<input id="fixer2No" name="fixer2No" class="form-control" type="hidden" >
+				<input id="fixer2Name" name="fixer2Name" class="form-control" type="hidden" >
+
+				<input id="fixer3No" name="fixer3No" class="form-control" type="hidden" >
+				<input id="fixer3Name" name="fixer3Name" class="form-control" type="hidden">
+
+				<input id="fixer4No" name="fixer4No" class="form-control" type="hidden" >
+				<input id="fixer4Name" name="fixer4Name" class="form-control" type="hidden">
+
+				<input id="assemblerNo" name="assemblerNo" class="form-control" type="hidden" >
+				<input id="assemblerName" name="assemblerName" class="form-control" type="hidden">
+				<div class="row ">
+					<div class="col-sm-4 ">
+						<button id="uploadImg" type="submit" class="btn btn-primary">影像上传</button>
+					</div>
+					<div class="col-sm-4 ">
+						<button id="save" type="submit" class="btn btn-primary" onclick="save()">签字提交</button>
+					</div>
+					<div class="col-sm-4 ">
+						<button id="sign" type="submit" class="btn btn-primary">保存</button>
+					</div>
+				</div>
+			</form>
+		</div>
 	</div>
-	</div>
-	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/biz/mainValveF8/add.js">
+</div>
+
+<!--shiro控制各个角色下可操作的表单 -->
+<div>
+	<script type="text/javascript">
+        var disassembler = false;
+        var cleaner = false;
+        var fixer = false;
+        var assembler=false;
 	</script>
+</div>
+<div shiro:hasPermission="biz:mainValveF8:disassemble">
+	<script type="text/javascript">
+        disassembler = true;
+	</script>
+</div>
+<div shiro:hasPermission="biz:mainValveF8:clean">
+	<script type="text/javascript">
+        cleaner =true;
+	</script>
+</div>
+<div shiro:hasPermission="biz:mainValveF8:fix">
+	<script type="text/javascript">
+        fixer = true;
+	</script>
+</div>
+<div shiro:hasPermission="biz:mainValveF8:assemble">
+	<script type="text/javascript">
+        assembler = true;
+	</script>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/biz/mainValveF8/add.js">
+</script>
+<script th:inline="javascript">
+    var currentUserName=[[${user.name}]];
+    var currentUserNameNo=[[${user.username}]];
+</script>
 </body>
 </html>

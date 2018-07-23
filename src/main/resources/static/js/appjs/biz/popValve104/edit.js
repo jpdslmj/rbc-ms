@@ -76,7 +76,7 @@ function loadPop104Table() {
                 {
                     uId:"5",
                     fixPro: "组装",
-                    fixContent: "各橡胶制品齐全不超期，橡胶膜板及密封圈更换",
+                    fixContent: "各部件组装状态良好，结合部清洁，压板螺母紧固，丝扣紧固",
                     worker: ""
 
                 }

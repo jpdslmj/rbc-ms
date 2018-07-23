@@ -12,7 +12,7 @@ function save() {
 		cache : true,
 		type : "POST",
 		url : "/biz/testTool/save",
-		data : $('#signupForm').serialize(),// 你的formid
+		data : $('#testToolForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
 			parent.layer.alert("Connection error");
@@ -34,7 +34,7 @@ function save() {
 }
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
-	$("#signupForm").validate({
+	$("#testToolForm").validate({
 		rules : {
 			name : {
 				required : true

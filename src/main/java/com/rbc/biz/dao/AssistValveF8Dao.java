@@ -1,16 +1,17 @@
 package com.rbc.biz.dao;
 
 import com.rbc.biz.domain.AssistValveF8DO;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * F8辅助阀信息表
  * @author lmj
  * @email 359819418@qq.com
- * @date 2018-07-07 10:22:40
+ * @date 2018-07-23 00:13:25
  */
 @Mapper
 public interface AssistValveF8Dao {

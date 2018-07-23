@@ -12,7 +12,7 @@ function save() {
 		cache : true,
 		type : "POST",
 		url : "/biz/taskInfo/save",
-		data : $('#signupForm').serialize(),// 你的formid
+		data : $('#taskInfoForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
 			parent.layer.alert("Connection error");
@@ -32,9 +32,38 @@ function save() {
 	});
 
 }
+
+
+function openWorker(){
+	var deptId="";
+    deptId = $("#deptId").val();
+    $("#getWorkerModal").on("show.bs.modal",function(){
+        load(deptId)
+	});
+    $("#getWorkerModal").modal('show');
+
+}
+function selectWorker(){
+ var rows =   $('#workerTable').bootstrapTable('getSelections');
+ if(rows.length>1){
+ 	layer.msg("只能选择一个工作者！")
+	 return;
+ }
+    if(rows.length==0){
+        layer.msg("请选择一个工作者！")
+        return;
+    }
+
+    $("#fixWorkerName").val(rows[0].name);
+    $("#fixWorkerNo").val(rows[0].username);
+    $("#getWorkerModal").on("hide.bs.modal",function(){
+        $(this).removeData("bs.modal");
+    });
+    $("#getWorkerModal").modal('hide');
+}
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
-	$("#signupForm").validate({
+	$("#taskInfoForm").validate({
 		rules : {
 			name : {
 				required : true

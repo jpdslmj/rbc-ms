@@ -10,17 +10,15 @@ import java.util.Date;
  * 
  * @author lmj
  * @email 359819418@qq.com
- * @date 2018-07-05 18:07:04
+ * @date 2018-07-20 23:20:26
  */
 public class TaskInfoDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//
 	private Long id;
-	//发布表主键
-	private String distributionId;
 	//序列号
-	private String sequenceNo;
+	private Long sequenceNo;
 	//检修项目
 	private String fixTask;
 	//计划数量
@@ -43,6 +41,8 @@ public class TaskInfoDO implements Serializable {
 	private Date createTime;
 	//更新日期
 	private Date updateTime;
+	//任务发布时间
+	private Date distribTime;
 
 	/**
 	 * 设置：
@@ -57,27 +57,15 @@ public class TaskInfoDO implements Serializable {
 		return id;
 	}
 	/**
-	 * 设置：发布表主键
-	 */
-	public void setDistributionId(String distributionId) {
-		this.distributionId = distributionId;
-	}
-	/**
-	 * 获取：发布表主键
-	 */
-	public String getDistributionId() {
-		return distributionId;
-	}
-	/**
 	 * 设置：序列号
 	 */
-	public void setSequenceNo(String sequenceNo) {
+	public void setSequenceNo(Long sequenceNo) {
 		this.sequenceNo = sequenceNo;
 	}
 	/**
 	 * 获取：序列号
 	 */
-	public String getSequenceNo() {
+	public Long getSequenceNo() {
 		return sequenceNo;
 	}
 	/**
@@ -211,5 +199,17 @@ public class TaskInfoDO implements Serializable {
 	 */
 	public Date getUpdateTime() {
 		return updateTime;
+	}
+	/**
+	 * 设置：任务发布时间
+	 */
+	public void setDistribTime(Date distribTime) {
+		this.distribTime = distribTime;
+	}
+	/**
+	 * 获取：任务发布时间
+	 */
+	public Date getDistribTime() {
+		return distribTime;
 	}
 }

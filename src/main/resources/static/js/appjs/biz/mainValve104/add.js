@@ -1,186 +1,268 @@
+
 $().ready(function() {
-	validateRule();
+    loadmain104Table();
+    if(disassembler){
+        $('#createTime').attr("disabled",false);
+        $('#popValue').attr("disabled",false);
+    }
+    var today=new Date().Format("yyyy-MM-dd");
+    $("#createTime").val(today);
+    validateRule();
 });
 
 $.validator.setDefaults({
-	submitHandler : function() {
-		save();
-	}
+    submitHandler : function() {
+        save();
+    }
 });
 
-
-function loadSafeChkTable() {
-    $('#safeChkTable').bootstrapTable(
+function loadmain104Table() {
+    $('#main104Table').bootstrapTable(
         {
-            method : 'get', // 服务器数据的请求方式 get or post
-            url : prefix + "/listSecurity/", // 服务器数据的加载地址
-            //	showRefresh : true,
-            //	showToggle : true,
-            //	showColumns : true,
+            data:[
+                {
+                    uId:"0",
+                    fixPro: "分解",
+                    fixContent: "检查除锈及配件状态",
+                    worker: ""
+                },
+                {
+                    uId:"1",
+                    fixPro: "清洗",
+                    fixContent: "阀体、阀盖和阀内各配件清洗 检测主活塞杆无变形",
+                    worker: ""
+                },
+                {
+                    uId:"2",
+                    fixPro: "检修",
+                    fixContent: "样板检测滑阀室限度≤46.8mm，滑阀限度≥16mm,节制阀限度≥5mm，缓解联络槽限度≥2.2mm",
+                    worker: ""
+                },
+                {
+                    uId:"3",
+                    fixPro: "检修",
+                    fixContent: "通针疏通限制孔：IФ0.8.8mm IIФ1.0mm 滑阀充气孔Ф1.2mm ，零部件检查",
+                    worker: ""
+
+                },
+                {
+                    uId:"4",
+                    fixPro: "检修",
+                    fixContent: "各橡胶制品齐全不超期，橡胶膜板及密封圈更换",
+                    worker: ""
+                },
+                {
+                    uId:"5",
+                    fixPro: "检修",
+                    fixContent: "弹簧测量",
+                    worker: ""
+                },
+                {
+                    uId:"6",
+                    fixPro: "组装",
+                    fixContent: "各部件组装状态良好，结合部清洁，压板螺母紧固，丝扣紧固",
+                    worker: ""
+
+                }
+
+            ],
+            uniqueId:'uId',
             editable:true,
-            clickToSelect: true,
+            clickToSelect: false,
             iconSize : 'outline',
             html:true,
-            //toolbar : '#safeChkTable',
-            //striped : true, // 设置为true会有隔行变色效果
             dataType : "json", // 服务器返回的数据类型
-            pagination : true, // 设置为true会在底部显示分页条
-            // queryParamsType : "limit",
-            // //设置为limit则会发送符合RESTFull格式的参数
             singleSelect : false, // 设置为true将禁止多选
-            // contentType : "application/x-www-form-urlencoded",
-            // //发送到服务器的数据编码类型
-            pageSize : 10, // 如果设置了分页，每页数据条数
-            pageNumber : 1, // 如果设置了分布，首页页码
-            //search : true, // 是否显示搜索框
             showColumns : false, // 是否显示内容下拉框（选择显示的列）
-            sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
-            queryParams : function(params) {
-                return {
-                    //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
-                    limit: params.limit,
-                    offset:params.offset,
-                    // name:$('#searchName').val(),
-                    // username:$('#searchName').val()
-                    logId:$('#id').val()
-                };
+            onCheck:function(row, $element){
+                row.worker=currentUserName;
+                $('#main104Table').bootstrapTable('updateRow',{
+                    index: $element.data('index'),
+                    row:row
+                });
+                if(row.uId==0){
+                    $('#disassembleNo').val(currentUserNameNo);
+                    $('#disassembleName').val(currentUserName);
+                }
+                if(row.uId==1){
+                    $('#cleanerNo').val(currentUserNameNo);
+                    $('#cleanerName').val(currentUserName);
+                }
+                if(row.uId==2){
+
+                    $('#fixer1No').val(currentUserNameNo);
+                    $('#fixer1Name').val(currentUserName);
+                }
+                if(row.uId==3){
+                    $('#fixer2No').val(currentUserNameNo);
+                    $('#fixer2Name').val(currentUserName);
+
+                }
+                if(row.uId==4){
+                    $('#fixer3No').val(currentUserNameNo);
+                    $('#fixer3Name').val(currentUserName);
+                }
+                if(row.uId==5){
+                    $('#fixer4No').val(currentUserNameNo);
+                    $('#fixer4Name').val(currentUserName);
+                }
+                if(row.uId==6){
+                    $('#assemblerNo').val(currentUserNameNo);
+                    $('#assemblerName').val(currentUserName);
+                }
             },
-            // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
-            // queryParamsType = 'limit' ,返回参数必须包含
-            // limit, offset, search, sort, order 否则, 需要包含:
-            // pageSize, pageNumber, searchText, sortName,
-            // sortOrder.
-            // 返回false将会终止请求
+            onUncheck:function(row, $element){
+                row.worker="";
+                $('#main104Table').bootstrapTable('updateRow',{
+                    index: $element.data('index'),
+                    row:row
+                });
+                if(row.uId==0){
+                    $('#disassembleNo').val("");
+                    $('#disassembleName').val("");
+                }
+                if(row.uId==1){
+                    $('#cleanerNo').val("");
+                    $('#cleanerName').val("");
+                }
+                if(row.uId==2){
+
+                    $('#fixer1No').val("");
+                    $('#fixer1Name').val("");
+                }
+                if(row.uId==3){
+                    $('#fixer2No').val("");
+                    $('#fixer2Name').val("");
+
+                }
+                if(row.uId==4){
+                    $('#fixer3No').val("");
+                    $('#fixer3Name').val("");
+                }
+                if(row.uId==5){
+                    $('#fixer4No').val("");
+                    $('#fixer4Name').val("");
+                }
+                if(row.uId==6){
+                    $('#assemblerNo').val("");
+                    $('#assemblerName').val("");
+                }
+            },
             columns : [
                 {
-                    checkbox : true
+                    checkbox : true,
+                    formatter:function stateFormatter(value,row,index){
+                        if (disassembler&&row.fixPro=="分解") {
+                            if(row.worker!=""){
+                                return {
+                                    disabled: false,//设置是否可用
+                                    checked:true
+                                }
+                            }else{
+                                return {
+                                    disabled: false//设置是否可用
+                                }
+                            }
+
+                        }else if (cleaner&&row.fixPro=="清洗") {
+                            if(row.worker!=""){
+                                return {
+                                    disabled: false,//设置是否可用
+                                    checked:true
+                                }
+                            }else{
+                                return {
+                                    disabled: false//设置是否可用
+                                }
+                            }
+                        }else if (fixer&&row.fixPro=="检修") {
+                            if(row.worker!=""){
+                                return {
+                                    disabled: false,//设置是否可用
+                                    checked:true
+                                }
+                            }else{
+                                return {
+                                    disabled: false//设置是否可用
+                                }
+                            }
+                        }else if (assembler&&row.fixPro=="组装") {
+                            if(row.worker!=""){
+                                return {
+                                    disabled: false,//设置是否可用
+                                    checked:true
+                                }
+                            }else{
+                                return {
+                                    disabled: false//设置是否可用
+                                }
+                            }
+                        }else{
+                            return {
+                                disabled: true//设置是否可用
+                            }
+                        }
+                        return value;
+                    }
                 },
                 {
-                    field : 'logId',
-                    title : '日志表主键',
-                    visible:false
+                    field : 'fixPro',
+                    title : '检修工序'
                 },
                 {
-                    field : 'id',
+                    field : 'fixContent',
+                    title : '检修内容'
+                },
+                {
+                    field : 'worker',
+                    title : '工作者',
+                },
+                {
+                    field : 'uId',
                     title : '主键',
                     visible:false
                 },
-                {
-                    field : 'num',
-                    title : '序号'
-                },
-                {
-                    field : 'securityProject',
-                    title : '抽查项目名' ,
-                    editable: {
-                        type: 'text',
-                        mode: "inline",
-                        placeholder: '抽查项目',
-                        validate: function (value) {
-                            if ($.trim(value) == '') return '质检项目不能为空';
-                        }
-                    }
-                },
-                {
-                    field : 'description',
-                    title : '安全质量状况' ,
-                    editable: {
-                        type: 'text',
-                        mode: "inline",
-                        placeholder: '安全质量状况',
-                        validate: function (value) {
-                            if ($.trim(value) == '') return '安全质量状况不能为空';
-                        }
-                    }
-                },
-                {
-                    field : 'remark',
-                    title : '备注',
-                    editable: {
-                        type: 'text',
-                        mode: "inline",
-                        placeholder: '备注',
-                    }
-                },
-                {
-                    field : 'gangmasterNo',
-                    title : '工长工号' ,
-                    visible:false
-                },
-                {
-                    field : 'gangmasterName',
-                    title : '工长名称' ,
-                    visible:false
-                },
-
-
-                {
-                    field : 'createTime',
-                    title : '创建日期',
-                    visible:false
-                },
-                {
-                    field : 'updateTime',
-                    title : '更新日期',
-                    visible:false
-                },
-                {
-                    title : '操作',
-                    field : 'num',
-                    align : 'center',
-                    formatter : function(value, row, index) {
-                        var e = '<a class="btn btn-primary btn-sm '+'" href="#" mce_href="#" title="编辑" onclick="editSafeChkTable(\''
-                            + row.num
-                            + '\')"><i class="fa fa-edit"></i></a> ';
-                        var d = '<a class="btn btn-warning btn-sm '+'" href="#" title="删除"  mce_href="#" onclick="removeSafeChkTable(\''
-                            + row.num
-                            + '\')"><i class="fa fa-remove"></i></a> ';
-                        return e + d ;
-                    }
-                } ]
+            ],
         });
 }
 
-
-
-
 function save() {
-	$.ajax({
-		cache : true,
-		type : "POST",
-		url : "/biz/mainValve104/save",
-		data : $('#signupForm').serialize(),// 你的formid
-		async : false,
-		error : function(request) {
-			parent.layer.alert("Connection error");
-		},
-		success : function(data) {
-			if (data.code == 0) {
-				parent.layer.msg("操作成功");
-				parent.reLoad();
-				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-				parent.layer.close(index);
+    var data=$('#main104Form').serialize();
+    $.ajax({
+        cache : true,
+        type : "POST",
+        url : "/biz/mainValve104/save",
+        data : data,
+        async : false,
+        error : function(request) {
+            parent.layer.alert("Connection error");
+        },
+        success : function(data) {
+            if (data.code == 0) {
+                parent.layer.msg("操作成功");
+                parent.reLoad();
+                var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                parent.layer.close(index);
 
-			} else {
-				parent.layer.alert(data.msg)
-			}
+            } else {
+                parent.layer.alert(data.msg)
+            }
 
-		}
-	});
-
+        }
+    });
 }
 function validateRule() {
-	var icon = "<i class='fa fa-times-circle'></i> ";
-	$("#signupForm").validate({
-		rules : {
-			name : {
-				required : true
-			}
-		},
-		messages : {
-			name : {
-				required : icon + "请输入姓名"
-			}
-		}
-	})
+    var icon = "<i class='fa fa-times-circle'></i> ";
+    $("#main104Form").validate({
+        rules : {
+            popValue : {
+                required : true
+            }
+        },
+        messages : {
+            popValue : {
+                required : icon + "编号不能为空"
+            }
+        }
+    });
 }

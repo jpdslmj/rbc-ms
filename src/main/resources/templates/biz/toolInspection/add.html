@@ -114,8 +114,8 @@
 						</div>
 						<table class="table table-bordered table-striped table-hover" id="otherToolTable"   data-mobile-responsive="true" ></table>
 
-								<input id="fixWorkerNo" name="fixWorkerNo" class="form-control" type="hidden">
-								<input id="fixWorkerName" name="fixWorkerName" class="form-control" type="hidden">
+								<input id="fixWorkerNo" name="fixWorkerNo" class="form-control" type="hidden" th:value="${user.username}">
+								<input id="fixWorkerName" name="fixWorkerName" class="form-control" type="hidden" th:value="${user.name}">
 								<input id="gangmasterNo" name="gangmasterNo" class="form-control"type="hidden">
 								<input id="gangmasterName" name="gangmasterName" class="form-control" type="hidden">
 								<input id="gangmasterAudit" name="gangmasterAudit" class="form-control" type="hidden">

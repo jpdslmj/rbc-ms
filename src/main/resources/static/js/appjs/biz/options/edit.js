@@ -11,8 +11,8 @@ function update() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/biz/testTool/update",
-		data : $('#testToolForm').serialize(),// 你的formid
+		url : "/biz/options/update",
+		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
 			parent.layer.alert("Connection error");
@@ -34,7 +34,7 @@ function update() {
 }
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
-	$("#testToolForm").validate({
+	$("#signupForm").validate({
 		rules : {
 			name : {
 				required : true

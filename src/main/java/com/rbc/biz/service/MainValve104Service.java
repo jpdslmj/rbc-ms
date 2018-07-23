@@ -1,6 +1,5 @@
 package com.rbc.biz.service;
 
-
 import com.rbc.biz.domain.MainValve104DO;
 
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.Map;
  * 
  * @author lmj
  * @email 359819418@qq.com
- * @date 2018-07-04 16:55:57
+ * @date 2018-07-23 00:13:25
  */
 public interface MainValve104Service {
 	
@@ -21,9 +20,9 @@ public interface MainValve104Service {
 	
 	int count(Map<String, Object> map);
 	
-	int save(MainValve104DO mainValve);
+	int save(MainValve104DO mainValve104);
 	
-	int update(MainValve104DO mainValve);
+	int update(MainValve104DO mainValve104);
 	
 	int remove(Long id);
 	
