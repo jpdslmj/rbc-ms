@@ -61,12 +61,18 @@ function load() {
 									title : '工长名称' 
 								},
 																{
-									field : 'permissionsOpinion', 
-									title : '开工结论' 
-								},
-																{
-									field : 'returnOpinion', 
-									title : '退回意见' 
+									field : 'gangmasterAudit',
+									title : '审核意见' ,
+									formatter : function(value, row, index){
+										var  audit ="";
+										if(value==1){
+											audit ="同意开工";
+										}
+										if(value==0){
+											audit ="退回";
+										}
+										return audit;
+									}
 								},
 																{
 									field : 'createTime', 

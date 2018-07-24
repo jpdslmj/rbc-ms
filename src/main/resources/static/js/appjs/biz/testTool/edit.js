@@ -1,4 +1,12 @@
 $().ready(function() {
+	if(gangmaster){
+		$("#testField").attr("disabled","disabled");
+	}
+	if(inspector){
+        $("#testField").attr("disabled","disabled");
+        $("#gangmasterName").attr("disabled","disabled");
+        $("#gangmasterAudit").attr("disabled","disabled");
+	}
 	validateRule();
 });
 

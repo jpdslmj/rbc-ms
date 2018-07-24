@@ -64,6 +64,8 @@ public class TestToolController extends BaseController {
 	String edit(@PathVariable("id") Long id,Model model){
 		TestToolDO testTool = testToolService.get(id);
 		model.addAttribute("testTool", testTool);
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
 	    return "biz/testTool/edit";
 	}
 	

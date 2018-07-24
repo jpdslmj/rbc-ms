@@ -34,9 +34,9 @@ $().ready(function() {
         }
     });
 
-
-    $("#fixWorkerNo").val(currentUserNameNo);
-    $("#fixWorkerName").val(currentUserName);
+    if(gangmaster){
+         $("#inspectionField").attr("disabled","disabled");
+    }
     validateRule();
 });
 

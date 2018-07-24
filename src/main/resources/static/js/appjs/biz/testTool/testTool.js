@@ -71,8 +71,19 @@ function load() {
 								},
 																{
 									field : 'gangmasterAudit', 
-									title : '工长审核意见：'
-								},
+									title : '工长审核意见：',
+								   formatter : function(value, row, index){
+									  var  audit ="";
+										if(value==1){
+											audit ="同意开工";
+										}
+										if(value==0) {
+											audit ="退回";
+										}
+										return audit;
+								   }
+
+                                },
 																{
 									field : 'inspectorNo', 
 									title : '质检员工号' ,
@@ -84,7 +95,17 @@ function load() {
 								},
 																{
 									field : 'inspectorAudit', 
-									title : '质检员审核意见' 
+									title : '质检员审核意见' ,
+									formatter : function(value, row, index){
+										var  audit ="";
+										if(value==1){
+											audit ="同意开工";
+										}
+										if(value==0){
+											audit ="退回";
+										}
+                                        return audit;
+									}
 								},
 																{
 									field : 'permissionsOpinion', 

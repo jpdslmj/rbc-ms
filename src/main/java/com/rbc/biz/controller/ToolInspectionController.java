@@ -14,6 +14,7 @@ import com.rbc.common.utils.Query;
 import com.rbc.common.utils.R;
 import com.rbc.system.domain.UserDO;
 import com.rbc.system.service.UserService;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -84,7 +85,7 @@ public class ToolInspectionController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	@RequiresPermissions("biz:toolInspection:add")
+	@RequiresPermissions(value = {"biz:toolInspection:add","biz:toolInspection:edit"},logical = Logical.OR)
 	public R save( @RequestBody JSONObject jsonParam){
 		System.out.println(jsonParam.toString());
 		JSONObject toolInspection=jsonParam.getJSONObject("toolInspectionDo");
