@@ -72,6 +72,13 @@ public class TaskInfoController extends BaseController {
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("biz:taskInfo:edit")
 	String edit(@PathVariable("id") Long id,Model model){
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
+		Map<String,Object> map=new HashMap();
+		map.put("optionType","task");
+		map.put("isvaliable",1);
+		List<OptionsDO> optList=optionsService.list(map);
+		model.addAttribute("optionList",optList);
 		TaskInfoDO taskInfo = taskInfoService.get(id);
 		model.addAttribute("taskInfo", taskInfo);
 	    return "biz/taskInfo/edit";
