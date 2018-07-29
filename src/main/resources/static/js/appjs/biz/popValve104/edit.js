@@ -235,6 +235,13 @@ function loadPop104Table() {
 
         });
 }
+
+function uploadImg(uploadType){
+    var partId=$("#id").val();
+    var partType="popValve104";
+    window.location.href="/common/sysFile/imgUpload/"+partId+"/"+partType+"/"+uploadType;
+
+}
 function update() {
     var data=$('#pop104Form').serialize();
     $.ajax({

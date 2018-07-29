@@ -1,5 +1,6 @@
 package com.rbc.common.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.rbc.common.config.AppConfig;
 import com.rbc.common.domain.FileDO;
 import com.rbc.common.service.FileService;
@@ -35,11 +36,21 @@ public class FileController extends BaseController {
 	String sysFile(Model model) {
 		Map<String, Object> params = new HashMap<>(16);
 		return "common/file/file";
+
+	}
+
+	@RequestMapping(value="/imgUpload/{partId}/{partType}/{uploadType}",method=RequestMethod.GET)
+	///@RequiresPermissions("common:sysFile:sysFile")
+	public String  imgUpload(@PathVariable Long partId,@PathVariable String partType,@PathVariable int uploadType,Model model) {
+		model.addAttribute("partId",partId);
+		model.addAttribute("partType",partType);
+		model.addAttribute("uploadType",uploadType);
+		return "common/file/imgUpload";
 	}
 
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("common:sysFile:sysFile")
+	//@RequiresPermissions("common:sysFile:sysFile")
 	public PageUtils list(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
 		Query query = new Query(params);
@@ -135,13 +146,25 @@ public class FileController extends BaseController {
 
 	@ResponseBody
 	@PostMapping("/upload")
-	R upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+	R upload(@RequestParam("file") MultipartFile file, @RequestParam("params") String  params) {
 		if ("test".equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
+		Map<String, Object> jsMap=JSONUtils.jsonToMap(params);
+		Long partId=new Long(jsMap.get("partId").toString());
+		String partType=jsMap.get("partType").toString();
+
 		String fileName = file.getOriginalFilename();
+		String realFileName=fileName;
 		fileName = FileUtil.renameToUUID(fileName);
-		FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date());
+		//FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date());
+		FileDO sysFile=new FileDO();
+		sysFile.setType(FileType.fileType(fileName));
+		sysFile.setUrl("/files/" + fileName);
+		sysFile.setCreateDate(new Date());
+		sysFile.setFileRealName(realFileName);
+		sysFile.setPartId(partId);
+		sysFile.setPartType(partType);
 		try {
 			FileUtil.uploadFile(file.getBytes(), appConfig.getUploadPath(), fileName);
 		} catch (Exception e) {

@@ -4,15 +4,18 @@
 <mapper namespace="com.rbc.common.dao.FileDao">
 
 	<select id="get" resultType="com.rbc.common.domain.FileDO">
-		select `id`,`type`,`url`,`create_date` from sys_file where id = #{value}
+		select `id`,`type`,`url`,`file_real_name`,`part_type`,`part_id`,`create_date` from sys_file where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.rbc.common.domain.FileDO">
-		select `id`,`type`,`url`,`create_date` from sys_file
+		select `id`,`type`,`url`,`file_real_name`,`part_type`,`part_id`,`create_date` from sys_file
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="type != null and type != ''"> and type = #{type} </if>
 		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="fileRealName != null and fileRealName != ''"> and file_real_name = #{fileRealName} </if>
+		  		  <if test="partType != null and partType != ''"> and part_type = #{partType} </if>
+		  		  <if test="partId != null and partId != ''"> and part_id = #{partId} </if>
 		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
 		  		</where>
         <choose>
@@ -34,6 +37,9 @@
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="type != null and type != ''"> and type = #{type} </if>
 		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="fileRealName != null and fileRealName != ''"> and file_real_name = #{fileRealName} </if>
+		  		  <if test="partType != null and partType != ''"> and part_type = #{partType} </if>
+		  		  <if test="partId != null and partId != ''"> and part_id = #{partId} </if>
 		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
 		  		</where>
 	</select>
@@ -43,12 +49,18 @@
 		(
 			`type`, 
 			`url`, 
+			`file_real_name`, 
+			`part_type`, 
+			`part_id`, 
 			`create_date`
 		)
 		values
 		(
 			#{type}, 
 			#{url}, 
+			#{fileRealName}, 
+			#{partType}, 
+			#{partId}, 
 			#{createDate}
 		)
 	</insert>
@@ -58,6 +70,9 @@
 		<set>
 			<if test="type != null">`type` = #{type}, </if>
 			<if test="url != null">`url` = #{url}, </if>
+			<if test="fileRealName != null">`file_real_name` = #{fileRealName}, </if>
+			<if test="partType != null">`part_type` = #{partType}, </if>
+			<if test="partId != null">`part_id` = #{partId}, </if>
 			<if test="createDate != null">`create_date` = #{createDate}</if>
 		</set>
 		where id = #{id}

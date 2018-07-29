@@ -252,6 +252,13 @@ function loadassistF8Table() {
 
         });
 }
+
+function uploadImg(uploadType){
+    var partId=$("#id").val();
+    var partType="assistValveF8";
+    window.location.href="/common/sysFile/imgUpload/"+partId+"/"+partType+"/"+uploadType;
+
+}
 function update() {
     var data=$('#assistF8Form').serialize();
     $.ajax({

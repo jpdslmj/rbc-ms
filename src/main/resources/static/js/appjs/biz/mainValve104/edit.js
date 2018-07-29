@@ -252,6 +252,14 @@ function loadmain104Table() {
 
         });
 }
+
+function uploadImg(uploadType){
+    var partId=$("#id").val();
+    var partType="mainValve104";
+    window.location.href="/common/sysFile/imgUpload/"+partId+"/"+partType+"/"+uploadType;
+
+}
+
 function update() {
     var data=$('#main104Form').serialize();
     $.ajax({

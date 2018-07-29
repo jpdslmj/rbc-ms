@@ -1,4 +1,4 @@
-bootdo:
+rbc:
   uploadPath: D:/var/uploaded_files/
 logging:
   level:

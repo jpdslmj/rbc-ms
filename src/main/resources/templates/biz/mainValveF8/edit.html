@@ -90,13 +90,16 @@
 				<input id="assemblerNo" name="assemblerNo" class="form-control" type="hidden" th:value="${mainValveF8.assemblerNo}">
 				<input id="assemblerName" name="assemblerName" class="form-control" type="hidden" th:value="${mainValveF8.assemblerName}">
 				<div class="row ">
-					<div class="col-sm-4 ">
-						<button id="uploadImg" type="submit" class="btn btn-primary">影像上传</button>
+					<div class="col-sm-3" shiro:hasAnyRoles="role:admin,role:disassembler,role:cleaner,role:fixer,role:assembler">
+						<a id="uploadImg" type="submit" class="btn btn-primary" href="javascript:void(0)" onClick="uploadImg(1)">影像上传</a>
 					</div>
-					<div class="col-sm-4 ">
+					<div class="col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster,role:inspector">
+						<a id="imgView" type="submit" class="btn btn-primary" href="javascript:void(0)" onClick="uploadImg(2)">影像查看</a>
+					</div>
+					<div class="col-sm-3 ">
 						<button id="save" type="submit" class="btn btn-primary" onclick="update()">签字提交</button>
 					</div>
-					<div class="col-sm-4 ">
+					<div class="col-sm-3 ">
 						<button id="sign" type="submit" class="btn btn-primary" >保存</button>
 					</div>
 				</div>

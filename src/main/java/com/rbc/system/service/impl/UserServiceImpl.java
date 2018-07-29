@@ -200,7 +200,12 @@ public class UserServiceImpl implements UserService {
     public Map<String, Object> updatePersonalImg(MultipartFile file, String avatar_data, Long userId) throws Exception {
         String fileName = file.getOriginalFilename();
         fileName = FileUtil.renameToUUID(fileName);
-        FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date());
+       // FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date());
+        FileDO sysFile=new FileDO();
+        sysFile.setType(FileType.fileType(fileName));
+        sysFile.setUrl("/files/" + fileName);
+        sysFile.setCreateDate(new Date());
+        sysFile.setFileRealName(fileName);
         //获取图片后缀
         String prefix = fileName.substring((fileName.lastIndexOf(".") + 1));
         String[] str = avatar_data.split(",");
