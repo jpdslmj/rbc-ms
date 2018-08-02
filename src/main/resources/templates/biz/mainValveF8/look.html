@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+	<div class="ibox float-e-margins">
+		<div class="ibox-content">
+			<form class="form-horizontal" id="mainF8Form">
+				<div class="col-sm-12 form-inline m-b-sm">
+					<div class="form-group col-sm-6" >
+						<label class="control-label">时间:</label>
+						<input id="createTime" name="createTime" class="form-control " th:value="${mainValveF8.createTime}" readonly="readonly" type="date" style="width: 250px">
+					</div>
+					<div class="form-group col-sm-6" >
+						<label class="control-label">F8主阀编号:</label>
+						<input id="popValue" name="popValue" class="form-control" readonly="readonly" type="text" th:value="${mainValveF8.popValue}" style="width: 250px">
+
+					</div>
+				</div>
+
+				<table class="table table-bordered table-striped table-hover" id="mainF8Table"   data-mobile-responsive="true" data-url="js/demo/popF8.json" ></table>
+
+				<div class="col-sm-12 form-inline m-t-sm">
+					<div class="form-group col-sm-3" >
+						<label class="control-label">工长检修意见：</label>
+						<select id="gangmasterAudit" name="gangmasterAudit" disabled="true" class="form-control" th:value="${mainValveF8.gangmasterAudit}">
+							<option value="" th:selected="${mainValveF8.gangmasterAudit ==''}"></option>
+							<option value="0" th:selected="${mainValveF8.gangmasterAudit == 0}">不合格</option>
+							<option value="1" th:selected="${mainValveF8.gangmasterAudit == 1}">合格</option>
+						</select>
+					</div>
+					<input id="gangmasterNo" name="gangmasterNo" class="form-control" type="hidden" th:value="${mainValveF8.gangmasterNo}">
+					<div class="form-group col-sm-3" >
+						<input id="gangmasterName" name="gangmasterName" class="form-control" type="text" readonly="readonly" placeholder="工长名称" th:value="${mainValveF8.gangmasterName}">
+					</div>
+					<div class="form-group col-sm-3" >
+						<label class="control-label">质检员检修意见:</label>
+						<select id="inspectorAudit" name="inspectorAudit" disabled="true" class="form-control " th:value="${mainValveF8.inspectorAudit}">
+							<option value="" th:selected="${mainValveF8.gangmasterAudit ==''}"></option>
+							<option value="0" th:selected="${mainValveF8.inspectorAudit ==0}">不合格</option>
+							<option value="1" th:selected="${mainValveF8.inspectorAudit ==1}">合格</option>
+						</select>
+					</div>
+					<input id="inspectorNo" name="inspectorNo" class="form-control" type="hidden" th:value="${mainValveF8.inspectorNo}" >
+					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
+						<input id="inspectorName" name="inspectorName" class="form-control" type="text" readonly="readonly" placeholder="质检员名称" th:value="${mainValveF8.inspectorName}">
+					</div>
+				</div>
+				<div class="col-sm-12 form-inline">
+					<div class="form-group col-sm-4" >
+						<label class="control-label">组装合字：</label>
+						<input id="assemblerRemark" name="assemblerRemark" class="form-control" type="checkbox" disabled="true" th:checked="${mainValveF8.assemblerRemark}?true">
+						<label class="control-label"><img src="/img/ren.png" style="width: 14px;height: 14px "></label>
+					</div>
+					<div class="form-group col-sm-4" >
+						<label class="control-label">工长合字:</label>
+						<input id="gangmasterRemark" name="gangmasterRemark" class="form-control " type="checkbox" disabled="true"  th:checked="${mainValveF8.gangmasterRemark}?true">
+						<label class="control-label"><img src="/img/renyi.png" style="width: 14px;height: 14px "></label>
+					</div>
+					<div class="form-group col-sm-4" >
+						<label class="control-label">质检员合字:</label>
+						<input id="inspectorRemark" name="inspectorRemark" class="form-control " type="checkbox" disabled="true" th:checked="${mainValveF8.inspectorRemark}?true">
+						<label class="control-label"><img src="/img/he.png" style="width: 14px;height: 14px ;" ></label>
+					</div>
+				</div>
+				<div class="form-group col-sm-12 " >
+					<textarea id="returnRemark" name="returnRemark" class="form-control" rows="1" placeholder="备注" readonly="readonly" th:text="${mainValveF8.returnRemark}"></textarea>
+				</div>
+
+				<input id="taskId" name="taskId" class="form-control" type="hidden" th:value="${mainValveF8.taskId}">
+				<input id="taskName" name="taskName" class="form-control" type="hidden" th:value="${mainValveF8.taskName}">
+				<input id="processInstanceId" name="processInstanceId" class="form-control" type="hidden" th:value="${mainValveF8.processInstanceId}">
+
+				<input id="id" name="id" class="form-control" type="hidden" th:value="${mainValveF8.id}">
+
+				<input id="disassembleNo" name="disassembleNo" class="form-control" type="hidden" th:value="${mainValveF8.disassembleNo}">
+				<input id="disassembleName" name="disassembleName" class="form-control" type="hidden" th:value="${mainValveF8.disassembleName}">
+
+				<input id="cleanerNo" name="cleanerNo" class="form-control" type="hidden" th:value="${mainValveF8.cleanerNo}">
+				<input id="cleanerName" name="cleanerName" class="form-control" type="hidden" th:value="${mainValveF8.cleanerName}">
+
+				<input id="fixer1No" name="fixer1No" class="form-control" type="hidden" th:value="${mainValveF8.fixer1No}">
+				<input id="fixer1Name" name="fixer1Name" class="form-control" type="hidden" th:value="${mainValveF8.fixer1Name}">
+
+				<input id="fixer2No" name="fixer2No" class="form-control" type="hidden" th:value="${mainValveF8.fixer2No}">
+				<input id="fixer2Name" name="fixer2Name" class="form-control" type="hidden" th:value="${mainValveF8.fixer2Name}">
+
+				<input id="fixer3No" name="fixer3No" class="form-control" type="hidden" th:value="${mainValveF8.fixer3No}">
+				<input id="fixer3Name" name="fixer3Name" class="form-control" type="hidden" th:value="${mainValveF8.fixer3Name}">
+
+				<input id="fixer4No" name="fixer4No" class="form-control" type="hidden" th:value="${mainValveF8.fixer4No}">
+				<input id="fixer4Name" name="fixer4Name" class="form-control" type="hidden" th:value="${mainValveF8.fixer4Name}">
+
+				<input id="assemblerNo" name="assemblerNo" class="form-control" type="hidden" th:value="${mainValveF8.assemblerNo}">
+				<input id="assemblerName" name="assemblerName" class="form-control" type="hidden" th:value="${mainValveF8.assemblerName}">
+				<div class="row ">
+					<div class="col-sm-1" shiro:hasAnyRoles="role:admin,role:gangmaster,role:inspector">
+						<a id="imgView" type="submit" class="btn btn-primary" href="javascript:void(0)" onClick="uploadImg(2)">影像查看</a>
+					</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
+
+<!--shiro控制各个角色下可操作的表单 -->
+<div>
+	<script type="text/javascript">
+        var disassembler = false;
+        var cleaner = false;
+        var fixer = false;
+        var assembler=false;
+        var gangmaster=false;
+        var inspector=false;
+	</script>
+</div>
+<div shiro:hasPermission="biz:mainValveF8:disassemble">
+	<script type="text/javascript">
+        //alert("disassembler");
+        disassembler = true;
+	</script>
+</div>
+<div shiro:hasPermission="biz:mainValveF8:clean">
+	<script type="text/javascript">
+        //alert("cleaner");
+        cleaner =true;
+	</script>
+</div>
+<div shiro:hasPermission="biz:mainValveF8:fix">
+	<script type="text/javascript">
+        // alert("fixer");
+        fixer = true;
+	</script>
+</div>
+<div shiro:hasPermission="biz:mainValveF8:assemble">
+	<script type="text/javascript">
+        //alert("assembler");
+        assembler = true;
+	</script>
+</div>
+<div shiro:hasAnyRoles="role:admin,role:gangmaster">
+	<script type="text/javascript">
+        //alert("gangmaster");
+        gangmaster = true;
+	</script>
+</div>
+<div shiro:hasAnyRoles="role:admin,role:inspector">
+	<script type="text/javascript">
+        //alert("gangmaster");
+        inspector = true;
+	</script>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/biz/mainValveF8/look.js">
+</script>
+<script th:inline="javascript">
+    var currentUserName=[[${user.name}]];
+    var currentUserNameNo=[[${user.username}]];
+
+    var disassembleName=[[${mainValveF8.disassembleName}]];
+    var disassembleNo=[[${mainValveF8.disassembleNo}]];
+    var cleanerName=[[${mainValveF8.cleanerName}]];
+    var cleanerNo=[[${mainValveF8.cleanerNo}]];
+
+    var fixer1Name=[[${mainValveF8.fixer1Name}]];
+    var fixer2Name=[[${mainValveF8.fixer2Name}]];
+    var fixer3Name=[[${mainValveF8.fixer3Name}]];
+    var fixer4Name=[[${mainValveF8.fixer4Name}]];
+
+    var fixer1No=[[${mainValveF8.fixer1No}]];
+    var fixer2No=[[${mainValveF8.fixer2No}]];
+    var fixer3No=[[${mainValveF8.fixer3No}]];
+    var fixer4No=[[${mainValveF8.fixer4No}]];
+
+    var assemblerName=[[${mainValveF8.assemblerName}]];
+    var assemblerNo=[[${mainValveF8.assemblerNo}]];
+
+    var createTime=[[${mainValveF8.createTime}]];
+</script>
+</body>
+</html>
