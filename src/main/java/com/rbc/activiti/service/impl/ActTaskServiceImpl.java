@@ -9,6 +9,7 @@ import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.*;
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricProcessInstance;
+import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.impl.RepositoryServiceImpl;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.pvm.PvmTransition;
@@ -87,17 +88,26 @@ public class ActTaskServiceImpl implements ActTaskService {
     }
 
     @Override
-    public void complete(String taskId, Map<String, Object> vars) {
+    public Task complete(String taskId, Map<String, Object> vars) {
         // 2.1根据人物ID查询流程实力ID
         Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
         // 获取流程实例ID
-        String processInstance = task.getProcessInstanceId();
+//        String processInstance = task.getProcessInstanceId();
         // 2.2根据流程实例ID，人物ID，评论的消息，保存教师或者学术对与该学生申请的评论信息
 //        taskService.addComment(taskId, processInstance, "");
 //        Map<String,Object> vars = new HashMap<>();
 //        vars.put("pass",  "1" );
 //        vars.put("title","");
+        taskService.claim(taskId, ShiroUtils.getUser().getUsername());
         taskService.complete(taskId, vars);
+        task = taskService.createTaskQuery().processInstanceId(task.getProcessInstanceId()).active().singleResult();
+        return task;
+    }
+
+
+    @Override
+    public void claim(String taskId, String userName) {
+        taskService.claim(taskId, userName);
     }
 
     /**
@@ -111,7 +121,7 @@ public class ActTaskServiceImpl implements ActTaskService {
      * @return 流程实例ID
      */
     @Override
-    public String startProcess(String procDefKey, String businessTable, String businessId, String title, Map<String, Object> vars) {
+    public Task startProcess(String procDefKey, String businessTable, String businessId, String title, Map<String, Object> vars) {
         String userId = ShiroUtils.getUser().getUsername();//ObjectUtils.toString(UserUtils.getUser().getId())
 
         // 用来设置启动流程的人员ID，引擎会自动把用户ID保存到activiti:initiator中
@@ -129,8 +139,9 @@ public class ActTaskServiceImpl implements ActTaskService {
 
         // 启动流程
         ProcessInstance procIns = runtimeService.startProcessInstanceByKey(procDefKey, businessId, vars);
-
-        return null;
+        Task task = taskService.createTaskQuery().processInstanceId(procIns.getProcessInstanceId()).active().singleResult();
+        taskService.claim(task.getId(), userId);
+        return task;
     }
 
     /**
@@ -217,6 +228,15 @@ public class ActTaskServiceImpl implements ActTaskService {
         return null;
     }
 
+    @Override
+    public List<HistoricTaskInstance> findHistoryTask(List<String> groupIds) {
+        String taskAssignee = "小黄";
+        List<HistoricTaskInstance> list = historyService.createHistoricTaskInstanceQuery()//创建历史任务实例查询
+                .taskCandidateGroupIn(groupIds)
+                .list();
+        return list;
+    }
+
 
     /**
      * 获取需要高亮的线
@@ -268,6 +288,8 @@ public class ActTaskServiceImpl implements ActTaskService {
         }
         return highFlows;
     }
+
+
 
 }
 

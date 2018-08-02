@@ -34,7 +34,7 @@ $().ready(function() {
 
 $.validator.setDefaults({
     submitHandler : function() {
-        update();
+        update('update');
     }
 });
 
@@ -242,12 +242,12 @@ function uploadImg(uploadType){
     window.location.href="/common/sysFile/imgUpload/"+partId+"/"+partType+"/"+uploadType;
 
 }
-function update() {
+function update(flag) {
     var data=$('#pop104Form').serialize();
     $.ajax({
         cache : true,
         type : "POST",
-        url : "/biz/popValve104/update",
+        url : "/biz/popValve104/"+flag,
         data : data,
         async : false,
         error : function(request) {

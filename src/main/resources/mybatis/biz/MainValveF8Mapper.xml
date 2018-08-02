@@ -4,11 +4,11 @@
 <mapper namespace="com.rbc.biz.dao.MainValveF8Dao">
 
 	<select id="get" resultType="com.rbc.biz.domain.MainValveF8DO">
-		select `id`,`pop_value`,`disassemble_no`,`disassemble_name`,`cleaner_no`,`cleaner_name`,`fixer1_no`,`fixer1_name`,`fixer1_remark`,`fixer2_no`,`fixer2_name`,`fixer2_remark`,`fixer3_no`,`fixer3_name`,`fixer3_remark`,`fixer4_no`,`fixer4_name`,`fixer4_remark`,`assembler_no`,`assembler_name`,`assembler_remark`,`assemble_mark`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`gangmaster_remark`,`gangmaster_mark`,`inspector_no`,`inspector_name`,`inspector_mark`,`inspector_audit`,`inspector_remark`,`return_opinion`,`return_remark`,`create_time`,`update_time` from web_main_valve_f8 where id = #{value}
+		select `id`,`pop_value`,`disassemble_no`,`disassemble_name`,`cleaner_no`,`cleaner_name`,`fixer1_no`,`fixer1_name`,`fixer1_remark`,`fixer2_no`,`fixer2_name`,`fixer2_remark`,`fixer3_no`,`fixer3_name`,`fixer3_remark`,`fixer4_no`,`fixer4_name`,`fixer4_remark`,`assembler_no`,`assembler_name`,`assembler_remark`,`assemble_mark`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`gangmaster_remark`,`gangmaster_mark`,`inspector_no`,`inspector_name`,`inspector_mark`,`inspector_audit`,`inspector_remark`,`return_opinion`,`return_remark`,`create_time`,`update_time`,`taskId`,`processInstanceId`,`taskName` from web_main_valve_f8 where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.rbc.biz.domain.MainValveF8DO">
-		select `id`,`pop_value`,`disassemble_no`,`disassemble_name`,`cleaner_no`,`cleaner_name`,`fixer1_no`,`fixer1_name`,`fixer1_remark`,`fixer2_no`,`fixer2_name`,`fixer2_remark`,`fixer3_no`,`fixer3_name`,`fixer3_remark`,`fixer4_no`,`fixer4_name`,`fixer4_remark`,`assembler_no`,`assembler_name`,`assembler_remark`,`assemble_mark`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`gangmaster_remark`,`gangmaster_mark`,`inspector_no`,`inspector_name`,`inspector_mark`,`inspector_audit`,`inspector_remark`,`return_opinion`,`return_remark`,`create_time`,`update_time` from web_main_valve_f8
+		select `id`,`pop_value`,`disassemble_no`,`disassemble_name`,`cleaner_no`,`cleaner_name`,`fixer1_no`,`fixer1_name`,`fixer1_remark`,`fixer2_no`,`fixer2_name`,`fixer2_remark`,`fixer3_no`,`fixer3_name`,`fixer3_remark`,`fixer4_no`,`fixer4_name`,`fixer4_remark`,`assembler_no`,`assembler_name`,`assembler_remark`,`assemble_mark`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`gangmaster_remark`,`gangmaster_mark`,`inspector_no`,`inspector_name`,`inspector_mark`,`inspector_audit`,`inspector_remark`,`return_opinion`,`return_remark`,`create_time`,`update_time`,`taskId`,`processInstanceId`,`taskName` from web_main_valve_f8
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="popValue != null and popValue != ''"> and pop_value = #{popValue} </if>
@@ -46,6 +46,9 @@
 		  		  <if test="returnRemark != null and returnRemark != ''"> and return_remark = #{returnRemark} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+				<if test="taskId != null and taskId != ''"> and taskId = #{taskId} </if>
+				<if test="processInstanceId != null and processInstanceId != ''"> and processInstanceId = #{processInstanceId} </if>
+				<if test="taskName != null and taskName != ''"> and taskName = #{taskName} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -99,6 +102,9 @@
 		  		  <if test="returnRemark != null and returnRemark != ''"> and return_remark = #{returnRemark} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+				 <if test="taskId != null and taskId != ''"> and taskId = #{taskId} </if>
+				 <if test="processInstanceId != null and processInstanceId != ''"> and processInstanceId = #{processInstanceId} </if>
+				 <if test="taskName != null and taskName != ''"> and taskName = #{taskName} </if>
 		  		</where>
 	</select>
 	 
@@ -139,7 +145,7 @@
 			`return_opinion`, 
 			`return_remark`, 
 			`create_time`, 
-			`update_time`
+			`update_time`,`taskId`,`processInstanceId`,`taskName`
 		)
 		values
 		(
@@ -177,7 +183,10 @@
 			#{returnOpinion}, 
 			#{returnRemark}, 
 			#{createTime}, 
-			#{updateTime}
+			#{updateTime},
+			#{taskId},
+			#{processInstanceId},
+			#{taskName}
 		)
 	</insert>
 	 
@@ -218,7 +227,10 @@
 			<if test="returnOpinion != null">`return_opinion` = #{returnOpinion}, </if>
 			<if test="returnRemark != null">`return_remark` = #{returnRemark}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
-			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="taskId != null">`taskId` = #{taskId}, </if>
+			<if test="processInstanceId != null">`processInstanceId` = #{processInstanceId}, </if>
+			<if test="taskName != null">`taskName` = #{taskName} </if>
 		</set>
 		where id = #{id}
 	</update>

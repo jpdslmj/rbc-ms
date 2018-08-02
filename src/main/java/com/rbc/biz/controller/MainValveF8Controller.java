@@ -1,11 +1,17 @@
 package com.rbc.biz.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.rbc.activiti.config.ActivitiConstant;
+import com.rbc.activiti.service.impl.ActTaskServiceImpl;
+import com.rbc.activiti.utils.ActivitiUtils;
 import com.rbc.common.controller.BaseController;
+import com.rbc.common.utils.*;
 import com.rbc.system.domain.UserDO;
 import com.rbc.system.service.UserService;
+import org.activiti.engine.task.Task;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -20,9 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rbc.biz.domain.MainValveF8DO;
 import com.rbc.biz.service.MainValveF8Service;
-import com.rbc.common.utils.PageUtils;
-import com.rbc.common.utils.Query;
-import com.rbc.common.utils.R;
 
 /**
  * F8主阀信息表
@@ -39,6 +42,10 @@ public class MainValveF8Controller extends BaseController {
 	private MainValveF8Service mainValveF8Service;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ActivitiUtils activitiUtils;
+	@Autowired
+	private ActTaskServiceImpl actTaskService;
 	@GetMapping()
 	@RequiresPermissions("biz:mainValveF8:mainValveF8")
 	String MainValveF8(){
@@ -74,7 +81,61 @@ public class MainValveF8Controller extends BaseController {
 		model.addAttribute("user",userDO);
 	    return "biz/mainValveF8/edit";
 	}
-	
+	@GetMapping("/look/{id}")
+	String look(@PathVariable("id") Long id,Model model){
+		MainValveF8DO mainValveF8 = mainValveF8Service.get(id);
+		model.addAttribute("mainValveF8", mainValveF8);
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
+		return "biz/mainValveF8/look";
+	}
+
+	//工作流开始页面
+	@GetMapping("/form")
+	String form(Model model) {
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
+		return "biz/mainValveF8/add";
+	}
+
+	//工作流编辑页面
+	@GetMapping("/form/{taskId}")
+	String form(@PathVariable("taskId") String taskId, Model model) {
+		Task task = activitiUtils.getTaskByTaskId(taskId);
+		MainValveF8DO mainValveF8 = mainValveF8Service.get(Long.valueOf(activitiUtils.getBusinessKeyByTask(task)));
+		mainValveF8.setTaskId(taskId);
+		model.addAttribute("mainValveF8", mainValveF8);
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
+		return "biz/mainValveF8/edit";
+	}
+
+	//工作流流转（签字）
+	@ResponseBody
+	@RequestMapping("/sign")
+	public R sign(MainValveF8DO mainValveF8){
+		if(mainValveF8.getId() == null) {
+			mainValveF8Service.save(mainValveF8);
+		}
+		if(StringUtils.isBlank(mainValveF8.getTaskId())) {
+			HashMap map = new HashMap<>();
+			map.put("processName","F8主阀");
+			map.put("processNumber",mainValveF8.getPopValue());
+			map.put("processForm","/biz/mainValveF8/form");
+			Task task = actTaskService.startProcess(ActivitiConstant.ACTIVITI_PROCESS104[0],ActivitiConstant.ACTIVITI_PROCESS104[1],mainValveF8.getId().toString(),null,map);
+			mainValveF8.setTaskId(task.getId());
+			mainValveF8.setTaskName(task.getName());
+			mainValveF8.setProcessInstanceId(task.getProcessInstanceId());
+		}
+		Map<String,Object> vars = new HashMap<>(16);
+		vars.put("pass",  mainValveF8.getTaskPass());
+		Task task = actTaskService.complete(mainValveF8.getTaskId(),vars);
+		mainValveF8.setTaskId(task.getId());
+		mainValveF8.setTaskName(task.getName());
+		mainValveF8Service.update(mainValveF8);
+		return R.ok();
+	}
+
 	/**
 	 * 保存
 	 */
@@ -83,6 +144,10 @@ public class MainValveF8Controller extends BaseController {
 	@RequiresPermissions("biz:mainValveF8:add")
 	public R save( MainValveF8DO mainValveF8){
 		if(mainValveF8Service.save(mainValveF8)>0){
+			String taskId = mainValveF8.getTaskId();
+			if(StringUtils.isNotBlank(taskId)) {
+				actTaskService.claim(taskId, ShiroUtils.getUser().getUsername());
+			}
 			return R.ok();
 		}
 		return R.error();

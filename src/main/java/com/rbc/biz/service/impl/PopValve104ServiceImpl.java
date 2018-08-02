@@ -5,6 +5,7 @@ import com.rbc.activiti.service.impl.ActTaskServiceImpl;
 import com.rbc.biz.dao.PopValve104Dao;
 import com.rbc.biz.domain.PopValve104DO;
 import com.rbc.biz.service.PopValve104Service;
+import com.rbc.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +19,6 @@ import java.util.Map;
 public class PopValve104ServiceImpl implements PopValve104Service {
 	@Autowired
 	private PopValve104Dao popValve104Dao;
-
-	@Autowired
-	private ActTaskServiceImpl actTaskService;
 
 	@Override
 	public PopValve104DO get(Long id){
@@ -49,17 +47,11 @@ public class PopValve104ServiceImpl implements PopValve104Service {
 	
 	@Override
 	public int save(PopValve104DO popValve104){
-		int i = popValve104Dao.save(popValve104);
-		actTaskService.startProcess(ActivitiConstant.ACTIVITI_PROCESS104[0],ActivitiConstant.ACTIVITI_PROCESS104[1],popValve104.getId().toString(),null,new HashMap<>());
-		return i;
+		return popValve104Dao.save(popValve104);
 	}
 	
 	@Override
 	public int update(PopValve104DO popValve104){
-		Map<String,Object> vars = new HashMap<>(16);
-		vars.put("pass",  popValve104.getTaskPass());
-		vars.put("title","");
-		actTaskService.complete(popValve104.getTaskId(),vars);
 		return popValve104Dao.update(popValve104);
 	}
 	

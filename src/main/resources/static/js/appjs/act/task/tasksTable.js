@@ -23,7 +23,7 @@ function load() {
 				// //发送到服务器的数据编码类型
 				pageSize : 10, // 如果设置了分页，每页数据条数
 				pageNumber : 1, // 如果设置了分布，首页页码
-				// search : true, // 是否显示搜索框
+				search : true, // 是否显示搜索框
 				showColumns : false, // 是否显示内容下拉框（选择显示的列）
 				sidePagination : "client", // 设置在哪里进行分页，可选值为"client" 或者
 				// "server"
@@ -45,33 +45,41 @@ function load() {
 					{
 						checkbox : true
 					},
+                    // {
+                    //     field : 'id', // 列字段名
+                    //     title : '任务' // 列标题
+                    // },
+                    // {
+                    //     field : 'key', // 列字段名
+                    //     title : '任务key' // 列标题
+                    // },
+                    // {
+                    //     field : 'processId', // 列字段名
+                    //     title : '流程编号' // 列标题
+                    // },
+                    // {
+                    //     field : 'processDefinitionId', // 列字段名
+                    //     title : '流程定义编号' // 列标题
+                    // },
                     {
-                        field : 'id', // 列字段名
-                        title : '任务' // 列标题
-                    },
-                    {
-                        field : 'key', // 列字段名
-                        title : '任务key' // 列标题
-                    },
-                    {
-                        field : 'processId', // 列字段名
-                        title : '流程编号' // 列标题
-                    },
-                    {
-                        field : 'processDefinitionId', // 列字段名
-                        title : '流程定义编号' // 列标题
-                    },
-                    {
-                        field : 'name',
+                        field : 'processName',
                         title : '任务名称'
                     },
                     {
-                        field : 'executionId',
-                        title : '跟踪',
-						formatter:function(value,row,index){
-                        	return '<a href="/activiti/task/trace/photo/'+row.processDefinitionId+'/'+row.executionId+'">跟踪</a>';
-						}
+                        field : 'processNumber',
+                        title : '任务编号'
                     },
+                    {
+                        field : 'name',
+                        title : '环节名称'
+                    },
+                    // {
+                    //     field : 'executionId',
+                    //     title : '跟踪',
+						// formatter:function(value,row,index){
+                    //     	return '<a href="/activiti/task/trace/photo/'+row.processDefinitionId+'/'+row.executionId+'">跟踪</a>';
+						// }
+                    // },
 					{
 						title : '操作',
 						field : 'id',
@@ -87,7 +95,7 @@ function load() {
 			});
 }
 function reLoad() {
-	$('#exampleTable').bootstrapTable('refresh');
+	$('#taskListTable').bootstrapTable('refresh');
 }
 function add() {
 	// iframe层

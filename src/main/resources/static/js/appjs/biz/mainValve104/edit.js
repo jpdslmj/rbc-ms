@@ -37,7 +37,7 @@ $().ready(function() {
 
 $.validator.setDefaults({
     submitHandler : function() {
-        update();
+        update('update');
     }
 });
 
@@ -260,12 +260,12 @@ function uploadImg(uploadType){
 
 }
 
-function update() {
+function update(flag) {
     var data=$('#main104Form').serialize();
     $.ajax({
         cache : true,
         type : "POST",
-        url : "/biz/mainValve104/update",
+        url : "/biz/mainValve104/"+flag,
         data : data,
         async : false,
         error : function(request) {

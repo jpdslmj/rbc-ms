@@ -26,6 +26,33 @@ public class TaskVO  {
     private String processId;
     private String processDefinitionId;
     private String executionId;
+    private String processName;
+    private String processNumber;
+    private String processForm;
+
+    public String getProcessName() {
+        return processName;
+    }
+
+    public void setProcessName(String processName) {
+        this.processName = processName;
+    }
+
+    public String getProcessNumber() {
+        return processNumber;
+    }
+
+    public void setProcessNumber(String processNumber) {
+        this.processNumber = processNumber;
+    }
+
+    public String getProcessForm() {
+        return processForm;
+    }
+
+    public void setProcessForm(String processForm) {
+        this.processForm = processForm;
+    }
 
     public String getId() {
         return id;

@@ -25,7 +25,7 @@ function load() {
 						// //发送到服务器的数据编码类型
 						pageSize : 10, // 如果设置了分页，每页数据条数
 						pageNumber : 1, // 如果设置了分布，首页页码
-						//search : true, // 是否显示搜索框
+						search : true, // 是否显示搜索框
 						showColumns : false, // 是否显示内容下拉框（选择显示的列）
 						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
 						queryParams : function(params) {
@@ -49,11 +49,6 @@ function load() {
 								},
 																{
 									field : 'id',
-									title : '',
-									visible:false
-								},
-																{
-									field : 'taskId',
 									title : '',
 									visible:false
 								},
@@ -219,16 +214,30 @@ function load() {
 								},
 																{
 									field : 'updateTime', 
-									title : '更新日期',
-																	visible:false
+									title : '更新日期', visible:false
+								},	 							{
+									field : 'taskId',
+									title : '当前任务ID', visible:false
+								},	 							{
+									field : 'taskName',
+									title : '当前环节'
+								},	 							{
+									field : 'processInstanceId',
+									title : '流程实例ID', visible:false
 								},
 																{
 									title : '操作',
 									field : 'popValue',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑1" onclick="edit(\''
-												+ row.taskId
+										if(row.taskId != null && row.taskId != "null" && row.taskId != "") {
+                                            var e = '<a class="btn btn-primary btn-sm" href="#" mce_href="#" title="查看" onclick="look(\''
+                                                + row.id
+                                                + '\')"><i class="fa fa-eye"></i></a> ';
+                                            return e;
+										}
+										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
+												+ row.id
 												+ '\')"><i class="fa fa-edit"></i></a> ';
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.id
@@ -292,7 +301,21 @@ function remove(id) {
 		});
 	})
 }
-
+function look(id) {
+    layer.open({
+        type : 2,
+        title : '查看',
+        shadeClose : false, // 点击遮罩关闭层
+        content : prefix + '/look/' + id ,// iframe的url
+        maxmin : true,
+        fixed:false,
+        resize:true,
+        area : ['600px','400px'],
+        success:function(layero ,index){
+            layer.full(index);
+        }
+    });
+}
 function resetPwd(id) {
 }
 function batchRemove() {

@@ -4,10 +4,16 @@ package com.rbc.activiti.controller;
 import com.rbc.activiti.service.ActTaskService;
 import com.rbc.activiti.vo.ProcessVO;
 import com.rbc.activiti.vo.TaskVO;
+import com.rbc.biz.domain.PopValve104DO;
+import com.rbc.common.controller.BaseController;
 import com.rbc.common.utils.PageUtils;
+import com.rbc.common.utils.StringUtils;
+import com.rbc.system.service.RoleService;
 import org.activiti.engine.FormService;
+import org.activiti.engine.HistoryService;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +28,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 @RequestMapping("activiti/task")
 @RestController
-public class TaskController {
+public class TaskController  extends BaseController {
 
     @Autowired
     RepositoryService repositoryService;
@@ -36,6 +43,10 @@ public class TaskController {
     TaskService taskService;
     @Autowired
     ActTaskService actTaskService;
+    @Autowired
+    private HistoryService historyService;
+    @Autowired
+    private RoleService roleService;
 
     @GetMapping("goto")
     public ModelAndView gotoTask(){
@@ -64,26 +75,38 @@ public class TaskController {
     @GetMapping("/form/{procDefId}/{taskId}")
     public void form(@PathVariable("procDefId") String procDefId,@PathVariable("taskId") String taskId ,HttpServletResponse response) throws IOException {
         // 获取流程XML上的表单KEY
-        String formKey = actTaskService.getFormKey(procDefId, taskId);
+        String formKey = (String)taskService.getVariable(taskId,"processForm");
+        if(StringUtils.isBlank(formKey)) {
+            formKey = actTaskService.getFormKey(procDefId, taskId);
+        }
         response.sendRedirect(formKey+"/"+taskId);
     }
 
     @GetMapping("/todo")
     ModelAndView todo(){
+
         return new ModelAndView("act/task/todoTask");
     }
 
+    @GetMapping("/sp")
+    ModelAndView sp(){
+        return new ModelAndView("act/task/spTask");
+    }
     /**
      * 获取个人任务列表
      */
     @GetMapping("/taskList")
     List<TaskVO> taskList(){
-        String assignee = "admin";
-        List<Task> tasks = taskService.createTaskQuery().taskAssignee(assignee).list();
+        List<Task> tasks = taskService.createTaskQuery().taskAssignee(getUsername()).list();
+        List<String> groupIds = roleService.getGroupIds(getUserId());
+        List<Task> taskGroupList = taskService.createTaskQuery().taskCandidateGroupIn(groupIds).list();
+        tasks.addAll(taskGroupList);
         List<TaskVO> taskVOS =  new ArrayList<>();
         for(Task task : tasks){
             TaskVO taskVO = new TaskVO(task);
             taskVOS.add(taskVO);
+            taskVO.setProcessName((String)taskService.getVariable(task.getId(),"processName"));
+            taskVO.setProcessNumber((String)taskService.getVariable(task.getId(),"processNumber"));
         }
         return taskVOS;
     }

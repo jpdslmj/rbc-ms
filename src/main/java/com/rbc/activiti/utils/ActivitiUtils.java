@@ -28,7 +28,13 @@ public class ActivitiUtils {
                 .singleResult();
         return pi.getBusinessKey();
     }
-
+    public String getBusinessKeyByTask(Task task){
+        ProcessInstance pi = runtimeService
+                .createProcessInstanceQuery()
+                .processInstanceId(task.getProcessInstanceId())
+                .singleResult();
+        return pi.getBusinessKey();
+    }
     public Task getTaskByTaskId(String taskId){
         Task task = taskService
                 .createTaskQuery()

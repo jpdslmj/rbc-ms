@@ -12,7 +12,7 @@ $().ready(function() {
 
 $.validator.setDefaults({
     submitHandler : function() {
-        save();
+        save('save');
     }
 });
 
@@ -226,12 +226,12 @@ function loadmainF8Table() {
         });
 }
 
-function save() {
+function save(flag) {
     var data=$('#mainF8Form').serialize();
     $.ajax({
         cache : true,
         type : "POST",
-        url : "/biz/mainValveF8/save",
+        url : "/biz/mainValveF8/"+flag,
         data : data,
         async : false,
         error : function(request) {

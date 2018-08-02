@@ -4,9 +4,28 @@ import java.util.Map;
 
 
 public class TaskDO {
-    private  String taskId;
+    private String taskId;
     private String taskComment;
     private String taskPass;
+    private String processInstanceId;
+    private String taskName;
+
+    public String getProcessInstanceId() {
+        return processInstanceId;
+    }
+
+    public void setProcessInstanceId(String processInstanceId) {
+        this.processInstanceId = processInstanceId;
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
     private Map<String,Object> vars;
 
     public String getTaskId() {

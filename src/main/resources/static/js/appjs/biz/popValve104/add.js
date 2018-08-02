@@ -12,7 +12,7 @@ $().ready(function() {
 
 $.validator.setDefaults({
 	submitHandler : function() {
-		save();
+		save('save');
 	}
 });
 
@@ -212,12 +212,12 @@ function loadPop104Table() {
         });
 }
 
-function save() {
+function save(flag) {
     var data=$('#pop104Form').serialize();
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/biz/popValve104/save",
+		url : "/biz/popValve104/"+flag,
 		data : data,
 		async : false,
 		error : function(request) {

@@ -12,7 +12,7 @@ $().ready(function() {
 
 $.validator.setDefaults({
     submitHandler : function() {
-        save();
+        save('save');
     }
 });
 
@@ -226,12 +226,12 @@ function loadmain104Table() {
         });
 }
 
-function save() {
+function save(flag) {
     var data=$('#main104Form').serialize();
     $.ajax({
         cache : true,
         type : "POST",
-        url : "/biz/mainValve104/save",
+        url : "/biz/mainValve104/"+flag,
         data : data,
         async : false,
         error : function(request) {
