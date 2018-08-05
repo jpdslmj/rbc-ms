@@ -47,16 +47,12 @@ public class PopValve104Controller extends BaseController {
 	private ActTaskServiceImpl actTaskService;
 	@GetMapping()
 	@RequiresPermissions("biz:popValve104:popValve104")
-	String PopValve104(){
+	String PopValve104(Model model){
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
 	    return "biz/popValve104/popValve104";
 	}
 
-	@GetMapping("/history")
-	//@RequiresPermissions("biz:popValve104:popValve104")
-	String historyIndex(){
-		return "biz/popValve104/history_index";
-	}
-	
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("biz:popValve104:popValve104")
@@ -68,7 +64,17 @@ public class PopValve104Controller extends BaseController {
 		PageUtils pageUtils = new PageUtils(popValve104List, total);
 		return pageUtils;
 	}
-
+	@ResponseBody
+	@GetMapping("/listNew")
+	@RequiresPermissions("biz:popValve104:popValve104")
+	public PageUtils listNew(@RequestParam Map<String, Object> params){
+		//查询列表数据
+		Query query = new Query(params);
+		List<PopValve104DO> popValve104List = popValve104Service.list(query);
+		int total = popValve104Service.count(query);
+		PageUtils pageUtils = new PageUtils(popValve104List, total);
+		return pageUtils;
+	}
 	@ResponseBody
 	@GetMapping("/history/list")
 	@RequiresPermissions("biz:popValve104:popValve104")
@@ -212,5 +218,10 @@ public class PopValve104Controller extends BaseController {
 		popValve104Service.batchRemove(ids);
 		return R.ok();
 	}
-
+	@PostMapping("/exit")
+	@ResponseBody
+	boolean exit(@RequestParam Map<String, Object> params) {
+		// 存在，不通过，false
+		return !popValve104Service.exit(params);
+	}
 }

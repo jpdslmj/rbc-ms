@@ -1,5 +1,9 @@
 
 $().ready(function() {
+    if(disassembler){
+        $('#createTime').attr("disabled",false);
+        $('#popValue').attr("disabled",false);
+    }
     loadPop104Table();
     var crtTm=new Date(createTime).Format("yyyy-MM-dd");
     $("#createTime").val(crtTm);
@@ -34,7 +38,8 @@ $().ready(function() {
 
 $.validator.setDefaults({
     submitHandler : function() {
-        update('update');
+        $('#taskPass').val('1');
+        update('sign');
     }
 });
 
@@ -243,6 +248,33 @@ function uploadImg(uploadType){
 
 }
 function update(flag) {
+    if(disassembler){
+        if($('#disassembleNo').val()==null||$('#disassembleNo').val()==''){
+            alert("请签名！");
+            return;
+        }
+    }
+    if(cleaner){
+        if($('#cleanerNo').val()==null||$('#cleanerNo').val()==''){
+            alert("请签名！");
+            return;
+        }
+    }
+    if(fixer&&flag=='sign'){
+        var fixer1=$('#fixer1No').val();
+        var fixer2=$('#fixer2No').val();
+        var fixer3=$('#fixer3No').val();
+        if(fixer1==null||fixer1==''||fixer2==null||fixer2==''||fixer3==null||fixer3==''){
+            alert("检修请全部签名！");
+            return;
+        }
+    }
+    if(assembler){
+        if($('#assemblerNo').val()==null||$('#assemblerNo').val()==''){
+            alert("请签名！");
+            return;
+        }
+    }
     var data=$('#pop104Form').serialize();
     $.ajax({
         cache : true,
@@ -257,6 +289,8 @@ function update(flag) {
             if (data.code == 0) {
                 parent.layer.msg("操作成功");
                 parent.reLoad();
+                parent.reLoad2();
+                parent.reLoad3();
                 var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
                 parent.layer.close(index);
 
@@ -273,12 +307,29 @@ function validateRule() {
     $('#pop104Form').validate({
         rules : {
             popValue : {
-                required : true
+                required : true,
+                remote : {
+                    url : "/biz/mainValve104/exit", // 后台处理程序
+                    type : "post", // 数据发送方式
+                    dataType : "json", // 接受数据格式
+                    data : { // 要传递的数据
+                        id:function() {
+                            return $("#id").val();
+                        },
+                        validate:function() {
+                            return "validate";
+                        },
+                        popValue : function() {
+                            return $("#popValue").val();
+                        }
+                    }
+                }
             }
         },
         messages : {
             popValue : {
-                required : icon + "请输入编号"
+                required : icon + "请输入编号",
+                remote : icon + "编号已经存在"
             }
         }
     })

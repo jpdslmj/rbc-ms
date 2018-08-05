@@ -10,11 +10,11 @@
 				<div class="col-sm-12 form-inline m-b-sm">
 					<div class="form-group col-sm-6" >
 						<label class="control-label">时间:</label>
-						<input id="createTime" name="createTime" class="form-control " th:value="${assistValveF8.createTime}"  readonly="readonly" type="date" style="width: 250px">
+						<input id="createTime" name="createTime" class="form-control " th:value="${assistValveF8.createTime}"   disabled="true"  type="date" style="width: 250px">
 					</div>
 					<div class="form-group col-sm-6" >
 						<label class="control-label">F8辅助阀编号:</label>
-						<input id="assistValue" name="assistValue" class="form-control"  readonly="readonly" type="text" th:value="${assistValveF8.assistValue}" style="width: 250px">
+						<input id="assistValue" name="assistValue" class="form-control"   disabled="true" type="text" th:value="${assistValveF8.assistValue}" style="width: 250px">
 
 					</div>
 				</div>
@@ -29,8 +29,9 @@
 							<option value="1" th:selected="${assistValveF8.gangmasterAudit == 1}">合格</option>
 						</select>
 					</div>
-					<input id="gangmasterNo" name="gangmasterNo" class="form-control" type="hidden" th:value="${assistValveF8.gangmasterNo}?:${user.username}">
+
 					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster">
+						<input id="gangmasterNo" name="gangmasterNo" class="form-control" type="hidden" th:value="${assistValveF8.gangmasterNo}?:${user.username}">
 						<input id="gangmasterName" name="gangmasterName" class="form-control" type="text" placeholder="工长名称" th:value="${assistValveF8.gangmasterName}?:${user.name}">
 					</div>
 					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
@@ -40,8 +41,8 @@
 							<option value="1" th:selected="${assistValveF8.inspectorAudit ==1}">合格</option>
 						</select>
 					</div>
-					<input id="inspectorNo" name="inspectorNo" class="form-control" type="hidden" th:value="${assistValveF8.inspectorNo}?:${user.username}" >
 					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
+						<input id="inspectorNo" name="inspectorNo" class="form-control" type="hidden" th:value="${assistValveF8.inspectorNo}?:${user.username}" >
 						<input id="inspectorName" name="inspectorName" class="form-control" type="text" placeholder="质检员名称" th:value="${assistValveF8.inspectorName}?:${user.name}">
 					</div>
 				</div>
@@ -101,7 +102,7 @@
 					</div>
 					<input id="taskPass" name="taskPass" class="hidden">
 					<div class="col-sm-4 " id="sign">
-						<button type="button" class="btn btn-primary" onclick="$('#taskPass').val('1');update('sign')">签字提交</button>
+						<button type="submit" class="btn btn-primary" >签字提交</button>
 					</div>
 					<div class="col-sm-4 " id="black">
 						<button type="button" class="btn btn-primary" onclick="$('#taskPass').val('0');update('sign')">退回</button>

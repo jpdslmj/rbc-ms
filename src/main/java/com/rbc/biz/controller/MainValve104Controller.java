@@ -50,7 +50,9 @@ public class MainValve104Controller extends BaseController {
 	
 	@GetMapping()
 	@RequiresPermissions("biz:mainValve104:mainValve104")
-	String MainValve104(){
+	String MainValve104(Model model){
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
 	    return "biz/mainValve104/mainValve104";
 	}
 	
@@ -65,7 +67,17 @@ public class MainValve104Controller extends BaseController {
 		PageUtils pageUtils = new PageUtils(mainValve104List, total);
 		return pageUtils;
 	}
-	
+	@ResponseBody
+	@GetMapping("/listNew")
+	@RequiresPermissions("biz:mainValve104:mainValve104")
+	public PageUtils listNew(@RequestParam Map<String, Object> params){
+		//查询列表数据
+		Query query = new Query(params);
+		List<MainValve104DO> assistValveF8List = mainValve104Service.list(query);
+		int total = mainValve104Service.count(query);
+		PageUtils pageUtils = new PageUtils(assistValveF8List, total);
+		return pageUtils;
+	}
 	@GetMapping("/add")
 	@RequiresPermissions("biz:mainValve104:add")
 	String add(Model model){
@@ -187,5 +199,10 @@ public class MainValve104Controller extends BaseController {
 		mainValve104Service.batchRemove(ids);
 		return R.ok();
 	}
-	
+	@PostMapping("/exit")
+	@ResponseBody
+	boolean exit(@RequestParam Map<String, Object> params) {
+		// 存在，不通过，false
+		return !mainValve104Service.exit(params);
+	}
 }

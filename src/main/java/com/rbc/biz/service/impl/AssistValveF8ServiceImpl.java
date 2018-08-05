@@ -51,5 +51,11 @@ public class AssistValveF8ServiceImpl implements AssistValveF8Service {
 	public int batchRemove(Long[] ids){
 		return assistValveF8Dao.batchRemove(ids);
 	}
-	
+
+	@Override
+	public boolean exit(Map<String, Object> params) {
+		boolean exit;
+		exit = assistValveF8Dao.list(params).size() > 0;
+		return exit;
+	}
 }

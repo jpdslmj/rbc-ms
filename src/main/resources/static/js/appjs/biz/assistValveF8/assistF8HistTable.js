@@ -1,15 +1,15 @@
 
-var prefix = "/biz/assistValveF8"
+var prefix2 = "/biz/assistValveF8"
 $(function() {
-    load();
+    load2();
 });
 
-function load() {
-    $('#exampleTable')
+function load2() {
+    $('#assistValveF8Table')
         .bootstrapTable(
             {
                 method : 'get', // 服务器数据的请求方式 get or post
-                url : prefix + "/list", // 服务器数据的加载地址
+                url : prefix2 + "/list", // 服务器数据的加载地址
                 //	showRefresh : true,
                 //	showToggle : true,
                 //	showColumns : true,
@@ -32,9 +32,11 @@ function load() {
                     return {
                         //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                         limit: params.limit,
-                        offset:params.offset
-                        // name:$('#searchName').val(),
-                        // username:$('#searchName').val()
+                        offset:params.offset,
+                        queryType:"his",
+                        createTime:$('#createTime').val(),
+                        assistValue:$('#assistValue').val(),
+                        username:currentUserNameNo
                     };
                 },
                 // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -59,7 +61,7 @@ function load() {
                     },
                     {
                         field : 'assistValue',
-                        title : 'F8主阀编号'
+                        title : 'F8辅助阀编号'
                     },
                     {
                         field : 'disassembleNo',
@@ -241,26 +243,19 @@ function load() {
                                     + '\')"><i class="fa fa-eye"></i></a> ';
                                 return e;
                             }
-                            var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑1" onclick="edit(\''
-                                + row.id
-                                + '\')"><i class="fa fa-edit"></i></a> ';
-                            var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-                                + row.id
-                                + '\')"><i class="fa fa-remove"></i></a> ';
-                            return e + d ;
                         }
                     } ]
             });
 }
-function reLoad() {
-    $('#exampleTable').bootstrapTable('refresh');
+function reLoad2() {
+    $('#assistValveF8Table').bootstrapTable('refresh');
 }
 function add() {
     layer.open({
         type : 2,
         title : '增加',
         shadeClose : false, // 点击遮罩关闭层
-        content : prefix + '/add', // iframe的url
+        content : prefix2 + '/add', // iframe的url
         maxmin : true,
         fixed:false,
         resize:true,
@@ -270,12 +265,12 @@ function add() {
         }
     });
 }
-function edit(id) {
+function edit2(id) {
     layer.open({
         type : 2,
         title : '编辑',
         shadeClose : false, // 点击遮罩关闭层
-        content : prefix + '/edit/' + id ,// iframe的url
+        content : prefix2 + '/edit/' + id ,// iframe的url
         maxmin : true,
         fixed:false,
         resize:true,
@@ -290,7 +285,7 @@ function look(id) {
         type : 2,
         title : '查看',
         shadeClose : false, // 点击遮罩关闭层
-        content : prefix + '/look/' + id ,// iframe的url
+        content : prefix2 + '/look/' + id ,// iframe的url
         maxmin : true,
         fixed:false,
         resize:true,
@@ -300,12 +295,12 @@ function look(id) {
         }
     });
 }
-function remove(id) {
+function remove2(id) {
     layer.confirm('确定要删除选中的记录？', {
         btn : [ '确定', '取消' ]
     }, function() {
         $.ajax({
-            url : prefix+"/remove",
+            url : prefix2+"/remove",
             type : "post",
             data : {
                 'id' : id
@@ -322,10 +317,10 @@ function remove(id) {
     })
 }
 
-function resetPwd(id) {
+function resetPwd2(id) {
 }
-function batchRemove() {
-    var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+function batchRemove2() {
+    var rows = $('#assistValveF8Table').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
     if (rows.length == 0) {
         layer.msg("请选择要删除的数据");
         return;
@@ -344,7 +339,7 @@ function batchRemove() {
             data : {
                 "ids" : ids
             },
-            url : prefix + '/batchRemove',
+            url : prefix2 + '/batchRemove',
             success : function(r) {
                 if (r.code == 0) {
                     layer.msg(r.msg);

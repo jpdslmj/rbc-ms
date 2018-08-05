@@ -65,4 +65,10 @@ public class PopValve104ServiceImpl implements PopValve104Service {
 		return popValve104Dao.batchRemove(ids);
 	}
 
+	@Override
+	public boolean exit(Map<String, Object> params) {
+		boolean exit;
+		exit = popValve104Dao.list(params).size() > 0;
+		return exit;
+	}
 }

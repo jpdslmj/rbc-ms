@@ -48,7 +48,9 @@ public class MainValveF8Controller extends BaseController {
 	private ActTaskServiceImpl actTaskService;
 	@GetMapping()
 	@RequiresPermissions("biz:mainValveF8:mainValveF8")
-	String MainValveF8(){
+	String MainValveF8(Model model){
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
 	    return "biz/mainValveF8/mainValveF8";
 	}
 	
@@ -63,7 +65,18 @@ public class MainValveF8Controller extends BaseController {
 		PageUtils pageUtils = new PageUtils(mainValveF8List, total);
 		return pageUtils;
 	}
-	
+	@ResponseBody
+	@GetMapping("/listNew")
+	@RequiresPermissions("biz:mainValveF8:mainValveF8")
+	public PageUtils listNew(@RequestParam Map<String, Object> params){
+		//查询列表数据
+		Query query = new Query(params);
+		List<MainValveF8DO> assistValveF8List = mainValveF8Service.list(query);
+		int total = mainValveF8Service.count(query);
+		PageUtils pageUtils = new PageUtils(assistValveF8List, total);
+		return pageUtils;
+	}
+
 	@GetMapping("/add")
 	@RequiresPermissions("biz:mainValveF8:add")
 	String add(Model model){
@@ -186,5 +199,10 @@ public class MainValveF8Controller extends BaseController {
 		mainValveF8Service.batchRemove(ids);
 		return R.ok();
 	}
-	
+	@PostMapping("/exit")
+	@ResponseBody
+	boolean exit(@RequestParam Map<String, Object> params) {
+		// 存在，不通过，false
+		return !mainValveF8Service.exit(params);
+	}
 }

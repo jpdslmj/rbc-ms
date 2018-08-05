@@ -27,4 +27,6 @@ public interface AssistValveF8Service {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
+	boolean exit(Map<String, Object> params);
 }

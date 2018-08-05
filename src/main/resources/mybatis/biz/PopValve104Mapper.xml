@@ -9,45 +9,71 @@
 
 	<select id="list" resultType="com.rbc.biz.domain.PopValve104DO">
 		select `id`,`pop_value`,`disassemble_no`,`disassemble_name`,`cleaner_no`,`cleaner_name`,`fixer1_no`,`fixer1_name`,`fixer1_remark`,`fixer2_no`,`fixer2_name`,`fixer2_remark`,`fixer3_no`,`fixer3_name`,`fixer3_remark`,`fixer4_no`,`fixer4_name`,`fixer4_remark`,`assembler_no`,`assembler_name`,`assembler_remark`,`assemble_mark`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`gangmaster_remark`,`gangmaster_mark`,`inspector_no`,`inspector_name`,`inspector_mark`,`inspector_audit`,`inspector_remark`,`return_opinion`,`return_remark`,`create_time`,`update_time`,`taskId`,`processInstanceId`,`taskName` from web_pop_valve_104
-        <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+        <where>
+			<choose>
+				<when test="validate=='validate'">
+					<if test="id != null and id != ''"> and id != #{id} </if>
+				</when>
+				<otherwise>
+					<if test="id != null and id != ''"> and id = #{id} </if>
+				</otherwise>
+			</choose>
 		  		  <if test="popValue != null and popValue != ''"> and pop_value = #{popValue} </if>
-		  		  <if test="disassembleNo != null and disassembleNo != ''"> and disassemble_no = #{disassembleNo} </if>
 		  		  <if test="disassembleName != null and disassembleName != ''"> and disassemble_name = #{disassembleName} </if>
-		  		  <if test="cleanerNo != null and cleanerNo != ''"> and cleaner_no = #{cleanerNo} </if>
 		  		  <if test="cleanerName != null and cleanerName != ''"> and cleaner_name = #{cleanerName} </if>
-		  		  <if test="fixer1No != null and fixer1No != ''"> and fixer1_no = #{fixer1No} </if>
 		  		  <if test="fixer1Name != null and fixer1Name != ''"> and fixer1_name = #{fixer1Name} </if>
 		  		  <if test="fixer1Remark != null and fixer1Remark != ''"> and fixer1_remark = #{fixer1Remark} </if>
-		  		  <if test="fixer2No != null and fixer2No != ''"> and fixer2_no = #{fixer2No} </if>
 		  		  <if test="fixer2Name != null and fixer2Name != ''"> and fixer2_name = #{fixer2Name} </if>
 		  		  <if test="fixer2Remark != null and fixer2Remark != ''"> and fixer2_remark = #{fixer2Remark} </if>
-		  		  <if test="fixer3No != null and fixer3No != ''"> and fixer3_no = #{fixer3No} </if>
 		  		  <if test="fixer3Name != null and fixer3Name != ''"> and fixer3_name = #{fixer3Name} </if>
 		  		  <if test="fixer3Remark != null and fixer3Remark != ''"> and fixer3_remark = #{fixer3Remark} </if>
-		  		  <if test="fixer4No != null and fixer4No != ''"> and fixer4_no = #{fixer4No} </if>
 		  		  <if test="fixer4Name != null and fixer4Name != ''"> and fixer4_name = #{fixer4Name} </if>
 		  		  <if test="fixer4Remark != null and fixer4Remark != ''"> and fixer4_remark = #{fixer4Remark} </if>
-		  		  <if test="assemblerNo != null and assemblerNo != ''"> and assembler_no = #{assemblerNo} </if>
 		  		  <if test="assemblerName != null and assemblerName != ''"> and assembler_name = #{assemblerName} </if>
 		  		  <if test="assemblerRemark != null and assemblerRemark != ''"> and assembler_remark = #{assemblerRemark} </if>
 		  		  <if test="assembleMark != null and assembleMark != ''"> and assemble_mark = #{assembleMark} </if>
-		  		  <if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
 		  		  <if test="gangmasterName != null and gangmasterName != ''"> and gangmaster_name = #{gangmasterName} </if>
 		  		  <if test="gangmasterAudit != null and gangmasterAudit != ''"> and gangmaster_audit = #{gangmasterAudit} </if>
 		  		  <if test="gangmasterRemark != null and gangmasterRemark != ''"> and gangmaster_remark = #{gangmasterRemark} </if>
 		  		  <if test="gangmasterMark != null and gangmasterMark != ''"> and gangmaster_mark = #{gangmasterMark} </if>
-		  		  <if test="inspectorNo != null and inspectorNo != ''"> and inspector_no = #{inspectorNo} </if>
 		  		  <if test="inspectorName != null and inspectorName != ''"> and inspector_name = #{inspectorName} </if>
 		  		  <if test="inspectorMark != null and inspectorMark != ''"> and inspector_mark = #{inspectorMark} </if>
 		  		  <if test="inspectorAudit != null and inspectorAudit != ''"> and inspector_audit = #{inspectorAudit} </if>
 		  		  <if test="inspectorRemark != null and inspectorRemark != ''"> and inspector_remark = #{inspectorRemark} </if>
 		  		  <if test="returnOpinion != null and returnOpinion != ''"> and return_opinion = #{returnOpinion} </if>
 		  		  <if test="returnRemark != null and returnRemark != ''"> and return_remark = #{returnRemark} </if>
-		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+			      <if test="createTime != null and createTime != ''">  <![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d') ]]> </if>
 				  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
-				  <if test="taskId != null and taskId != ''"> and taskId = #{taskId} </if>
-				  <if test="processInstanceId != null and processInstanceId != ''"> and processInstanceId = #{processInstanceId} </if>
+			<choose>
+				<when test="queryType == 'his'">
+					and (taskId is not null or taskId!="")
+					<if test="username != null and username != ''">
+						and ( disassemble_no = #{username}
+						or cleaner_no = #{username}
+						or fixer1_no = #{username}
+						or fixer2_no = #{username}
+						or fixer3_no = #{username}
+						or fixer4_no = #{username}
+						or assembler_no = #{username}
+						or gangmaster_no = #{username}
+						or inspector_no = #{username})
+					</if>
+
+				</when>
+				<otherwise>
+					<if test="disassembleNo != null and disassembleNo != ''"> and disassemble_no = #{disassembleNo} </if>
+					<if test="cleanerNo != null and cleanerNo != ''"> and cleaner_no = #{cleanerNo} </if>
+					<if test="fixer1No != null and fixer1No != ''"> and fixer1_no = #{fixer1No} </if>
+					<if test="fixer2No != null and fixer2No != ''"> and fixer2_no = #{fixer2No} </if>
+					<if test="fixer3No != null and fixer3No != ''"> and fixer3_no = #{fixer3No} </if>
+					<if test="fixer4No != null and fixer4No != ''"> and fixer4_no = #{fixer4No} </if>
+					<if test="assemblerNo != null and assemblerNo != ''"> and assembler_no = #{assemblerNo} </if>
+					<if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
+					<if test="inspectorNo != null and inspectorNo != ''"> and inspector_no = #{inspectorNo} </if>
+					<if test="queryType =='new'">and (taskId is null or taskId="")</if>
+				</otherwise>
+			</choose>
+			<if test="processInstanceId != null and processInstanceId != ''"> and processInstanceId = #{processInstanceId} </if>
 				  <if test="taskName != null and taskName != ''"> and taskName = #{taskName} </if>
 		  		</where>
         <choose>
@@ -68,41 +94,60 @@
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
 			<if test="popValue != null and popValue != ''"> and pop_value = #{popValue} </if>
-			<if test="disassembleNo != null and disassembleNo != ''"> and disassemble_no = #{disassembleNo} </if>
 			<if test="disassembleName != null and disassembleName != ''"> and disassemble_name = #{disassembleName} </if>
-			<if test="cleanerNo != null and cleanerNo != ''"> and cleaner_no = #{cleanerNo} </if>
 			<if test="cleanerName != null and cleanerName != ''"> and cleaner_name = #{cleanerName} </if>
-			<if test="fixer1No != null and fixer1No != ''"> and fixer1_no = #{fixer1No} </if>
 			<if test="fixer1Name != null and fixer1Name != ''"> and fixer1_name = #{fixer1Name} </if>
 			<if test="fixer1Remark != null and fixer1Remark != ''"> and fixer1_remark = #{fixer1Remark} </if>
-			<if test="fixer2No != null and fixer2No != ''"> and fixer2_no = #{fixer2No} </if>
 			<if test="fixer2Name != null and fixer2Name != ''"> and fixer2_name = #{fixer2Name} </if>
 			<if test="fixer2Remark != null and fixer2Remark != ''"> and fixer2_remark = #{fixer2Remark} </if>
-			<if test="fixer3No != null and fixer3No != ''"> and fixer3_no = #{fixer3No} </if>
 			<if test="fixer3Name != null and fixer3Name != ''"> and fixer3_name = #{fixer3Name} </if>
 			<if test="fixer3Remark != null and fixer3Remark != ''"> and fixer3_remark = #{fixer3Remark} </if>
-			<if test="fixer4No != null and fixer4No != ''"> and fixer4_no = #{fixer4No} </if>
 			<if test="fixer4Name != null and fixer4Name != ''"> and fixer4_name = #{fixer4Name} </if>
 			<if test="fixer4Remark != null and fixer4Remark != ''"> and fixer4_remark = #{fixer4Remark} </if>
-			<if test="assemblerNo != null and assemblerNo != ''"> and assembler_no = #{assemblerNo} </if>
 			<if test="assemblerName != null and assemblerName != ''"> and assembler_name = #{assemblerName} </if>
 			<if test="assemblerRemark != null and assemblerRemark != ''"> and assembler_remark = #{assemblerRemark} </if>
 			<if test="assembleMark != null and assembleMark != ''"> and assemble_mark = #{assembleMark} </if>
-			<if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
 			<if test="gangmasterName != null and gangmasterName != ''"> and gangmaster_name = #{gangmasterName} </if>
 			<if test="gangmasterAudit != null and gangmasterAudit != ''"> and gangmaster_audit = #{gangmasterAudit} </if>
 			<if test="gangmasterRemark != null and gangmasterRemark != ''"> and gangmaster_remark = #{gangmasterRemark} </if>
 			<if test="gangmasterMark != null and gangmasterMark != ''"> and gangmaster_mark = #{gangmasterMark} </if>
-			<if test="inspectorNo != null and inspectorNo != ''"> and inspector_no = #{inspectorNo} </if>
 			<if test="inspectorName != null and inspectorName != ''"> and inspector_name = #{inspectorName} </if>
 			<if test="inspectorMark != null and inspectorMark != ''"> and inspector_mark = #{inspectorMark} </if>
 			<if test="inspectorAudit != null and inspectorAudit != ''"> and inspector_audit = #{inspectorAudit} </if>
 			<if test="inspectorRemark != null and inspectorRemark != ''"> and inspector_remark = #{inspectorRemark} </if>
 			<if test="returnOpinion != null and returnOpinion != ''"> and return_opinion = #{returnOpinion} </if>
 			<if test="returnRemark != null and returnRemark != ''"> and return_remark = #{returnRemark} </if>
-			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+			<if test="createTime != null and createTime != ''">  <![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d') ]]> </if>
 			<if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
-			<if test="taskId != null and taskId != ''"> and taskId = #{taskId} </if>
+			<choose>
+				<when test="queryType == 'his'">
+					and (taskId is not null or taskId!="")
+					<if test="username != null and username != ''">
+						and ( disassemble_no = #{username}
+						or cleaner_no = #{username}
+						or fixer1_no = #{username}
+						or fixer2_no = #{username}
+						or fixer3_no = #{username}
+						or fixer4_no = #{username}
+						or assembler_no = #{username}
+						or gangmaster_no = #{username}
+						or inspector_no = #{username})
+					</if>
+
+				</when>
+				<otherwise>
+					<if test="disassembleNo != null and disassembleNo != ''"> and disassemble_no = #{disassembleNo} </if>
+					<if test="cleanerNo != null and cleanerNo != ''"> and cleaner_no = #{cleanerNo} </if>
+					<if test="fixer1No != null and fixer1No != ''"> and fixer1_no = #{fixer1No} </if>
+					<if test="fixer2No != null and fixer2No != ''"> and fixer2_no = #{fixer2No} </if>
+					<if test="fixer3No != null and fixer3No != ''"> and fixer3_no = #{fixer3No} </if>
+					<if test="fixer4No != null and fixer4No != ''"> and fixer4_no = #{fixer4No} </if>
+					<if test="assemblerNo != null and assemblerNo != ''"> and assembler_no = #{assemblerNo} </if>
+					<if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
+					<if test="inspectorNo != null and inspectorNo != ''"> and inspector_no = #{inspectorNo} </if>
+					and (taskId is null or taskId="")
+				</otherwise>
+			</choose>
 			<if test="processInstanceId != null and processInstanceId != ''"> and processInstanceId = #{processInstanceId} </if>
 			<if test="taskName != null and taskName != ''"> and taskName = #{taskName} </if>
 		</where>

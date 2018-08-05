@@ -48,7 +48,9 @@ public class AssistValveF8Controller extends BaseController {
 	private ActTaskServiceImpl actTaskService;
 	@GetMapping()
 	@RequiresPermissions("biz:assistValveF8:assistValveF8")
-	String AssistValveF8(){
+	String AssistValveF8(Model model){
+        UserDO userDO  = userService.get(getUserId());
+        model.addAttribute("user",userDO);
 	    return "biz/assistValveF8/assistValveF8";
 	}
 	
@@ -63,7 +65,19 @@ public class AssistValveF8Controller extends BaseController {
 		PageUtils pageUtils = new PageUtils(assistValveF8List, total);
 		return pageUtils;
 	}
-	
+	@ResponseBody
+	@GetMapping("/listNew")
+	@RequiresPermissions("biz:assistValveF8:assistValveF8")
+	public PageUtils listNew(@RequestParam Map<String, Object> params){
+		//查询列表数据
+		Query query = new Query(params);
+		List<AssistValveF8DO> assistValveF8List = assistValveF8Service.list(query);
+		int total = assistValveF8Service.count(query);
+		PageUtils pageUtils = new PageUtils(assistValveF8List, total);
+		return pageUtils;
+	}
+
+
 	@GetMapping("/add")
 	@RequiresPermissions("biz:assistValveF8:add")
 	String add(Model model){
@@ -186,5 +200,10 @@ public class AssistValveF8Controller extends BaseController {
 		assistValveF8Service.batchRemove(ids);
 		return R.ok();
 	}
-	
+	@PostMapping("/exit")
+	@ResponseBody
+	boolean exit(@RequestParam Map<String, Object> params) {
+		// 存在，不通过，false
+		return !assistValveF8Service.exit(params);
+	}
 }

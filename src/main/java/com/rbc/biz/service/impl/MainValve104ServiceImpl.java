@@ -51,5 +51,11 @@ public class MainValve104ServiceImpl implements MainValve104Service {
 	public int batchRemove(Long[] ids){
 		return mainValve104Dao.batchRemove(ids);
 	}
-	
+
+	@Override
+	public boolean exit(Map<String, Object> params) {
+		boolean exit;
+		exit = mainValve104Dao.list(params).size() > 0;
+		return exit;
+	}
 }

@@ -3,7 +3,7 @@ rbc:
 logging:
   level:
     root: info
-    com.bootdo: debug
+    com.rbc.biz.dao: debug
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource

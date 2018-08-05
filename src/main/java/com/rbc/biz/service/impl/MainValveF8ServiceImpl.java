@@ -51,5 +51,12 @@ public class MainValveF8ServiceImpl implements MainValveF8Service {
 	public int batchRemove(Long[] ids){
 		return mainValveF8Dao.batchRemove(ids);
 	}
+
+	@Override
+	public boolean exit(Map<String, Object> params) {
+		boolean exit;
+		exit = mainValveF8Dao.list(params).size() > 0;
+		return exit;
+	}
 	
 }
