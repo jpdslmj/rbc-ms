@@ -95,6 +95,8 @@ function save() {
             if (data.code == 0) {
                 parent.layer.msg("操作成功");
                 parent.reLoad();
+                parent.reLoad2();
+                parent.reLoad3();
                 var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
                 parent.layer.close(index);
 

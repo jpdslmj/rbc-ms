@@ -35,7 +35,9 @@ public class TestToolController extends BaseController {
 	UserService userService;
 	@GetMapping()
 	@RequiresPermissions("biz:testTool:testTool")
-	String TestTool(){
+	String TestTool(Model model){
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
 	    return "biz/testTool/testTool";
 	}
 	
@@ -50,7 +52,17 @@ public class TestToolController extends BaseController {
 		PageUtils pageUtils = new PageUtils(testToolList, total);
 		return pageUtils;
 	}
-	
+	@ResponseBody
+	@GetMapping("/listNew")
+	@RequiresPermissions("biz:testTool:testTool")
+	public PageUtils listNew(@RequestParam Map<String, Object> params){
+		//查询列表数据
+		Query query = new Query(params);
+		List<TestToolDO> testToolList = testToolService.list(query);
+		int total = testToolService.count(query);
+		PageUtils pageUtils = new PageUtils(testToolList, total);
+		return pageUtils;
+	}
 	@GetMapping("/add")
 	@RequiresPermissions("biz:testTool:add")
 	String add(Model model){

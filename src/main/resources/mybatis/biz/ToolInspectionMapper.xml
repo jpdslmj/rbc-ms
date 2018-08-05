@@ -27,8 +27,8 @@
 		  		  <if test="gangmasterAudit != null and gangmasterAudit != ''"> and gangmaster_audit = #{gangmasterAudit} </if>
 		  		  <if test="permissionsOpinion != null and permissionsOpinion != ''"> and permissions_opinion = #{permissionsOpinion} </if>
 		  		  <if test="returnOpinion != null and returnOpinion != ''"> and return_opinion = #{returnOpinion} </if>
-		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
-		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+			      <if test="createTime != null and createTime != ''"> <![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d') ]]> </if>
+			      <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -63,8 +63,8 @@
 		  		  <if test="gangmasterAudit != null and gangmasterAudit != ''"> and gangmaster_audit = #{gangmasterAudit} </if>
 		  		  <if test="permissionsOpinion != null and permissionsOpinion != ''"> and permissions_opinion = #{permissionsOpinion} </if>
 		  		  <if test="returnOpinion != null and returnOpinion != ''"> and return_opinion = #{returnOpinion} </if>
-		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
-		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+			 <if test="createTime != null and createTime != ''"> <![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d') ]]> </if>
+			 <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		  		</where>
 	</select>
 	 

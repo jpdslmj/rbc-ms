@@ -1,15 +1,15 @@
 
-var prefix = "/biz/toolInspection"
+var prefix3 = "/biz/toolInspection"
 $(function() {
-	load();
+	load3();
 });
 
-function load() {
-	$('#toolInspectionTable')
+function load3() {
+	$('#toolInspectionNewTable')
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/list", // 服务器数据的加载地址
+						url : prefix3 + "/listNew", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -32,7 +32,10 @@ function load() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset
+								offset:params.offset,
+                                queryType:"new",
+                                createTime:$('#createTimeNew').val(),
+                                fixWorkerNo:currentUserNameNo
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -84,10 +87,10 @@ function load() {
 									field : 'fixWorkerName',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
+										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit3(\''
 												+ row.id
 												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
+										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove3(\''
 												+ row.id
 												+ '\')"><i class="fa fa-remove"></i></a> ';
 										return e + d ;
@@ -95,16 +98,16 @@ function load() {
 								} ]
 					});
 }
-function reLoad() {
-	$('#toolInspectionTable').bootstrapTable('refresh');
+function reload3() {
+	$('#toolInspectionNewTable').bootstrapTable('refresh');
 }
-function add() {
+function add3() {
 	layer.open({
 		type : 2,
 		title : '增加',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		content : prefix + '/add', // iframe的url
+		content : prefix3 + '/add', // iframe的url
         fixed:false,
         resize:true,
         area : ['600x','400px'],
@@ -113,12 +116,12 @@ function add() {
         }
 	});
 }
-function edit(id) {
+function edit3(id) {
 	layer.open({
 		type : 2,
 		title : '编辑',
 		shadeClose : false, // 点击遮罩关闭层
-		content : prefix + '/edit/' + id, // iframe的url
+		content : prefix3 + '/edit/' + id, // iframe的url
         maxmin : true,
         fixed:false,
         resize:true,
@@ -128,12 +131,12 @@ function edit(id) {
         }
 	});
 }
-function remove(id) {
+function remove3(id) {
 	layer.confirm('确定要删除选中的记录？', {
 		btn : [ '确定', '取消' ]
 	}, function() {
 		$.ajax({
-			url : prefix+"/remove",
+			url : prefix3+"/remove",
 			type : "post",
 			data : {
 				'id' : id
@@ -141,7 +144,7 @@ function remove(id) {
 			success : function(r) {
 				if (r.code==0) {
 					layer.msg(r.msg);
-					reLoad();
+					reload3();
 				}else{
 					layer.msg(r.msg);
 				}
@@ -150,10 +153,10 @@ function remove(id) {
 	})
 }
 
-function resetPwd(id) {
+function resetPwd3(id) {
 }
-function batchRemove() {
-	var rows = $('#toolInspectionTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+function batchRemove3() {
+	var rows = $('#toolInspectionNewTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
 		layer.msg("请选择要删除的数据");
 		return;
@@ -172,11 +175,11 @@ function batchRemove() {
 			data : {
 				"ids" : ids
 			},
-			url : prefix + '/batchRemove',
+			url : prefix3 + '/batchRemove',
 			success : function(r) {
 				if (r.code == 0) {
 					layer.msg(r.msg);
-					reLoad();
+					reload3();
 				} else {
 					layer.msg(r.msg);
 				}

@@ -46,7 +46,9 @@ public class ToolInspectionController extends BaseController {
 	UserService userService;
 	@GetMapping()
 	@RequiresPermissions("biz:toolInspection:toolInspection")
-	String ToolInspection(){
+	String ToolInspection(Model model){
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
 	    return "biz/toolInspection/toolInspection";
 	}
 	
@@ -61,7 +63,17 @@ public class ToolInspectionController extends BaseController {
 		PageUtils pageUtils = new PageUtils(toolInspectionList, total);
 		return pageUtils;
 	}
-	
+	@ResponseBody
+	@GetMapping("/listNew")
+	@RequiresPermissions("biz:toolInspection:toolInspection")
+	public PageUtils listNew(@RequestParam Map<String, Object> params){
+		//查询列表数据
+		Query query = new Query(params);
+		List<ToolInspectionDO> toolInspectionList = toolInspectionService.list(query);
+		int total = toolInspectionService.count(query);
+		PageUtils pageUtils = new PageUtils(toolInspectionList, total);
+		return pageUtils;
+	}
 	@GetMapping("/add")
 	@RequiresPermissions("biz:toolInspection:add")
 	String add(Model model){

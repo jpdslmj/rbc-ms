@@ -1,61 +1,96 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
-	<div class="wrapper wrapper-content ">
-		<div class="col-sm-12">
+<div class="wrapper wrapper-content ">
+	<div class="row">
+		<div class="col-sm-11">
 			<div class="ibox">
 				<div class="ibox-body">
-					<div class="fixed-table-toolbar">
-						<div class="columns pull-left">
-							<button shiro:hasPermission="biz:toolInspection:add" type="button" class="btn  btn-primary" onclick="add()">
-								<i class="fa fa-plus" aria-hidden="true"></i>添加
-							</button>
-							<button shiro:hasPermission="biz:toolInspection:batchRemove" type="button" class="btn  btn-danger"
-								onclick="batchRemove()">
-								<i class="fa fa-trash" aria-hidden="true"></i>删除
-							</button>
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="tab" href="#tab-1"><i class="fa fa-file-text"></i>待办工作</a>
+						</li>
+						<li class=""><a data-toggle="tab" href="#tab-2"><i class="fa fa-briefcase">已办工作</i></a>
+						</li>
+						<li class="" shiro:hasAnyRoles="role:admin,role:assembler,role:fixer,role:cleaner,role:disassembler"><a data-toggle="tab" href="#tab-3"><i class="fa fa-briefcase"></i>新增工作</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div id="tab-1" class="tab-pane active">
+							<table id="toolInspectionTaskListTable" data-mobile-responsive="true">
+							</table>
 						</div>
-						<div class="columns pull-right">
-							<button class="btn btn-success" onclick="reLoad()">查询</button>
+						<div id="tab-2" class="tab-pane ">
+							<div class="fixed-table-toolbar">
+								<div class="columns pull-right m-l-xs">
+									<button class="btn btn-success" onclick="reLoad2()">查询</button>
+								</div>
+								<div class="columns pull-right col-md-2 nopadding">
+									<input id="createTime" type="date" class="form-control"
+										   placeholder="检查时间">
+								</div>
+							</div>
+							<table id="toolInspectionTable" data-mobile-responsive="true"></table>
 						</div>
-						<div class="columns pull-right col-md-2 nopadding">
-							<input id="searchName" type="text" class="form-control"
-								placeholder="">
+						<div id="tab-3" class="tab-pane ">
+							<div class="fixed-table-toolbar">
+								<div class="columns pull-left">
+									<button shiro:hasPermission="biz:toolInspection:add" type="button" class="btn  btn-primary" onclick="add3()">
+										<i class="fa fa-plus" aria-hidden="true"></i>添加
+									</button>
+									<button shiro:hasPermission="biz:toolInspection:batchRemove" type="button" class="btn  btn-danger"
+											onclick="batchRemove()">
+										<i class="fa fa-trash" aria-hidden="true"></i>删除
+									</button>
+								</div>
+								<div class="columns pull-right m-l-xs">
+									<button class="btn btn-success" onclick="reLoad3()">查询</button>
+								</div>
+								<div class="columns pull-right col-md-2 nopadding">
+									<input id="createTimeNew" type="date" class="form-control"
+										   placeholder="检查时间">
+								</div>
+							</div>
+							<table id="toolInspectionNewTable" data-mobile-responsive="true"></table>
 						</div>
 					</div>
-					<table id="toolInspectionTable" data-mobile-responsive="true">
-					</table>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
-		<div>
-			<script type="text/javascript">
-				var s_edit_h = 'hidden';
-				var s_remove_h = 'hidden';
-				var s_resetPwd_h = 'hidden';
-			</script>
-		</div>
-		<div shiro:hasPermission="biz:toolInspection:edit">
-			<script type="text/javascript">
-				s_edit_h = '';
-			</script>
-		</div>
-		<div shiro:hasPermission="biz:toolInspection:remove">
-			<script type="text/javascript">
-				var s_remove_h = '';
-			</script>
-		</div>
-		<div shiro:hasPermission="biz:toolInspection:resetPwd">
-			<script type="text/javascript">
-				var s_resetPwd_h = '';
-			</script>
-		</div>
+	<div>
+		<script type="text/javascript">
+            var s_edit_h = 'hidden';
+            var s_remove_h = 'hidden';
+            var s_resetPwd_h = 'hidden';
+		</script>
 	</div>
-	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="/js/appjs/biz/toolInspection/toolInspection.js"></script>
+	<div shiro:hasPermission="biz:toolInspection:edit">
+		<script type="text/javascript">
+            s_edit_h = '';
+		</script>
+	</div>
+	<div shiro:hasPermission="biz:toolInspection:remove">
+		<script type="text/javascript">
+            s_remove_h = '';
+		</script>
+	</div>
+	<div shiro:hasPermission="act:process:resetPwd">
+		<script type="text/javascript">
+             s_resetPwd_h = '';
+		</script>
+	</div>
+
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/biz/toolInspection/toolInspectionHistTable.js"></script>
+<script type="text/javascript" src="/js/appjs/biz/toolInspection/toolInspectionNewTable.js"></script>
+<script type="text/javascript" src="/js/appjs/biz/toolInspection/toolInspectionTasksTable.js"></script>
+<script th:inline="javascript">
+    var currentUserName=[[${user.name}]];
+    var currentUserNameNo=[[${user.username}]];
+</script>
 </body>
 </html>
