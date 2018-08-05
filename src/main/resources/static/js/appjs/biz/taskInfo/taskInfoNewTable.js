@@ -124,8 +124,7 @@ function load3() {
                             } ]
 					});
 }
-function reload3() {
-	alert("1");
+function reload3(){
 	$('#taskInfoNewTable').bootstrapTable('refresh');
 }
 function add3() {
