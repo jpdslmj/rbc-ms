@@ -1,4 +1,12 @@
 $().ready(function() {
+    if(gangmaster){
+        $("#realNum").attr("disabled",true);
+
+        $("#planNum").attr("disabled",false);
+        $("#fixTask").attr("disabled",false);
+        $("#fixWorkerName").attr("disabled",false);
+        $("#gangmasterName").attr("disabled",false);
+    }
     validateRule();
 });
 
@@ -21,6 +29,8 @@ function update() {
             if (data.code == 0) {
                 parent.layer.msg("操作成功");
                 parent.reLoad();
+                //parent.reLoad2();
+               //parent.reLoad3();
                 var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
                 parent.layer.close(index);
 

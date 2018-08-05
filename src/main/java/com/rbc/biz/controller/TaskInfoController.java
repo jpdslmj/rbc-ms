@@ -4,6 +4,7 @@ import com.rbc.biz.domain.OptionsDO;
 import com.rbc.biz.domain.TaskInfoDO;
 import com.rbc.biz.service.OptionsService;
 import com.rbc.biz.service.TaskInfoService;
+import com.rbc.common.config.DateConverConfig;
 import com.rbc.common.controller.BaseController;
 import com.rbc.common.utils.PageUtils;
 import com.rbc.common.utils.Query;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -38,9 +40,13 @@ public class TaskInfoController extends BaseController {
 	UserService userService;
 	@Autowired
 	OptionsService optionsService;
+	@Autowired
+	DateConverConfig dateConverConfig;
 	@GetMapping()
 	@RequiresPermissions("biz:taskInfo:taskInfo")
-	String TaskInfo(){
+	String TaskInfo(Model model){
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
 	    return "biz/taskInfo/taskInfo";
 	}
 	
@@ -55,7 +61,17 @@ public class TaskInfoController extends BaseController {
 		PageUtils pageUtils = new PageUtils(taskInfoList, total);
 		return pageUtils;
 	}
-
+	@ResponseBody
+	@GetMapping("/listNew")
+	@RequiresPermissions("biz:taskInfo:taskInfo")
+	public PageUtils listNew(@RequestParam Map<String, Object> params){
+		//查询列表数据
+		Query query = new Query(params);
+		List<TaskInfoDO> taskInfoList = taskInfoService.list(query);
+		int total = taskInfoService.count(query);
+		PageUtils pageUtils = new PageUtils(taskInfoList, total);
+		return pageUtils;
+	}
 	@GetMapping("/add")
 	@RequiresPermissions("biz:taskInfo:add")
 	String add(Model model){
@@ -91,7 +107,13 @@ public class TaskInfoController extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("biz:taskInfo:add")
 	public R save( TaskInfoDO taskInfo){
-		taskInfo.setDistribTime(new Date());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date day=new Date();
+		String dateStr=sdf.format(day);
+		day=dateConverConfig.stringDateConvert().convert(dateStr);
+		taskInfo.setDistribTime(day);
+		taskInfo.setCreateTime(day);
+		taskInfo.setUpdateTime(day);
 		if(taskInfoService.save(taskInfo)>0){
 			return R.ok();
 		}
@@ -104,8 +126,16 @@ public class TaskInfoController extends BaseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("biz:taskInfo:edit")
 	public R update( TaskInfoDO taskInfo){
-		taskInfoService.update(taskInfo);
-		return R.ok();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date day=new Date();
+		String dateStr=sdf.format(day);
+		day=dateConverConfig.stringDateConvert().convert(dateStr);
+		taskInfo.setDistribTime(day);
+		taskInfo.setUpdateTime(day);
+		if(taskInfoService.update(taskInfo)>0){
+			return R.ok();
+		}
+		return R.error();
 	}
 	
 	/**
