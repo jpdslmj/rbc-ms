@@ -144,7 +144,7 @@ function load3() {
                             } ]
 					});
 }
-function reload3() {
+function reLoad3() {
 	$('#testToolNewTable').bootstrapTable('refresh');
 }
 function add3() {
@@ -190,7 +190,7 @@ function remove3(id) {
 			success : function(r) {
 				if (r.code==0) {
 					layer.msg(r.msg);
-					reload3();
+					reLoad3();
 				}else{
 					layer.msg(r.msg);
 				}

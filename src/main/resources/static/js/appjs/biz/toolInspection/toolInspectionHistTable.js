@@ -98,7 +98,7 @@ function load2() {
 								} ]
 					});
 }
-function reload2() {
+function reLoad2() {
 	$('#toolInspectionTable').bootstrapTable('refresh');
 }
 function add2() {
@@ -144,7 +144,7 @@ function remove2(id) {
 			success : function(r) {
 				if (r.code==0) {
 					layer.msg(r.msg);
-					reload2();
+                    reLoad2();
 				}else{
 					layer.msg(r.msg);
 				}
@@ -179,7 +179,7 @@ function batchRemove2() {
 			success : function(r) {
 				if (r.code == 0) {
 					layer.msg(r.msg);
-					reload2();
+                    reLoad2();
 				} else {
 					layer.msg(r.msg);
 				}
