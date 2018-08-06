@@ -113,13 +113,10 @@ function load2() {
                                 field : 'id',
                                 align : 'center',
                                 formatter : function(value, row, index) {
-                                    var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit2(\''
+                                    var e = '<a class="btn btn-primary btn-sm" href="#" mce_href="#" title="查看" onclick="look(\''
                                         + row.id
-                                        + '\')"><i class="fa fa-edit"></i></a> ';
-                                    var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove2(\''
-                                        + row.id
-                                        + '\')"><i class="fa fa-remove"></i></a> ';
-                                    return e + d ;
+                                        + '\')"><i class="fa fa-eye"></i></a> ';
+                                    return e;
                                 }
                             } ]
 					});
@@ -156,6 +153,21 @@ function edit2(id) {
             layer.full(index);
         }
 	});
+}
+function look(id) {
+    layer.open({
+        type : 2,
+        title : '查看',
+        shadeClose : false, // 点击遮罩关闭层
+        content : prefix2 + '/look/' + id ,// iframe的url
+        maxmin : true,
+        fixed:false,
+        resize:true,
+        area : ['600px','400px'],
+        success:function(layero ,index){
+            layer.full(index);
+        }
+    });
 }
 function remove2(id) {
 	layer.confirm('确定要删除选中的记录？', {

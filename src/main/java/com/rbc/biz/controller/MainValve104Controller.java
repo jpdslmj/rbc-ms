@@ -144,8 +144,10 @@ public class MainValve104Controller extends BaseController {
 		Map<String,Object> vars = new HashMap<>(16);
 		vars.put("pass",  mainValve104.getTaskPass());
 		Task task = actTaskService.complete(mainValve104.getTaskId(),vars);
-		mainValve104.setTaskId(task.getId());
-		mainValve104.setTaskName(task.getName());
+		if(task != null) {
+			mainValve104.setTaskId(task.getId());
+			mainValve104.setTaskName(task.getName());
+		}
 		mainValve104Service.update(mainValve104);
 		return R.ok();
 	}	
@@ -159,7 +161,7 @@ public class MainValve104Controller extends BaseController {
 		if(mainValve104Service.save(mainValve104)>0){
 			String taskId = mainValve104.getTaskId();
 			if(StringUtils.isNotBlank(taskId)) {
-				actTaskService.claim(taskId, ShiroUtils.getUser().getUsername());
+				actTaskService.claim(taskId, getUsername());
 			}
 			return R.ok();
 		}
@@ -172,6 +174,10 @@ public class MainValve104Controller extends BaseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("biz:mainValve104:edit")
 	public R update( MainValve104DO mainValve104){
+		String taskId = mainValve104.getTaskId();
+		if(StringUtils.isNotBlank(taskId)) {
+			actTaskService.claim(taskId, getUsername());
+		}
 		mainValve104Service.update(mainValve104);
 		return R.ok();
 	}

@@ -4,6 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.rbc.activiti.config.ActivitiConstant;
+import com.rbc.activiti.service.impl.ActTaskServiceImpl;
+import com.rbc.activiti.utils.ActivitiUtils;
 import com.rbc.biz.domain.*;
 import com.rbc.biz.service.ToolInspectionService;
 import com.rbc.biz.service.ToolOtherService;
@@ -12,8 +15,10 @@ import com.rbc.common.controller.BaseController;
 import com.rbc.common.utils.PageUtils;
 import com.rbc.common.utils.Query;
 import com.rbc.common.utils.R;
+import com.rbc.common.utils.StringUtils;
 import com.rbc.system.domain.UserDO;
 import com.rbc.system.service.UserService;
+import org.activiti.engine.task.Task;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +27,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +52,10 @@ public class ToolInspectionController extends BaseController {
 	ToolOtherService toolOtherService;
 	@Autowired
 	UserService userService;
+	@Autowired
+	private ActivitiUtils activitiUtils;
+	@Autowired
+	private ActTaskServiceImpl actTaskService;
 	@GetMapping()
 	@RequiresPermissions("biz:toolInspection:toolInspection")
 	String ToolInspection(Model model){
@@ -91,7 +103,14 @@ public class ToolInspectionController extends BaseController {
 		model.addAttribute("user",userDO);
 	    return "biz/toolInspection/edit";
 	}
-	
+	@GetMapping("/look/{id}")
+	String look(@PathVariable("id") Long id,Model model){
+		ToolInspectionDO toolInspection = toolInspectionService.get(id);
+		model.addAttribute("toolInspection", toolInspection);
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
+		return "biz/toolInspection/look";
+	}
 	/**
 	 * 保存
 	 */
@@ -115,6 +134,10 @@ public class ToolInspectionController extends BaseController {
 		int r=toolInspectionService.batchSaveOrUpdate(toolInspectionDo,wenchDoList,toolOtherDoList);
 
 		if(r>0){
+			String taskId = toolInspectionDo.getTaskId();
+			if(StringUtils.isNotBlank(taskId)) {
+				actTaskService.claim(taskId, getUsername());
+			}
 			return R.ok();
 		}
 
@@ -127,6 +150,10 @@ public class ToolInspectionController extends BaseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("biz:toolInspection:edit")
 	public R update( ToolInspectionDO toolInspection){
+		String taskId = toolInspection.getTaskId();
+		if(StringUtils.isNotBlank(taskId)) {
+			actTaskService.claim(taskId, getUsername());
+		}
 		toolInspectionService.update(toolInspection);
 		return R.ok();
 	}
@@ -191,6 +218,72 @@ public class ToolInspectionController extends BaseController {
 	@RequiresPermissions("biz:toolInspection:toolInspection")
 	public R batchRemoveWench(@RequestParam("ids[]") Long[] ids){
 		wenchService.batchRemove(ids);
+		return R.ok();
+	}
+
+	//工作流开始页面
+	@GetMapping("/form")
+	String form(Model model) {
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
+		return "biz/toolInspection/add";
+	}
+
+	//工作流编辑页面
+	@GetMapping("/form/{taskId}")
+	String form(@PathVariable("taskId") String taskId, Model model) {
+		Task task = activitiUtils.getTaskByTaskId(taskId);
+		ToolInspectionDO toolInspection = toolInspectionService.get(Long.valueOf(activitiUtils.getBusinessKeyByTask(task)));
+		toolInspection.setTaskId(taskId);
+		model.addAttribute("toolInspection", toolInspection);
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
+		return "biz/toolInspection/edit";
+	}
+
+	//工作流流转（签字）
+	@ResponseBody
+	@RequestMapping(value = "/sign", method = RequestMethod.POST)
+	public R sign(@RequestBody JSONObject jsonParam){
+		JSONObject toolInspection=jsonParam.getJSONObject("toolInspectionDo");
+		JSONArray wench =jsonParam.getJSONArray("wenchDo");
+		JSONArray toolOther =jsonParam.getJSONArray("toolOtherDo");
+
+		ToolInspectionDO toolInspectionDo=JSON.parseObject(toolInspection.toJSONString(),ToolInspectionDO.class);
+
+		Type typeWench = new TypeReference<List<WenchDO>>(){}.getType();
+		List<WenchDO> wenchDoList = JSON.parseObject(wench.toJSONString(), typeWench);
+
+		Type typeOtherTool = new TypeReference<List<ToolOtherDO>>(){}.getType();
+		List<ToolOtherDO> toolOtherDoList = JSON.parseObject(toolOther.toJSONString(), typeOtherTool);
+
+		int r=toolInspectionService.batchSaveOrUpdate(toolInspectionDo,wenchDoList,toolOtherDoList);
+
+		if(r>0){
+			if(StringUtils.isBlank(toolInspectionDo.getTaskId())) {
+				HashMap map = new HashMap<>();
+				map.put("processName","检修设备检视");
+				Map params = new HashMap();
+				params.put("fixWorkerName", toolInspectionDo.getFixWorkerName());
+				params.put("createTime", toolInspectionDo.getCreateTime());
+				map.put("params", params);
+				map.put("processForm","/biz/toolInspection/form");
+				map.put("fixWorkerNo",toolInspectionDo.getFixWorkerNo());
+				Task task = actTaskService.startProcess(ActivitiConstant.ACTIVITI_INSPECTION[0],ActivitiConstant.ACTIVITI_INSPECTION[1],toolInspectionDo.getId().toString(),null,map);
+				toolInspectionDo.setTaskId(task.getId());
+				toolInspectionDo.setTaskName(task.getName());
+				toolInspectionDo.setProcessInstanceId(task.getProcessInstanceId());
+			}
+			Map<String,Object> vars = new HashMap<>(16);
+			vars.put("pass",  toolInspectionDo.getTaskPass());
+			vars.put("fixWorkerNo",toolInspectionDo.getFixWorkerNo());
+			Task task = actTaskService.complete(toolInspectionDo.getTaskId(),vars);
+			if(task != null) {
+				toolInspectionDo.setTaskId(task.getId());
+				toolInspectionDo.setTaskName(task.getName());
+			}
+			toolInspectionService.update(toolInspectionDo);
+		}
 		return R.ok();
 	}
 }

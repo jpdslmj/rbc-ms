@@ -1,5 +1,7 @@
 package com.rbc.biz.domain;
 
+import com.rbc.activiti.domain.TaskDO;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,7 +14,7 @@ import java.util.Date;
  * @email 359819418@qq.com
  * @date 2018-07-05 18:07:05
  */
-public class ToolInspectionDO implements Serializable {
+public class ToolInspectionDO extends TaskDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//

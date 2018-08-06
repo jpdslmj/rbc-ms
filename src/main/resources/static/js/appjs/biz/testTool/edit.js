@@ -12,14 +12,14 @@ $().ready(function() {
 
 $.validator.setDefaults({
 	submitHandler : function() {
-		update();
+		update("update");
 	}
 });
-function update() {
+function update(flag) {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/biz/testTool/update",
+		url : "/biz/testTool/"+flag,
 		data : $('#testToolForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {

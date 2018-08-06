@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-content">
+					<form class="form-horizontal m-t" id="taskInfoForm">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">检修任务：</label>
+							<div class="col-sm-8">
+								<select  id="fixTask" name="fixTask" class="form-control" type="text" disabled="true">
+									<option value=""> -- 请选择 -- </option>
+									<option  th:selected="${taskInfo.fixTask eq o.optionValue}"   th:each="o:${optionList}"  th:value="${o.optionValue}" th:text="${o.optionName}" value="1">104分配阀检修组装</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">计划数量：</label>
+							<div class="col-sm-8">
+								<input id="planNum" name="planNum" class="form-control" type="text" readonly="readonly" th:value="${taskInfo.planNum}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">实际数量：</label>
+							<div class="col-sm-8">
+								<input id="realNum" name="realNum" class="form-control" type="text" readonly="readonly"  th:value="${taskInfo.realNum}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">任务工作者名称：</label>
+							<div class="col-sm-8">
+								<input id="fixWorkerName" name="fixWorkerName" class="form-control" type="text" readonly="readonly"  th:value="${taskInfo.fixWorkerName}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">发布工长名称：</label>
+							<div class="col-sm-8">
+								<input id="gangmasterName" name="gangmasterName" class="form-control"  readonly="readonly" type="text" th:value="${taskInfo.gangmasterName}">
+							</div>
+						</div>
+
+						<input id="id" name="id" class="form-control" type="hidden" th:value="${taskInfo.id}">
+						<input id="fixWorkerNo" name="fixWorkerNo" class="form-control" type="hidden" th:value="${taskInfo.fixWorkerNo}">
+						<input id="gangmasterNo" name="gangmasterNo" class="form-control" type="hidden" th:value="${taskInfo.gangmasterNo}">
+						<input id="auditOpinion" name="auditOpinion" class="form-control" type="hidden">
+						<input id="auditRemark" name="auditRemark" class="form-control" type="hidden">
+
+						<input id="deptId" name="deptId" class="form-control" type="hidden" th:value="${user.deptId}">
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+    var gangmaster = false;
+</script>
+<div shiro:hasAnyRoles="role:admin,role:gangmaster">
+	<script type="text/javascript">
+         gangmaster = true;
+	</script>
+</div>
+<div th:include="include::footer"></div>
+
+</body>
+</html>

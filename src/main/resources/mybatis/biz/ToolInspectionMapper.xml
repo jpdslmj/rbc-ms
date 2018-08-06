@@ -29,7 +29,26 @@
 		  		  <if test="returnOpinion != null and returnOpinion != ''"> and return_opinion = #{returnOpinion} </if>
 			      <if test="createTime != null and createTime != ''"> <![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d') ]]> </if>
 			      <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
-		  		</where>
+			<choose>
+				<when test="queryType == 'his'">
+					and (taskId is not null or taskId!="")
+				</when>
+				<otherwise>
+					<if test="queryType =='new'">and (taskId is null or taskId="")</if>
+				</otherwise>
+			</choose>
+			<if test="processInstanceId != null and processInstanceId != ''"> and processInstanceId = #{processInstanceId} </if>
+			<if test="taskName != null and taskName != ''"> and taskName = #{taskName} </if><choose>
+			<when test="queryType == 'his'">
+				and (taskId is not null or taskId!="")
+			</when>
+			<otherwise>
+				<if test="queryType =='new'">and (taskId is null or taskId="")</if>
+			</otherwise>
+		</choose>
+			<if test="processInstanceId != null and processInstanceId != ''"> and processInstanceId = #{processInstanceId} </if>
+			<if test="taskName != null and taskName != ''"> and taskName = #{taskName} </if>
+		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
@@ -63,8 +82,18 @@
 		  		  <if test="gangmasterAudit != null and gangmasterAudit != ''"> and gangmaster_audit = #{gangmasterAudit} </if>
 		  		  <if test="permissionsOpinion != null and permissionsOpinion != ''"> and permissions_opinion = #{permissionsOpinion} </if>
 		  		  <if test="returnOpinion != null and returnOpinion != ''"> and return_opinion = #{returnOpinion} </if>
-			 <if test="createTime != null and createTime != ''"> <![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d') ]]> </if>
-			 <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+				 <if test="createTime != null and createTime != ''"> <![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d') ]]> </if>
+				 <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+				 <choose>
+					 <when test="queryType == 'his'">
+						 and (taskId is not null or taskId!="")
+					 </when>
+					 <otherwise>
+						 <if test="queryType =='new'">and (taskId is null or taskId="")</if>
+					 </otherwise>
+				 </choose>
+				 <if test="processInstanceId != null and processInstanceId != ''"> and processInstanceId = #{processInstanceId} </if>
+				 <if test="taskName != null and taskName != ''"> and taskName = #{taskName} </if>
 		  		</where>
 	</select>
 	 
@@ -88,7 +117,7 @@
 			`permissions_opinion`, 
 			`return_opinion`, 
 			`create_time`, 
-			`update_time`
+			`update_time`,`taskId`,`processInstanceId`,`taskName`
 		)
 		values
 		(
@@ -109,7 +138,10 @@
 			#{permissionsOpinion}, 
 			#{returnOpinion}, 
 			#{createTime}, 
-			#{updateTime}
+			#{updateTime},
+			#{taskId},
+			#{processInstanceId},
+			#{taskName}
 		)
 	</insert>
 	 
@@ -133,7 +165,10 @@
 			<if test="permissionsOpinion != null">`permissions_opinion` = #{permissionsOpinion}, </if>
 			<if test="returnOpinion != null">`return_opinion` = #{returnOpinion}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
-			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+			<if test="updateTime != null">`update_time` = #{updateTime},</if>
+			<if test="taskId != null">`taskId` = #{taskId}, </if>
+			<if test="processInstanceId != null">`processInstanceId` = #{processInstanceId}, </if>
+			<if test="taskName != null">`taskName` = #{taskName} </if>
 		</set>
 		where id = #{id}
 	</update>

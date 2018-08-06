@@ -8,14 +8,14 @@ $().ready(function() {
 
 $.validator.setDefaults({
 	submitHandler : function() {
-		save();
+		save("save");
 	}
 });
-function save() {
+function save(flag) {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/biz/taskInfo/save",
+		url : "/biz/taskInfo/" + flag,
 		data : $('#taskInfoForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
@@ -26,7 +26,7 @@ function save() {
 				parent.layer.msg("操作成功");
 				parent.reLoad();
                 parent.reload2();
-                parent.reload2();
+                parent.reload3();
 				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 				parent.layer.close(index);
 
@@ -38,7 +38,6 @@ function save() {
 	});
 
 }
-
 
 function openWorker(){
 	var deptId="";

@@ -144,8 +144,10 @@ public class AssistValveF8Controller extends BaseController {
 		Map<String,Object> vars = new HashMap<>(16);
 		vars.put("pass",  assistValveF8.getTaskPass());
 		Task task = actTaskService.complete(assistValveF8.getTaskId(),vars);
-		assistValveF8.setTaskId(task.getId());
-		assistValveF8.setTaskName(task.getName());
+		if(task != null) {
+			assistValveF8.setTaskId(task.getId());
+			assistValveF8.setTaskName(task.getName());
+		}
 		assistValveF8Service.update(assistValveF8);
 		return R.ok();
 	}
@@ -160,7 +162,7 @@ public class AssistValveF8Controller extends BaseController {
 		if(assistValveF8Service.save(assistValveF8)>0){
 			String taskId = assistValveF8.getTaskId();
 			if(StringUtils.isNotBlank(taskId)) {
-				actTaskService.claim(taskId, ShiroUtils.getUser().getUsername());
+				actTaskService.claim(taskId, getUsername());
 			}
 			return R.ok();
 		}
@@ -173,6 +175,10 @@ public class AssistValveF8Controller extends BaseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("biz:assistValveF8:edit")
 	public R update( AssistValveF8DO assistValveF8){
+		String taskId = assistValveF8.getTaskId();
+		if(StringUtils.isNotBlank(taskId)) {
+			actTaskService.claim(taskId, getUsername());
+		}
 		assistValveF8Service.update(assistValveF8);
 		return R.ok();
 	}

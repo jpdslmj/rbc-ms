@@ -4,11 +4,11 @@
 <mapper namespace="com.rbc.biz.dao.TaskInfoDao">
 
 	<select id="get" resultType="com.rbc.biz.domain.TaskInfoDO">
-		select `id`,`sequence_no`,`fix_task`,`plan_num`,`real_Num`,`fix_worker_no`,`fix_worker_name`,`gangmaster_no`,`gangmaster_name`,`audit_opinion`,`audit_remark`,`create_time`,`update_time`,`distrib_time` from web_task_info where id = #{value}
+		select `id`,`sequence_no`,`fix_task`,`plan_num`,`real_Num`,`fix_worker_no`,`fix_worker_name`,`gangmaster_no`,`gangmaster_name`,`audit_opinion`,`audit_remark`,`create_time`,`update_time`,`distrib_time`,`taskId`,`processInstanceId`,`taskName` from web_task_info where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.rbc.biz.domain.TaskInfoDO">
-		select `id`,`sequence_no`,`fix_task`,`plan_num`,`real_Num`,`fix_worker_no`,`fix_worker_name`,`gangmaster_no`,`gangmaster_name`,`audit_opinion`,`audit_remark`,`create_time`,`update_time`,`distrib_time` from web_task_info
+		select `id`,`sequence_no`,`fix_task`,`plan_num`,`real_Num`,`fix_worker_no`,`fix_worker_name`,`gangmaster_no`,`gangmaster_name`,`audit_opinion`,`audit_remark`,`create_time`,`update_time`,`distrib_time`,`taskId`,`processInstanceId`,`taskName` from web_task_info
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="sequenceNo != null and sequenceNo != ''"> and sequence_no = #{sequenceNo} </if>
@@ -24,7 +24,17 @@
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		  		  <if test="distribTime != null and distribTime != ''"> and distrib_time = #{distribTime} </if>
-		  		</where>
+			<choose>
+				<when test="queryType == 'his'">
+					and (taskId is not null or taskId!="")
+				</when>
+				<otherwise>
+					<if test="queryType =='new'">and (taskId is null or taskId="")</if>
+				</otherwise>
+			</choose>
+			<if test="processInstanceId != null and processInstanceId != ''"> and processInstanceId = #{processInstanceId} </if>
+			<if test="taskName != null and taskName != ''"> and taskName = #{taskName} </if>
+		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
@@ -55,6 +65,16 @@
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		  		  <if test="distribTime != null and distribTime != ''"> and distrib_time = #{distribTime} </if>
+				 <choose>
+					 <when test="queryType == 'his'">
+						 and (taskId is not null or taskId!="")
+					 </when>
+					 <otherwise>
+						 <if test="queryType =='new'">and (taskId is null or taskId="")</if>
+					 </otherwise>
+				 </choose>
+				 <if test="processInstanceId != null and processInstanceId != ''"> and processInstanceId = #{processInstanceId} </if>
+				 <if test="taskName != null and taskName != ''"> and taskName = #{taskName} </if>
 		  		</where>
 	</select>
 	 
@@ -73,7 +93,7 @@
 			`audit_remark`, 
 			`create_time`, 
 			`update_time`, 
-			`distrib_time`
+			`distrib_time`,`taskId`,`processInstanceId`,`taskName`
 		)
 		values
 		(
@@ -89,7 +109,10 @@
 			#{auditRemark}, 
 			#{createTime}, 
 			#{updateTime}, 
-			#{distribTime}
+			#{distribTime},
+			#{taskId},
+			#{processInstanceId},
+			#{taskName}
 		)
 	</insert>
 	 
@@ -108,7 +131,10 @@
 			<if test="auditRemark != null">`audit_remark` = #{auditRemark}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
-			<if test="distribTime != null">`distrib_time` = #{distribTime}</if>
+			<if test="distribTime != null">`distrib_time` = #{distribTime},</if>
+			<if test="taskId != null">`taskId` = #{taskId}, </if>
+			<if test="processInstanceId != null">`processInstanceId` = #{processInstanceId}, </if>
+			<if test="taskName != null">`taskName` = #{taskName} </if>
 		</set>
 		where id = #{id}
 	</update>

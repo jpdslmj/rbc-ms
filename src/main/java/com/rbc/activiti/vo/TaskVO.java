@@ -2,6 +2,8 @@ package com.rbc.activiti.vo;
 
 import org.activiti.engine.task.Task;
 
+import java.util.Map;
+
 
 public class TaskVO  {
 
@@ -29,6 +31,7 @@ public class TaskVO  {
     private String processName;
     private String processNumber;
     private String processForm;
+    private Map params;
 
     public String getProcessName() {
         return processName;
@@ -124,5 +127,13 @@ public class TaskVO  {
 
     public void setExecutionId(String executionId) {
         this.executionId = executionId;
+    }
+
+    public Map getParams() {
+        return params;
+    }
+
+    public void setParams(Map params) {
+        this.params = params;
     }
 }

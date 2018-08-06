@@ -42,7 +42,7 @@ $().ready(function() {
 
 $.validator.setDefaults({
     submitHandler : function() {
-        save();
+        save("save");
     }
 });
 $.fn.serializeObject = function()
@@ -61,7 +61,7 @@ $.fn.serializeObject = function()
     });
     return o;
 };
-function save() {
+function save(flag) {
     var sWenckVal =$("#wench").val();
     var sotherToolVal =$("#otherTool").val();
 
@@ -84,7 +84,7 @@ function save() {
     $.ajax({
         cache : true,
         type : "POST",
-        url : "/biz/toolInspection/save",
+        url : "/biz/toolInspection/"+flag,
         contentType: "application/json; charset=utf-8",
         data : jasonData,
         async : false,

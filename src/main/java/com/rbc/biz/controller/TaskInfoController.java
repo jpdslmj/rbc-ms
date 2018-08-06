@@ -1,6 +1,10 @@
 package com.rbc.biz.controller;
 
+import com.rbc.activiti.config.ActivitiConstant;
+import com.rbc.activiti.service.impl.ActTaskServiceImpl;
+import com.rbc.activiti.utils.ActivitiUtils;
 import com.rbc.biz.domain.OptionsDO;
+import com.rbc.biz.domain.PopValve104DO;
 import com.rbc.biz.domain.TaskInfoDO;
 import com.rbc.biz.service.OptionsService;
 import com.rbc.biz.service.TaskInfoService;
@@ -9,8 +13,10 @@ import com.rbc.common.controller.BaseController;
 import com.rbc.common.utils.PageUtils;
 import com.rbc.common.utils.Query;
 import com.rbc.common.utils.R;
+import com.rbc.common.utils.StringUtils;
 import com.rbc.system.domain.UserDO;
 import com.rbc.system.service.UserService;
+import org.activiti.engine.task.Task;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,6 +48,10 @@ public class TaskInfoController extends BaseController {
 	OptionsService optionsService;
 	@Autowired
 	DateConverConfig dateConverConfig;
+	@Autowired
+	private ActivitiUtils activitiUtils;
+	@Autowired
+	private ActTaskServiceImpl actTaskService;
 	@GetMapping()
 	@RequiresPermissions("biz:taskInfo:taskInfo")
 	String TaskInfo(Model model){
@@ -99,7 +109,20 @@ public class TaskInfoController extends BaseController {
 		model.addAttribute("taskInfo", taskInfo);
 	    return "biz/taskInfo/edit";
 	}
-	
+
+	@GetMapping("/look/{id}")
+	String look(@PathVariable("id") Long id,Model model){
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
+		Map<String,Object> map=new HashMap();
+		map.put("optionType","task");
+		map.put("isvaliable",1);
+		List<OptionsDO> optList=optionsService.list(map);
+		model.addAttribute("optionList",optList);
+		TaskInfoDO taskInfo = taskInfoService.get(id);
+		model.addAttribute("taskInfo", taskInfo);
+		return "biz/taskInfo/look";
+	}
 	/**
 	 * 保存
 	 */
@@ -111,10 +134,13 @@ public class TaskInfoController extends BaseController {
 		Date day=new Date();
 		String dateStr=sdf.format(day);
 		day=dateConverConfig.stringDateConvert().convert(dateStr);
-		taskInfo.setDistribTime(day);
 		taskInfo.setCreateTime(day);
 		taskInfo.setUpdateTime(day);
 		if(taskInfoService.save(taskInfo)>0){
+			String taskId = taskInfo.getTaskId();
+			if(StringUtils.isNotBlank(taskId)) {
+				actTaskService.claim(taskId, getUsername());
+			}
 			return R.ok();
 		}
 		return R.error();
@@ -130,9 +156,12 @@ public class TaskInfoController extends BaseController {
 		Date day=new Date();
 		String dateStr=sdf.format(day);
 		day=dateConverConfig.stringDateConvert().convert(dateStr);
-		taskInfo.setDistribTime(day);
 		taskInfo.setUpdateTime(day);
 		if(taskInfoService.update(taskInfo)>0){
+			String taskId = taskInfo.getTaskId();
+			if(StringUtils.isNotBlank(taskId)) {
+				actTaskService.claim(taskId, getUsername());
+			}
 			return R.ok();
 		}
 		return R.error();
@@ -192,5 +221,74 @@ public class TaskInfoController extends BaseController {
 
 	}
 
+	//工作流开始页面
+	@GetMapping("/form")
+	String form(Model model) {
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
+		return "biz/taskInfo/add";
+	}
 
+	//工作流编辑页面
+	@GetMapping("/form/{taskId}")
+	String form(@PathVariable("taskId") String taskId, Model model) {
+		Task task = activitiUtils.getTaskByTaskId(taskId);
+		TaskInfoDO taskInfo = taskInfoService.get(Long.valueOf(activitiUtils.getBusinessKeyByTask(task)));
+		taskInfo.setTaskId(taskId);
+		model.addAttribute("taskInfo", taskInfo);
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
+		Map<String,Object> map=new HashMap();
+		map.put("optionType","task");
+		map.put("isvaliable",1);
+		List<OptionsDO> optList=optionsService.list(map);
+		model.addAttribute("optionList",optList);
+		return "biz/taskInfo/edit";
+	}
+
+	//工作流流转（签字）
+	@ResponseBody
+	@RequestMapping("/sign")
+	public R sign(TaskInfoDO taskInfo){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date day=new Date();
+		String dateStr=sdf.format(day);
+		day=dateConverConfig.stringDateConvert().convert(dateStr);
+		if(taskInfo.getId() == null) {
+			taskInfo.setCreateTime(day);
+			taskInfoService.save(taskInfo);
+		}
+		if(StringUtils.isBlank(taskInfo.getTaskId())) {
+			taskInfo.setDistribTime(day);
+			HashMap map = new HashMap<>();
+			map.put("processName","任务发布");
+			Map<String,Object> fixTaskMap = new HashMap();
+			fixTaskMap.put("optionType","task");
+			fixTaskMap.put("isvaliable",1);
+			fixTaskMap.put("optionValue",taskInfo.getFixTask());
+			List<OptionsDO> optList = optionsService.list(fixTaskMap);
+			Map params = new HashMap();
+			params.put("taskInfoId", taskInfo.getId());
+			params.put("fixTaskName", optList.get(0).getOptionName());
+			map.put("params", params);
+			map.put("processForm","/biz/taskInfo/form");
+			map.put("fixWorkerNo",taskInfo.getFixWorkerNo());
+			Task task = actTaskService.startProcess(ActivitiConstant.ACTIVITI_TASK[0],ActivitiConstant.ACTIVITI_TASK[1],taskInfo.getId().toString(),null,map);
+			taskInfo.setTaskId(task.getId());
+			taskInfo.setTaskName(task.getName());
+			taskInfo.setProcessInstanceId(task.getProcessInstanceId());
+		}
+		Map<String,Object> vars = new HashMap<>(16);
+		vars.put("pass",  taskInfo.getTaskPass());
+		vars.put("fixWorkerNo",taskInfo.getFixWorkerNo());
+		vars.put("gangmasterNo",taskInfo.getGangmasterNo());
+		Task task = actTaskService.complete(taskInfo.getTaskId(),vars);
+		if(task != null) {
+			taskInfo.setTaskId(task.getId());
+			taskInfo.setTaskName(task.getName());
+		}
+		taskInfo.setUpdateTime(day);
+		taskInfoService.update(taskInfo);
+		return R.ok();
+	}
 }

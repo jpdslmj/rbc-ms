@@ -154,8 +154,10 @@ public class PopValve104Controller extends BaseController {
 		Map<String,Object> vars = new HashMap<>(16);
 		vars.put("pass",  popValve104.getTaskPass());
 		Task task = actTaskService.complete(popValve104.getTaskId(),vars);
-		popValve104.setTaskId(task.getId());
-		popValve104.setTaskName(task.getName());
+		if(task != null) {
+			popValve104.setTaskId(task.getId());
+			popValve104.setTaskName(task.getName());
+		}
 		popValve104Service.update(popValve104);
 		return R.ok();
 	}
@@ -178,7 +180,7 @@ public class PopValve104Controller extends BaseController {
 		if(popValve104Service.save(popValve104)>0){
 		    String taskId = popValve104.getTaskId();
 			if(StringUtils.isNotBlank(taskId)) {
-                actTaskService.claim(taskId, ShiroUtils.getUser().getUsername());
+                actTaskService.claim(taskId, getUsername());
 			}
 			return R.ok();
 		}
@@ -191,6 +193,10 @@ public class PopValve104Controller extends BaseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("biz:popValve104:edit")
 	public R update( PopValve104DO popValve104){
+		String taskId = popValve104.getTaskId();
+		if(StringUtils.isNotBlank(taskId)) {
+			actTaskService.claim(taskId, getUsername());
+		}
 		popValve104Service.update(popValve104);
 		return R.ok();
 	}

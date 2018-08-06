@@ -53,8 +53,11 @@
 							<input id="deptId" name="deptId" class="form-control" type="hidden" th:value="${user.deptId}">
 
 							<div class="form-group">
-								<div class="col-sm-8 col-sm-offset-3">
-									<button type="submit" class="btn btn-primary">任务发布</button>
+								<div class="col-sm-4 col-sm-offset-3">
+									<button type="button" class="btn btn-primary" onclick="save('save')">保存</button>
+								</div>
+								<div class="col-sm-4 col-sm-offset-3">
+									<button type="button" class="btn btn-primary" onclick="save('sign')">任务发布</button>
 								</div>
 							</div>
 						</form>

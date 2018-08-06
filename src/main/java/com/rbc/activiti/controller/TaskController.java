@@ -100,15 +100,18 @@ public class TaskController  extends BaseController {
         String CurProcessName="";
         if(taskType.equals("assistF8")){
             CurProcessName="F8辅助阀";
-        }
-        if(taskType.equals("mainF8")){
+        } else if(taskType.equals("mainF8")){
             CurProcessName="F8主阀";
-        }
-        if(taskType.equals("main104")){
+        } else if(taskType.equals("main104")){
             CurProcessName="104主阀";
-        }
-        if(taskType.equals("pop104")){
+        } else if(taskType.equals("pop104")){
             CurProcessName="104紧急阀";
+        } else if(taskType.equals("taskInfo")){
+            CurProcessName="任务发布";
+        } else if(taskType.equals("toolInspection")){
+            CurProcessName="检修设备检视";
+        } else if(taskType.equals("testTool")){
+            CurProcessName="试验设备检视";
         }
         List<Task> tasks = taskService.createTaskQuery().taskAssignee(getUsername()).list();
         List<String> groupIds = roleService.getGroupIds(getUserId());
@@ -120,6 +123,7 @@ public class TaskController  extends BaseController {
             if(!CurProcessName.equals((String)taskService.getVariable(task.getId(),"processName"))){continue;}
             taskVO.setProcessName((String)taskService.getVariable(task.getId(),"processName"));
             taskVO.setProcessNumber((String)taskService.getVariable(task.getId(),"processNumber"));
+            taskVO.setParams((Map) taskService.getVariable(task.getId(),"params"));
             taskVOS.add(taskVO);
         }
         return taskVOS;

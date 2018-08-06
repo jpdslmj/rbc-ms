@@ -13,21 +13,21 @@
 						<div class="form-group col-md-4">
 							<div class="input-group">
 								<div class="input-group-addon">白光照度：</div>
-								<input type="text" class="form-control" id="luminanceMeasure" name="luminanceMeasure" th:value="${toolInspection.luminanceMeasure}">
+								<input type="text" class="form-control" id="luminanceMeasure" name="luminanceMeasure" readonly="readonly" th:value="${toolInspection.luminanceMeasure}">
 								<div class="input-group-addon">LX</div>
 							</div>
 						</div>
 						<div class="form-group  col-md-4">
 							<div class="input-group">
 								<div class="input-group-addon">温度：</div>
-								<input id="temperature" name="temperature" class="form-control" type="text" th:value="${toolInspection.temperature}">
+								<input id="temperature" name="temperature" class="form-control" type="text" readonly="readonly" th:value="${toolInspection.temperature}">
 								<div class="input-group-addon">°C</div>
 							</div>
 						</div>
 						<div class="form-group col-md-4">
 							<div class="input-group">
 								<div class="input-group-addon">湿度：</div>
-								<input id="humidity" name="humidity" class="form-control" type="text" th:value="${toolInspection.humidity}">
+								<input id="humidity" name="humidity" class="form-control" type="text" readonly="readonly" th:value="${toolInspection.humidity}">
 								<div class="input-group-addon">%</div>
 							</div>
 						</div>
@@ -45,35 +45,35 @@
 					<div class="radio col-md-6">
 						<label class="radio-inline">
 							<span style="margin-right: 20px">通针：</span>
-							<input id="nozzleCleaner1" name="nozzleCleaner"  type="radio" value="1" th:checked="${toolInspection.nozzleCleaner==1}">合格
+							<input id="nozzleCleaner1" name="nozzleCleaner"  type="radio" value="1" disabled="true" th:checked="${toolInspection.nozzleCleaner==1}">合格
 						</label>
 						<label class="radio-inline">
-							<input id="nozzleCleaner2" name="nozzleCleaner"  type="radio" value="0" th:checked="${toolInspection.nozzleCleaner==0}">不合格
+							<input id="nozzleCleaner2" name="nozzleCleaner"  type="radio" value="0" disabled="true" th:checked="${toolInspection.nozzleCleaner==0}">不合格
 						</label>
 					</div>
 					<div class="radio col-md-6">
 						<label class="radio-inline">
 							<span style="margin-right: 20px">硅油：</span>
-							<input id="siliconeOil1" name="siliconeOil"  type="radio" value="1" th:checked="${toolInspection.siliconeOil==1}">合格
+							<input id="siliconeOil1" name="siliconeOil"  type="radio" value="1" disabled="true" th:checked="${toolInspection.siliconeOil==1}">合格
 						</label>
 						<label class="radio-inline">
-							<input id="siliconeOil2" name="siliconeOil"  type="radio" value="1"th:checked="${toolInspection.siliconeOil==0}">不合格
+							<input id="siliconeOil2" name="siliconeOil"  type="radio" value="1" disabled="true" th:checked="${toolInspection.siliconeOil==0}">不合格
 						</label>
 					</div>
 					<div class="radio col-md-6">
 						<label class="radio-inline">
 							<span style="margin-right: 20px">硅脂：</span>
-							<input id="siliconeGrease1" name="siliconeGrease"  type="radio" value="1" th:checked="${toolInspection.siliconeGrease==1}">合格
+							<input id="siliconeGrease1" name="siliconeGrease"  type="radio" value="1" disabled="true" th:checked="${toolInspection.siliconeGrease==1}">合格
 						</label>
 						<label class="radio-inline">
-							<input id="siliconeGrease2" name="siliconeGrease"  type="radio" value="0" th:checked="${toolInspection.siliconeGrease==0}">不合格
+							<input id="siliconeGrease2" name="siliconeGrease"  type="radio" value="0" disabled="true" th:checked="${toolInspection.siliconeGrease==0}">不合格
 						</label>
 					</div>
 					<div class="form-group" style="margin:15px 0px 0px 5px" >
 						<h4 class="col-sm-2 text-left">力矩扳手:</h4>
 						<label class="col-sm-2 control-label">检视情况</label>
 						<div class="col-sm-3">
-							<select id="wench" name="wench" class="form-control" >
+							<select id="wench" name="wench" class="form-control" disabled="true" >
 								<option value="1" th:selected="${toolInspection.wench==1}">全部合格</option>
 								<option value="2" th:selected="${toolInspection.wench==2}">部分合格</option>
 								<option value="3" th:selected="${toolInspection.wench==3}">全不合格</option>
@@ -96,7 +96,7 @@
 						<h4 class="col-sm-2 text-left">其他工具:</h4>
 						<label class="col-sm-2 control-label">检视情况</label>
 						<div class="col-sm-3">
-							<select id="otherTool" name="otherTool" class="form-control" >
+							<select id="otherTool" name="otherTool" class="form-control" disabled="true" >
 								<option value="1" th:selected="${toolInspection.otherTool==1}">全部合格</option>
 								<option value="2" th:selected="${toolInspection.otherTool==2}">部分合格</option>
 								<option value="3" th:selected="${toolInspection.otherTool==3}">全不合格</option>
@@ -118,11 +118,11 @@
 					<div class="col-sm-12 form-inline">
 						<div class="form-group col-sm-3 " shiro:hasAnyRoles="role:admin,role:gangmaster">
 							<label class="control-label">工长：</label>
-							<input id="gangmasterName" name="gangmasterName" class="form-control" type="text" th:value="${toolInspection.gangmasterName}?:${user.name}">
+							<input id="gangmasterName" name="gangmasterName" class="form-control" type="text" readonly="readonly" th:value="${toolInspection.gangmasterName}">
 						</div>
 						<div class="form-group col-sm-3 " shiro:hasAnyRoles="role:admin,role:gangmaster">
 							<label class="control-label">工长检视意见:</label>
-							<select id="gangmasterAudit" name="gangmasterAudit" class="form-control " th:value="${toolInspection.gangmasterAudit}">
+							<select id="gangmasterAudit" name="gangmasterAudit" class="form-control " disabled="true" th:value="${toolInspection.gangmasterAudit}">
 								<option value="" th:selected="${toolInspection.gangmasterAudit ==''}">请选择</option>
 								<option value="0" th:selected="${toolInspection.gangmasterAudit ==0}">退回</option>
 								<option value="1" th:selected="${toolInspection.gangmasterAudit ==1}">同意开工</option>
@@ -142,17 +142,6 @@
 					<input id="returnOpinion" name="returnOpinion" class="form-control" type="hidden">
 					<input id="createTime" name="createTime" class="form-control" type="hidden">
 					<input id="updateTime" name="updateTime" class="form-control" type="hidden">
-					<div class="form-group m-t-md">
-						<div class="col-sm-6">
-							<button type="button" class="btn btn-primary pull-right" id="submit1" onclick="$('#taskPass').val('1');save('sign')">签字提交</button>
-						</div>
-						<div class="col-sm-6 " id="black">
-							<button type="button" class="btn btn-primary" onclick="$('#taskPass').val('0');save('sign')">退回</button>
-						</div>
-						<div class="col-sm-6">
-							<button type="button" class="btn btn-primary" id="submit2" onclick="save('save')">保存</button>
-						</div>
-					</div>
 				</form>
 			</div>
 		</div>
@@ -170,7 +159,7 @@
         gangmaster = true;
 	</script>
 </div>
-<script type="text/javascript" src="/js/appjs/biz/toolInspection/edit.js" >
+<script type="text/javascript" src="/js/appjs/biz/toolInspection/look.js" >
 </script>
 <script type="text/javascript" src="/js/appjs/biz/toolInspection/wenchTable.js">
 </script>

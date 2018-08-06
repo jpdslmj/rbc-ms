@@ -63,12 +63,12 @@ function load() {
                     //     title : '流程定义编号' // 列标题
                     // },
                     {
-                        field : 'processName',
-                        title : '任务名称'
+                        field : 'params.fixWorkerName',
+                        title : '工作者名称'
                     },
                     {
-                        field : 'processNumber',
-                        title : 'F8辅助阀编号'
+                        field : 'params.createTime',
+                        title : '创建日期'
                     },
                     {
                         field : 'name',

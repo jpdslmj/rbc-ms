@@ -4,14 +4,14 @@ $().ready(function() {
 
 $.validator.setDefaults({
 	submitHandler : function() {
-		save();
+		save("save");
 	}
 });
-function save() {
+function save(flag) {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/biz/testTool/save",
+		url : "/biz/testTool/"+flag,
 		data : $('#testToolForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {

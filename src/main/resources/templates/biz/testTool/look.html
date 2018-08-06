@@ -11,16 +11,16 @@
 				<div class="col-sm-12 form-inline">
 					<div class="form-group col-sm-6">
 						<label class="control-label">风表误差：</label>
-						<input id="windErrorValue" name="windErrorValue" class="form-control" type="checkbox" th:checked="${testTool.windErrorValue}?true:false">
+						<input id="windErrorValue" name="windErrorValue" class="form-control" type="checkbox" disabled="true" th:checked="${testTool.windErrorValue}?true">
 						<label class="control-label">±10范围</label>
 					</div>
 					<div class="radio col-md-6">
 						<label class="radio-inline">
 							<span style="margin-right: 20px">风表是否超期：</span>
-							<input id="isWindExced1" name="isWindExced"  type="radio" value="1" th:checked="${testTool.isWindExced==1}">是
+							<input id="isWindExced1" name="isWindExced"  type="radio" value="1" disabled="true" th:checked="${testTool.isWindExced==1}">是
 						</label>
 						<label class="radio-inline">
-							<input id="isWindExced2" name="isWindExced"  type="radio" value="0" th:checked="${testTool.isWindExced==0}">否
+							<input id="isWindExced2" name="isWindExced"  type="radio" value="0" disabled="true" th:checked="${testTool.isWindExced==0}">否
 						</label>
 					</div>
 				</div>
@@ -28,14 +28,14 @@
 					<div class="form-group  col-sm-6">
 						<div class="input-group">
 							<div class="input-group-addon">温度：</div>
-							<input id="temperature" name="temperature" class="form-control" type="text" th:value="${testTool.temperature}">
+							<input id="temperature" name="temperature" class="form-control" type="text" readonly="readonly" th:value="${testTool.temperature}">
 							<div class="input-group-addon">°C</div>
 						</div>
 					</div>
 					<div class="form-group col-sm-6">
 						<div class="input-group">
 							<div class="input-group-addon">湿度：</div>
-							<input id="humidity" name="humidity" class="form-control" type="text" th:value="${testTool.humidity}">
+							<input id="humidity" name="humidity" class="form-control" type="text" readonly="readonly" th:value="${testTool.humidity}">
 							<div class="input-group-addon">%</div>
 						</div>
 					</div>
@@ -44,126 +44,126 @@
 				<div class="radio col-sm-6">
 					<label class="radio-inline">
 						<span style="margin-right: 20px">705试验台1：</span>
-						<input id="fu705test11" name="fu705test1"  type="radio" value="1" th:checked="${testTool.fu705test1==1}">合格
+						<input id="fu705test11" name="fu705test1"  type="radio" value="1" disabled="true" th:checked="${testTool.fu705test1==1}">合格
 					</label>
 					<label class="radio-inline">
-						<input id="fu705test12" name="fu705test1"  type="radio" value="0" th:checked="${testTool.fu705test1==0}">不合格
+						<input id="fu705test12" name="fu705test1"  type="radio" value="0" disabled="true" th:checked="${testTool.fu705test1==0}">不合格
 					</label>
 				</div>
 				<div class="form-group col-sm-6 form-inline">
 					<label class=" control-label">备注：</label>
-					<input id="mk705test1" name="mk705test1" class="form-control" type="text" th:value="${testTool.mk705test1}">
+					<input id="mk705test1" name="mk705test1" class="form-control" type="text" readonly="readonly" th:value="${testTool.mk705test1}">
 				</div>
 				<div class="radio col-sm-6">
 					<label class="radio-inline">
 						<span style="margin-right: 20px">705试验台2：</span>
-						<input id="fu705test21" name="fu705test2"  type="radio" value="1" th:checked="${testTool.fu705test2==1}">合格
+						<input id="fu705test21" name="fu705test2"  type="radio" value="1" disabled="true" th:checked="${testTool.fu705test2==1}">合格
 					</label>
 					<label class="radio-inline">
-						<input id="fu705test22" name="fu705test2"  type="radio" value="0" th:checked="${testTool.fu705test2==0}">不合格
+						<input id="fu705test22" name="fu705test2"  type="radio" value="0" disabled="true" th:checked="${testTool.fu705test2==0}">不合格
 					</label>
 				</div>
 				<div class="form-group col-sm-6 form-inline">
 					<label class=" control-label">备注：</label>
-					<input id="mk705test2" name="mk705test2" class="form-control" type="text" th:value="${testTool.mk705test2}">
+					<input id="mk705test2" name="mk705test2" class="form-control" type="text" readonly="readonly" th:value="${testTool.mk705test2}">
 				</div>
 				<div class="radio col-sm-6 ">
 					<label class="radio-inline">
 						<span style="margin-right: 20px">705试验台3：</span>
-						<input id="fu705test31" name="fu705test3"  type="radio" value="1" th:checked="${testTool.fu705test3==1}">合格
+						<input id="fu705test31" name="fu705test3"  type="radio" value="1" disabled="true" th:checked="${testTool.fu705test3==1}">合格
 					</label>
 					<label class="radio-inline">
-						<input id="fu705test32" name="fu705test3"  type="radio" value="0" th:checked="${testTool.fu705test3==0}">不合格
+						<input id="fu705test32" name="fu705test3"  type="radio" value="0" disabled="true" th:checked="${testTool.fu705test3==0}">不合格
 					</label>
 				</div>
 				<div class="form-group col-sm-6 form-inline">
 					<label class=" control-label">备注：</label>
-					<input id="mk705test3" name="mk705test3" class="form-control" type="text" th:value="${testTool.mk705test3}">
+					<input id="mk705test3" name="mk705test3" class="form-control" type="text" readonly="readonly" th:value="${testTool.mk705test3}">
 				</div>
 				<div class="radio col-sm-6">
 					<label class="radio-inline">
 						<span style="margin-right: 20px">F8试验台1：</span>
-						<input id="fuf8test11" name="fuf8test1"  type="radio" value="1" th:checked="${testTool.fuf8test1==1}">合格
+						<input id="fuf8test11" name="fuf8test1"  type="radio" value="1" disabled="true" th:checked="${testTool.fuf8test1==1}">合格
 					</label>
 					<label class="radio-inline">
-						<input id="fuf8test12" name="fuf8test1"  type="radio" value="0" th:checked="${testTool.fuf8test1==0}">不合格
+						<input id="fuf8test12" name="fuf8test1"  type="radio" value="0" disabled="true" th:checked="${testTool.fuf8test1==0}">不合格
 					</label>
 				</div>
 				<div class="form-group col-sm-6 form-inline">
 					<label class=" control-label">备注：</label>
-					<input id="mkf8test1" name="mkf8test1" class="form-control" type="text" th:value="${testTool.mkf8test1}">
+					<input id="mkf8test1" name="mkf8test1" class="form-control" type="text" readonly="readonly" th:value="${testTool.mkf8test1}">
 				</div>
 				<div class="radio col-sm-6">
 					<label class="radio-inline">
 						<span style="margin-right: 20px">F8试验台2：</span>
-						<input id="fuf8test21" name="fuf8test2"  type="radio" value="1" th:checked="${testTool.fuf8test2==1}">合格
+						<input id="fuf8test21" name="fuf8test2"  type="radio" value="1" disabled="true" th:checked="${testTool.fuf8test2==1}">合格
 					</label>
 					<label class="radio-inline">
-						<input id="fuf8test22" name="fuf8test2"  type="radio" value="0" th:checked="${testTool.fuf8test2==0}">不合格
+						<input id="fuf8test22" name="fuf8test2"  type="radio" value="0" disabled="true" th:checked="${testTool.fuf8test2==0}">不合格
 					</label>
 				</div>
 				<div class="form-group col-sm-6 form-inline">
 					<label class=" control-label">备注：</label>
-					<input id="mkf8test2" name="mkf8test2" class="form-control" type="text" th:value="${testTool.mkf8test2}">
+					<input id="mkf8test2" name="mkf8test2" class="form-control" type="text" readonly="readonly" th:value="${testTool.mkf8test2}">
 				</div>
 				<div class="col-sm-12"><h4 class="text-left">故障试验:</h4></div>
 				<div class="radio col-sm-6">
 					<label class="radio-inline">
 						<span style="margin-right: 20px">705试验台1：</span>
-						<input id="fa705test11" name="fa705test1"  type="radio" value="1" th:checked="${testTool.fa705test1==1}">合格
+						<input id="fa705test11" name="fa705test1"  type="radio" value="1" disabled="true" th:checked="${testTool.fa705test1==1}">合格
 					</label>
 					<label class="radio-inline">
-						<input id="fa705test12" name="fa705test1"  type="radio" value="0" th:checked="${testTool.fa705test1==0}">不合格
+						<input id="fa705test12" name="fa705test1"  type="radio" value="0" disabled="true" th:checked="${testTool.fa705test1==0}">不合格
 					</label>
 				</div>
 				<div class="radio col-sm-6">
 					<label class="radio-inline">
 						<span style="margin-right: 20px">705试验台2：</span>
-						<input id="fa705test21" name="fa705test2"  type="radio" value="1" th:checked="${testTool.fa705test2==1}">合格
+						<input id="fa705test21" name="fa705test2"  type="radio" value="1" disabled="true" th:checked="${testTool.fa705test2==1}">合格
 					</label>
 					<label class="radio-inline">
-						<input id="fa705test22" name="fa705test2"  type="radio" value="0" th:checked="${testTool.fa705test2==0}">不合格
+						<input id="fa705test22" name="fa705test2"  type="radio" value="0" disabled="true" th:checked="${testTool.fa705test2==0}">不合格
 					</label>
 				</div>
 				<div class="radio col-sm-6">
 					<label class="radio-inline">
 						<span style="margin-right: 20px">705试验台3：</span>
-						<input id="fa705test31" name="fa705test3"  type="radio" value="1" th:checked="${testTool.fa705test3==1}">合格
+						<input id="fa705test31" name="fa705test3"  type="radio" value="1" disabled="true" th:checked="${testTool.fa705test3==1}">合格
 					</label>
 					<label class="radio-inline">
-						<input id="fa705test32" name="fa705test3"  type="radio" value="0" th:checked="${testTool.fa705test3==0}">不合格
+						<input id="fa705test32" name="fa705test3"  type="radio" value="0" disabled="true" th:checked="${testTool.fa705test3==0}">不合格
 					</label>
 				</div>
 				<div class="radio col-sm-6">
 					<label class="radio-inline">
 						<span style="margin-right: 20px">F8试验台1：</span>
-						<input id="faf8test11" name="faf8test1"  type="radio" value="1" th:checked="${testTool.faf8test1==1}">合格
+						<input id="faf8test11" name="faf8test1"  type="radio" value="1" disabled="true" th:checked="${testTool.faf8test1==1}">合格
 					</label>
 					<label class="radio-inline">
-						<input id="faf8test12" name="faf8test1"  type="radio" value="0" th:checked="${testTool.faf8test1==0}">不合格
+						<input id="faf8test12" name="faf8test1"  type="radio" value="0" disabled="true" th:checked="${testTool.faf8test1==0}">不合格
 					</label>
 				</div>
 				<div class="radio col-sm-12">
 					<label class="radio-inline">
 						<span style="margin-right: 20px">F8试验台2：</span>
-						<input id="faf8test21" name="faf8test2"  type="radio" value="1" th:checked="${testTool.faf8test2==1}">合格
+						<input id="faf8test21" name="faf8test2"  type="radio" value="1" disabled="true" th:checked="${testTool.faf8test2==1}">合格
 					</label>
 					<label class="radio-inline">
-						<input id="faf8test22" name="faf8test2"  type="radio" value="0" th:checked="${testTool.faf8test2==0}">不合格
+						<input id="faf8test22" name="faf8test2"  type="radio" value="0" disabled="true" th:checked="${testTool.faf8test2==0}">不合格
 					</label>
 				</div>
 				<div class="col-sm-12 form-inline m-t-md">
 					<div class="form-group col-sm-4">
 						<label class="control-label">试验工作者：</label>
-						<input id="testerName" name="testerName" class="form-control" type="text" th:value="${testTool.testerName}">
+						<input id="testerName" name="testerName" class="form-control" readonly="readonly" type="text" th:value="${testTool.testerName}">
 					</div>
 					<div class="form-group col-sm-4">
 						<label class="control-label">试验工作者工号：</label>
-						<input id="testerNo" name="testerNo" class="form-control" type="text" th:value="${testTool.testerNo}">
+						<input id="testerNo" name="testerNo" class="form-control" readonly="readonly" type="text" th:value="${testTool.testerNo}">
 					</div>
 					<div class="form-group col-sm-4">
 						<label class="control-label">提交时间：</label>
-						<input id="updateTime" name="updateTime" class="form-control" type="date" th:value="${#dates.format(testTool.updateTime,'yyyy-MM-dd')}">
+						<input id="updateTime" name="updateTime" class="form-control" readonly="readonly" type="date" th:value="${#dates.format(testTool.updateTime,'yyyy-MM-dd')}">
 					</div>
 				</div>
 				</fieldset>
@@ -171,11 +171,11 @@
 				<!--	<fieldset id="gangmasterField">-->
 					<div class="form-group col-sm-3 " shiro:hasAnyRoles="role:admin,role:gangmaster,role:inspector">
 						<label class="control-label">工长：</label>
-						<input id="gangmasterName" name="gangmasterName" class="form-control" type="text" th:value="${testTool.gangmasterName}?:${user.name}">
+						<input id="gangmasterName" name="gangmasterName" class="form-control" type="text" readonly="readonly" th:value="${testTool.gangmasterName}">
 					</div>
 					<div class="form-group col-sm-3 " shiro:hasAnyRoles="role:admin,role:gangmaster,role:inspector">
 					<label class="control-label">工长检视意见:</label>
-					<select id="gangmasterAudit" name="gangmasterAudit" class="form-control " th:value="${testTool.gangmasterAudit}">
+					<select id="gangmasterAudit" name="gangmasterAudit" class="form-control " readonly="readonly" th:value="${testTool.gangmasterAudit}">
 						<option value="" th:selected="${testTool.gangmasterAudit ==''}">请选择</option>
 						<option value="0" th:selected="${testTool.gangmasterAudit ==0}">退回</option>
 						<option value="1" th:selected="${testTool.gangmasterAudit ==1}">同意开工</option>
@@ -184,11 +184,11 @@
 					<!--</fieldset>-->
 					<div class="form-group col-sm-3 " shiro:hasAnyRoles="role:admin,role:inspector">
 						<label class="control-label">质检员：</label>
-						<input id="inspectorName" name="inspectorName" class="form-control" type="text" th:value="${testTool.inspectorName}?:${user.name}">
+						<input id="inspectorName" name="inspectorName" class="form-control" type="text" readonly="readonly" th:value="${testTool.inspectorName}">
 					</div>
 					<div class="form-group col-sm-3 " shiro:hasAnyRoles="role:admin,role:inspector">
 						<label class="control-label">质检员检视意见:</label>
-						<select id="inspectorAudit" name="inspectorAudit" class="form-control " th:value="${testTool.inspectorAudit}">
+						<select id="inspectorAudit" name="inspectorAudit" class="form-control " readonly="readonly" th:value="${testTool.inspectorAudit}">
 							<option value="" th:selected="${testTool.inspectorAudit ==''}">请选择</option>
 							<option value="0" th:selected="${testTool.inspectorAudit ==0}">退回</option>
 							<option value="1" th:selected="${testTool.inspectorAudit ==1}">同意开工</option>
@@ -207,17 +207,6 @@
 				<input id="returnOpinion" name="returnOpinion" class="form-control" type="hidden">
 				<input id="createTime" name="createTime" class="form-control" type="hidden">
 
-				<div class="form-group">
-					<div class="col-sm-6">
-						<button type="button" class="btn btn-primary pull-right" onclick="$('#taskPass').val('1');update('sign')">签字提交</button>
-					</div>
-					<div class="col-sm-6 " id="black">
-						<button type="button" class="btn btn-primary" onclick="$('#taskPass').val('0');update('sign')">退回</button>
-					</div>
-					<div class="col-sm-6">
-						<button type="button" class="btn btn-primary" id="submit2" onclick="$('#taskPass').val('0');update('update')">保存</button>
-					</div>
-				</div>
 			</form>
 		</div>
 	</div>
@@ -240,7 +229,7 @@
         inspector = true;
 	</script>
 </div>
-<script type="text/javascript" src="/js/appjs/biz/testTool/edit.js">
+<script type="text/javascript" src="/js/appjs/biz/testTool/look.js">
 </script>
 </body>
 </html>

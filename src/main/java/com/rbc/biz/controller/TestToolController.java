@@ -1,20 +1,28 @@
 package com.rbc.biz.controller;
 
+import com.rbc.activiti.config.ActivitiConstant;
+import com.rbc.activiti.service.impl.ActTaskServiceImpl;
+import com.rbc.activiti.utils.ActivitiUtils;
+import com.rbc.biz.domain.OptionsDO;
 import com.rbc.biz.domain.TestToolDO;
 import com.rbc.biz.service.TestToolService;
 import com.rbc.common.controller.BaseController;
 import com.rbc.common.utils.PageUtils;
 import com.rbc.common.utils.Query;
 import com.rbc.common.utils.R;
+import com.rbc.common.utils.StringUtils;
 import com.rbc.system.domain.UserDO;
 import com.rbc.system.service.UserService;
+import org.activiti.engine.task.Task;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +41,10 @@ public class TestToolController extends BaseController {
 	private TestToolService testToolService;
 	@Autowired
 	UserService userService;
+	@Autowired
+	private ActivitiUtils activitiUtils;
+	@Autowired
+	private ActTaskServiceImpl actTaskService;
 	@GetMapping()
 	@RequiresPermissions("biz:testTool:testTool")
 	String TestTool(Model model){
@@ -80,7 +92,14 @@ public class TestToolController extends BaseController {
 		model.addAttribute("user",userDO);
 	    return "biz/testTool/edit";
 	}
-	
+	@GetMapping("/look/{id}")
+	String look(@PathVariable("id") Long id,Model model){
+		TestToolDO testTool = testToolService.get(id);
+		model.addAttribute("testTool", testTool);
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
+		return "biz/testTool/look";
+	}
 	/**
 	 * 保存
 	 */
@@ -91,6 +110,10 @@ public class TestToolController extends BaseController {
 		testTool.setCreateTime(new Date());
 		testTool.setUpdateTime(new Date());
 		if(testToolService.save(testTool)>0){
+			String taskId = testTool.getTaskId();
+			if(StringUtils.isNotBlank(taskId)) {
+				actTaskService.claim(taskId, getUsername());
+			}
 			return R.ok();
 		}
 		return R.error();
@@ -102,6 +125,10 @@ public class TestToolController extends BaseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("biz:testTool:edit")
 	public R update( TestToolDO testTool){
+		String taskId = testTool.getTaskId();
+		if(StringUtils.isNotBlank(taskId)) {
+			actTaskService.claim(taskId, getUsername());
+		}
 		testTool.setUpdateTime(new Date());
 		testToolService.update(testTool);
 		return R.ok();
@@ -130,5 +157,54 @@ public class TestToolController extends BaseController {
 		testToolService.batchRemove(ids);
 		return R.ok();
 	}
-	
+	//工作流开始页面
+	@GetMapping("/form")
+	String form(Model model) {
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
+		return "biz/testTool/add";
+	}
+
+	//工作流编辑页面
+	@GetMapping("/form/{taskId}")
+	String form(@PathVariable("taskId") String taskId, Model model) {
+		Task task = activitiUtils.getTaskByTaskId(taskId);
+		TestToolDO testTool = testToolService.get(Long.valueOf(activitiUtils.getBusinessKeyByTask(task)));
+		testTool.setTaskId(taskId);
+		model.addAttribute("testTool", testTool);
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
+		return "biz/testTool/edit";
+	}
+
+	//工作流流转（签字）
+	@ResponseBody
+	@RequestMapping("/sign")
+	public R sign(TestToolDO testTool){
+		if(testTool.getId() == null) {
+			testToolService.save(testTool);
+		}
+		if(StringUtils.isBlank(testTool.getTaskId())) {
+			HashMap map = new HashMap<>();
+			map.put("processName","试验设备检视");
+			Map params = new HashMap();
+			params.put("testerNo", testTool.getTesterNo());
+			params.put("testerName", testTool.getTesterName());
+			map.put("params", params);
+			map.put("processForm","/biz/testTool/form");
+			Task task = actTaskService.startProcess(ActivitiConstant.ACTIVITI_INSPECTION[0],ActivitiConstant.ACTIVITI_INSPECTION[1],testTool.getId().toString(),null,map);
+			testTool.setTaskId(task.getId());
+			testTool.setTaskName(task.getName());
+			testTool.setProcessInstanceId(task.getProcessInstanceId());
+		}
+		Map<String,Object> vars = new HashMap<>(16);
+		vars.put("pass",  testTool.getTaskPass());
+		Task task = actTaskService.complete(testTool.getTaskId(),vars);
+		if(task != null) {
+			testTool.setTaskId(task.getId());
+			testTool.setTaskName(task.getName());
+		}
+		testToolService.update(testTool);
+		return R.ok();
+	}
 }

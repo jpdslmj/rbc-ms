@@ -143,8 +143,10 @@ public class MainValveF8Controller extends BaseController {
 		Map<String,Object> vars = new HashMap<>(16);
 		vars.put("pass",  mainValveF8.getTaskPass());
 		Task task = actTaskService.complete(mainValveF8.getTaskId(),vars);
-		mainValveF8.setTaskId(task.getId());
-		mainValveF8.setTaskName(task.getName());
+		if(task != null) {
+			mainValveF8.setTaskId(task.getId());
+			mainValveF8.setTaskName(task.getName());
+		}
 		mainValveF8Service.update(mainValveF8);
 		return R.ok();
 	}
@@ -159,7 +161,7 @@ public class MainValveF8Controller extends BaseController {
 		if(mainValveF8Service.save(mainValveF8)>0){
 			String taskId = mainValveF8.getTaskId();
 			if(StringUtils.isNotBlank(taskId)) {
-				actTaskService.claim(taskId, ShiroUtils.getUser().getUsername());
+				actTaskService.claim(taskId, getUsername());
 			}
 			return R.ok();
 		}
@@ -172,6 +174,10 @@ public class MainValveF8Controller extends BaseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("biz:mainValveF8:edit")
 	public R update( MainValveF8DO mainValveF8){
+		String taskId = mainValveF8.getTaskId();
+		if(StringUtils.isNotBlank(taskId)) {
+			actTaskService.claim(taskId, getUsername());
+		}
 		mainValveF8Service.update(mainValveF8);
 		return R.ok();
 	}

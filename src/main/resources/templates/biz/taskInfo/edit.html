@@ -53,12 +53,25 @@
 
 						<input id="deptId" name="deptId" class="form-control" type="hidden" th:value="${user.deptId}">
 
+						<input id="taskId" name="taskId" class="form-control" type="hidden" th:value="${taskInfo.taskId}">
+						<input id="taskName" name="taskName" class="form-control" type="hidden" th:value="${taskInfo.taskName}">
+						<input id="processInstanceId" name="processInstanceId" class="form-control" type="hidden" th:value="${taskInfo.processInstanceId}">
+						<input id="taskPass" name="taskPass" class="hidden" >
 						<div class="form-group">
-							<div class="col-sm-8 col-sm-offset-3" shiro:hasAnyRoles="role:admin,role:gangmaster">
-								<button type="submit" class="btn btn-primary">任务发布</button>
+							<div class="col-sm-4 col-sm-offset-3">
+								<button type="button" class="btn btn-primary" onclick="update('update')">保存</button>
 							</div>
-							<div class="col-sm-8 col-sm-offset-3" shiro:lacksRole  ="role:gangmaster">
-								<button type="submit" class="btn btn-primary">任务反馈</button>
+							<div class="col-sm-4 col-sm-offset-3" id="release" shiro:hasAnyRoles="role:admin,role:gangmaster">
+								<button type="button" class="btn btn-primary" onclick="update('sign')">任务发布</button>
+							</div>
+							<div class="col-sm-4 col-sm-offset-3" id="sign" shiro:hasAnyRoles="role:admin,role:gangmaster">
+								<button type="button" class="btn btn-primary" onclick="$('#taskPass').val('1');update('sign')">审核通过</button>
+							</div>
+							<div class="col-sm-4 col-sm-offset-3" id="black" shiro:hasAnyRoles="role:admin,role:gangmaster">
+								<button type="button" class="btn btn-primary" onclick="$('#taskPass').val('0');update('sign')">退回</button>
+							</div>
+							<div class="col-sm-4 col-sm-offset-3" shiro:lacksRole  ="role:gangmaster">
+								<button type="button" class="btn btn-primary" onclick="update('sign')">任务反馈</button>
 							</div>
 						</div>
 					</form>
@@ -79,6 +92,18 @@
 <script type="text/javascript" src="/js/appjs/biz/taskInfo/edit.js">
 </script>
 <script type="text/javascript" src="/js/appjs/biz/taskInfo/worker.js">
+</script>
+<script th:inline="javascript">
+    var taskName = [[${taskInfo.taskName}]];
+    if(taskName == "审核") {
+        $("#release").hide();
+        $("#sign").show();
+        $("#black").show();
+	} else {
+        $("#release").show();
+        $("#sign").hide();
+        $("#black").hide();
+	}
 </script>
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="getWorkerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

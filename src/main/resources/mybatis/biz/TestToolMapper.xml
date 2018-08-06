@@ -4,11 +4,11 @@
 <mapper namespace="com.rbc.biz.dao.TestToolDao">
 
 	<select id="get" resultType="com.rbc.biz.domain.TestToolDO">
-		select `id`,`wind_error_value`,`is_wind_exced`,`temperature`,`humidity`,`fu705test3`,`fu705test1`,`fu705test2`,`fuF8test1`,`fuF8test2`,`fa705test1`,`fa705test2`,`fa705test3`,`faF8test1`,`faF8test2`,`mk705test1`,`mk705test2`,`mk705test3`,`tester_no`,`tester_name`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`inspector_no`,`inspector_name`,`inspector_audit`,`permissions_opinion`,`return_opinion`,`create_time`,`update_time`,`mkf8test1`,`mkf8test2` from web_test_tool where id = #{value}
+		select `id`,`wind_error_value`,`is_wind_exced`,`temperature`,`humidity`,`fu705test3`,`fu705test1`,`fu705test2`,`fuF8test1`,`fuF8test2`,`fa705test1`,`fa705test2`,`fa705test3`,`faF8test1`,`faF8test2`,`mk705test1`,`mk705test2`,`mk705test3`,`tester_no`,`tester_name`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`inspector_no`,`inspector_name`,`inspector_audit`,`permissions_opinion`,`return_opinion`,`create_time`,`update_time`,`mkf8test1`,`mkf8test2`,`taskId`,`processInstanceId`,`taskName` from web_test_tool where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.rbc.biz.domain.TestToolDO">
-		select `id`,`wind_error_value`,`is_wind_exced`,`temperature`,`humidity`,`fu705test3`,`fu705test1`,`fu705test2`,`fuF8test1`,`fuF8test2`,`fa705test1`,`fa705test2`,`fa705test3`,`faF8test1`,`faF8test2`,`mk705test1`,`mk705test2`,`mk705test3`,`tester_no`,`tester_name`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`inspector_no`,`inspector_name`,`inspector_audit`,`permissions_opinion`,`return_opinion`,`create_time`,`update_time`,`mkf8test1`,`mkf8test2` from web_test_tool
+		select `id`,`wind_error_value`,`is_wind_exced`,`temperature`,`humidity`,`fu705test3`,`fu705test1`,`fu705test2`,`fuF8test1`,`fuF8test2`,`fa705test1`,`fa705test2`,`fa705test3`,`faF8test1`,`faF8test2`,`mk705test1`,`mk705test2`,`mk705test3`,`tester_no`,`tester_name`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`inspector_no`,`inspector_name`,`inspector_audit`,`permissions_opinion`,`return_opinion`,`create_time`,`update_time`,`mkf8test1`,`mkf8test2`,`taskId`,`processInstanceId`,`taskName` from web_test_tool
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="windErrorValue != null and windErrorValue != ''"> and wind_error_value = #{windErrorValue} </if>
@@ -43,6 +43,16 @@
 			<if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		  		  <if test="mkf8test1 != null and mkf8test1 != ''"> and mkf8test1 = #{mkf8test1} </if>
 		  		  <if test="mkf8test2 != null and mkf8test2 != ''"> and mkf8test2 = #{mkf8test2} </if>
+			<choose>
+				<when test="queryType == 'his'">
+					and (taskId is not null or taskId!="")
+				</when>
+				<otherwise>
+					<if test="queryType =='new'">and (taskId is null or taskId="")</if>
+				</otherwise>
+			</choose>
+			<if test="processInstanceId != null and processInstanceId != ''"> and processInstanceId = #{processInstanceId} </if>
+			<if test="taskName != null and taskName != ''"> and taskName = #{taskName} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -88,10 +98,20 @@
 		  		  <if test="inspectorAudit != null and inspectorAudit != ''"> and inspector_audit = #{inspectorAudit} </if>
 		  		  <if test="permissionsOpinion != null and permissionsOpinion != ''"> and permissions_opinion = #{permissionsOpinion} </if>
 		  		  <if test="returnOpinion != null and returnOpinion != ''"> and return_opinion = #{returnOpinion} </if>
-			 <if test="createTime != null and createTime != ''"> <![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d') ]]> </if>
-			 <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+				 <if test="createTime != null and createTime != ''"> <![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d') ]]> </if>
+				 <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		  		  <if test="mkf8test1 != null and mkf8test1 != ''"> and mkf8test1 = #{mkf8test1} </if>
 		  		  <if test="mkf8test2 != null and mkf8test2 != ''"> and mkf8test2 = #{mkf8test2} </if>
+				 <choose>
+					 <when test="queryType == 'his'">
+						 and (taskId is not null or taskId!="")
+					 </when>
+					 <otherwise>
+						 <if test="queryType =='new'">and (taskId is null or taskId="")</if>
+					 </otherwise>
+				 </choose>
+				 <if test="processInstanceId != null and processInstanceId != ''"> and processInstanceId = #{processInstanceId} </if>
+				 <if test="taskName != null and taskName != ''"> and taskName = #{taskName} </if>
 		  		</where>
 	</select>
 	 
@@ -128,7 +148,7 @@
 			`create_time`, 
 			`update_time`, 
 			`mkf8test1`, 
-			`mkf8test2`
+			`mkf8test2`,`taskId`,`processInstanceId`,`taskName`
 		)
 		values
 		(
@@ -162,7 +182,10 @@
 			#{createTime}, 
 			#{updateTime}, 
 			#{mkf8test1}, 
-			#{mkf8test2}
+			#{mkf8test2},
+			#{taskId},
+			#{processInstanceId},
+			#{taskName}
 		)
 	</insert>
 	 
@@ -199,7 +222,10 @@
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
 			<if test="mkf8test1 != null">`mkf8test1` = #{mkf8test1}, </if>
-			<if test="mkf8test2 != null">`mkf8test2` = #{mkf8test2}</if>
+			<if test="mkf8test2 != null">`mkf8test2` = #{mkf8test2},</if>
+			<if test="taskId != null">`taskId` = #{taskId}, </if>
+			<if test="processInstanceId != null">`processInstanceId` = #{processInstanceId}, </if>
+			<if test="taskName != null">`taskName` = #{taskName} </if>
 		</set>
 		where id = #{id}
 	</update>

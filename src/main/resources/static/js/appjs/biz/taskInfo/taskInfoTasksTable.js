@@ -67,8 +67,12 @@ function load() {
                         title : '任务名称'
                     },
                     {
-                        field : 'processNumber',
-                        title : 'F8辅助阀编号'
+                        field : 'params.taskInfoId',
+                        title : '任务序号'
+                    },
+                    {
+                        field : 'params.fixTaskName',
+                        title : '检修任务'
                     },
                     {
                         field : 'name',
