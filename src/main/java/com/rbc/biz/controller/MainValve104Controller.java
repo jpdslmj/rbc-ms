@@ -1,5 +1,7 @@
 package com.rbc.biz.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +9,8 @@ import java.util.Map;
 import com.rbc.activiti.config.ActivitiConstant;
 import com.rbc.activiti.service.impl.ActTaskServiceImpl;
 import com.rbc.activiti.utils.ActivitiUtils;
+import com.rbc.biz.domain.ToolInspectionDO;
+import com.rbc.biz.service.ToolInspectionService;
 import com.rbc.common.controller.BaseController;
 import com.rbc.common.utils.*;
 import com.rbc.system.domain.UserDO;
@@ -210,5 +214,25 @@ public class MainValve104Controller extends BaseController {
 	boolean exit(@RequestParam Map<String, Object> params) {
 		// 存在，不通过，false
 		return !mainValve104Service.exit(params);
+	}
+	@Autowired
+	ToolInspectionService toolInspectionService;
+	@PostMapping("/workPermission")
+	@ResponseBody
+	public R workPermission(@RequestParam Map<String, Object> params) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date day=new Date();
+		String dateStr=sdf.format(day);
+		UserDO userDO  = userService.get(getUserId());
+		params.put("fixWorkerNo",userDO.getUsername());
+		params.put("createTime",dateStr);
+		List<ToolInspectionDO> toolinspection= toolInspectionService.list(params);
+		if(toolinspection!=null&&toolinspection.size()>0){
+			Integer gangmasterAudit= toolinspection.get(0).getGangmasterAudit();
+			if(gangmasterAudit!=null&&gangmasterAudit==1){
+				return R.ok();
+			}
+		}
+		return R.error();
 	}
 }

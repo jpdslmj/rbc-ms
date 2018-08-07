@@ -20,9 +20,9 @@
 		  		  <if test="siliconeOil != null and siliconeOil != ''"> and silicone_oil = #{siliconeOil} </if>
 		  		  <if test="siliconeGrease != null and siliconeGrease != ''"> and silicone_grease = #{siliconeGrease} </if>
 		  		  <if test="otherTool != null and otherTool != ''"> and other_tool = #{otherTool} </if>
-		  		  <if test="fixWorkerNo != null and fixWorkerNo != ''"> and fix_worker_no = #{fixWorkerNo} </if>
+
 		  		  <if test="fixWorkerName != null and fixWorkerName != ''"> and fix_worker_name = #{fixWorkerName} </if>
-		  		  <if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
+
 		  		  <if test="gangmasterName != null and gangmasterName != ''"> and gangmaster_name = #{gangmasterName} </if>
 		  		  <if test="gangmasterAudit != null and gangmasterAudit != ''"> and gangmaster_audit = #{gangmasterAudit} </if>
 		  		  <if test="permissionsOpinion != null and permissionsOpinion != ''"> and permissions_opinion = #{permissionsOpinion} </if>
@@ -32,8 +32,11 @@
 			<choose>
 				<when test="queryType == 'his'">
 					and (taskId is not null or taskId!="")
+					<if test="username != null and username != ''">and(fix_worker_no=#{username}or gangmaster_no=#{username})</if>
 				</when>
 				<otherwise>
+					<if test="fixWorkerNo != null and fixWorkerNo != ''"> and fix_worker_no = #{fixWorkerNo} </if>
+					<if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
 					<if test="queryType =='new'">and (taskId is null or taskId="")</if>
 				</otherwise>
 			</choose>
@@ -75,9 +78,7 @@
 		  		  <if test="siliconeOil != null and siliconeOil != ''"> and silicone_oil = #{siliconeOil} </if>
 		  		  <if test="siliconeGrease != null and siliconeGrease != ''"> and silicone_grease = #{siliconeGrease} </if>
 		  		  <if test="otherTool != null and otherTool != ''"> and other_tool = #{otherTool} </if>
-		  		  <if test="fixWorkerNo != null and fixWorkerNo != ''"> and fix_worker_no = #{fixWorkerNo} </if>
 		  		  <if test="fixWorkerName != null and fixWorkerName != ''"> and fix_worker_name = #{fixWorkerName} </if>
-		  		  <if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
 		  		  <if test="gangmasterName != null and gangmasterName != ''"> and gangmaster_name = #{gangmasterName} </if>
 		  		  <if test="gangmasterAudit != null and gangmasterAudit != ''"> and gangmaster_audit = #{gangmasterAudit} </if>
 		  		  <if test="permissionsOpinion != null and permissionsOpinion != ''"> and permissions_opinion = #{permissionsOpinion} </if>
@@ -87,8 +88,11 @@
 				 <choose>
 					 <when test="queryType == 'his'">
 						 and (taskId is not null or taskId!="")
+						 <if test="username != null and username != ''">and(fix_worker_no=#{username}or gangmaster_no=#{username})</if>
 					 </when>
 					 <otherwise>
+						 <if test="fixWorkerNo != null and fixWorkerNo != ''"> and fix_worker_no = #{fixWorkerNo} </if>
+						 <if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
 						 <if test="queryType =='new'">and (taskId is null or taskId="")</if>
 					 </otherwise>
 				 </choose>

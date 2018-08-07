@@ -264,21 +264,51 @@ function uploadImg(uploadType){
     window.location.href="/common/sysFile/imgUpload/"+partId+"/"+partType+"/"+uploadType;
 
 }
-
+function workPermission(flag){
+    var workPermMrk='';
+    $.ajax({
+        url : "/biz/mainValve104/workPermission",
+        type : "post",
+        data : {
+            "queryType" : "his",
+        },
+        async : false,
+        success : function(r) {
+            workPermMrk=r.code;
+        }
+    });
+    if(workPermMrk==1&&flag=='sign'){
+        return true;
+    }else{
+        return false;
+    }
+}
 function update(flag) {
     if(disassembler){
+        if(workPermission(flag)==true){
+            layer.alert("请先完成当天工具检视任务！");
+            return;
+        }
         if($('#disassembleNo').val()==null||$('#disassembleNo').val()==''){
             alert("请签名！");
             return;
         }
     }
     if(cleaner){
+        if(workPermission(flag)==true){
+            layer.alert("请先完成当天工具检视任务！");
+            return;
+        }
         if($('#cleanerNo').val()==null||$('#cleanerNo').val()==''){
             alert("请签名！");
             return;
         }
     }
     if(fixer&&flag=='sign'){
+        if(workPermission(flag)==true){
+            layer.alert("请先完成当天工具检视任务！");
+            return;
+        }
         var fixer1=$('#fixer1No').val();
         var fixer2=$('#fixer2No').val();
         var fixer3=$('#fixer3No').val();
@@ -289,6 +319,10 @@ function update(flag) {
         }
     }
     if(assembler){
+        if(workPermission(flag)==true){
+            layer.alert("请先完成当天工具检视任务！");
+            return;
+        }
         if($('#assemblerNo').val()==null||$('#assemblerNo').val()==''){
             alert("请签名！");
             return;

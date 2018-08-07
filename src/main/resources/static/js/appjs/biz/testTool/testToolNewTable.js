@@ -35,7 +35,7 @@ function load3() {
 								offset:params.offset,
                                 queryType:"new",
                                 createTime:$('#createTimeNew').val(),
-                                fixWorkerNo:currentUserNameNo
+                                testerNo:currentUserNameNo
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};

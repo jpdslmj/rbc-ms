@@ -128,6 +128,22 @@ function edit2(id) {
         }
 	});
 }
+function look(id) {
+    layer.open({
+        type : 2,
+        title : '查看',
+        shadeClose : false, // 点击遮罩关闭层
+        content : prefix2 + '/look/' + id ,// iframe的url
+        maxmin : true,
+        fixed:false,
+        resize:true,
+        area : ['600px','400px'],
+        success:function(layero ,index){
+            layer.full(index);
+        }
+    });
+}
+
 function remove2(id) {
 	layer.confirm('确定要删除选中的记录？', {
 		btn : [ '确定', '取消' ]

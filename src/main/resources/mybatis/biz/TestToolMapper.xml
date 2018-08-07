@@ -28,12 +28,12 @@
 		  		  <if test="mk705test1 != null and mk705test1 != ''"> and mk705test1 = #{mk705test1} </if>
 		  		  <if test="mk705test2 != null and mk705test2 != ''"> and mk705test2 = #{mk705test2} </if>
 		  		  <if test="mk705test3 != null and mk705test3 != ''"> and mk705test3 = #{mk705test3} </if>
-		  		  <if test="testerNo != null and testerNo != ''"> and tester_no = #{testerNo} </if>
+
 		  		  <if test="testerName != null and testerName != ''"> and tester_name = #{testerName} </if>
-		  		  <if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
+
 		  		  <if test="gangmasterName != null and gangmasterName != ''"> and gangmaster_name = #{gangmasterName} </if>
 		  		  <if test="gangmasterAudit != null and gangmasterAudit != ''"> and gangmaster_audit = #{gangmasterAudit} </if>
-		  		  <if test="inspectorNo != null and inspectorNo != ''"> and inspector_no = #{inspectorNo} </if>
+
 		  		  <if test="inspectorName != null and inspectorName != ''"> and inspector_name = #{inspectorName} </if>
 		  		  <if test="inspectorAudit != null and inspectorAudit != ''"> and inspector_audit = #{inspectorAudit} </if>
 		  		  <if test="permissionsOpinion != null and permissionsOpinion != ''"> and permissions_opinion = #{permissionsOpinion} </if>
@@ -46,8 +46,17 @@
 			<choose>
 				<when test="queryType == 'his'">
 					and (taskId is not null or taskId!="")
+					<if test="username != null and username != ''">
+						and(
+						    tester_no=#{username}
+						or gangmaster_no=#{username}
+						or inspector_no==#{username})
+					</if>
 				</when>
 				<otherwise>
+					<if test="testerNo != null and testerNo != ''"> and tester_no = #{testerNo} </if>
+					<if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
+					<if test="inspectorNo != null and inspectorNo != ''"> and inspector_no = #{inspectorNo} </if>
 					<if test="queryType =='new'">and (taskId is null or taskId="")</if>
 				</otherwise>
 			</choose>
@@ -88,12 +97,9 @@
 		  		  <if test="mk705test1 != null and mk705test1 != ''"> and mk705test1 = #{mk705test1} </if>
 		  		  <if test="mk705test2 != null and mk705test2 != ''"> and mk705test2 = #{mk705test2} </if>
 		  		  <if test="mk705test3 != null and mk705test3 != ''"> and mk705test3 = #{mk705test3} </if>
-		  		  <if test="testerNo != null and testerNo != ''"> and tester_no = #{testerNo} </if>
 		  		  <if test="testerName != null and testerName != ''"> and tester_name = #{testerName} </if>
-		  		  <if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
 		  		  <if test="gangmasterName != null and gangmasterName != ''"> and gangmaster_name = #{gangmasterName} </if>
 		  		  <if test="gangmasterAudit != null and gangmasterAudit != ''"> and gangmaster_audit = #{gangmasterAudit} </if>
-		  		  <if test="inspectorNo != null and inspectorNo != ''"> and inspector_no = #{inspectorNo} </if>
 		  		  <if test="inspectorName != null and inspectorName != ''"> and inspector_name = #{inspectorName} </if>
 		  		  <if test="inspectorAudit != null and inspectorAudit != ''"> and inspector_audit = #{inspectorAudit} </if>
 		  		  <if test="permissionsOpinion != null and permissionsOpinion != ''"> and permissions_opinion = #{permissionsOpinion} </if>
@@ -102,14 +108,23 @@
 				 <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		  		  <if test="mkf8test1 != null and mkf8test1 != ''"> and mkf8test1 = #{mkf8test1} </if>
 		  		  <if test="mkf8test2 != null and mkf8test2 != ''"> and mkf8test2 = #{mkf8test2} </if>
-				 <choose>
-					 <when test="queryType == 'his'">
-						 and (taskId is not null or taskId!="")
-					 </when>
-					 <otherwise>
-						 <if test="queryType =='new'">and (taskId is null or taskId="")</if>
-					 </otherwise>
-				 </choose>
+			 <choose>
+				 <when test="queryType == 'his'">
+					 and (taskId is not null or taskId!="")
+					 <if test="username != null and username != ''">
+						 and(
+						 tester_no=#{username}
+						 or gangmaster_no=#{username}
+						 or inspector_no==#{username})
+					 </if>
+				 </when>
+				 <otherwise>
+					 <if test="testerNo != null and testerNo != ''"> and tester_no = #{testerNo} </if>
+					 <if test="gangmasterNo != null and gangmasterNo != ''"> and gangmaster_no = #{gangmasterNo} </if>
+					 <if test="inspectorNo != null and inspectorNo != ''"> and inspector_no = #{inspectorNo} </if>
+					 <if test="queryType =='new'">and (taskId is null or taskId="")</if>
+				 </otherwise>
+			 </choose>
 				 <if test="processInstanceId != null and processInstanceId != ''"> and processInstanceId = #{processInstanceId} </if>
 				 <if test="taskName != null and taskName != ''"> and taskName = #{taskName} </if>
 		  		</where>

@@ -96,17 +96,17 @@
 						<div class="col-sm-4" shiro:hasAnyRoles="role:admin,role:disassembler,role:cleaner,role:fixer,role:assembler">
 							<a id="uploadImg" type="submit" class="btn btn-primary" href="javascript:void(0)" onClick="uploadImg(1)">影像上传</a>
 						</div>
-						<div class="col-sm-4" shiro:hasAnyRoles="role:admin,role:gangmaster,role:inspector">
+						<div class="col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster,role:inspector">
 							<a id="imgView" type="submit" class="btn btn-primary" href="javascript:void(0)" onClick="uploadImg(2)">影像查看</a>
 						</div>
 						<input id="taskPass" name="taskPass" class="hidden">
-						<div class="col-sm-4 " id="sign">
+						<div class="col-sm-3 " id="sign">
 							<button type="submit" class="btn btn-primary" >签字提交</button>
 						</div>
-						<div class="col-sm-4 " id="black">
+						<div class="col-sm-3 " id="black" shiro:hasAnyRoles="role:admin,role:inspector,role:gangmaster">
 							<button type="button" class="btn btn-primary" onclick="$('#taskPass').val('0');update('sign')">退回</button>
 						</div>
-						<div class="col-sm-4 ">
+						<div class="col-sm-3 ">
 							<button id="save" type="button" class="btn btn-primary" onclick="update('update')">保存</button>
 						</div>
 					</div>
