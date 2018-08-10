@@ -2,8 +2,8 @@ rbc:
   uploadPath: D:/var/uploaded_files/
 logging:
   level:
-    root: info
-    com.rbc.biz.dao: debug
+    root: error
+    com.rbc: info
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource

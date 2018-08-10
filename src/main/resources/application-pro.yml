@@ -1,9 +1,9 @@
 rbc:
-  uploadPath: /var/uploaded_files/
+  uploadPath: F:/var/uploaded_files/
 logging:
   level:
     root: error
-    com.bootdo: info
+    com.rbc: info
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource

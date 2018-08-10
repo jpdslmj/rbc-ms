@@ -1,4 +1,12 @@
 $().ready(function() {
+    $("#description").hide();
+	$("#isPass").change(function(){
+        if($("#isPass").val()==0){
+               $("#description").show();
+    }else{
+            $("#description").hide();
+		}
+	})
 	validateRule();
 });
 

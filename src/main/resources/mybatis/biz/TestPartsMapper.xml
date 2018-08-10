@@ -4,15 +4,13 @@
 <mapper namespace="com.rbc.biz.dao.TestPartsDao">
 
 	<select id="get" resultType="com.rbc.biz.domain.TestPartsDO">
-		select `id`,`pop_value`,`sequence_no`,`test_part_no`,`assembler_no`,`assembler_name`,`assemble_date`,`is_pass`,`fault_description`,`retan_sit`,`create_time`,`update_time` from web_test_parts where id = #{value}
+		select `id`,`test_part_no`,`assembler_no`,`assembler_name`,`assemble_date`,`is_pass`,`fault_description`,`retan_sit`,`create_time`,`update_time`,`test_part_type`,`tester_no`,`tester_name` from web_test_parts where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.rbc.biz.domain.TestPartsDO">
-		select `id`,`pop_value`,`sequence_no`,`test_part_no`,`assembler_no`,`assembler_name`,`assemble_date`,`is_pass`,`fault_description`,`retan_sit`,`create_time`,`update_time` from web_test_parts
+		select `id`,`test_part_no`,`assembler_no`,`assembler_name`,`assemble_date`,`is_pass`,`fault_description`,`retan_sit`,`create_time`,`update_time`,`test_part_type`,`tester_no`,`tester_name` from web_test_parts
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="popValue != null and popValue != ''"> and pop_value = #{popValue} </if>
-		  		  <if test="sequenceNo != null and sequenceNo != ''"> and sequence_no = #{sequenceNo} </if>
 		  		  <if test="testPartNo != null and testPartNo != ''"> and test_part_no = #{testPartNo} </if>
 		  		  <if test="assemblerNo != null and assemblerNo != ''"> and assembler_no = #{assemblerNo} </if>
 		  		  <if test="assemblerName != null and assemblerName != ''"> and assembler_name = #{assemblerName} </if>
@@ -20,8 +18,11 @@
 		  		  <if test="isPass != null and isPass != ''"> and is_pass = #{isPass} </if>
 		  		  <if test="faultDescription != null and faultDescription != ''"> and fault_description = #{faultDescription} </if>
 		  		  <if test="retanSit != null and retanSit != ''"> and retan_sit = #{retanSit} </if>
-		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="createTime != null and createTime != ''"> <![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d') ]]> </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="testPartType != null and testPartType != ''"> and test_part_type = #{testPartType} </if>
+		  		  <if test="testerNo != null and testerNo != ''"> and tester_no = #{testerNo} </if>
+		  		  <if test="testerName != null and testerName != ''"> and tester_name = #{testerName} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -40,8 +41,6 @@
 		select count(*) from web_test_parts
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="popValue != null and popValue != ''"> and pop_value = #{popValue} </if>
-		  		  <if test="sequenceNo != null and sequenceNo != ''"> and sequence_no = #{sequenceNo} </if>
 		  		  <if test="testPartNo != null and testPartNo != ''"> and test_part_no = #{testPartNo} </if>
 		  		  <if test="assemblerNo != null and assemblerNo != ''"> and assembler_no = #{assemblerNo} </if>
 		  		  <if test="assemblerName != null and assemblerName != ''"> and assembler_name = #{assemblerName} </if>
@@ -49,16 +48,17 @@
 		  		  <if test="isPass != null and isPass != ''"> and is_pass = #{isPass} </if>
 		  		  <if test="faultDescription != null and faultDescription != ''"> and fault_description = #{faultDescription} </if>
 		  		  <if test="retanSit != null and retanSit != ''"> and retan_sit = #{retanSit} </if>
-		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="createTime != null and createTime != ''">  <![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d') ]]>  </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="testPartType != null and testPartType != ''"> and test_part_type = #{testPartType} </if>
+		  		  <if test="testerNo != null and testerNo != ''"> and tester_no = #{testerNo} </if>
+		  		  <if test="testerName != null and testerName != ''"> and tester_name = #{testerName} </if>
 		  		</where>
 	</select>
 	 
 	<insert id="save" parameterType="com.rbc.biz.domain.TestPartsDO" useGeneratedKeys="true" keyProperty="id">
 		insert into web_test_parts
 		(
-			`pop_value`, 
-			`sequence_no`, 
 			`test_part_no`, 
 			`assembler_no`, 
 			`assembler_name`, 
@@ -67,12 +67,13 @@
 			`fault_description`, 
 			`retan_sit`, 
 			`create_time`, 
-			`update_time`
+			`update_time`, 
+			`test_part_type`, 
+			`tester_no`, 
+			`tester_name`
 		)
 		values
 		(
-			#{popValue}, 
-			#{sequenceNo}, 
 			#{testPartNo}, 
 			#{assemblerNo}, 
 			#{assemblerName}, 
@@ -81,15 +82,16 @@
 			#{faultDescription}, 
 			#{retanSit}, 
 			#{createTime}, 
-			#{updateTime}
+			#{updateTime}, 
+			#{testPartType}, 
+			#{testerNo}, 
+			#{testerName}
 		)
 	</insert>
 	 
 	<update id="update" parameterType="com.rbc.biz.domain.TestPartsDO">
 		update web_test_parts 
 		<set>
-			<if test="popValue != null">`pop_value` = #{popValue}, </if>
-			<if test="sequenceNo != null">`sequence_no` = #{sequenceNo}, </if>
 			<if test="testPartNo != null">`test_part_no` = #{testPartNo}, </if>
 			<if test="assemblerNo != null">`assembler_no` = #{assemblerNo}, </if>
 			<if test="assemblerName != null">`assembler_name` = #{assemblerName}, </if>
@@ -98,7 +100,10 @@
 			<if test="faultDescription != null">`fault_description` = #{faultDescription}, </if>
 			<if test="retanSit != null">`retan_sit` = #{retanSit}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
-			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="testPartType != null">`test_part_type` = #{testPartType}, </if>
+			<if test="testerNo != null">`tester_no` = #{testerNo}, </if>
+			<if test="testerName != null">`tester_name` = #{testerName}</if>
 		</set>
 		where id = #{id}
 	</update>

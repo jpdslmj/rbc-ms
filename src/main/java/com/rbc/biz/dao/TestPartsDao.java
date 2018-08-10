@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 试验部件信息表
  * @author lmj
  * @email 359819418@qq.com
- * @date 2018-07-05 18:07:04
+ * @date 2018-08-09 22:48:45
  */
 @Mapper
 public interface TestPartsDao {
