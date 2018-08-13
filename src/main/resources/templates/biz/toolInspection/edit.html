@@ -146,7 +146,7 @@
 						<div class="col-sm-6">
 							<button type="button" class="btn btn-primary pull-right" id="submit1" onclick="$('#taskPass').val('1');save('sign')">签字提交</button>
 						</div>
-						<div class="col-sm-6 " id="black">
+						<div class="col-sm-6 " id="black" shiro:hasAnyRoles="role:admin,role:gangmaster">
 							<button type="button" class="btn btn-primary" onclick="$('#taskPass').val('0');save('sign')">退回</button>
 						</div>
 						<div class="col-sm-6">

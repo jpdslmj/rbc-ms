@@ -178,8 +178,8 @@
 					<label class="control-label">工长检视意见:</label>
 					<select id="gangmasterAudit" name="gangmasterAudit" class="form-control " th:value="${testTool.gangmasterAudit}">
 						<option value="" th:selected="${testTool.gangmasterAudit ==''}">请选择</option>
-						<option value="0" th:selected="${testTool.gangmasterAudit ==0}">退回</option>
 						<option value="1" th:selected="${testTool.gangmasterAudit ==1}">同意开工</option>
+						<option value="0" th:selected="${testTool.gangmasterAudit ==0}">退回</option>
 					</select>
 					</div>
 					<!--</fieldset>-->
@@ -192,8 +192,8 @@
 						<label class="control-label">质检员检视意见:</label>
 						<select id="inspectorAudit" name="inspectorAudit" class="form-control " th:value="${testTool.inspectorAudit}">
 							<option value="" th:selected="${testTool.inspectorAudit ==''}">请选择</option>
-							<option value="0" th:selected="${testTool.inspectorAudit ==0}">退回</option>
 							<option value="1" th:selected="${testTool.inspectorAudit ==1}">同意开工</option>
+							<option value="0" th:selected="${testTool.inspectorAudit ==0}">退回</option>
 						</select>
 					</div>
 				</div>
@@ -211,7 +211,7 @@
 					<div class="col-sm-6">
 						<button type="button" class="btn btn-primary pull-right" onclick="$('#taskPass').val('1');update('sign')">签字提交</button>
 					</div>
-					<div class="col-sm-6 " id="black">
+					<div class="col-sm-6 " id="black" shiro:hasAnyRoles="role:admin,role:gangmaster,role:inspector">
 						<button type="button" class="btn btn-primary" onclick="$('#taskPass').val('0');update('sign')">退回</button>
 					</div>
 					<div class="col-sm-6">

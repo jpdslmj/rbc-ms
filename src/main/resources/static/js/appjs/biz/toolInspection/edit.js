@@ -62,17 +62,18 @@ $.fn.serializeObject = function()
     return o;
 };
 function save(flag) {
-    var taskpass= $('#taskPass').val();
-    var gangmasterAudit= $('#gangmasterAudit').val();
-    if(gangmasterAudit==null||gangmasterAudit==''){
-        layer.alert("工长审核意见不能为空！");
-        return;
+    if(gangmaster){
+        var taskpass= $('#taskPass').val();
+        var gangmasterAudit= $('#gangmasterAudit').val();
+        if(gangmasterAudit==null||gangmasterAudit==''){
+            layer.alert("工长审核意见不能为空！");
+            return;
+        }
+        if(taskpass!=gangmasterAudit){
+            layer.alert("工长签批意见与操作不一致！");
+            return;
+        }
     }
-    if(taskpass!=gangmasterAudit){
-        layer.alert("工长签批意见与操作不一致！");
-        return;
-    }
-
     var sWenckVal =$("#wench").val();
     var sotherToolVal =$("#otherTool").val();
 
