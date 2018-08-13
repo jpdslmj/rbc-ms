@@ -172,6 +172,7 @@
 					<div class="form-group col-sm-3 " shiro:hasAnyRoles="role:admin,role:gangmaster,role:inspector">
 						<label class="control-label">工长：</label>
 						<input id="gangmasterName" name="gangmasterName" class="form-control" type="text" th:value="${testTool.gangmasterName}?:${user.name}">
+						<input id="gangmasterNo" name="gangmasterNo" class="form-control" type="hidden" th:value="${testTool.gangmasterNo}?:${user.username}">
 					</div>
 					<div class="form-group col-sm-3 " shiro:hasAnyRoles="role:admin,role:gangmaster,role:inspector">
 					<label class="control-label">工长检视意见:</label>
@@ -185,6 +186,7 @@
 					<div class="form-group col-sm-3 " shiro:hasAnyRoles="role:admin,role:inspector">
 						<label class="control-label">质检员：</label>
 						<input id="inspectorName" name="inspectorName" class="form-control" type="text" th:value="${testTool.inspectorName}?:${user.name}">
+						<input id="inspectorNo" name="inspectorNo" class="form-control" type="hidden" th:value="${testTool.inspectorNo}?:${user.username}">
 					</div>
 					<div class="form-group col-sm-3 " shiro:hasAnyRoles="role:admin,role:inspector">
 						<label class="control-label">质检员检视意见:</label>
@@ -201,8 +203,6 @@
 				<input id="processInstanceId" name="processInstanceId" class="form-control" type="hidden" th:value="${testTool.processInstanceId}">
 				<input id="taskPass" name="taskPass" class="hidden">
 				<input id="id" name="id" class="form-control" type="hidden" th:value="${testTool.id}">
-				<input id="gangmasterNo" name="gangmasterNo" class="form-control" type="hidden" th:value="${testTool.gangmasterNo}?:${user.username}">
-				<input id="inspectorNo" name="inspectorNo" class="form-control" type="hidden" th:value="${testTool.inspectorNo}?:${user.username}">
 				<input id="permissionsOpinion" name="permissionsOpinion" class="form-control" type="hidden">
 				<input id="returnOpinion" name="returnOpinion" class="form-control" type="hidden">
 				<input id="createTime" name="createTime" class="form-control" type="hidden">

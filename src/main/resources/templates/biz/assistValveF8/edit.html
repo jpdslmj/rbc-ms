@@ -25,8 +25,9 @@
 					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster" th:value="${assistValveF8.gangmasterAudit}">
 						<label class="control-label">工长检修意见：</label>
 						<select id="gangmasterAudit" name="gangmasterAudit" class="form-control">
-							<option value="0" th:selected="${assistValveF8.gangmasterAudit == 0}">不合格</option>
+							<option value="" th:selected="${assistValveF8.gangmasterAudit == ''}">请选择</option>
 							<option value="1" th:selected="${assistValveF8.gangmasterAudit == 1}">合格</option>
+							<option value="0" th:selected="${assistValveF8.gangmasterAudit == 0}">不合格</option>
 						</select>
 					</div>
 
@@ -37,8 +38,9 @@
 					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
 						<label class="control-label">质检员检修意见:</label>
 						<select id="inspectorAudit" name="inspectorAudit" class="form-control " th:value="${assistValveF8.inspectorAudit}">
-							<option value="0" th:selected="${assistValveF8.inspectorAudit ==0}">不合格</option>
+							<option value="" th:selected="${assistValveF8.inspectorAudit ==''}">请选择</option>
 							<option value="1" th:selected="${assistValveF8.inspectorAudit ==1}">合格</option>
+							<option value="0" th:selected="${assistValveF8.inspectorAudit ==0}">不合格</option>
 						</select>
 					</div>
 					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">

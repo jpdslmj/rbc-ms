@@ -328,6 +328,30 @@ function update(flag) {
             return;
         }
     }
+    if(gangmaster){
+        var taskpass= $('#taskPass').val();
+        var gangmasterAudit= $('#gangmasterAudit').val();
+        if(gangmasterAudit==null||gangmasterAudit==''){
+            layer.alert("工长审核意见不能为空！");
+            return;
+        }
+        if(taskpass!=gangmasterAudit){
+            layer.alert("工长签批意见与操作不一致！");
+            return;
+        }
+    }
+    if(inspector){
+        var taskpass= $('#taskPass').val();
+        var inspectorAudit= $('#inspectorAudit').val();
+        if(inspectorAudit==null||inspectorAudit==''){
+            layer.alert("质检员审核意见不能为空！");
+            return;
+        }
+        if(taskpass!=inspectorAudit){
+            layer.alert("质检员签批意见与操作不一致！");
+            return;
+        }
+    }
    // alert($('#taskPass').val())
     var data=$('#assistF8Form').serialize();
     $.ajax({
