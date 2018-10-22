@@ -17,4 +17,5 @@ public class BaseController {
 	public String getUsername() {
 		return getUser().getUsername();
 	}
+
 }

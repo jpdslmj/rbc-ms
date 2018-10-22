@@ -139,6 +139,8 @@ public class PopValve104Controller extends BaseController {
 	@RequestMapping("/sign")
 	public R sign(PopValve104DO popValve104){
 		if(popValve104.getId() == null) {
+			Date crtTm= new Date();
+			popValve104.setCreateTime(crtTm);
 			popValve104Service.save(popValve104);
 		}
 		if(StringUtils.isBlank(popValve104.getTaskId())) {

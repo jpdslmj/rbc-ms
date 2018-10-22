@@ -133,6 +133,8 @@ public class MainValve104Controller extends BaseController {
 	@RequestMapping("/sign")
 	public R sign(MainValve104DO mainValve104){
 		if(mainValve104.getId() == null) {
+			Date crtTm= new Date();
+			mainValve104.setCreateTime(crtTm);
 			mainValve104Service.save(mainValve104);
 		}
 		if(StringUtils.isBlank(mainValve104.getTaskId())) {

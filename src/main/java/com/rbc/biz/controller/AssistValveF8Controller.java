@@ -133,6 +133,8 @@ public class AssistValveF8Controller extends BaseController {
 	@RequestMapping("/sign")
 	public R sign(AssistValveF8DO assistValveF8){
 		if(assistValveF8.getId() == null) {
+			Date crtTm= new Date();
+			assistValveF8.setCreateTime(crtTm);
 			assistValveF8Service.save(assistValveF8);
 		}
 		if(StringUtils.isBlank(assistValveF8.getTaskId())) {
