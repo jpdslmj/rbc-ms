@@ -3,7 +3,7 @@ $().ready(function() {
     loadassistF8Table();
     if(disassembler){
         $('#createTime').attr("disabled",false);
-        $('#assistValue').attr("disabled",false);
+        $('#popValue').attr("disabled",false);
     }
     var today=new Date().Format("yyyy-MM-dd");
     $("#createTime").val(today);
@@ -320,22 +320,22 @@ function validateRule() {
     var icon = "<i class='fa fa-times-circle'></i> ";
     $("#assistF8Form").validate({
         rules : {
-            assistValue : {
+            popValue : {
                 required : true ,
                 remote : {
                     url : "/biz/assistValveF8/exit", // 后台处理程序
                     type : "post", // 数据发送方式
                     dataType : "json", // 接受数据格式
                     data : { // 要传递的数据
-                        assistValue : function() {
-                            return $("#assistValue").val();
+                        popValue : function() {
+                            return $("#popValue").val();
                         }
                     }
                 }
             }
         },
         messages : {
-            assistValue : {
+            popValue : {
                 required : icon + "编号不能为空",
                 remote : icon + "编号已经存在"
             }

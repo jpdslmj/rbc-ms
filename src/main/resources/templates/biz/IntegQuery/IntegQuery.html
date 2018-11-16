@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12">
+			<div class="ibox">
+				<div class="ibox-body">
+					<div class="fixed-table-toolbar">
+						<div class="columns">
+							<div class="columns pull-right">
+								<button class="btn btn-success" onclick="reLoad()">查询</button>
+							</div>
+							<div class="columns pull-right col-md-3 nopadding">
+								<select id="valueType" name="valueType" class="form-control" >
+									<option value="0">部件类型</option>
+									<option value="1">104紧急阀</option>
+									<option value="2">104主阀</option>
+									<option value="3">F8主阀</option>
+									<option value="4">F8辅助阀</option>
+								</select>
+							</div>
+							<div class="columns pull-right col-md-3 nopadding">
+								<input id="valueNo" type="text" class="form-control"
+									   placeholder="部件编号">
+							</div>
+							<div class="columns pull-right col-md-3 nopadding">
+								<input id="createTime" type="date" class="form-control"
+									   placeholder="检修时间">
+							</div>
+						</div>
+
+					</div>
+					<table id="IntegQuery" data-mobile-responsive="true">
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+		<div>
+			<script type="text/javascript">
+				var s_edit_h = 'hidden';
+				var s_remove_h = 'hidden';
+				var s_resetPwd_h = 'hidden';
+			</script>
+		</div>
+		<div shiro:hasPermission="biz:IntegQuery:edit">
+			<script type="text/javascript">
+				s_edit_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="biz:IntegQuery:remove">
+			<script type="text/javascript">
+				var s_remove_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="biz:IntegQuery:resetPwd">
+			<script type="text/javascript">
+				var s_resetPwd_h = '';
+			</script>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/biz/IntegQuery/IntegQuery.js"></script>
+</body>
+</html>

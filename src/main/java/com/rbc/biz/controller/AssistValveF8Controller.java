@@ -140,7 +140,7 @@ public class AssistValveF8Controller extends BaseController {
 		if(StringUtils.isBlank(assistValveF8.getTaskId())) {
 			HashMap map = new HashMap<>();
 			map.put("processName","F8辅助阀");
-			map.put("processNumber",assistValveF8.getAssistValue());
+			map.put("processNumber",assistValveF8.getPopValue());
 			map.put("processForm","/biz/assistValveF8/form");
 			Task task = actTaskService.startProcess(ActivitiConstant.ACTIVITI_PROCESS104[0],ActivitiConstant.ACTIVITI_PROCESS104[1],assistValveF8.getId().toString(),null,map);
 			assistValveF8.setTaskId(task.getId());
@@ -165,6 +165,10 @@ public class AssistValveF8Controller extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("biz:assistValveF8:add")
 	public R save( AssistValveF8DO assistValveF8){
+		if(assistValveF8.getId() == null) {
+			Date crtTm= new Date();
+			assistValveF8.setCreateTime(crtTm);
+		}
 		if(assistValveF8Service.save(assistValveF8)>0){
 			String taskId = assistValveF8.getTaskId();
 			if(StringUtils.isNotBlank(taskId)) {
@@ -219,6 +223,9 @@ public class AssistValveF8Controller extends BaseController {
 		return !assistValveF8Service.exit(params);
 	}
 
+	/**
+	 * 检验当天设备检视情况
+	 */
 	@Autowired
 	ToolInspectionService toolInspectionService;
 	@PostMapping("/workPermission")
@@ -228,7 +235,7 @@ public class AssistValveF8Controller extends BaseController {
 		Date day=new Date();
 		String dateStr=sdf.format(day);
 		UserDO userDO  = userService.get(getUserId());
-		params.put("fixWorkerNo",userDO.getUsername());
+		params.put("username",userDO.getUsername());
 		params.put("createTime",dateStr);
 		List<ToolInspectionDO> toolinspection= toolInspectionService.list(params);
         if(toolinspection!=null&&toolinspection.size()>0){
@@ -239,5 +246,4 @@ public class AssistValveF8Controller extends BaseController {
 		}
 		return R.error();
 	}
-
 }

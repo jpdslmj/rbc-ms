@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<body>
+<object classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2" id=WebBrowser></object>
+<div class="wrapper wrapper-content ">
+	<table style="text-align:center;vertical-align:middle;border-collapse:collapse;" width="800" height="500" cellspacing="0" cellpadding="0" border="1" align="center">
+		<caption style="text-align:center"><h2>F8辅助阀检修记录表</h2></caption>
+		<tbody><tr height="50">
+			<td width="100">检修日期：</td>
+			<td colspan="2" width="300">2018-11-13 15:45:01</td>
+			<td width="100">编号：</td>
+			<td colspan="2" width="300">FF0001</td>
+		</tr>
+		<tr>
+			<td colspan="6">
+				<table style="text-align:center;vertical-align:middle;border-collapse:collapse;" width="800" height="400" cellspacing="0" cellpadding="0" border="1" align="center">
+					<thead>
+					<tr><td width="100">检修工序</td>
+						<td colspan="2" width="400">检修内容</td>
+						<td width="100">工作者</td>
+						<td colspan="2" width="200">备注</td>
+
+					</tr></thead><tbody>
+				<tr>
+					<td>分解</td>
+					<td colspan="2">检查除锈及配件状态</td>
+					<td>分解工作者</td>
+					<td colspan="2"></td>
+				</tr>
+				<tr>
+					<td>清洗</td>
+					<td colspan="2">阀体、阀盖和阀内各配件清洗</td>
+					<td>清洗工作者</td>
+					<td colspan="2"></td>
+				</tr>
+				<tr>
+					<td rowspan="4">检修</td>
+					<td colspan="2">通针疏通常用排风堵Ф1.2mm，紧急排风堵Ф1.4mm</td>
+					<td>检修工作者</td>
+					<td colspan="2"></td>
+				</tr>
+				<tr>
+					<td colspan="2">主题阀、阀盖检查及零部件检查</td>
+					<td>检修工作者</td>
+					<td colspan="2"></td>
+				</tr>
+				<tr>
+					<td colspan="2">橡胶膜板及密封圈更换</td>
+					<td>检修工作者</td>
+					<td colspan="2"></td>
+				</tr>
+				<tr>
+					<td colspan="2">弹簧测量</td>
+					<td>检修工作者</td>
+					<td colspan="2"></td>
+				</tr>
+				<tr>
+					<td>组装</td>
+					<td width="100">
+						<input disabled="true" id="assemblerRemark" name="assemblerRemark" type="checkbox" checked="checked">
+						<label><img src="/img/ren.png" style="width: 14px;height: 14px "></label>
+					</td>
+					<td width="300">各部件组装状态良好，结合部清洁，压板螺母紧固，丝扣紧固</td>
+					<td>组装工作者</td>
+					<td colspan="2"></td>
+				</tr>
+				</tbody>
+				</table>
+			</td>
+		</tr>
+		<tr height="50">
+			<td width="100">工长：</td>
+			<td width="50">
+				<input disabled="true" id="gangmasterRemark" name="gangmasterRemark" type="checkbox" checked="checked">
+				<label><img src="/img/renyi.png" style="width: 14px;height: 14px "></label>
+			</td>
+			<td width="250">工长</td>
+			<td width="100">质检员：</td>
+			<td width="50">
+				<input disabled="true" id="inspectorRemark" name="inspectorRemark" type="checkbox" checked="checked">
+				<label><img src="/img/he.png" style="width: 14px;height: 14px ;"></label>
+			</td>
+			<td width="250">质检员</td>
+		</tr>
+		</tbody></table>
+</div>
+<input id=printView name=Button onClick=printView() type=button value=打印预览>
+<input id = print name=Button   onClick=print()   type=button   value=直接打印>
+<input id = pageSetup name=Button   onClick= pageSetup() type=button   value=页面设置>
+<script>
+	function printView(){
+	    hidden();
+	    document.all.WebBrowser.ExecWB(7,1);
+	}
+	function print(){
+	    hidden();
+	    document.all.WebBrowser.ExecWB(6,6)
+	}
+	function pageSetup(){
+	    hidden();
+	    document.all.WebBrowser.ExecWB(8,1);
+	}
+	function hidden(){
+	    document.all("printView").style.display="none";
+	    document.all("print").style.display="none";
+	    document.all("pageSetup").style.display="none";
+	}
+</script>
+</body>
+</html>

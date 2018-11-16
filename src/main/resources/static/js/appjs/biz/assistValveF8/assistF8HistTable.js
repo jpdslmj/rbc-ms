@@ -35,7 +35,7 @@ function load2() {
                         offset:params.offset,
                         queryType:"his",
                         createTime:$('#createTime').val(),
-                        assistValue:$('#assistValue').val(),
+                        popValue:$('#popValue').val(),
                         username:currentUserNameNo
                     };
                 },
@@ -60,7 +60,7 @@ function load2() {
                         visible:false
                     },
                     {
-                        field : 'assistValue',
+                        field : 'popValue',
                         title : 'F8辅助阀编号'
                     },
                     {
@@ -234,7 +234,7 @@ function load2() {
                     },
                     {
                         title : '操作',
-                        field : 'assistValue',
+                        field : 'popValue',
                         align : 'center',
                         formatter : function(value, row, index) {
                             if(row.taskId != null && row.taskId != "null" && row.taskId != "") {

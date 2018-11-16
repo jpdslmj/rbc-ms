@@ -14,7 +14,7 @@
 					</div>
 					<div class="form-group col-sm-6" >
 						<label class="control-label">F8辅助阀编号:</label>
-						<input id="assistValue" name="assistValue" class="form-control"   disabled="true" type="text" th:value="${assistValveF8.assistValue}" style="width: 250px">
+						<input id="popValue" name="popValue" class="form-control"   disabled="true" type="text" th:value="${assistValveF8.popValue}" style="width: 250px">
 
 					</div>
 				</div>
@@ -95,6 +95,7 @@
 
 				<input id="assemblerNo" name="assemblerNo" class="form-control" type="hidden" th:value="${assistValveF8.assemblerNo}">
 				<input id="assemblerName" name="assemblerName" class="form-control" type="hidden" th:value="${assistValveF8.assemblerName}">
+				<input id="valueType" name="valueType" class="form-control" type="hidden" th:value="${assistValveF8.valueType}">
 				<div class="row ">
 					<div class="col-sm-3" shiro:hasAnyRoles="role:admin,role:disassembler,role:cleaner,role:fixer,role:assembler">
 						<a id="uploadImg" type="submit" class="btn btn-primary" href="javascript:void(0)" onClick="uploadImg(1)">影像上传</a>

@@ -89,7 +89,8 @@ public class MainValve104DO extends TaskDO implements Serializable {
 	private Date createTime;
 	//更新日期
 	private Date updateTime;
-
+	//部件类型
+	private Integer valueType;
 	/**
 	 * 设置：
 	 */
@@ -521,5 +522,20 @@ public class MainValve104DO extends TaskDO implements Serializable {
 	 */
 	public Date getUpdateTime() {
 		return updateTime;
+	}
+	/**
+	 *
+	 * 获取部件类型
+	 */
+	public Integer getValueType() {
+		return valueType;
+	}
+
+	/**
+	 *
+	 * 设置：部件类型
+	 */
+	public void setValueType(Integer valueType) {
+		this.valueType = valueType;
 	}
 }

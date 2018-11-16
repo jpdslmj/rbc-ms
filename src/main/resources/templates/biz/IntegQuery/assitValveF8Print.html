@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body>
+<br/>
+	<input id="printView" type="button" value="预览打印" onClick="printme()">
+	<input type="button" value="打印" onClick="doPrint()">
+	<!--startprint1-->
+	<object classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2"   id="WebBrowser"></object>
+	<div class="wrapper wrapper-content ">
+		<table  cellspacing="0" cellpadding="0" border="1" width="800" align="center" height="500" style="text-align:center;vertical-align:middle;border-collapse:collapse;">
+			<caption style="text-align:center"><h2>F8辅助阀检修记录表</h2></caption>
+			<tr height="50">
+				<td width="100">检修日期：</td>
+				<td  width="300" colspan="2" th:text="${#dates.format(assistValveF8.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+				<td width="100">编号：</td>
+				<td width="300" colspan="2" th:text="${assistValveF8.popValue}"></td>
+			</tr>
+			<tr>
+				<td colspan="6">
+					<table border="1" cellspacing="0" cellpadding="0" align="center" width="800"  height="400" style="text-align:center;vertical-align:middle;border-collapse:collapse;">
+						<thead>
+						<td width="100">检修工序</td>
+						<td width="400" colspan="2">检修内容</td>
+						<td width="100">工作者</td>
+						<td width="200" colspan="2">备注</td>
+						</thead>
+						<tbody>
+						<tr>
+							<td>分解</td>
+							<td colspan="2">检查除锈及配件状态</td>
+							<td th:text="${assistValveF8.disassembleName}"></td>
+							<td colspan="2"></td>
+						</tr>
+						<tr>
+							<td>清洗</td>
+							<td colspan="2">阀体、阀盖和阀内各配件清洗</td>
+							<td th:text="${assistValveF8.cleanerName}"></td>
+							<td colspan="2"></td>
+						</tr>
+						<tr>
+							<td rowspan="4">检修</td>
+							<td colspan="2">通针疏通常用排风堵Ф1.2mm，紧急排风堵Ф1.4mm</td>
+							<td th:text="${assistValveF8.fixer1Name}"></td>
+							<td colspan="2"></td>
+						</tr>
+						<tr>
+							<td colspan="2">主体阀、阀盖检查及零部件检查</td>
+							<td th:text="${assistValveF8.fixer2Name}"></td>
+							<td colspan="2"></td>
+						</tr>
+						<tr>
+							<td colspan="2">橡胶膜板及密封圈更换</td>
+							<td th:text="${assistValveF8.fixer3Name}"></td>
+							<td colspan="2"></td>
+						</tr>
+						<tr>
+							<td colspan="2">弹簧测量</td>
+							<td th:text="${assistValveF8.fixer4Name}"></td>
+							<td colspan="2"></td>
+						</tr>
+						<tr>
+							<td>组装</td>
+							<td width="100">
+								<input id="assemblerRemark" name="assemblerRemark" type="checkbox" disabled=true th:checked="${assistValveF8.assemblerRemark}?true:false">
+								<label><img src="/img/ren.png" style="width: 14px;height: 14px "></label>
+							</td>
+							<td width="300">各部件组装状态良好，结合部清洁，压板螺母紧固，丝扣紧固</td>
+							<td th:text="${assistValveF8.assemblerName}"></td>
+							<td colspan="2"></td>
+						</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+			<tr height="50">
+				<td width="100">工长：</td>
+				<td width="50">
+					<input id="gangmasterRemark" name="gangmasterRemark"  type="checkbox" disabled=true th:checked="${assistValveF8.gangmasterRemark}?true:false">
+					<label ><img src="/img/renyi.png" style="width: 14px;height: 14px "></label>
+				</td>
+				<td width="250" th:text="${assistValveF8.gangmasterName}"></td>
+				<td width="100">质检员：</td>
+				<td width="50">
+					<input id="inspectorRemark" name="inspectorRemark"  type="checkbox" disabled=true  th:checked="${assistValveF8.inspectorRemark}?true:false">
+					<label ><img src="/img/he.png" style="width: 14px;height: 14px ;" ></label>
+				</td>
+				<td width="250" th:text="${assistValveF8.inspectorName}"></td>
+			</tr>
+		</table>
+	</div>
+	<!--endprint1-->
+	<div th:include="include::footer"></div>
+	<script src="/js/plugins/jcpfree/jcpfree.js"></script>
+
+<script>
+    function doPrint() {
+	    var  bdhtml=window.document.body.innerHTML;//获取当前页的html代码
+        var  sprnstr="<!--startprint1-->";//设置打印开始区域
+        var  eprnstr="<!--endprint1-->";//设置打印结束区域
+        var  prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+18); //从开始代码向后取html
+		prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html
+        window.document.body.innerHTML=prnhtml;
+		window.print();
+        window.document.body.innerHTML=bdhtml;
+    }
+    function printme()
+    {   var head="<!DOCTYPE html>\n" +
+        "<html>\n" +
+        "<meta charset=\"utf-8\">\n" +
+        "<body>";
+      var tail="</body>\n" +
+          "</html>";
+        ///var print = this.document.getElementById("print").innerHTML;
+        var  bdhtml=window.document.body.innerHTML;//获取当前页的html代码
+        var  sprnstr="<!--startprint1-->";//设置打印开始区域
+        var  eprnstr="<!--endprint1-->";//设置打印结束区域
+        var  prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+18); //从开始代码向后取html
+        prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html
+
+        prnhtml =head+ prnhtml+"<input id=printView name=Button onClick=printView() type=button value=打印预览> <input id = print name=Button   onClick=print()   type=button   value=直接打印>   <input id = pageSetup name=Button   onClick= pageSetup() type=button   value=页面设置>" ;
+        prnhtml = prnhtml +'<script> function printView(){hidden();document.all.WebBrowser.ExecWB(7,1); } function print(){hidden();document.all.WebBrowser.ExecWB(6,6)}function pageSetup(){hidden();document.all.WebBrowser.ExecWB(8,1);}function hidden(){document.all("printView").style.display="none"; document.all("print").style.display="none"; document.all("pageSetup").style.display="none";}<\/script>'+tail;
+        var newWindow = window.open();
+        newWindow.document.open("text/html");
+        newWindow.document.write(prnhtml);
+        newWindow.document.close();
+    }
+</script>
+</body>
+</html>

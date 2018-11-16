@@ -164,6 +164,10 @@ public class MainValve104Controller extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("biz:mainValve104:add")
 	public R save( MainValve104DO mainValve104){
+		if(mainValve104.getId() == null) {
+			Date crtTm= new Date();
+			mainValve104.setCreateTime(crtTm);
+		}
 		if(mainValve104Service.save(mainValve104)>0){
 			String taskId = mainValve104.getTaskId();
 			if(StringUtils.isNotBlank(taskId)) {
@@ -226,7 +230,7 @@ public class MainValve104Controller extends BaseController {
 		Date day=new Date();
 		String dateStr=sdf.format(day);
 		UserDO userDO  = userService.get(getUserId());
-		params.put("fixWorkerNo",userDO.getUsername());
+		params.put("username",userDO.getUsername());
 		params.put("createTime",dateStr);
 		List<ToolInspectionDO> toolinspection= toolInspectionService.list(params);
 		if(toolinspection!=null&&toolinspection.size()>0){

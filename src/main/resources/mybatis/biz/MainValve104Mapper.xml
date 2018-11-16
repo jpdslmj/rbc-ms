@@ -4,11 +4,11 @@
 <mapper namespace="com.rbc.biz.dao.MainValve104Dao">
 
 	<select id="get" resultType="com.rbc.biz.domain.MainValve104DO">
-		select `id`,`pop_value`,`disassemble_no`,`disassemble_name`,`cleaner_no`,`cleaner_name`,`fixer1_no`,`fixer1_name`,`fixer1_remark`,`fixer2_no`,`fixer2_name`,`fixer2_remark`,`fixer3_no`,`fixer3_name`,`fixer3_remark`,`fixer4_no`,`fixer4_name`,`fixer4_remark`,`assembler_no`,`assembler_name`,`assembler_remark`,`assemble_mark`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`gangmaster_remark`,`gangmaster_mark`,`inspector_no`,`inspector_name`,`inspector_mark`,`inspector_audit`,`inspector_remark`,`return_opinion`,`return_remark`,`create_time`,`update_time`,`taskId`,`processInstanceId`,`taskName` from web_main_valve_104 where id = #{value}
+		select `id`,`pop_value`,`disassemble_no`,`disassemble_name`,`cleaner_no`,`cleaner_name`,`fixer1_no`,`fixer1_name`,`fixer1_remark`,`fixer2_no`,`fixer2_name`,`fixer2_remark`,`fixer3_no`,`fixer3_name`,`fixer3_remark`,`fixer4_no`,`fixer4_name`,`fixer4_remark`,`assembler_no`,`assembler_name`,`assembler_remark`,`assemble_mark`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`gangmaster_remark`,`gangmaster_mark`,`inspector_no`,`inspector_name`,`inspector_mark`,`inspector_audit`,`inspector_remark`,`return_opinion`,`return_remark`,`create_time`,`update_time`,`taskId`,`processInstanceId`,`taskName` ,`value_type` from web_main_valve_104 where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.rbc.biz.domain.MainValve104DO">
-		select `id`,`pop_value`,`disassemble_no`,`disassemble_name`,`cleaner_no`,`cleaner_name`,`fixer1_no`,`fixer1_name`,`fixer1_remark`,`fixer2_no`,`fixer2_name`,`fixer2_remark`,`fixer3_no`,`fixer3_name`,`fixer3_remark`,`fixer4_no`,`fixer4_name`,`fixer4_remark`,`assembler_no`,`assembler_name`,`assembler_remark`,`assemble_mark`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`gangmaster_remark`,`gangmaster_mark`,`inspector_no`,`inspector_name`,`inspector_mark`,`inspector_audit`,`inspector_remark`,`return_opinion`,`return_remark`,`create_time`,`update_time`,`taskId`,`processInstanceId`,`taskName` from web_main_valve_104
+		select `id`,`pop_value`,`disassemble_no`,`disassemble_name`,`cleaner_no`,`cleaner_name`,`fixer1_no`,`fixer1_name`,`fixer1_remark`,`fixer2_no`,`fixer2_name`,`fixer2_remark`,`fixer3_no`,`fixer3_name`,`fixer3_remark`,`fixer4_no`,`fixer4_name`,`fixer4_remark`,`assembler_no`,`assembler_name`,`assembler_remark`,`assemble_mark`,`gangmaster_no`,`gangmaster_name`,`gangmaster_audit`,`gangmaster_remark`,`gangmaster_mark`,`inspector_no`,`inspector_name`,`inspector_mark`,`inspector_audit`,`inspector_remark`,`return_opinion`,`return_remark`,`create_time`,`update_time`,`taskId`,`processInstanceId`,`taskName` ,`value_type` from web_main_valve_104
         <where>
 			<choose>
 				<when test="validate=='validate'">
@@ -44,6 +44,7 @@
 		  		  <if test="returnRemark != null and returnRemark != ''"> and return_remark = #{returnRemark} </if>
 		  		  <if test="createTime != null and createTime != ''">  <![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d') ]]> </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+				  <if test="valueType != null and valueType != ''"> and  value_type= #{valueType} </if>
 			<choose>
 				<when test="queryType == 'his'">
 					and (taskId is not null or taskId!="")
@@ -116,8 +117,9 @@
 		  		  <if test="inspectorRemark != null and inspectorRemark != ''"> and inspector_remark = #{inspectorRemark} </if>
 		  		  <if test="returnOpinion != null and returnOpinion != ''"> and return_opinion = #{returnOpinion} </if>
 		  		  <if test="returnRemark != null and returnRemark != ''"> and return_remark = #{returnRemark} </if>
-		  		  <if test="createTime != null and createTime != ''"> and  <![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d') ]]> </if>
+		  		  <if test="createTime != null and createTime != ''">   <![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d') ]]> </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+			 <if test="valueType != null and valueType != ''"> and  value_type= #{valueType} </if>
 			 <choose>
 				 <when test="queryType == 'his'">
 					 and (taskId is not null or taskId!="")
@@ -189,7 +191,7 @@
 			`return_opinion`, 
 			`return_remark`, 
 			`create_time`, 
-			`update_time`,`taskId`,`processInstanceId`,`taskName`
+			`update_time`,`taskId`,`processInstanceId`,`taskName`,`value_type`
 		)
 		values
 		(
@@ -230,7 +232,8 @@
 			#{updateTime},
 			#{taskId},
 			#{processInstanceId},
-			#{taskName}
+			#{taskName},
+			#{valueType}
 		)
 	</insert>
 	 
@@ -274,7 +277,8 @@
 			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
 			<if test="taskId != null">`taskId` = #{taskId}, </if>
 			<if test="processInstanceId != null">`processInstanceId` = #{processInstanceId}, </if>
-			<if test="taskName != null">`taskName` = #{taskName} </if>
+			<if test="taskName != null">`taskName` = #{taskName}, </if>
+			<if test="valueType != null"> `value_type`= #{valueType} </if>
 		</set>
 		where id = #{id}
 	</update>

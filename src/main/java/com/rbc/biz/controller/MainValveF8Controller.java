@@ -164,6 +164,10 @@ public class MainValveF8Controller extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("biz:mainValveF8:add")
 	public R save( MainValveF8DO mainValveF8){
+		if(mainValveF8.getId() == null) {
+			Date crtTm= new Date();
+			mainValveF8.setCreateTime(crtTm);
+		}
 		if(mainValveF8Service.save(mainValveF8)>0){
 			String taskId = mainValveF8.getTaskId();
 			if(StringUtils.isNotBlank(taskId)) {
@@ -226,7 +230,7 @@ public class MainValveF8Controller extends BaseController {
 		Date day=new Date();
 		String dateStr=sdf.format(day);
 		UserDO userDO  = userService.get(getUserId());
-		params.put("fixWorkerNo",userDO.getUsername());
+		params.put("username",userDO.getUsername());
 		params.put("createTime",dateStr);
 		List<ToolInspectionDO> toolinspection= toolInspectionService.list(params);
 		if(toolinspection!=null&&toolinspection.size()>0){

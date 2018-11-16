@@ -179,6 +179,10 @@ public class PopValve104Controller extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("biz:popValve104:add")
 	public R save( PopValve104DO popValve104){
+		if(popValve104.getId() == null) {
+			Date crtTm= new Date();
+			popValve104.setCreateTime(crtTm);
+		}
 		if(popValve104Service.save(popValve104)>0){
 		    String taskId = popValve104.getTaskId();
 			if(StringUtils.isNotBlank(taskId)) {
@@ -241,7 +245,7 @@ public class PopValve104Controller extends BaseController {
 		Date day=new Date();
 		String dateStr=sdf.format(day);
 		UserDO userDO  = userService.get(getUserId());
-		params.put("fixWorkerNo",userDO.getUsername());
+		params.put("username",userDO.getUsername());
 		params.put("createTime",dateStr);
 		List<ToolInspectionDO> toolinspection= toolInspectionService.list(params);
 		if(toolinspection!=null&&toolinspection.size()>0){

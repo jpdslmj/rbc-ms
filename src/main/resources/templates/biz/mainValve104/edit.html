@@ -94,6 +94,7 @@
 
 				<input id="assemblerNo" name="assemblerNo" class="form-control" type="hidden" th:value="${mainValve104.assemblerNo}">
 				<input id="assemblerName" name="assemblerName" class="form-control" type="hidden" th:value="${mainValve104.assemblerName}">
+				<input id="valueType" name="valueType" class="form-control" type="hidden" th:value="${mainValve104.valueType}">
 				<div class="row ">
 					<div class="col-sm-3" shiro:hasAnyRoles="role:admin,role:disassembler,role:cleaner,role:fixer,role:assembler">
 						<a id="uploadImg" type="submit" class="btn btn-primary" href="javascript:void(0)" onClick="uploadImg(1)">影像上传</a>

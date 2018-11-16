@@ -2,7 +2,7 @@
 $().ready(function() {
     if(disassembler){
         $('#createTime').attr("disabled",false);
-        $('#assistValue').attr("disabled",false);
+        $('#popValue').attr("disabled",false);
     }
     loadassistF8Table();
     var crtTm=new Date(createTime).Format("yyyy-MM-dd");
@@ -384,7 +384,7 @@ function validateRule() {
     var icon = "<i class='fa fa-times-circle'></i> ";
     $("#assistF8Form").validate({
         rules : {
-            assistValue : {
+            popValue : {
                 required : true ,
                 remote : {
                     url : "/biz/assistValveF8/exit", // 后台处理程序
@@ -397,15 +397,15 @@ function validateRule() {
                         validate:function() {
                             return "validate";
                         },
-                        assistValue : function() {
-                            return $("#assistValue").val();
+                        popValue : function() {
+                            return $("#popValue").val();
                         }
                     }
                 }
             }
         },
         messages : {
-            assistValue : {
+            popValue : {
                 required : icon + "编号不能为空",
                 remote : icon + "编号已经存在"
             }

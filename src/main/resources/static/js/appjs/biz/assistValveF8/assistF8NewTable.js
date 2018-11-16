@@ -35,7 +35,7 @@ function load3() {
                         offset:params.offset,
                         queryType:"new",
                         createTime:$('#createTimeNew').val(),
-                        assistValue:$('#assistValueNew').val(),
+                        popValue:$('#popValueNew').val(),
                         disassembleNo:currentUserNameNo,
                     };
                 },
@@ -60,7 +60,7 @@ function load3() {
                         visible:false
                     },
                     {
-                        field : 'assistValue',
+                        field : 'popValue',
                         title : 'F8辅助阀编号'
                     },
                     {
@@ -234,7 +234,7 @@ function load3() {
                     },
                     {
                         title : '操作',
-                        field : 'assistValue',
+                        field : 'popValue',
                         align : 'center',
                         formatter : function(value, row, index) {
                             var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑1" onclick="edit3(\''

@@ -20,7 +20,7 @@ public class AssistValveF8DO extends TaskDO implements Serializable {
 	//
 	private Long id;
 	//F8辅助阀编号
-	private String assistValue;
+	private String popValue;
 	//分解者工号
 	private String disassembleNo;
 	//分解者名称
@@ -89,6 +89,8 @@ public class AssistValveF8DO extends TaskDO implements Serializable {
 	private Date createTime;
 	//更新日期
 	private Date updateTime;
+	//部件类型
+	private Integer valueType;
 
 	/**
 	 * 设置：
@@ -105,14 +107,14 @@ public class AssistValveF8DO extends TaskDO implements Serializable {
 	/**
 	 * 设置：F8辅助阀编号
 	 */
-	public void setAssistValue(String assistValue) {
-		this.assistValue = assistValue;
+	public void setPopValue(String popValue) {
+		this.popValue = popValue;
 	}
 	/**
 	 * 获取：F8辅助阀编号
 	 */
-	public String getAssistValue() {
-		return assistValue;
+	public String getPopValue() {
+		return popValue;
 	}
 	/**
 	 * 设置：分解者工号
@@ -521,5 +523,21 @@ public class AssistValveF8DO extends TaskDO implements Serializable {
 	 */
 	public Date getUpdateTime() {
 		return updateTime;
+	}
+
+	/**
+	 *
+	 * 获取部件类型
+	 */
+	public Integer getValueType() {
+		return valueType;
+	}
+
+	/**
+	 *
+	 * 设置：部件类型
+	 */
+	public void setValueType(Integer valueType) {
+		this.valueType = valueType;
 	}
 }
