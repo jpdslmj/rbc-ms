@@ -141,6 +141,7 @@ public class MainValveF8Controller extends BaseController {
 			map.put("processName","F8主阀");
 			map.put("processNumber",mainValveF8.getPopValue());
 			map.put("processForm","/biz/mainValveF8/form");
+			map.put("createTime",DateUtils.format(mainValveF8.getCreateTime()));
 			Task task = actTaskService.startProcess(ActivitiConstant.ACTIVITI_PROCESS104[0],ActivitiConstant.ACTIVITI_PROCESS104[1],mainValveF8.getId().toString(),null,map);
 			mainValveF8.setTaskId(task.getId());
 			mainValveF8.setTaskName(task.getName());

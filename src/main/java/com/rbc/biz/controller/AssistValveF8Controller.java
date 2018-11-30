@@ -142,6 +142,7 @@ public class AssistValveF8Controller extends BaseController {
 			map.put("processName","F8辅助阀");
 			map.put("processNumber",assistValveF8.getPopValue());
 			map.put("processForm","/biz/assistValveF8/form");
+			map.put("createTime",DateUtils.format(assistValveF8.getCreateTime()));
 			Task task = actTaskService.startProcess(ActivitiConstant.ACTIVITI_PROCESS104[0],ActivitiConstant.ACTIVITI_PROCESS104[1],assistValveF8.getId().toString(),null,map);
 			assistValveF8.setTaskId(task.getId());
 			assistValveF8.setTaskName(task.getName());

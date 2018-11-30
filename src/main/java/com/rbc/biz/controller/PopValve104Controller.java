@@ -148,6 +148,7 @@ public class PopValve104Controller extends BaseController {
 			map.put("processName","104紧急阀");
 			map.put("processNumber",popValve104.getPopValue());
 			map.put("processForm","/biz/popValve104/form");
+			map.put("createTime",DateUtils.format(popValve104.getCreateTime()));
 			Task task = actTaskService.startProcess(ActivitiConstant.ACTIVITI_PROCESS104[0],ActivitiConstant.ACTIVITI_PROCESS104[1],popValve104.getId().toString(),null,map);
 			popValve104.setTaskId(task.getId());
 			popValve104.setTaskName(task.getName());

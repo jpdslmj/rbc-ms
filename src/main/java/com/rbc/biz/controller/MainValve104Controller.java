@@ -142,6 +142,7 @@ public class MainValve104Controller extends BaseController {
 			map.put("processName","104主阀");
 			map.put("processNumber",mainValve104.getPopValue());
 			map.put("processForm","/biz/mainValve104/form");
+			map.put("createTime",DateUtils.format(mainValve104.getCreateTime()));
 			Task task = actTaskService.startProcess(ActivitiConstant.ACTIVITI_PROCESS104[0],ActivitiConstant.ACTIVITI_PROCESS104[1],mainValve104.getId().toString(),null,map);
 			mainValve104.setTaskId(task.getId());
 			mainValve104.setTaskName(task.getName());

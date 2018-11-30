@@ -217,7 +217,9 @@ function load2() {
                     },
                     {
                         field : 'createTime',
-                        title : '创建日期'
+                        title : '创建日期',
+                        sortable:true,
+                        order:'desc'
                     },
                     {
                         field : 'updateTime',

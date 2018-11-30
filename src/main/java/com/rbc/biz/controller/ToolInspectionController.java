@@ -12,10 +12,7 @@ import com.rbc.biz.service.ToolInspectionService;
 import com.rbc.biz.service.ToolOtherService;
 import com.rbc.biz.service.WenchService;
 import com.rbc.common.controller.BaseController;
-import com.rbc.common.utils.PageUtils;
-import com.rbc.common.utils.Query;
-import com.rbc.common.utils.R;
-import com.rbc.common.utils.StringUtils;
+import com.rbc.common.utils.*;
 import com.rbc.system.domain.UserDO;
 import com.rbc.system.service.UserService;
 import org.activiti.engine.task.Task;
@@ -130,7 +127,12 @@ public class ToolInspectionController extends BaseController {
 
 		Type typeOtherTool = new TypeReference<List<ToolOtherDO>>(){}.getType();
 		List<ToolOtherDO> toolOtherDoList = JSON.parseObject(toolOther.toJSONString(), typeOtherTool);
-
+//		if(toolInspectionDo.getId()==null||toolInspectionDo.getId().equals("")){
+//			toolInspectionDo.setCreateTime(new Date());
+//			toolInspectionDo.setUpdateTime(new Date());
+//		}else{
+//			toolInspectionDo.setUpdateTime(new Date());
+//		}
 		int r=toolInspectionService.batchSaveOrUpdate(toolInspectionDo,wenchDoList,toolOtherDoList);
 
 		if(r>0){
@@ -256,7 +258,12 @@ public class ToolInspectionController extends BaseController {
 
 		Type typeOtherTool = new TypeReference<List<ToolOtherDO>>(){}.getType();
 		List<ToolOtherDO> toolOtherDoList = JSON.parseObject(toolOther.toJSONString(), typeOtherTool);
-
+//		if(toolInspectionDo.getId()==null||toolInspectionDo.getId().equals("")){
+//			toolInspectionDo.setCreateTime(new Date());
+//			toolInspectionDo.setUpdateTime(new Date());
+//		}else{
+//			toolInspectionDo.setUpdateTime(new Date());
+//		}
 		int r=toolInspectionService.batchSaveOrUpdate(toolInspectionDo,wenchDoList,toolOtherDoList);
 
 		if(r>0){
@@ -269,6 +276,7 @@ public class ToolInspectionController extends BaseController {
 				map.put("params", params);
 				map.put("processForm","/biz/toolInspection/form");
 				map.put("fixWorkerNo",toolInspectionDo.getFixWorkerNo());
+				map.put("createTime",DateUtils.format(toolInspectionDo.getCreateTime()));
 				Task task = actTaskService.startProcess(ActivitiConstant.ACTIVITI_INSPECTION[0],ActivitiConstant.ACTIVITI_INSPECTION[1],toolInspectionDo.getId().toString(),null,map);
 				toolInspectionDo.setTaskId(task.getId());
 				toolInspectionDo.setTaskName(task.getName());

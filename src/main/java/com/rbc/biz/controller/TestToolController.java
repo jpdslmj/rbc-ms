@@ -7,10 +7,7 @@ import com.rbc.biz.domain.OptionsDO;
 import com.rbc.biz.domain.TestToolDO;
 import com.rbc.biz.service.TestToolService;
 import com.rbc.common.controller.BaseController;
-import com.rbc.common.utils.PageUtils;
-import com.rbc.common.utils.Query;
-import com.rbc.common.utils.R;
-import com.rbc.common.utils.StringUtils;
+import com.rbc.common.utils.*;
 import com.rbc.system.domain.UserDO;
 import com.rbc.system.service.UserService;
 import org.activiti.engine.task.Task;
@@ -182,6 +179,8 @@ public class TestToolController extends BaseController {
 	@RequestMapping("/sign")
 	public R sign(TestToolDO testTool){
 		if(testTool.getId() == null) {
+			testTool.setCreateTime(new Date());
+			testTool.setUpdateTime(new Date());
 			testToolService.save(testTool);
 		}
 		if(StringUtils.isBlank(testTool.getTaskId())) {
@@ -192,6 +191,9 @@ public class TestToolController extends BaseController {
 			params.put("testerName", testTool.getTesterName());
 			map.put("params", params);
 			map.put("processForm","/biz/testTool/form");
+			//map.put("testerNo", testTool.getTesterNo());
+			map.put("fixWorkerNo", testTool.getTesterNo());
+			map.put("createTime",DateUtils.format(testTool.getCreateTime()));
 			Task task = actTaskService.startProcess(ActivitiConstant.ACTIVITI_INSPECTION[0],ActivitiConstant.ACTIVITI_INSPECTION[1],testTool.getId().toString(),null,map);
 			testTool.setTaskId(task.getId());
 			testTool.setTaskName(task.getName());

@@ -6,6 +6,7 @@ import com.rbc.activiti.vo.ProcessVO;
 import com.rbc.activiti.vo.TaskVO;
 import com.rbc.biz.domain.PopValve104DO;
 import com.rbc.common.controller.BaseController;
+import com.rbc.common.utils.DateUtils;
 import com.rbc.common.utils.PageUtils;
 import com.rbc.common.utils.StringUtils;
 import com.rbc.system.service.RoleService;
@@ -17,16 +18,14 @@ import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -96,7 +95,7 @@ public class TaskController  extends BaseController {
      * 获取个人任务列表
      */
     @GetMapping("/taskList/{taskType}")
-    List<TaskVO> taskList(@PathVariable("taskType") String taskType){
+    List<TaskVO> taskList(@PathVariable("taskType") String taskType,@RequestParam Map<String, Object> params){
         String CurProcessName="";
         if(taskType.equals("assistF8")){
             CurProcessName="F8辅助阀";
@@ -113,19 +112,61 @@ public class TaskController  extends BaseController {
         } else if(taskType.equals("testTool")){
             CurProcessName="试验设备检视";
         }
+        String  popValueTask =(params.containsKey("popValueTask")&&!params.get("popValueTask").toString().equals("")?params.get("popValueTask").toString():null);
+
+        Date createTimeTask =null;
+
+        if(params.containsKey("createTimeTask")&&params.get("createTimeTask").toString().equals("")){
+            createTimeTask= DateUtils.strToDate(DateUtils.dateToStr(new Date()));
+        }else if(params.containsKey("createTimeTask")&&!params.get("createTimeTask").toString().equals("")){
+            createTimeTask= DateUtils.strToDate(params.get("createTimeTask").toString());
+        }
+
+
         List<Task> tasks = taskService.createTaskQuery().taskAssignee(getUsername()).list();
         List<String> groupIds = roleService.getGroupIds(getUserId());
         List<Task> taskGroupList = taskService.createTaskQuery().taskCandidateGroupIn(groupIds).list();
         tasks.addAll(taskGroupList);
         List<TaskVO> taskVOS =  new ArrayList<>();
-        for(Task task : tasks){
-            TaskVO taskVO = new TaskVO(task);
-            if(!CurProcessName.equals((String)taskService.getVariable(task.getId(),"processName"))){continue;}
-            taskVO.setProcessName((String)taskService.getVariable(task.getId(),"processName"));
-            taskVO.setProcessNumber((String)taskService.getVariable(task.getId(),"processNumber"));
-            taskVO.setParams((Map) taskService.getVariable(task.getId(),"params"));
-            taskVOS.add(taskVO);
+        if(popValueTask!=null){
+            for(Task task : tasks) {
+                TaskVO taskVO = new TaskVO(task);
+                String dateStr= (String) taskService.getVariable(task.getId(),"createTime");
+                //Date taskCreatDate = DateUtils.strToDate((String) taskService.getVariable(task.getId(), "createTime"));
+                if (!CurProcessName.equals((String) taskService.getVariable(task.getId(), "processName"))) {
+                    continue;
+                }
+                if(dateStr!=null){
+                    Date taskCreatDate = DateUtils.strToDate(dateStr);
+                    if(createTimeTask!=null&&taskCreatDate.compareTo(createTimeTask)!=0){continue;}
+                }else{continue;}
+                if ( popValueTask.equals((String) taskService.getVariable(task.getId(), "processNumber"))) {
+                    taskVO.setProcessName((String) taskService.getVariable(task.getId(), "processName"));
+                    taskVO.setProcessNumber((String) taskService.getVariable(task.getId(), "processNumber"));
+                    taskVO.setParams((Map) taskService.getVariable(task.getId(), "params"));
+                    taskVO.setCreateTime((String) taskService.getVariable(task.getId(), "createTime"));
+                    taskVOS.add(taskVO);
+                    break;
+                }
+            }
+        }else{
+            for(Task task : tasks){
+                TaskVO taskVO = new TaskVO(task);
+                String dateStr= (String) taskService.getVariable(task.getId(),"createTime");
+                if(!CurProcessName.equals((String)taskService.getVariable(task.getId(),"processName"))){continue;}
+                if(dateStr!=null){
+                    Date taskCreatDate = DateUtils.strToDate(dateStr);
+                    if(createTimeTask!=null&&taskCreatDate.compareTo(createTimeTask)!=0){continue;}
+                }else{continue;}
+                taskVO.setProcessName((String)taskService.getVariable(task.getId(),"processName"));
+                taskVO.setProcessNumber((String)taskService.getVariable(task.getId(),"processNumber"));
+                taskVO.setParams((Map) taskService.getVariable(task.getId(),"params"));
+                taskVO.setCreateTime((String) taskService.getVariable(task.getId(), "createTime"));
+                taskVOS.add(taskVO);
+
+            }
         }
+
         return taskVOS;
     }
 

@@ -1,13 +1,12 @@
 
 $().ready(function() {
     if(disassembler){
-        $('#createTime').attr("disabled",false);
-        $('#popValue').attr("disabled",false);
+        //$('#createTime').removeAttr("readonly");
+        var today=new Date().Format("yyyy-MM-dd HH:mm:ss");
+        $("#createTime").val(today);
+        $('#popValue').removeAttr("readonly");
     }
     loadPop104Table();
-    var crtTm=new Date(createTime).Format("yyyy-MM-dd");
-    $("#createTime").val(crtTm);
-
     $.each($('#pop104Table').bootstrapTable('getData'),function(i,row){
         if(row.uId==0){
             if(disassembleName!=null) {row.worker=disassembleName;}
@@ -330,7 +329,7 @@ function update(flag) {
             return;
         }
     }
-    var data=$('#pop104Form').serialize();
+    var data=$('#pop104Form').serialize().replace(/\+/g," ");
     $.ajax({
         cache : true,
         type : "POST",
@@ -338,19 +337,24 @@ function update(flag) {
         data : data,
         async : false,
         error : function(request) {
-            parent.layer.alert("Connection error");
+            //parent.layer.alert("Connection error");
+            layer.alert("Connection error");
         },
         success : function(data) {
             if (data.code == 0) {
-                parent.layer.msg("操作成功");
-                parent.reLoad();
-                parent.reLoad2();
-                parent.reLoad3();
-                var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-                parent.layer.close(index);
+                layer.msg('操作成功',{time: 1000 },function () {
+                    location.href="/biz/popValve104";
+                });
+                // parent.layer.msg("操作成功");
+                // parent.reLoad();
+                // parent.reLoad2();
+                // parent.reLoad3();
+                // var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                // parent.layer.close(index);
 
             } else {
-                parent.layer.alert(data.msg)
+                //parent.layer.alert(data.msg)
+                layer.alert(data.msg);
             }
 
         }

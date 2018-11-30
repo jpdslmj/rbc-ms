@@ -5,6 +5,9 @@ import org.slf4j.LoggerFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Calendar;
+
+import java.text.ParseException;
 
 /**
  * 日期处理
@@ -21,7 +24,7 @@ public class DateUtils {
     public final static String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
     public static String format(Date date) {
-        return format(date, DATE_PATTERN);
+        return format(date, DATE_TIME_PATTERN);
     }
 
     public static String format(Date date, String pattern) {
@@ -32,6 +35,63 @@ public class DateUtils {
         return null;
     }
 
+      /**
+       * 将长时间格式字符串转换为时间 yyyy-MM-dd HH:mm:ss
+       *
+       * @param strDate
+       * @return
+       */
+        public static Date strToDateLong(String strDate) {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date strtodate=null;
+            try {
+                strtodate = formatter.parse(strDate);
+            }catch (ParseException e){
+                e.printStackTrace();
+            }
+            return strtodate;
+         }
+
+       /**
+        * 将长时间格式时间转换为字符串 yyyy-MM-dd HH:mm:ss
+        *
+        * @param dateDate
+        * @return
+        */
+         public static String dateToStrLong(java.util.Date dateDate) {
+             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+             String dateString = formatter.format(dateDate);
+             return dateString;
+         }
+      /**
+       * 将短时间格式时间转换为字符串 yyyy-MM-dd
+       *
+       * @param dateDate
+       * @param
+       * @return
+       */
+       public static String dateToStr(java.util.Date dateDate) {
+           SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+           String dateString = formatter.format(dateDate);
+           return dateString;
+       }
+
+          /**
+           * 将短时间格式字符串转换为时间 yyyy-MM-dd
+           *
+           * @param strDate
+           * @return
+           */
+         public static Date strToDate(String strDate) {
+             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+             Date strtodate=null;
+            try{
+                strtodate = formatter.parse(strDate);
+            }catch (ParseException e){
+                e.printStackTrace();
+            }
+            return strtodate;
+         }
     /**
      * 计算距离现在多久，非精确
      *

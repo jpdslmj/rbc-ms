@@ -2,10 +2,10 @@
 $().ready(function() {
     loadassistF8Table();
     if(disassembler){
-        $('#createTime').attr("disabled",false);
-        $('#popValue').attr("disabled",false);
+        //$('#createTime').removeAttr("readonly");
+        $('#popValue').removeAttr("readonly");
     }
-    var today=new Date().Format("yyyy-MM-dd");
+    var today=new Date().Format("yyyy-MM-dd HH:mm:ss");
     $("#createTime").val(today);
     validateRule();
 
@@ -290,7 +290,7 @@ function save(flag) {
                 return;
             }
         }
-    var data=$('#assistF8Form').serialize();
+    var data=$('#assistF8Form').serialize().replace(/\+/g," ");
     $.ajax({
         cache : true,
         type : "POST",
@@ -298,19 +298,25 @@ function save(flag) {
         data : data,
         async : false,
         error : function(request) {
-            parent.layer.alert("Connection error");
+            //parent.layer.alert("Connection error");
+            layer.alert("Connection error");
         },
         success : function(data) {
             if (data.code == 0) {
-                parent.layer.msg("操作成功");
-                parent.reLoad();
-                parent.reLoad2();
-                parent.reLoad3();
-                var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-                parent.layer.close(index);
+                layer.msg('操作成功',{time: 1000 },function () {
+                    location.href="/biz/assistValveF8/";
+                });
+               // window.location.href="/biz/assistValveF8/";
+                // parent.layer.msg("操作成功");
+                // parent.reLoad();
+                // parent.reLoad2();
+                // parent.reLoad3();
+                // var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                // parent.layer.close(index);
 
             } else {
-                parent.layer.alert(data.msg)
+               // parent.layer.alert(data.msg);
+                layer.alert(data.msg);
             }
 
         }

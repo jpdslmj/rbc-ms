@@ -10,11 +10,11 @@
 				<div class="col-sm-12 form-inline m-b-sm">
 					<div class="form-group col-sm-6" >
 						<label class="control-label">时间:</label>
-						<input id="createTime" name="createTime" class="form-control " th:value="${assistValveF8.createTime}"   disabled="true"  type="date" style="width: 250px">
+						<input id="createTime" name="createTime" class="form-control " th:value="${#dates.format(assistValveF8.createTime,'yyyy-MM-dd HH:mm:ss')}"  readonly="readonly"  type="text" style="width: 250px">
 					</div>
 					<div class="form-group col-sm-6" >
 						<label class="control-label">F8辅助阀编号:</label>
-						<input id="popValue" name="popValue" class="form-control"   disabled="true" type="text" th:value="${assistValveF8.popValue}" style="width: 250px">
+						<input id="popValue" name="popValue" class="form-control"  readonly="readonly" type="text" th:value="${assistValveF8.popValue}" style="width: 250px">
 
 					</div>
 				</div>
@@ -97,21 +97,26 @@
 				<input id="assemblerName" name="assemblerName" class="form-control" type="hidden" th:value="${assistValveF8.assemblerName}">
 				<input id="valueType" name="valueType" class="form-control" type="hidden" th:value="${assistValveF8.valueType}">
 				<div class="row ">
-					<div class="col-sm-3" shiro:hasAnyRoles="role:admin,role:disassembler,role:cleaner,role:fixer,role:assembler">
+					<div class="col-sm-2" shiro:hasAnyRoles="role:admin,role:disassembler,role:cleaner,role:fixer,role:assembler">
 						<a id="uploadImg" type="submit" class="btn btn-primary" href="javascript:void(0)" onClick="uploadImg(1)">影像上传</a>
 					</div>
-					<div class="col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster,role:inspector">
+					<div class="col-sm-2" shiro:hasAnyRoles="role:admin,role:gangmaster,role:inspector">
 						<a id="imgView" type="submit" class="btn btn-primary" href="javascript:void(0)" onClick="uploadImg(2)">影像查看</a>
 					</div>
 					<input id="taskPass" name="taskPass" class="hidden">
-					<div class="col-sm-3 " id="sign">
+					<div class="col-sm-2 " id="sign">
 						<button type="submit" class="btn btn-primary" >签字提交</button>
 					</div>
-					<div class="col-sm-3 " id="black" shiro:hasAnyRoles="role:admin,role:inspector,role:gangmaster">
+					<div class="col-sm-2 " id="black" shiro:hasAnyRoles="role:admin,role:inspector,role:gangmaster">
 						<button type="button" class="btn btn-primary" onclick="$('#taskPass').val('0');update('sign')">退回</button>
 					</div>
-					<div class="col-sm-3 ">
+					<div class="col-sm-2 ">
 						<button id="save" type="button" class="btn btn-primary" onclick="update('update')">保存</button>
+					</div>
+					<div class="col-sm-2 ">
+						<a type="button" class="btn btn-primary" id="close" href="javascript:location.href='/biz/assistValveF8/'">
+							<i class="fa fa-sign-out"></i>关闭页面
+						</a>
 					</div>
 				</div>
 			</form>

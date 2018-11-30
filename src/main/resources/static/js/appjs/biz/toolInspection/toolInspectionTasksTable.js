@@ -33,6 +33,7 @@ function load() {
 						// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 						limit : params.limit,
 						offset : params.offset,
+                        createTimeTask:$('#createTimeTask').val()
 						//name : $('#searchName').val(),
 					};
 				},
@@ -68,7 +69,9 @@ function load() {
                     },
                     {
                         field : 'params.createTime',
-                        title : '创建日期'
+                        title : '创建日期',
+                        sortable:true,
+                        order:'desc'
                     },
                     {
                         field : 'name',

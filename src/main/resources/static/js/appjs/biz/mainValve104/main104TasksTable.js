@@ -33,6 +33,8 @@ function load() {
 						// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 						limit : params.limit,
 						offset : params.offset,
+                        popValueTask:$('#popValueTask').val(),
+                        createTimeTask:$('#createTimeTask').val()
 						//name : $('#searchName').val(),
 					};
 				},
@@ -73,6 +75,12 @@ function load() {
                     {
                         field : 'name',
                         title : '环节名称'
+                    },
+                    {
+                        field : 'createTime',
+                        title : '检修时间',
+                        sortable:true,
+                        order:'desc'
                     },
                     // {
                     //     field : 'executionId',
@@ -144,14 +152,15 @@ function edit(id) {
 }
 
 function form(proId,id) {
-    layer.open({
-        type : 2,
-        title : '发起流程',
-        maxmin : true,
-        shadeClose : false,
-        area : [ '100%', '100%' ],
-        content : prefix + '/form/'+ proId+'/'+id
-    })
+    // layer.open({
+    //     type : 2,
+    //     title : '发起流程',
+    //     maxmin : true,
+    //     shadeClose : false,
+    //     area : [ '100%', '100%' ],
+    //     content : prefix + '/form/'+ proId+'/'+id
+    // })
+    window.location.href=prefix + '/form/'+ proId+'/'+id;
 }
 
 function batchRemove() {

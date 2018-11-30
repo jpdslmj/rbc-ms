@@ -18,6 +18,19 @@
 					</ul>
 					<div class="tab-content">
 						<div id="tab-1" class="tab-pane active">
+							<div class="fixed-table-toolbar">
+								<div class="columns pull-right m-l-xs">
+									<button class="btn btn-success" onclick="reLoad()">查询</button>
+								</div>
+								<div class="columns pull-right col-md-2 nopadding">
+									<input id="popValueTask" type="text" class="form-control"
+										   placeholder="F8主阀编号">
+								</div>
+								<div class="columns pull-right col-md-2 nopadding">
+									<input id="createTimeTask" type="date" class="form-control"
+										   placeholder="检修时间">
+								</div>
+							</div>
 							<table id="mainF8TaskListTable" data-mobile-responsive="true">
 							</table>
 						</div>
