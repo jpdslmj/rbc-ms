@@ -208,14 +208,19 @@
 				<input id="createTime" name="createTime" class="form-control" type="hidden">
 
 				<div class="form-group">
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						<button type="button" class="btn btn-primary" onclick="$('#taskPass').val('1');update('sign')">签字提交</button>
 					</div>
-					<div class="col-sm-4" id="black" shiro:hasAnyRoles="role:admin,role:gangmaster,role:inspector">
+					<div class="col-sm-3" id="black" shiro:hasAnyRoles="role:admin,role:gangmaster,role:inspector">
 						<button type="button" class="btn btn-primary" onclick="$('#taskPass').val('0');update('sign')">退回</button>
 					</div>
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						<button type="button" class="btn btn-primary" id="submit2" onclick="$('#taskPass').val('0');update('update')">保存</button>
+					</div>
+					<div class="col-sm-3 ">
+						<a type="button" class="btn btn-primary" id="close" href="javascript:location.href='/biz/testTool'">
+							<i class="fa fa-sign-out"></i>关闭页面
+						</a>
 					</div>
 				</div>
 			</form>

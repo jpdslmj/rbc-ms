@@ -166,11 +166,16 @@
 					<input id="updateTime" name="updateTime" class="form-control" type="hidden">
 
 					<div class="form-group">
-						<div class="col-sm-6">
+						<div class="col-sm-4">
 							<button type="button" class="btn btn-primary" onclick="$('#taskPass').val('1');save('sign')">签字提交</button>
 						</div>
-						<div class="col-sm-6">
+						<div class="col-sm-4">
 							<button type="button" class="btn btn-primary" onclick="save('save')">保存</button>
+						</div>
+						<div class="col-sm-4 ">
+							<a type="button" class="btn btn-primary" id="close" href="javascript:location.href='/biz/testTool'">
+								<i class="fa fa-sign-out"></i>关闭页面
+							</a>
 						</div>
 					</div>
 				</form>

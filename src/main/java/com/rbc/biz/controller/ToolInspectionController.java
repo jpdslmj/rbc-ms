@@ -100,13 +100,47 @@ public class ToolInspectionController extends BaseController {
 		model.addAttribute("user",userDO);
 	    return "biz/toolInspection/edit";
 	}
+
+	/**
+	 *
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/look/{id}")
 	String look(@PathVariable("id") Long id,Model model){
 		ToolInspectionDO toolInspection = toolInspectionService.get(id);
 		model.addAttribute("toolInspection", toolInspection);
 		UserDO userDO  = userService.get(getUserId());
+		Map query = new HashMap();
+		query.put("toolId",id);
+		List<WenchDO> wenchList = wenchService.list(query);
+		List<ToolOtherDO> otherToolList = toolOtherService.list(query);
 		model.addAttribute("user",userDO);
+		model.addAttribute("wenchList",wenchList);
+		model.addAttribute("otherToolList",otherToolList);
 		return "biz/toolInspection/look";
+	}
+
+	/**
+	 * 打印
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/print/{id}")
+	String print(@PathVariable("id") Long id,Model model){
+		ToolInspectionDO toolInspection = toolInspectionService.get(id);
+		model.addAttribute("toolInspection", toolInspection);
+		UserDO userDO  = userService.get(getUserId());
+		Map query = new HashMap();
+		query.put("toolId",id);
+		List<WenchDO> wenchList = wenchService.list(query);
+		List<ToolOtherDO> otherToolList = toolOtherService.list(query);
+		model.addAttribute("user",userDO);
+		model.addAttribute("wenchList",wenchList);
+		model.addAttribute("otherToolList",otherToolList);
+		return "biz/toolInspection/toolInspectionPrint";
 	}
 	/**
 	 * 保存

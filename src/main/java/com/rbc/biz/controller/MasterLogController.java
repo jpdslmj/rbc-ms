@@ -5,9 +5,14 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.rbc.biz.domain.MasterLogDO;
+import com.rbc.biz.domain.TaskDistributionDO;
+import com.rbc.biz.domain.TaskInfoDO;
 import com.rbc.biz.service.MasterLogService;
 import com.rbc.biz.service.SecurityCheckService;
+import com.rbc.biz.service.TaskDistributionService;
+import com.rbc.biz.service.TaskInfoService;
 import com.rbc.common.controller.BaseController;
+import com.rbc.common.utils.DateUtils;
 import com.rbc.common.utils.PageUtils;
 import com.rbc.common.utils.Query;
 import com.rbc.common.utils.R;
@@ -42,6 +47,12 @@ public class MasterLogController extends BaseController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private TaskDistributionService taskDistributionService;
+
+	@Autowired
+	private TaskInfoService taskInfoService;
 
 	@GetMapping()
 	@RequiresPermissions("biz:masterLog:masterLog")
@@ -162,5 +173,22 @@ public class MasterLogController extends BaseController {
 		masterLogService.batchRemove(ids);
 		return R.ok();
 	}
-	
+	@GetMapping("/print/{id}")
+	String print(@PathVariable("id") Long id,Model model){
+		MasterLogDO masterLog = masterLogService.get(id);
+		model.addAttribute("masterLog", masterLog);
+
+		Map query = new HashMap();
+		query.put("logId",id);
+		List<SecurityCheckDO> securityCheckList = securityCheckService.list(query);
+		model.addAttribute("securityCheckList",securityCheckList);
+
+		query.put("gangmasterNo",masterLog.getGangmasterNo());
+		query.put("distribTime", DateUtils.dateToStr(masterLog.getCreateTime()));
+		query.put("taskName","审核");
+		List<TaskInfoDO> taskInfoList = taskInfoService.list(query);
+		model.addAttribute("taskInfoList",taskInfoList);
+
+		return "biz/masterLog/masterLogPrint";
+	}
 }

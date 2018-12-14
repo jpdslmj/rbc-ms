@@ -53,11 +53,16 @@
 							<input id="deptId" name="deptId" class="form-control" type="hidden" th:value="${user.deptId}">
 
 							<div class="form-group">
-								<div class="col-sm-4 col-sm-offset-3">
+								<div class="col-sm-3 ">
 									<button type="button" class="btn btn-primary" onclick="save('save')">保存</button>
 								</div>
-								<div class="col-sm-4 col-sm-offset-3">
+								<div class="col-sm-3 ">
 									<button type="button" class="btn btn-primary" onclick="save('sign')">任务发布</button>
+								</div>
+								<div class="col-sm-3 ">
+									<a type="button" class="btn btn-primary" id="close" href="javascript:location.href='/biz/taskInfo'">
+										<i class="fa fa-sign-out"></i>关闭页面
+									</a>
 								</div>
 							</div>
 						</form>

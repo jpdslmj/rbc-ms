@@ -123,9 +123,9 @@ public class TaskController  extends BaseController {
         }
 
 
-        List<Task> tasks = taskService.createTaskQuery().taskAssignee(getUsername()).list();
+        List<Task> tasks = taskService.createTaskQuery().taskAssignee(getUsername()).orderByTaskCreateTime().asc().list();
         List<String> groupIds = roleService.getGroupIds(getUserId());
-        List<Task> taskGroupList = taskService.createTaskQuery().taskCandidateGroupIn(groupIds).list();
+        List<Task> taskGroupList = taskService.createTaskQuery().taskCandidateGroupIn(groupIds).orderByTaskCreateTime().asc().list();
         tasks.addAll(taskGroupList);
         List<TaskVO> taskVOS =  new ArrayList<>();
         if(popValueTask!=null){

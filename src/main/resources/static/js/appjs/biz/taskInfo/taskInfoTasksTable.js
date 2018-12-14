@@ -148,14 +148,15 @@ function edit(id) {
 }
 
 function form(proId,id) {
-    layer.open({
+/*    layer.open({
         type : 2,
         title : '发起流程',
         maxmin : true,
         shadeClose : false,
         area : [ '100%', '100%' ],
         content : prefix + '/form/'+ proId+'/'+id
-    })
+    })*/
+	window.location.href=prefix + '/form/'+ proId+'/'+id;
 }
 
 function batchRemove() {

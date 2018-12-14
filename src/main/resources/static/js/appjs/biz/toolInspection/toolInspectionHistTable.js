@@ -92,7 +92,10 @@ function load2() {
                                         var e = '<a class="btn btn-primary btn-sm" href="#" mce_href="#" title="查看" onclick="look(\''
                                             + row.id
                                             + '\')"><i class="fa fa-eye"></i></a> ';
-                                        return e;
+                                        var f = '<a class="btn btn-primary btn-sm" href="#" mce_href="#" title="打印" onclick="print(\''
+                                            + row.id
+                                            + '\')"><i class="fa fa-print"></i></a> ';
+                                        return e+f;
 									}
 								} ]
 					});
@@ -131,7 +134,7 @@ function edit2(id) {
 	});
 }
 function look(id) {
-    layer.open({
+/*    layer.open({
         type : 2,
         title : '查看',
         shadeClose : false, // 点击遮罩关闭层
@@ -143,9 +146,12 @@ function look(id) {
         success:function(layero ,index){
             layer.full(index);
         }
-    });
+    });*/
+    window.location.href=prefix2 + '/look/' + id;
 }
-
+function print(id) {
+    window.location.href=prefix2+ '/print/' + id ;
+}
 function remove2(id) {
 	layer.confirm('确定要删除选中的记录？', {
 		btn : [ '确定', '取消' ]

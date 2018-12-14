@@ -48,17 +48,23 @@ function save() {
         data : jasonData,
         async : false,
         error : function(request) {
-            parent.layer.alert("保存安全检查数据Connection error");
+            //parent.layer.alert("保存安全检查数据Connection error");
+            layer.alert("保存安全检查数据Connection error");
         },
         success : function(data) {
             if (data.code == 0) {
+/*
                 parent.layer.msg("操作成功");
                 parent.reLoad();
                 var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
                 parent.layer.close(index);
-
+*/
+                layer.msg('操作成功',{time: 1000 },function () {
+                    location.href="/biz/masterLog";
+                });
             } else {
-                parent.layer.alert(data.msg)
+                //parent.layer.alert(data.msg)
+                layer.alert(data.msg);
             }
 
         }

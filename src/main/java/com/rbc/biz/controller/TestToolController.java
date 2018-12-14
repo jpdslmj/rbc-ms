@@ -97,6 +97,21 @@ public class TestToolController extends BaseController {
 		model.addAttribute("user",userDO);
 		return "biz/testTool/look";
 	}
+
+	/**
+	 * 表格打印
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/print/{id}")
+	String print(@PathVariable("id") Long id,Model model){
+		TestToolDO testTool = testToolService.get(id);
+		model.addAttribute("testTool", testTool);
+		UserDO userDO  = userService.get(getUserId());
+		model.addAttribute("user",userDO);
+		return "biz/testTool/testToolPrint";
+	}
 	/**
 	 * 保存
 	 */
@@ -192,9 +207,9 @@ public class TestToolController extends BaseController {
 			map.put("params", params);
 			map.put("processForm","/biz/testTool/form");
 			//map.put("testerNo", testTool.getTesterNo());
-			map.put("fixWorkerNo", testTool.getTesterNo());
+			map.put("testerNo", testTool.getTesterNo());
 			map.put("createTime",DateUtils.format(testTool.getCreateTime()));
-			Task task = actTaskService.startProcess(ActivitiConstant.ACTIVITI_INSPECTION[0],ActivitiConstant.ACTIVITI_INSPECTION[1],testTool.getId().toString(),null,map);
+			Task task = actTaskService.startProcess(ActivitiConstant.ACTIVITI_TESTINSPECTION[0],ActivitiConstant.ACTIVITI_TESTINSPECTION[1],testTool.getId().toString(),null,map);
 			testTool.setTaskId(task.getId());
 			testTool.setTaskName(task.getName());
 			testTool.setProcessInstanceId(task.getProcessInstanceId());

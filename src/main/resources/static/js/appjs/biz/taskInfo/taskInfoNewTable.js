@@ -128,7 +128,7 @@ function reload3(){
 	$('#taskInfoNewTable').bootstrapTable('refresh');
 }
 function add3() {
-	layer.open({
+/*	layer.open({
 		type : 2,
 		title : '增加',
 		maxmin : true,
@@ -140,10 +140,11 @@ function add3() {
         success:function(layero ,index){
             layer.full(index);
         }
-	});
+	});*/
+    window.location.href=prefix3 + '/add';
 }
 function edit3(id) {
-	layer.open({
+/*	layer.open({
 		type : 2,
 		title : '编辑',
 		shadeClose : false, // 点击遮罩关闭层
@@ -155,7 +156,8 @@ function edit3(id) {
         success:function(layero ,index){
             layer.full(index);
         }
-	});
+	});*/
+    window.location.href=prefix3 + '/edit/' + id;
 }
 function remove3(id) {
 	layer.confirm('确定要删除选中的记录？', {

@@ -74,10 +74,10 @@ function load() {
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.id
 												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+										var f = '<a class="btn btn-success btn-sm" href="#" title="打印"  mce_href="#" onclick="printLog(\''
 												+ row.id
-												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + d ;
+												+ '\')"><i class="fa fa-print"></i></a> ';
+										return e + d + f ;
 									}
 								} ]
 					});
@@ -86,7 +86,7 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
-	layer.open({
+/*	layer.open({
 		type : 2,
 		title : '新增日志',
 		shadeClose : false, // 点击遮罩关闭层
@@ -100,10 +100,11 @@ function add() {
             layer.full(index);
         }
 
-	});
+	});*/
+    window.location.href=prefix + '/add/';
 }
 function edit(id) {
-	layer.open({
+/*	layer.open({
 		type : 2,
 		title : '编辑',
 		shadeClose : false, // 点击遮罩关闭层
@@ -116,7 +117,8 @@ function edit(id) {
         success:function(layero ,index){
             layer.full(index);
         }
-	});
+	});*/
+    window.location.href=prefix + '/edit/' + id;
 }
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {
@@ -140,7 +142,21 @@ function remove(id) {
 	})
 }
 
-function resetPwd(id) {
+function printLog(id) {
+ /*   layer.open({
+        type : 2,
+        title : '打印',
+        shadeClose : false, // 点击遮罩关闭层
+        content : prefix + '/print/' + id, // iframe的url
+        maxmin : true,
+        fixed:false,
+        resize:true,
+        area : ['360px','640px'],
+        success:function(layero ,index){
+            layer.full(index);
+        }
+    });*/
+    window.location.href=prefix + '/print/' + id;
 }
 function batchRemove() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组

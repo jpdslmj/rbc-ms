@@ -155,7 +155,7 @@ function edit2(id) {
 	});
 }
 function look(id) {
-    layer.open({
+/*    layer.open({
         type : 2,
         title : '查看',
         shadeClose : false, // 点击遮罩关闭层
@@ -167,7 +167,8 @@ function look(id) {
         success:function(layero ,index){
             layer.full(index);
         }
-    });
+    });*/
+    window.location.href=prefix2 + '/look/' + id;
 }
 function remove2(id) {
 	layer.confirm('确定要删除选中的记录？', {

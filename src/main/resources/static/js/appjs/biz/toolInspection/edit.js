@@ -101,19 +101,23 @@ function save(flag) {
         data : jasonData,
         async : false,
         error : function(request) {
-            parent.layer.alert("Connection error");
+            //parent.layer.alert("Connection error");
+            layer.alert("Connection error");
         },
         success : function(data) {
             if (data.code == 0) {
-                parent.layer.msg("操作成功");
+/*                parent.layer.msg("操作成功");
                 parent.reLoad();
                 parent.reLoad2();
                 parent.reLoad3();
                 var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-                parent.layer.close(index);
-
+                parent.layer.close(index);*/
+                layer.msg('操作成功',{time: 1000 },function () {
+                    location.href="/biz/toolInspection";
+                });
             } else {
-                parent.layer.alert(data.msg)
+                //parent.layer.alert(data.msg)
+                layer.alert(data.msg);
             }
 
         }

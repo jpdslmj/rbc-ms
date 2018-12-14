@@ -117,22 +117,23 @@ public class TestPartsController extends BaseController {
 				break;
 			}
 			case "3":{
-				paraMap.put("assistValue",testPartNo);
-				List<AssistValveF8DO> assistValve104List=assistValveF8Service.list(paraMap);
-				if(assistValve104List!=null&&assistValve104List.size()>0){
-					assemberNo=assistValve104List.get(0).getAssemblerNo();
-					assemblerName=assistValve104List.get(0).getAssemblerName();
-					assemberTime=assistValve104List.get(0).getCreateTime();
-				}
-				break;
-			}
-			case "4":{
 				paraMap.put("popValue",testPartNo);
 				List<MainValveF8DO> mainValve104List=mainValveF8Service.list(paraMap);
 				if(mainValve104List!=null&&mainValve104List.size()>0){
 					assemberNo=mainValve104List.get(0).getAssemblerNo();
 					assemblerName=mainValve104List.get(0).getAssemblerName();
 					assemberTime=mainValve104List.get(0).getCreateTime();
+				}
+
+				break;
+			}
+			case "4":{
+				paraMap.put("popValue",testPartNo);
+				List<AssistValveF8DO> assistValve104List=assistValveF8Service.list(paraMap);
+				if(assistValve104List!=null&&assistValve104List.size()>0){
+					assemberNo=assistValve104List.get(0).getAssemblerNo();
+					assemblerName=assistValve104List.get(0).getAssemblerName();
+					assemberTime=assistValve104List.get(0).getCreateTime();
 				}
 				break;
 			}

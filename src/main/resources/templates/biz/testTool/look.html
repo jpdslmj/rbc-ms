@@ -152,7 +152,7 @@
 						<input id="faf8test22" name="faf8test2"  type="radio" value="0" disabled="true" th:checked="${testTool.faf8test2==0}">不合格
 					</label>
 				</div>
-				<div class="col-sm-12 form-inline m-t-md">
+				<div class="col-sm-12 form-inline m-t-md m-b-md">
 					<div class="form-group col-sm-4">
 						<label class="control-label">试验工作者：</label>
 						<input id="testerName" name="testerName" class="form-control" readonly="readonly" type="text" th:value="${testTool.testerName}">
@@ -166,14 +166,13 @@
 						<input id="updateTime" name="updateTime" class="form-control" readonly="readonly" type="date" th:value="${#dates.format(testTool.updateTime,'yyyy-MM-dd')}">
 					</div>
 				</div>
-				</fieldset>
-				<div class="col-sm-12 form-inline m-t-md">
+				<div class="col-sm-12 form-inline">
 				<!--	<fieldset id="gangmasterField">-->
-					<div class="form-group col-sm-3 " shiro:hasAnyRoles="role:admin,role:gangmaster,role:inspector">
+					<div class="form-group col-sm-3 " >
 						<label class="control-label">工长：</label>
 						<input id="gangmasterName" name="gangmasterName" class="form-control" type="text" readonly="readonly" th:value="${testTool.gangmasterName}">
 					</div>
-					<div class="form-group col-sm-3 " shiro:hasAnyRoles="role:admin,role:gangmaster,role:inspector">
+					<div class="form-group col-sm-3 ">
 					<label class="control-label">工长检视意见:</label>
 					<select id="gangmasterAudit" name="gangmasterAudit" class="form-control " readonly="readonly" th:value="${testTool.gangmasterAudit}">
 						<option value="" th:selected="${testTool.gangmasterAudit ==''}">请选择</option>
@@ -182,11 +181,11 @@
 					</select>
 					</div>
 					<!--</fieldset>-->
-					<div class="form-group col-sm-3 " shiro:hasAnyRoles="role:admin,role:inspector">
+					<div class="form-group col-sm-3 " >
 						<label class="control-label">质检员：</label>
 						<input id="inspectorName" name="inspectorName" class="form-control" type="text" readonly="readonly" th:value="${testTool.inspectorName}">
 					</div>
-					<div class="form-group col-sm-3 " shiro:hasAnyRoles="role:admin,role:inspector">
+					<div class="form-group col-sm-3 ">
 						<label class="control-label">质检员检视意见:</label>
 						<select id="inspectorAudit" name="inspectorAudit" class="form-control " readonly="readonly" th:value="${testTool.inspectorAudit}">
 							<option value="" th:selected="${testTool.inspectorAudit ==''}">请选择</option>
@@ -195,7 +194,14 @@
 						</select>
 					</div>
 				</div>
-
+				<div class="form-group">
+					<div class="col-sm-4 m-t-md offset-4">
+						<a type="button" class="btn btn-primary" id="close" href="javascript:location.href='/biz/testTool'">
+							<i class="fa fa-sign-out"></i>关闭页面
+						</a>
+					</div>
+				</div>
+				</fieldset>
 				<input id="taskId" name="taskId" class="form-control" type="hidden" th:value="${testTool.taskId}">
 				<input id="taskName" name="taskName" class="form-control" type="hidden" th:value="${testTool.taskName}">
 				<input id="processInstanceId" name="processInstanceId" class="form-control" type="hidden" th:value="${testTool.processInstanceId}">
@@ -206,7 +212,6 @@
 				<input id="permissionsOpinion" name="permissionsOpinion" class="form-control" type="hidden">
 				<input id="returnOpinion" name="returnOpinion" class="form-control" type="hidden">
 				<input id="createTime" name="createTime" class="form-control" type="hidden">
-
 			</form>
 		</div>
 	</div>

@@ -58,20 +58,25 @@
 						<input id="processInstanceId" name="processInstanceId" class="form-control" type="hidden" th:value="${taskInfo.processInstanceId}">
 						<input id="taskPass" name="taskPass" class="hidden" >
 						<div class="form-group">
-							<div class="col-sm-4 col-sm-offset-3">
+							<div class="col-sm-3">
 								<button type="button" class="btn btn-primary" onclick="update('update')">保存</button>
 							</div>
-							<div class="col-sm-4 col-sm-offset-3" id="release" shiro:hasAnyRoles="role:admin,role:gangmaster">
+							<div class="col-sm-3" id="release" shiro:hasAnyRoles="role:admin,role:gangmaster">
 								<button type="button" class="btn btn-primary" onclick="update('sign')">任务发布</button>
 							</div>
-							<div class="col-sm-4 col-sm-offset-3" id="sign" shiro:hasAnyRoles="role:admin,role:gangmaster">
+							<div class="col-sm-3" id="sign" shiro:hasAnyRoles="role:admin,role:gangmaster">
 								<button type="button" class="btn btn-primary" onclick="$('#taskPass').val('1');update('sign')">审核通过</button>
 							</div>
-							<div class="col-sm-4 col-sm-offset-3" id="black" shiro:hasAnyRoles="role:admin,role:gangmaster">
+							<div class="col-sm-3" id="black" shiro:hasAnyRoles="role:admin,role:gangmaster">
 								<button type="button" class="btn btn-primary" onclick="$('#taskPass').val('0');update('sign')">退回</button>
 							</div>
-							<div class="col-sm-4 col-sm-offset-3" shiro:lacksRole  ="role:gangmaster">
+							<div class="col-sm-3" shiro:lacksRole  ="role:gangmaster">
 								<button type="button" class="btn btn-primary" onclick="update('sign')">任务反馈</button>
+							</div>
+							<div class="col-sm-3 ">
+								<a type="button" class="btn btn-primary" id="close" href="javascript:location.href='/biz/taskInfo'">
+									<i class="fa fa-sign-out"></i>关闭页面
+								</a>
 							</div>
 						</div>
 					</form>

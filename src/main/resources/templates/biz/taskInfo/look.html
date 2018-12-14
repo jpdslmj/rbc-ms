@@ -42,7 +42,11 @@
 								<input id="gangmasterName" name="gangmasterName" class="form-control"  readonly="readonly" type="text" th:value="${taskInfo.gangmasterName}">
 							</div>
 						</div>
-
+						<div class="col-sm-3 form-group">
+							<a type="button" class="btn btn-primary" id="close" href="javascript:location.href='/biz/taskInfo'">
+								<i class="fa fa-sign-out"></i>关闭页面
+							</a>
+						</div>
 						<input id="id" name="id" class="form-control" type="hidden" th:value="${taskInfo.id}">
 						<input id="fixWorkerNo" name="fixWorkerNo" class="form-control" type="hidden" th:value="${taskInfo.fixWorkerNo}">
 						<input id="gangmasterNo" name="gangmasterNo" class="form-control" type="hidden" th:value="${taskInfo.gangmasterNo}">
