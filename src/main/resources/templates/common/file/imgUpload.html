@@ -47,11 +47,12 @@
                                 <h3>{{row.fileRealName}}</h3>
                             </div>
                         </div>
-                        &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;<button
-                            class="btn btn-warning btn-xs copy" :url="row.url">复制
-                    </button>&nbsp; &nbsp; &nbsp; &nbsp;<button class="btn btn-danger btn-xs"
-                                                                @click="remove(row.id)">删除
+                         &nbsp; &nbsp; &nbsp; &nbsp;
+                        <button class="btn btn-danger btn-xs" @click="remove(row.id)">删除
                     </button>
+                        &nbsp; &nbsp;
+                        <button class="btn btn-danger btn-xs" @click="download(row.id)">下载
+                        </button>
                     </div>
                 </div>
             </div>
@@ -155,6 +156,9 @@
                     });
                 })
             },
+            download: function (id) {
+                window.location.href="/common/sysFile/download/"+id;
+            },
             changeType: function (i) {
                 this.type = i;
                 this.offset = 0;
@@ -186,6 +190,8 @@
             url: '/common/sysFile/upload', //上传接口
             size: 4000,
             accept: 'file',
+            multiple: true,
+            //auto: false,
             done: function (r) {
                 layer.msg(r.msg);
                 location.reload();
