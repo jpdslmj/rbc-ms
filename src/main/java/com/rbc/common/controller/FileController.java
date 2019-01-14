@@ -184,7 +184,7 @@ public class FileController extends BaseController {
 		String fileName = appConfig.getUploadPath() + sysFileService.get(id).getUrl().replace("/files/", "");
 		File file = new File(fileName);
 		if(file.exists()){ //判断文件父目录是否存在
-			response.setContentType("application/force-download");
+			response.setContentType("application/octet-stream");
 			response.setHeader("Content-Disposition", "attachment;fileName=" + sysFileService.get(id).getUrl().replace("/files/", ""));
 
 			byte[] buffer = new byte[1024];

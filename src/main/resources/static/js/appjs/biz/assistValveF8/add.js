@@ -1,4 +1,23 @@
-
+var browser = {
+    versions:function(){
+        var ua = navigator.userAgent, app = navigator.appVersion;
+        return {
+            trident: ua.indexOf('Trident') > -1, //IE内核
+            presto: ua.indexOf('Presto') > -1, //opera内核
+            webKit: ua.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+            gecko: ua.indexOf('Gecko') > -1 && ua.indexOf('KHTML') == -1,//火狐内核
+            mobile: !!ua.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+            ios: !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+            android: ua.indexOf('Android') > -1 || ua.indexOf('Adr') > -1, //android终端
+            iPhone: ua.indexOf('iPhone') > -1 , //是否为iPhone或者QQHD浏览器
+            iPad: ua.indexOf('iPad') > -1, //是否iPad
+            webApp: ua.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+            weixin: ua.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
+            qq: ua.match(/\sQQ/i) == " qq" //是否QQ
+        };
+    }(),
+    language:(navigator.browserLanguage || navigator.language).toLowerCase()
+}
 $().ready(function() {
     loadassistF8Table();
     if(disassembler){
@@ -245,51 +264,69 @@ function workPermission(flag){
         return false;
     }
 }
+function jsCallBiometricPrompt() { // 调用Android指纹验证
+    android.callBiometricPrompt();
+}
+
+function biometricPromptReturn(flag) { // 指纹处理，Android调用
+    if(flag==1){
+        validateAndSave('sign');
+    }else{
+        layer.alert("指纹认证失败！");
+    }
+}
 function save(flag) {
-        if(disassembler){
-            if(workPermission(flag)==true){
-                layer.alert("请先完成当天工具检视任务！");
-                return;
-            }
-            if($('#disassembleNo').val()==null||$('#disassembleNo').val()==''){
-                alert("请签名！");
-                return;
-            }
+    if(flag=='sign'&&(/(Android)/i.test(navigator.userAgent)||browser.versions.android)){
+        jsCallBiometricPrompt();
+    }else{
+        validateAndSave(flag);
+    }
+}
+function validateAndSave(flag){
+    if(disassembler){
+        if(workPermission(flag)==true){
+            layer.alert("请先完成当天工具检视任务！");
+            return;
         }
-        if(cleaner){
-            if(workPermission(flag)==true){
-                layer.alert("请先完成当天工具检视任务！");
-                return;
-            }
-            if($('#cleanerNo').val()==null||$('#cleanerNo').val()==''){
-                alert("请签名！");
-                return;
-            }
+        if($('#disassembleNo').val()==null||$('#disassembleNo').val()==''){
+            alert("请签名！");
+            return;
         }
-        if(fixer&&flag=='sign'){
-            if(workPermission(flag)==true){
-                layer.alert("请先完成当天工具检视任务！");
-                return;
-            }
-            var fixer1=$('#fixer1No').val();
-            var fixer2=$('#fixer2No').val();
-            var fixer3=$('#fixer3No').val();
-            var fixer4=$('#fixer4No').val();
-            if(fixer1==null||fixer1==''||fixer2==null||fixer2==''||fixer3==null||fixer3==''||fixer4==null||fixer4==''){
-                alert("检修请全部签名！");
-                return;
-            }
+    }
+    if(cleaner){
+        if(workPermission(flag)==true){
+            layer.alert("请先完成当天工具检视任务！");
+            return;
         }
-        if(assembler){
-            if(workPermission(flag)==true){
-                layer.alert("请先完成当天工具检视任务！");
-                return;
-            }
-            if($('#assemblerNo').val()==null||$('#assemblerNo').val()==''){
-                alert("请签名！");
-                return;
-            }
+        if($('#cleanerNo').val()==null||$('#cleanerNo').val()==''){
+            alert("请签名！");
+            return;
         }
+    }
+    if(fixer&&flag=='sign'){
+        if(workPermission(flag)==true){
+            layer.alert("请先完成当天工具检视任务！");
+            return;
+        }
+        var fixer1=$('#fixer1No').val();
+        var fixer2=$('#fixer2No').val();
+        var fixer3=$('#fixer3No').val();
+        var fixer4=$('#fixer4No').val();
+        if(fixer1==null||fixer1==''||fixer2==null||fixer2==''||fixer3==null||fixer3==''||fixer4==null||fixer4==''){
+            layer.alert("检修请全部签名！");
+            return;
+        }
+    }
+    if(assembler){
+        if(workPermission(flag)==true){
+            layer.alert("请先完成当天工具检视任务！");
+            return;
+        }
+        if($('#assemblerNo').val()==null||$('#assemblerNo').val()==''){
+            alert("请签名！");
+            return;
+        }
+    }
     var data=$('#assistF8Form').serialize().replace(/\+/g," ");
     $.ajax({
         cache : true,
@@ -306,7 +343,7 @@ function save(flag) {
                 layer.msg('操作成功',{time: 1000 },function () {
                     location.href="/biz/assistValveF8/";
                 });
-               // window.location.href="/biz/assistValveF8/";
+                // window.location.href="/biz/assistValveF8/";
                 // parent.layer.msg("操作成功");
                 // parent.reLoad();
                 // parent.reLoad2();
@@ -315,7 +352,7 @@ function save(flag) {
                 // parent.layer.close(index);
 
             } else {
-               // parent.layer.alert(data.msg);
+                // parent.layer.alert(data.msg);
                 layer.alert(data.msg);
             }
 
