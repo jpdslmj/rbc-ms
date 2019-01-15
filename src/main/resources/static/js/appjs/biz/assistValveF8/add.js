@@ -282,6 +282,11 @@ function save(flag) {
         validateAndSave(flag);
     }
 }
+
+function biometricPrompt() {
+    validateAndSave("sign");// 签名
+}
+
 function validateAndSave(flag){
     if(disassembler){
         if(workPermission(flag)==true){

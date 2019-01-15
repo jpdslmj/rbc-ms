@@ -133,6 +133,7 @@
                          </ul>
                      </li>-->
                      <li class="hidden-xs"><a @click="personal" href="#" ><i class="fa fa-id-card"></i> 个人</a></li>
+                     <li class="hidden-xs"> <input type="button" onclick="biometricPromptReturn(1)" value="调用子iframe的js"> </li>
                      <li> <a href="/logout"><i class="fa fa fa-sign-out"></i> 退出</a></li>
                      <!--<li class="dropdown hidden-xs"><a
                              class="right-sidebar-toggle" aria-expanded="false"> <i
@@ -304,6 +305,18 @@
 <!-- Toastr script -->
 <script src="/js/plugins/toastr/toastr.min.js"></script>
 <script type="text/javascript">
+
+    function biometricPromptReturn() { // 设置数据，Android调用
+        $(".J_iframe").each(function(){
+            if ($(this).css("display")=="inline"){// 获取激活状态的 iframe
+                var id = $(this).attr("id");
+                //var name = $(this).attr("name");
+                //console.log("display:"+$(this).css("display")+",data-id:"+$(this).attr("data-id")+",name:"+name+",id:"+id);
+                document.getElementById(id).contentWindow.biometricPrompt();// 调用 iframe 中的方法
+            }
+        });
+    }
+
     var stompClient = null;
     $(function () {
         connect();
