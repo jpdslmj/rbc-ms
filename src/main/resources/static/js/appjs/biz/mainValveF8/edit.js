@@ -282,6 +282,9 @@ function workPermission(flag){
         return false;
     }
 }
+function jsCallBiometricPrompt() { // 调用Android指纹验证
+    android.callBiometricPrompt();
+}
 function biometricPrompt() {
     validateAndSave("sign");// 签名
 }
