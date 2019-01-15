@@ -7,7 +7,20 @@ $.validator.setDefaults({
 		save("save");
 	}
 });
+function jsCallBiometricPrompt() { // 调用Android指纹验证
+    android.callBiometricPrompt();
+}
+function biometricPrompt() {
+    validateAndSave("sign");// 签名
+}
 function save(flag) {
+    if(flag=='sign'&&(/(Android)/i.test(navigator.userAgent))){
+        jsCallBiometricPrompt();
+    }else{
+        validateAndSave(flag);
+    }
+}
+function validateAndSave(flag) {
 	$.ajax({
 		cache : true,
 		type : "POST",

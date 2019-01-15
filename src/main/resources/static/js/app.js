@@ -4,7 +4,7 @@
 
 
 $(document).ready(function () {
-
+//var  iframe=$('.J_iframe[display!=none]');
     // MetsiMenu
     $('#side-menu').metisMenu();
 

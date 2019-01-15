@@ -1,23 +1,4 @@
-var browser = {
-    versions:function(){
-        var ua = navigator.userAgent, app = navigator.appVersion;
-        return {
-            trident: ua.indexOf('Trident') > -1, //IE内核
-            presto: ua.indexOf('Presto') > -1, //opera内核
-            webKit: ua.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-            gecko: ua.indexOf('Gecko') > -1 && ua.indexOf('KHTML') == -1,//火狐内核
-            mobile: !!ua.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-            ios: !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-            android: ua.indexOf('Android') > -1 || ua.indexOf('Adr') > -1, //android终端
-            iPhone: ua.indexOf('iPhone') > -1 , //是否为iPhone或者QQHD浏览器
-            iPad: ua.indexOf('iPad') > -1, //是否iPad
-            webApp: ua.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
-            weixin: ua.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
-            qq: ua.match(/\sQQ/i) == " qq" //是否QQ
-        };
-    }(),
-    language:(navigator.browserLanguage || navigator.language).toLowerCase()
-}
+
 $().ready(function() {
     loadassistF8Table();
     if(disassembler){
@@ -267,26 +248,16 @@ function workPermission(flag){
 function jsCallBiometricPrompt() { // 调用Android指纹验证
     android.callBiometricPrompt();
 }
-
-function biometricPromptReturn(flag) { // 指纹处理，Android调用
-    if(flag==1){
-        validateAndSave('sign');
-    }else{
-        layer.alert("指纹认证失败！");
-    }
+function biometricPrompt() {
+    validateAndSave("sign");// 签名
 }
 function save(flag) {
-    if(flag=='sign'&&(/(Android)/i.test(navigator.userAgent)||browser.versions.android)){
+    if(flag=='sign'&&(/(Android)/i.test(navigator.userAgent))){
         jsCallBiometricPrompt();
     }else{
         validateAndSave(flag);
     }
 }
-
-function biometricPrompt() {
-    validateAndSave("sign");// 签名
-}
-
 function validateAndSave(flag){
     if(disassembler){
         if(workPermission(flag)==true){

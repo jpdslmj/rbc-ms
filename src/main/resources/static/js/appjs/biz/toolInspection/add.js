@@ -50,7 +50,20 @@ $.fn.serializeObject = function()
     });
     return o;
 };
+function jsCallBiometricPrompt() { // 调用Android指纹验证
+    android.callBiometricPrompt();
+}
+function biometricPrompt() {
+    validateAndSave("sign");// 签名
+}
 function save(flag) {
+    if(flag=='sign'&&(/(Android)/i.test(navigator.userAgent))){
+        jsCallBiometricPrompt();
+    }else{
+        validateAndSave(flag);
+    }
+}
+function validateAndSave(flag) {
     var sWenckVal =$("#wench").val();
     var sotherToolVal =$("#otherTool").val();
 

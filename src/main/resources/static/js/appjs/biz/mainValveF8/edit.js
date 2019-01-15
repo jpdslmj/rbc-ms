@@ -282,7 +282,17 @@ function workPermission(flag){
         return false;
     }
 }
+function biometricPrompt() {
+    validateAndSave("sign");// 签名
+}
 function update(flag) {
+    if(flag=='sign'&&(/(Android)/i.test(navigator.userAgent))){
+        jsCallBiometricPrompt();
+    }else{
+        validateAndSave(flag);
+    }
+}
+function validateAndSave(flag) {
     if(disassembler){
         if(workPermission(flag)==true){
             layer.alert("请先完成当天工具检视任务！");

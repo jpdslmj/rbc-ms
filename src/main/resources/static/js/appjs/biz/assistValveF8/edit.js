@@ -283,7 +283,20 @@ function workPermission(flag){
         return false;
     }
 }
+function jsCallBiometricPrompt() { // 调用Android指纹验证
+    android.callBiometricPrompt();
+}
+function biometricPrompt() {
+    validateAndSave("sign");// 签名
+}
 function update(flag) {
+    if(flag=='sign'&&(/(Android)/i.test(navigator.userAgent))){
+        jsCallBiometricPrompt();
+    }else{
+        validateAndSave(flag);
+    }
+}
+function  validateAndSave(flag){
     if(disassembler){
         if(workPermission(flag)==true){
             layer.alert("请先完成当天工具检视任务！");
@@ -352,7 +365,7 @@ function update(flag) {
             return;
         }
     }
-   // alert($('#taskPass').val())
+    // alert($('#taskPass').val())
     var data=$('#assistF8Form').serialize().replace(/\+/g," ");
     $.ajax({
         cache : true,
@@ -369,8 +382,8 @@ function update(flag) {
                 layer.msg('操作成功',{time: 1000 },function () {
                     location.href="/biz/assistValveF8/";
                 });
-               // window.location.href="/biz/assistValveF8/";
-               // parent.layer.msg("操作成功");
+                // window.location.href="/biz/assistValveF8/";
+                // parent.layer.msg("操作成功");
                 // parent.reLoad();
                 // parent.reLoad2();
                 // parent.reLoad3();

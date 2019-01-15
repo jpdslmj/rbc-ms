@@ -265,7 +265,20 @@ function workPermission(flag){
         return false;
     }
 }
+function jsCallBiometricPrompt() { // 调用Android指纹验证
+    android.callBiometricPrompt();
+}
+function biometricPrompt() {
+    validateAndSave("sign");// 签名
+}
 function update(flag) {
+    if(flag=='sign'&&(/(Android)/i.test(navigator.userAgent))){
+        jsCallBiometricPrompt();
+    }else{
+        validateAndSave(flag);
+    }
+}
+function validateAndSave(flag) {
     if(disassembler){
         if($('#disassembleNo').val()==null||$('#disassembleNo').val()==''){
             alert("请签名！");
