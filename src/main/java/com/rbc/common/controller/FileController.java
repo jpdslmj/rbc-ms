@@ -186,6 +186,7 @@ public class FileController extends BaseController {
 		if(file.exists()){ //判断文件父目录是否存在
 			response.setContentType("application/octet-stream");
 			response.setHeader("Content-Disposition", "attachment;fileName=" + sysFileService.get(id).getUrl().replace("/files/", ""));
+			response.setContentLengthLong(file.length());
 
 			byte[] buffer = new byte[1024];
 			FileInputStream fis = null; //文件输入流
@@ -196,6 +197,9 @@ public class FileController extends BaseController {
 				os = response.getOutputStream();
 				fis = new FileInputStream(file);
 				bis = new BufferedInputStream(fis);
+
+				response.setContentLength(fis.available());
+
 				int i = bis.read(buffer);
 				while(i != -1){
 					os.write(buffer);
