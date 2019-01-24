@@ -3,7 +3,10 @@ var prefix3 = "/biz/mainValveF8"
 $(function() {
     load3();
 });
-
+function reset3(){
+    $('#popValueNew').val("");
+    $('#createTimeNew').val("");
+}
 function load3() {
     $('#mainValveF8NewTable')
         .bootstrapTable(
@@ -35,7 +38,7 @@ function load3() {
                         offset:params.offset,
                         queryType:"new",
                         createTime:$('#createTimeNew').val(),
-                        mainValue:$('#mainValueNew').val(),
+                        popValue:$('#popValueNew').val(),
                         disassembleNo:currentUserNameNo,
                     };
                 },

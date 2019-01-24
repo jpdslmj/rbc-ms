@@ -3,7 +3,10 @@ var prefix3 = "/biz/assistValveF8"
 $(function() {
     load3();
 });
-
+function reset3(){
+    $('#popValueNew').val("");
+    $('#createTimeNew').val("");
+}
 function load3() {
     $('#assistValveF8NewTable')
         .bootstrapTable(

@@ -3,7 +3,10 @@ var taskType="assistF8";
 $(function() {
 	load();
 });
-
+function reset(){
+    $('#popValueTask').val("");
+    $('#createTimeTask').val("");
+}
 function load() {
 	$('#assistF8TaskListTable').bootstrapTable(
 			{

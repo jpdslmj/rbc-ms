@@ -259,7 +259,7 @@ function save(flag) {
     }
 }
 function validateAndSave(flag){
-    if(disassembler){
+    if(disassembler&&flag=='sign'){
         if(workPermission(flag)==true){
             layer.alert("请先完成当天工具检视任务！");
             return;
@@ -269,7 +269,7 @@ function validateAndSave(flag){
             return;
         }
     }
-    if(cleaner){
+    if(cleaner&&flag=='sign'){
         if(workPermission(flag)==true){
             layer.alert("请先完成当天工具检视任务！");
             return;
@@ -293,7 +293,7 @@ function validateAndSave(flag){
             return;
         }
     }
-    if(assembler){
+    if(assembler&&flag=='sign'){
         if(workPermission(flag)==true){
             layer.alert("请先完成当天工具检视任务！");
             return;

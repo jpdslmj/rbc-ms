@@ -22,7 +22,7 @@
 				<table class="table table-bordered table-striped table-hover" id="main104Table"   data-mobile-responsive="true" data-url="js/demo/pop104.json" ></table>
 
 				<div class="col-sm-12 form-inline m-t-sm">
-					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster">
+					<div class="form-group col-sm-3">
 						<label class="control-label">工长检修意见：</label>
 						<select id="gangmasterAudit" name="gangmasterAudit" disabled="true" class="form-control" th:value="${mainValve104.gangmasterAudit}">
 							<option value="" th:selected="${mainValve104.gangmasterAudit ==''}"></option>
@@ -31,10 +31,10 @@
 						</select>
 					</div>
 					<input id="gangmasterNo" name="gangmasterNo" class="form-control" type="hidden" th:value="${mainValve104.gangmasterNo}">
-					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:gangmaster">
+					<div class="form-group col-sm-3">
 						<input id="gangmasterName" name="gangmasterName" class="form-control" type="text" readonly="readonly" placeholder="工长名称" th:value="${mainValve104.gangmasterName}">
 					</div>
-					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
+					<div class="form-group col-sm-3">
 						<label class="control-label">质检员检修意见:</label>
 						<select id="inspectorAudit" name="inspectorAudit" disabled="true" class="form-control " th:value="${mainValve104.inspectorAudit}">
 							<option value="" th:selected="${mainValve104.inspectorAudit ==''}"></option>
@@ -43,22 +43,22 @@
 						</select>
 					</div>
 					<input id="inspectorNo" name="inspectorNo" class="form-control" type="hidden" th:value="${mainValve104.inspectorNo}" >
-					<div class="form-group col-sm-3" shiro:hasAnyRoles="role:admin,role:inspector">
+					<div class="form-group col-sm-3" >
 						<input id="inspectorName" name="inspectorName" class="form-control" type="text" readonly="readonly" placeholder="质检员名称" th:value="${mainValve104.inspectorName}">
 					</div>
 				</div>
 				<div class="col-sm-12 form-inline">
-					<div class="form-group col-sm-4" shiro:hasPermission="biz:mainValve104:assemble">
+					<div class="form-group col-sm-4" >
 						<label class="control-label">组装合字：</label>
 						<input id="assemblerRemark" name="assemblerRemark" class="form-control" type="checkbox" disabled="true" th:checked="${mainValve104.assemblerRemark}?true">
 						<label class="control-label"><img src="/img/ren.png" style="width: 14px;height: 14px "></label>
 					</div>
-					<div class="form-group col-sm-4" shiro:hasAnyRoles="role:admin,role:gangmaster">
+					<div class="form-group col-sm-4" >
 						<label class="control-label">工长合字:</label>
 						<input id="gangmasterRemark" name="gangmasterRemark" class="form-control " type="checkbox" disabled="true"  th:checked="${mainValve104.gangmasterRemark}?true">
 						<label class="control-label"><img src="/img/renyi.png" style="width: 14px;height: 14px "></label>
 					</div>
-					<div class="form-group col-sm-4" shiro:hasAnyRoles="role:admin,role:inspector">
+					<div class="form-group col-sm-4" >
 						<label class="control-label">质检员合字:</label>
 						<input id="inspectorRemark" name="inspectorRemark" class="form-control " type="checkbox" disabled="true" th:checked="${mainValve104.inspectorRemark}?true">
 						<label class="control-label"><img src="/img/he.png" style="width: 14px;height: 14px ;" ></label>
@@ -98,6 +98,10 @@
 				<div class="row ">
 					<div class="col-sm-1" shiro:hasAnyRoles="role:admin,role:gangmaster,role:inspector">
 						<a id="imgView" type="submit" class="btn btn-primary" href="javascript:void(0)" onClick="uploadImg(2)">影像查看</a>
+					</div>
+					<div class="col-sm-1 ">
+						<a type="button" class="btn btn-primary" id="close" href="javascript:location.href='/biz/mainValve104/'">
+							<i class="fa fa-sign-out"></i>关闭页面</a>
 					</div>
 				</div>
 			</form>

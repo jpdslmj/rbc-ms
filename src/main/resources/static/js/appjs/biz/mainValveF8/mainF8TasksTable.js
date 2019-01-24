@@ -3,7 +3,10 @@ var taskType="mainF8";
 $(function() {
 	load();
 });
-
+function reset(){
+    $('#popValueTask').val("");
+    $('#createTimeTask').val("");
+}
 function load() {
 	$('#mainF8TaskListTable').bootstrapTable(
 			{

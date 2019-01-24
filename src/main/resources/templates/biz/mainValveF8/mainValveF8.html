@@ -19,16 +19,17 @@
 					<div class="tab-content">
 						<div id="tab-1" class="tab-pane active">
 							<div class="fixed-table-toolbar">
-								<div class="columns pull-right m-l-xs">
-									<button class="btn btn-success" onclick="reLoad()">查询</button>
-								</div>
-								<div class="columns pull-right col-md-2 nopadding">
+								<div class="columns col-sm-4 nopadding">
 									<input id="popValueTask" type="text" class="form-control"
 										   placeholder="F8主阀编号">
 								</div>
-								<div class="columns pull-right col-md-2 nopadding">
+								<div class="columns col-sm-4 nopadding">
 									<input id="createTimeTask" type="date" class="form-control"
 										   placeholder="检修时间">
+								</div>
+								<div class="columns col-sm-4">
+									<button class="btn btn-success" onclick="reLoad()">查询</button>
+									<button class="btn btn-success" onclick="reset()">重置</button>
 								</div>
 							</div>
 							<table id="mainF8TaskListTable" data-mobile-responsive="true">
@@ -36,23 +37,24 @@
 						</div>
 						<div id="tab-2" class="tab-pane ">
 							<div class="fixed-table-toolbar">
-								<div class="columns pull-right m-l-xs">
-									<button class="btn btn-success" onclick="reLoad2()">查询</button>
-								</div>
-								<div class="columns pull-right col-md-2 nopadding">
-									<input id="mainValue" type="text" class="form-control"
+								<div class="columns col-sm-4 nopadding">
+									<input id="popValue" type="text" class="form-control"
 										   placeholder="F8主阀编号">
 								</div>
-								<div class="columns pull-right col-md-2 nopadding">
+								<div class="columns col-sm-4 nopadding">
 									<input id="createTime" type="date" class="form-control"
 										   placeholder="检修时间">
+								</div>
+								<div class="columns col-sm-4">
+									<button class="btn btn-success" onclick="reLoad2()">查询</button>
+									<button class="btn btn-success" onclick="reset2()">重置</button>
 								</div>
 							</div>
 							<table id="mainValveF8Table" data-mobile-responsive="true"></table>
 						</div>
 						<div id="tab-3" class="tab-pane ">
 							<div class="fixed-table-toolbar">
-								<div class="columns pull-left">
+								<div class="columns col-sm-3">
 									<button shiro:hasPermission="biz:mainValveF8:add" type="button" class="btn  btn-primary" onclick="add3()">
 										<i class="fa fa-plus" aria-hidden="true"></i>添加
 									</button>
@@ -61,16 +63,17 @@
 										<i class="fa fa-trash" aria-hidden="true"></i>删除
 									</button>
 								</div>
-								<div class="columns pull-right m-l-xs">
-									<button class="btn btn-success" onclick="reLoad3()">查询</button>
-								</div>
-								<div class="columns pull-right col-md-2 nopadding">
-									<input id="mainValueNew" type="text" class="form-control"
+								<div class="columns col-sm-3 nopadding">
+									<input id="popValueNew" type="text" class="form-control"
 										   placeholder="F8主阀编号">
 								</div>
-								<div class="columns pull-right col-md-2 nopadding">
+								<div class="columns col-sm-3 nopadding">
 									<input id="createTimeNew" type="date" class="form-control"
 										   placeholder="检修时间">
+								</div>
+								<div class="columns col-sm-3">
+									<button class="btn btn-success" onclick="reLoad3()">查询</button>
+									<button class="btn btn-success" onclick="reset3()">重置</button>
 								</div>
 							</div>
 							<table id="mainValveF8NewTable" data-mobile-responsive="true"></table>

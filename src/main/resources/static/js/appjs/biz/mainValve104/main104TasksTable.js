@@ -3,7 +3,10 @@ var taskType="main104";
 $(function() {
 	load();
 });
-
+function reset(){
+    $('#popValueTask').val("");
+    $('#createTimeTask').val("");
+}
 function load() {
 	$('#main104TaskListTable').bootstrapTable(
 			{
