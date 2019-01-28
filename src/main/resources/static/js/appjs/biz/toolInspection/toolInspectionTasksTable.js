@@ -3,7 +3,9 @@ var taskType="toolInspection";
 $(function() {
 	load();
 });
-
+function reset(){
+    $('#createTimeTask').val("");
+}
 function load() {
 	$('#toolInspectionTaskListTable').bootstrapTable(
 			{

@@ -3,7 +3,9 @@ var prefix3 = "/biz/testTool"
 $(function() {
 	load3();
 });
-
+function reset3(){
+    $('#createTimeNew').val("");
+}
 function load3() {
 	$('#testToolNewTable')
 			.bootstrapTable(

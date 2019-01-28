@@ -8,7 +8,7 @@
 			<div class="ibox">
 				<div class="ibox-body">
 					<div class="fixed-table-toolbar">
-						<div class="columns pull-left">
+						<div class="columns col-sm-3">
 							<button shiro:hasPermission="biz:testParts:add" type="button" class="btn  btn-primary" onclick="add()">
 								<i class="fa fa-plus" aria-hidden="true"></i>添加
 							</button>
@@ -17,16 +17,17 @@
 								<i class="fa fa-trash" aria-hidden="true"></i>删除
 							</button>
 						</div>
-						<div class="columns pull-right m-l-xs">
-							<button class="btn btn-success" onclick="reLoad()">查询</button>
-						</div>
-						<div class="columns pull-right col-md-2 nopadding">
+						<div class="columns col-sm-3 nopadding">
 							<input id="testPartNo" type="text" class="form-control"
 								   placeholder="试验阀编号">
 						</div>
-						<div class="columns pull-right col-md-2 nopadding">
+						<div class="columns col-sm-3 nopadding">
 							<input id="createTime" type="date" class="form-control"
 								   placeholder="试验时间">
+						</div>
+						<div class="columns col-sm-3">
+							<button class="btn btn-success" onclick="reLoad()">查询</button>
+							<button class="btn btn-success" onclick="reset()">重置</button>
 						</div>
 					</div>
 					<table id="exampleTable" data-mobile-responsive="true">

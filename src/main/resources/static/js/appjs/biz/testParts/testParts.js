@@ -3,7 +3,10 @@ var prefix = "/biz/testParts"
 $(function() {
 	load();
 });
-
+function reset(){
+    $('#createTime').val("");
+    $('#testPartNo').val("");
+}
 function load() {
 	$('#exampleTable')
 			.bootstrapTable(
@@ -141,7 +144,7 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
-	layer.open({
+/*	layer.open({
         type : 2,
         title : '新增日志',
         shadeClose : false, // 点击遮罩关闭层
@@ -153,10 +156,11 @@ function add() {
         success:function(layero ,index) {
             layer.full(index);
         }
-	});
+	});*/
+	window.location.href=prefix + '/add';
 }
 function edit(id) {
-	layer.open({
+/*	layer.open({
         type : 2,
         title : '编辑',
         shadeClose : false, // 点击遮罩关闭层
@@ -168,7 +172,8 @@ function edit(id) {
         success:function(layero ,index){
             layer.full(index);
         }
-	});
+	});*/
+    window.location.href=prefix +'/edit/' + id;
 }
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {

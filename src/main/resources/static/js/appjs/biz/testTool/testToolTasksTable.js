@@ -3,7 +3,9 @@ var taskType="testTool";
 $(function() {
 	load();
 });
-
+function reset(){
+    $('#createTimeTask').val("");
+}
 function load() {
 	$('#testToolTaskListTable').bootstrapTable(
 			{

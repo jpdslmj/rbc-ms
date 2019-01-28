@@ -8,7 +8,9 @@ $(function() {
     }
 	load3();
 });
-
+function reset3(){
+    $('#createTimeNew').val("");
+}
 function load3() {
 	$('#taskInfoNewTable')
 			.bootstrapTable(
